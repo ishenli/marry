@@ -1,0 +1,10 @@
+.ui-top-nav .top-menu .active,.ui-top-nav .user-panel .option-item:hover a{
+    background:#6addd3;
+    color: #fff;
+
+}
+.ui-top-nav .top-menu .active{
+    border: 1px solid #47d3c6;
+    border-top: none;
+    border-bottom: none;
+}

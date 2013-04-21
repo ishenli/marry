@@ -1,0 +1,203 @@
+body{
+    /*background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;*/
+
+}
+.ui-top-nav{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+    color: #FFF;
+}
+.ui-top-nav .ui-top-nav-body{
+    margin: 0 auto;
+}
+.ui-top-nav .login-btn,.ui-top-nav .user-panel{
+    float: right;
+    width: 145px;
+}
+.ui-top-nav .login-btn{
+    height: 32px;
+    margin: 4px 0;
+    background: url("../assets/images/login-btn.jpg") right no-repeat;
+    line-height: 32px;
+
+}
+.ui-top-nav .login-btn .login-btn-text{
+    color: #fff;
+    width: 70px;
+    float: right;
+
+}
+.ui-top-nav .login-btn .login-btn-text span{
+    margin-left:35px ;
+}
+.ui-top-nav .user-panel{
+    height: 40px;
+}
+.ui-top-nav .user-panel span{
+    float: right;
+
+}
+.ui-top-nav .user-panel .arrow{
+    background: #6addd3;
+    border-color:#6addd3 white white white;
+    margin: 16px 10px 0 0
+}
+.ui-top-nav .user-panel .avatar{
+    width: 30px;
+    height: 30px;
+    margin: 5px 8px 0 0;
+    overflow: hidden;
+
+}
+
+.ui-top-nav .user-panel .notice{
+    width: 30px;
+    height: 18px;
+    margin: 11px 3px 0 0;
+    background: url("../assets/images/notice-bg.png") -4px -3px no-repeat;
+}
+.ui-top-nav .user-panel .notice-active{
+    line-height: 18px;
+    text-indent: 9px;
+    font-weight: bold;
+    background: url("../assets/images/notice-bg.png") -4px -29px no-repeat;
+}
+
+.ui-top-nav .user-panel .user-active{
+    width: 70px;
+    height: 40px;
+    position: relative;
+    float: right;
+}
+.ui-top-nav .user-panel .user-active:hover{
+    cursor: pointer;
+    background: #6addd3;
+}
+.ui-top-nav .user-panel .user-active:hover .arrow{
+    background: #fff;
+    border-color:#fff #6addd3 #6addd3 #6addd3;
+}
+.ui-top-nav .user-panel .option{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    visibility: hidden;
+    z-index: 3;
+}
+.ui-top-nav .user-panel .option-item{
+    height: 30px;
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    background: #fff;
+    color: #aca195;
+}
+.ui-top-nav .user-panel .option-item a{
+    display: block;
+}
+.ui-top-nav .user-panel .user-active:hover .option{
+    visibility: visible;
+}
+.ui-top-nav .top-logo {
+    float: left;
+    _display: inline;
+}
+
+.ui-top-nav .top-menu {
+    line-height: 40px;
+    float: right;
+    _display:inline;
+}
+
+.ui-top-nav .top-menu .top-menu-item{
+    float: right;
+    padding: 0 14px;
+}
+.ui-top-nav .top-menu .top-menu-item a{
+    display: block;
+    float: right;
+    height: 40px;
+    color: #6addd3;
+    font-size: 12px;
+}
+.ui-top-nav .top-menu .active{
+    background:#6addd3;
+    border: 1px solid #47d3c6;
+    color: #fff;
+    border-top: none;
+    border-bottom: none;
+}
+.ui-top-nav .top-menu .active a{
+    color: #fff;
+}
+.ui-top-nav a, .ui-top-nav a:hover, .ui-top-nav a:active, .ui-top-nav a:visited {
+    text-decoration: none;
+}
+
+.ui-top-nav .top-login {
+    float: right;
+    margin-right: 35px;
+}
+.ui-top-nav .top-login a {
+    padding: 0 5px;
+}
+.container{
+    width: 980px;
+    margin:0 auto;
+}
+
+
+.ui-body-content {
+    margin: 30px auto 0;
+    background: #ffffff;
+    padding-bottom: 20px;
+
+}
+
+.ui-body-content .ui-header {
+    margin: 0 20px;
+}
+.ui-body-content .ui-header h1{
+    font: 18px/70px "microsoft yahei";
+
+}
+.ui-header .ui-header-more {
+    float: right;
+    margin-top:-52px;
+    font-size: 14px;
+
+}
+.ui-footer {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #6addd3;
+    height: 40px;
+}
+.foot-body .foot-txt,.foot-body .line,.foot-body .copyright{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    float:left;
+    margin:14px 0;
+    color: #fff;
+    font-size: 12px;
+}
+.foot-body {
+    margin: 0 auto;
+}
+
+.foot-body .line {
+    color: #fff;
+    width: 1px;
+    background: #fff;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-indent: -9999px;
+}
+
+.foot-body .copyright{
+    float:right;
+}
