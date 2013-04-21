@@ -158,7 +158,7 @@
 .ui-slip {
     height: 30px;
     line-height: 30px;
-    background: url("../assets/images/share-sprite.png") 0 -12px no-repeat;
+    background: url("../assets/images/slip-sprite.png") 0 -12px no-repeat;
     padding-left: 15px;
 }
 .ui-slip .ui-slip-inner{
