@@ -22,7 +22,7 @@ define(function(require, exports, module) {
             }}
         function adjustViewer(){
             var height=WindowSize.height-140;
-            $("#viewer").height(height).find(".noteList li,.viewArrow").height(height);
+            $("#viewer").height(height).find(".node-list li,.viewArrow").height(height);
             $("#slide").height(height);
             $("#viewer-wrapper").height(WindowSize.height-140);
         }

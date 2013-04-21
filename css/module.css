@@ -335,7 +335,7 @@
     line-height: 118px;
 }
 
-/*浏览组件*/
+/*浏览相册组件*/
 
 #horizontal .scrollbar {
     margin: 1em 0;
@@ -346,20 +346,10 @@
     width: 100px;
     height: 100%;
 }
-
-#horizontal .example1 .sly {
-}
-
-#horizontal .example1 .sly ul {
-}
-
 #horizontal .sly ul li {
     float: left;
-    width: 187px;
     height: 100%;
     margin: 0 1px 0 0;
-    font-size: 50px;
-    line-height: 170px;
 }
 #horizontal .scrollbar {
     background: #808080;
@@ -391,12 +381,38 @@
     overflow: hidden;
 }
 
-.sly > ul {
+.sly .node-list {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-
+.sly .node-list .cover{
+    width: 400px;
+    background: #fff;
+    font-size: 14px;
+    color: #c7c7c7;
+    line-height: 100%;
+}
+.sly .node-list .cover-dot-top,.sly .node-list .cover-dot-bottom{
+    position: absolute;
+    width: 55px;
+    height: 25px;
+    background: url("../assets/images/cover-dot.png") no-repeat;
+    text-indent: -9999px;
+}
+.sly .node-list .cover-dot-top{
+    background-position: -2px -7px ;
+    top: 75px;
+    left: 42px;
+}
+.sly .node-list .cover-dot-bottom{
+    background-position: -2px -40px;
+    bottom: 75px;
+    right: 42px;
+}
+.node-list .cover-content{
+    margin: 100px 97px;
+}
 .sly > ul li {
     position: relative;
     margin: 0;
