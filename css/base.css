@@ -318,4 +318,9 @@ div.sl-rc-wrap,p.sl-rc-wrap,h2.sl-rc-wrap,h3.sl-rc-wrap,h4.sl-rc-wrap,h5.sl-rc-w
     *top:-50%;
 }
 
+.sl-vertical {
+    position: absolute;
+    top: 50%;
+}
+
 

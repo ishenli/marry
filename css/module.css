@@ -210,6 +210,49 @@
 .marry-list .counter .share .ico{
     background-position: -92px -3px;
 }
+/*用户页面顶部导航*/
+.ui-green-header {
+    background: #cbeeeb;
+    opacity: 0.7;
+    _filter: alpha(Opacity=70);
+}
+.ui-page-nav {
+    height: 100%;
+}
+.ui-page-nav li{
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    font: 18px "microsoft yahei";
+    color: #fff;
+}
+.ui-page-nav li .arrow{
+    display: none;
+ }
+.ui-page-nav-active span{
+    background: #6addd3;
+    padding: 0 4px;
+}
+.ui-page-nav-line span{
+    width: 2px;
+    padding: 0;
+    margin-left: 18px;
+    margin-right:18px;
+    background: #fff;
+    text-indent: -9999px;
+}
+.ui-page-nav .ui-page-nav-active .arrow{
+    display: block;
+    border-width:8px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -8px;
+    background: #cbeeeb;
+    border-color:#cbeeeb #cbeeeb white #cbeeeb;
+}
 /*各种插件*/
 #indexBanner{
     position: relative;

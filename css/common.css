@@ -8,6 +8,7 @@
 .ui-pic-item img{
     width: 300px;
     height: 185px;
+
 }
 .ui-pic-item .read{
     position: absolute;
@@ -52,11 +53,7 @@
     height: 285px;
 }
 
-.page-header {
-    background: #cbeeeb;
-    opacity: 0.7;
-    _filter: alpha(Opacity=70);
-}
+
 
 .page-header .page-inner {
     position: relative;
@@ -64,50 +61,7 @@
     text-align: center;
 }
 
-.page-header .page-inner .page-nav {
-    height: 60px;
-    margin:0 auto;
-}
-.page-header .page-inner .page-nav li{
-    height: 60px;
-    display: inline-block;
-    *display: inline;
-    *zoom:1;
-    font: 18px "microsoft yahei";
-    color: #fff;
-}
 
-.page-header .page-inner .page-nav .page-nav-active {
-    position: relative;
-}
-.page-header .page-inner .page-nav span{
-    display: inline-block;
-    margin-top: 18px;
-    margin-bottom: 18px;
-    height: 24px;
-    line-height: 24px;
-}
-.page-header .page-inner  .page-nav-active span{
-    background: #6addd3;
-    padding: 0 4px;
-}
-.page-header .page-inner  .page-nav-line span{
-    width: 2px;
-    padding: 0;
-    margin-left: 18px;
-    margin-right:18px;
-    background: #fff;
-    text-indent: -9999px;
-}
-.page-header .page-inner .page-nav-active .arrow{
-    border-width:8px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    margin-left: -8px;
-    background: #cbeeeb;
-    border-color:#cbeeeb #cbeeeb white #cbeeeb;
-}
 
 .marry-list-medium {
     margin: 0 0 0 -19px;
@@ -320,6 +274,32 @@
     left: 0;
     z-index: 1;
 }
+
+.user-header  .user-header-inner {
+    width: 980px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.user-header  .user-header-inner .user-nav{
+    position: absolute;
+    right: 125px;
+}
+.user-grid {
+    width: 960px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.user-header {
+    height: 80px;
+}
+
+.user-header .create {
+    right:0;
+    margin: -17px 10px 0 0;
+}
+
 
 
 
