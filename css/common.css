@@ -302,9 +302,26 @@
     margin: 0 auto;
     position: relative;
 }
+.user-header  .user-header-inner .user-info{
+    float: left;
+    width: 250px;
+    margin: 10px 0 0 10px;
+    font-size: 14px;
+
+}
+.user-header .user-info .username,.user-header .user-info .description{
+    float: left;
+    color: #fff;
+    margin: 5px 0 0 20px;
+
+}
+.user-header .user-info .description{
+    margin-top: 10px;
+}
 .user-header  .user-header-inner .user-nav{
     position: absolute;
     right: 125px;
+    top: 0;
 }
 .user-grid {
     width: 960px;
@@ -320,7 +337,7 @@
     margin: 0 80px;
 }
 .user-grid .user-grid-item img{
-   width: 800px;
+    width: 800px;
 }
 .user-grid .user-grid-item h1{
     height: 60px;
@@ -341,16 +358,24 @@
     background: #fff;
 
 }
-
 .user-grid-foot .outer {
     width: 960px;
     margin: 0 auto;
 }
 
+.user-edit-wrap {
+    background: #fff;
+    width: 960px;
+    margin:40px auto 0;
+    padding-top: 30px;
+    color: #666666;
+}
 
+.user-edit-wrap  .user-edit-inner {
+    margin:0 50px;
+}
+.user-edit-wrap  .user-edit-inner h1{
+    font-size: 24px;
+    height: 55px;
 
-
-
-
-
-
+}

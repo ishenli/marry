@@ -105,6 +105,20 @@
 .ui-dialog-operation .ui-dialog-confirm {
     margin-right: 4px;
 }
+/*表单*/
+.ui-form legend{display:none}
+.ui-form-other{_display:inline-block;margin-left:4px}
+.ui-lable{ float: left; margin-left: -180px; width: 170px; text-align: right; padding-top: 4px; font-size: 14px; }
+.ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
+.ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
+.ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
+.ui-textarea{width:422px;height:79px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;font-family:Arial}
+.ui-radio{width:25px;height: 25px; }
+.ui-radio-txt{position: relative;display: inline-block;height: 25px;line-height: 25px;top: 3px;}
+.ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
+.ui-form-item{padding:0 5px 15px 170px;*padding:0 5px 12px 170px;_padding:0 5px 13px 170px;zoom:1;}
+.ui-form-item .ui-input{font-size:12px;*font-size:11px;_font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px}
+.ui-form-item .ui-select{font-size:12px;*font-size:11px;_font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px;width: 190px;height: 28px;margin-top: 0px;}
 
 /*各种小组件*/
 /*button*/
@@ -185,6 +199,14 @@
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
 }
+.big-avatar img{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+}
 .marry-list .counter .comments, .marry-list .counter .fav, .marry-list .counter .share {
     display: inline-block;
     margin-right: 5px;
@@ -212,7 +234,7 @@
 }
 /*用户页面顶部导航*/
 .ui-green-header {
-    background: #cbeeeb;
+    background: #6addd3;
     opacity: 0.7;
     _filter: alpha(Opacity=70);
 }
@@ -230,7 +252,7 @@
 }
 .ui-page-nav li .arrow{
     display: none;
- }
+}
 .ui-page-nav-active span{
     background: #6addd3;
     padding: 0 4px;
@@ -250,8 +272,8 @@
     bottom: 0;
     left: 50%;
     margin-left: -8px;
-    background: #cbeeeb;
-    border-color:#cbeeeb #cbeeeb white #cbeeeb;
+    background: #6addd3;
+    border-color: #6addd3 #6addd3 white #6addd3;
 }
 /*各种插件*/
 #indexBanner{
@@ -533,3 +555,4 @@
 .viewArrow .next{
     background-position:-53px -103px;
 }
+

@@ -1,6 +1,6 @@
 body{
-    /*background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;*/
-
+    background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;
+    /*height: auto;*/
 }
 .ui-top-nav{
     position: relative;
@@ -49,7 +49,7 @@ body{
     width: 30px;
     height: 30px;
     margin: 5px 8px 0 0;
-    overflow: hidden;
+    overflow:hidden;
 
 }
 
