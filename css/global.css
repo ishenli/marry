@@ -1,6 +1,13 @@
 body{
-    background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;
+    /*background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;*/
+    background: #ccc;
     /*height: auto;*/
+}
+#wrapper{
+    min-height: 100%;
+    height: auto!important;
+    height: 100%;
+    background: #f4f4f4 url("../assets/images/bg.jpg") scroll repeat ;
 }
 .ui-top-nav{
     position: relative;
@@ -171,21 +178,23 @@ body{
     *display: inline;
     *zoom:1;
     float:left;
-    margin:14px 0;
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
 }
 .foot-body {
     margin: 0 auto;
 }
 
 .foot-body .line {
-    color: #fff;
     width: 1px;
     background: #fff;
     margin-left: 20px;
     margin-right: 20px;
     text-indent: -9999px;
+    margin-top: 14px;
+    height: 12px;
 }
 
 .foot-body .copyright{

@@ -3,6 +3,7 @@ html,body {
     color: #333;
     width: 100%;
     background: #fff;
+    height: 100%;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -26,7 +27,8 @@ audio, canvas, video {
 /* 字体的问题 */
 body{
     /*font:12px/1.5 tahoma,arial,Hiragino Sans GB,"Microsoft Yahei",\5b8b\4f53;*/
-    font:12px/1.5 MicrosoftYaHei,'微软雅黑',Arial,Tahoma,Helvetica,Georgia,Sans-serif,'STXihei','华文黑体',Hei,'Hiragino Kaku Gothic Pro',SimSun;
+    font:12px/1.5 "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
+    _font:12px/1.5  Tahoma, Arial, Helvetica, STHeiti, sans-serif;
     color: #aca195;
 
 }
