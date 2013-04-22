@@ -114,7 +114,6 @@ body{
 
 .ui-top-nav .top-menu .top-menu-item{
     float: right;
-    padding: 0 14px;
 }
 .ui-top-nav .top-menu .top-menu-item a{
     display: block;
@@ -122,16 +121,7 @@ body{
     height: 40px;
     color: #6addd3;
     font-size: 12px;
-}
-.ui-top-nav .top-menu .active{
-    background:#6addd3;
-    border: 1px solid #47d3c6;
-    color: #fff;
-    border-top: none;
-    border-bottom: none;
-}
-.ui-top-nav .top-menu .active a{
-    color: #fff;
+    padding: 0 14px;
 }
 .ui-top-nav a, .ui-top-nav a:hover, .ui-top-nav a:active, .ui-top-nav a:visited {
     text-decoration: none;

@@ -330,6 +330,10 @@
 .user-grid .user-grid-item p{
     height: 40px;
 }
+.load-more {
+    margin-top: 20px;
+    text-align: center;
+}
 .user-grid-foot {
     margin: 30px 0 -30px 0;
     height: 290px;
@@ -342,6 +346,8 @@
     width: 960px;
     margin: 0 auto;
 }
+
+
 
 
 
