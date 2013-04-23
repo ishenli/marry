@@ -146,8 +146,8 @@
 .add-panel header{
     height: 50px;
     line-height: 50px;
-
     position: relative;
+    z-index: 0;
     border-bottom: 1px solid #aca195;
 
 }
@@ -220,6 +220,7 @@
     border:1px solid #ccc;
     width: 100px;
     height: 40px;
+    _margin-left:18px;
 }
 .add-panel .cover {
     width: 120px;
