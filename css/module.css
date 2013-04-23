@@ -210,7 +210,8 @@
     height: 16px;
     background: url("../assets/images/small-arrow.png") no-repeat;
 }
-.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner .back{
+.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner a{
+    display: block;
     height: 30px;
     line-height: 30px;
     /*font: 24px "黑体";*/
@@ -440,22 +441,22 @@
 }
 
 /*浏览相册组件*/
-
-#horizontal .scrollbar {
+.scrollbar-panel{
+    float: left;
+    margin-left: 20px;
+    width: 365px;
+}
+.scrollbar {
     margin: 1em 0;
     height: 5px;
 }
 
-#horizontal .scrollbar .handle {
+ .scrollbar .handle {
     width: 100px;
     height: 100%;
 }
-#horizontal .sly ul li {
-    float: left;
-    height: 100%;
-    margin: 0 1px 0 0;
-}
-#horizontal .scrollbar {
+
+.scrollbar {
     background: #808080;
     border-radius: 4px;
     border: 2px solid #808080;
@@ -463,7 +464,7 @@
     line-height: 0;
 }
 
-#horizontal .scrollbar .handle {
+.scrollbar .handle {
     border-radius: 4px;
     background: #fff;
     cursor: pointer;
@@ -484,7 +485,12 @@
 .sly {
     overflow: hidden;
 }
-
+.sly ul li {
+    float: left;
+    height: 100%;
+    width: 200px;
+    margin: 0 1px 0 0;
+}
 .sly .node-list {
     list-style: none;
     margin: 0;

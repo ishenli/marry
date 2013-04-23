@@ -47,6 +47,25 @@
                     </div>
                 </div>
             </div> <!-- .sl-hvalign -->
+            <div class="ui-top-nav" id="photo-user-panel">
+                <div  class="user-panel">
+                    <div class="user-active">
+                        <span class="arrow">&gt;</span>
+                                <span class="avatar">
+                                    <img src="assets/test/avatar.jpg">
+                                </span>
+                        <div class="option">
+                            <ul>
+                                <li class="option-item"><a href="/">创建画卷</a></li>
+                                <li class="option-item"><a href="/">个人主页</a></li>
+                                <li class="option-item"><a href="/">编辑资料</a></li>
+                                <li class="option-item"><a href="/">退出</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="notice notice-active"> 1 </span>
+                </div>
+            </div>
         </header>
         <article class="viewer" id="viewer">
             <div class="viewport-wrapper" id="viewer-wrapper">
@@ -69,17 +88,39 @@
                                 <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li><li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li><li>30</li>
                             </ul>
                         </div>
-                        <div class="scrollbar">
-                            <div class="handle"></div>
-                        </div>
-                        <ul class="pages">
 
-                        </ul>
+                        <!--<ul class="pages">-->
+
+                        <!--</ul>-->
                 </div>
             </div>
         </article>
-        <footer class="foot-tol">
-
+        <footer id="footFool" class="foot-tol">
+            <div class="sl-hvalign">
+                <div class="sl-hvalign-cnt">
+                    <div class="sl-hvalign-cnt-inner">
+                        <div class="ui-slip">
+                            <div class="ui-slip-inner">
+                                <a  href="javascript:;"><span class="prev">往左</span></a>
+                            </div>
+                        </div>
+                        <div class="scrollbar-panel">
+                            <div class="scrollbar"> <div class="handle"></div> </div>
+                        </div>
+                        <div class="ui-slip">
+                            <div class="ui-slip-inner">
+                                <a  href="javascript:;"><span class="next">往右</span></a>
+                            </div>
+                        </div>
+                        <div class="ui-share-btn-list">
+                            <div class="counter">
+                                <span class="comments">11</span>
+                                <span class="fav">11</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     <script type="text/javascript">
         //初始化
@@ -87,7 +128,7 @@
                 frame = $("#slide"),
                 slidee = frame.find("ul"),
                 scrollbar = $(".scrollbar"),
-                pagesbar = $(".pages"),
+//                pagesbar = $(".pages"),
                 controls = $(".controls"),
                 prevButton = $(".prev"),
                 nextButton = $(".next"),
@@ -102,7 +143,7 @@
             scrollBy: 1,
 
             scrollBar: scrollbar,
-            pagesBar: pagesbar,
+//            pagesBar: pagesbar,
 
             prev: prevButton,
             next: nextButton,

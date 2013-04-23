@@ -91,7 +91,7 @@ body{
     position: absolute;
     right: 0;
     top: 40px;
-    visibility: hidden;
+    display: none;
     z-index: 3;
 }
 .ui-top-nav .user-panel .option-item{
@@ -106,8 +106,9 @@ body{
     display: block;
 }
 .ui-top-nav .user-panel .user-active:hover .option{
-    visibility: visible;
+    display: block;
 }
+
 .ui-top-nav .top-logo {
     float: left;
     _display: inline;

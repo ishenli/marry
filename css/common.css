@@ -279,7 +279,42 @@
 .foot-tol {
     height: 80px;
 }
+#footFool .prev,#footFool .next{
+    display: block;
+    width: 25px;
+    text-indent: -9999px;
+    background: url("../assets/images/show-sprite.png") no-repeat;
+}
+#footFool .prev{
+    background-position: 0 -53px;
+}
+#footFool .next{
+    background-position: -31px -53px;
+}
 
+#footFool .counter {
+    height: 20px;
+    margin: 8px 0 0 32px;
+}
+#footFool .counter span{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    background: url("../assets/images/show-sprite.png") no-repeat;
+}
+#footFool .counter .comments{
+    background-position: -44px -29px;
+    padding-left: 26px;
+
+}
+#footFool .counter .fav{
+    margin-left: 15px;
+    padding-left: 26px;
+    background-position: 0 -29px;
+}
 .viewer {
 }
 .viewer .viewport-wrapper {
@@ -379,4 +414,23 @@
     font-size: 24px;
     height: 55px;
 
+}
+
+#photo-user-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    margin-top: 10px;
+}
+#photo-user-panel .user-panel .arrow {
+    background: #6addd3;
+    border-color: #6addd3 #bce2e1 #bce2e1 #bce2e1;
+}
+#photo-user-panel .user-panel .user-active:hover{
+    cursor: pointer;
+}
+#photo-user-panel .user-panel .user-active:hover .arrow{
+    background: #fff;
+    border-color:#fff #6addd3 #6addd3 #6addd3;
 }
