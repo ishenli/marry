@@ -7,7 +7,8 @@ body{
     min-height: 100%;
     height: auto!important;
     height: 100%;
-    background: #f4f4f4 url("../assets/images/bg.jpg") scroll repeat ;
+    /*background: #f4f4f4 url("../assets/images/bg.jpg") scroll repeat ;*/
+    background: #ccc;
 }
 .ui-top-nav{
     position: relative;
@@ -42,6 +43,7 @@ body{
 }
 .ui-top-nav .user-panel{
     height: 40px;
+    z-index: 2;
 }
 .ui-top-nav .user-panel span{
     float: right;
@@ -78,6 +80,7 @@ body{
     height: 40px;
     position: relative;
     float: right;
+    z-index: 3;
 }
 .ui-top-nav .user-panel .user-active:hover{
     cursor: pointer;
@@ -91,7 +94,11 @@ body{
     position: absolute;
     right: 0;
     top: 40px;
-    display: none;
+    /*display: none;*/
+    display: block;
+    z-index: 100;
+}
+.ui-top-nav .user-panel .option ul{
     z-index: 3;
 }
 .ui-top-nav .user-panel .option-item{
@@ -104,6 +111,7 @@ body{
 }
 .ui-top-nav .user-panel .option-item a{
     display: block;
+    *zoom:1;     /*列表间距bug*/
 }
 .ui-top-nav .user-panel .user-active:hover .option{
     display: block;
@@ -125,7 +133,7 @@ body{
 }
 .ui-top-nav .top-menu .top-menu-item a{
     display: block;
-    float: right;
+    /*float: right;*/
     height: 40px;
     color: #6addd3;
     font-size: 12px;
@@ -179,7 +187,7 @@ body{
     *display: inline;
     *zoom:1;
     float:left;
-    color: #fff;
+    color:#fff;
     font-size: 14px;
     height: 40px;
     line-height: 40px;
@@ -196,6 +204,7 @@ body{
     text-indent: -9999px;
     margin-top: 14px;
     height: 12px;
+    line-height: 12px;
 }
 
 .foot-body .copyright{

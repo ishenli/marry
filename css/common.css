@@ -25,7 +25,9 @@
     bottom: 12px;
     height: 46px;
     width: 140px;
-    background: rgba(0,0,0,0.7);
+    background: #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
     color: #FFF;
     padding: 6px 18px;
 }
@@ -326,10 +328,12 @@
 }
 .user-header {
     height: 80px;
+    position: relative;
 }
 
 .user-header .create {
     right:0;
+    z-index: 2;
     margin: -17px 10px 0 0;
 }
 .user-header  .user-header-inner {
@@ -422,6 +426,7 @@
     top: 0;
     background: none;
     margin-top: 10px;
+    z-index: 10;
 }
 #photo-user-panel .user-panel .arrow {
     background: #6addd3;
