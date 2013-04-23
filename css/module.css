@@ -167,22 +167,61 @@
 .strike.ui-btn:hover {background-color: #39ceb0}
 .gray.ui-btn{background-color: #C7C7C7;}
 .gray.ui-btn:hover{background-color: #999999;}
-/*条*/
 
-.ui-slip {
+.ui-share-btn-list{
+    float: left;
     height: 30px;
-    line-height: 30px;
-    background: url("../assets/images/slip-sprite.png") 0 -12px no-repeat;
-    padding-left: 15px;
+}
+.ui-share-btn-list a{
+    margin-left: 6px;
+    float: left;
+    width: 30px;
+    height: 30px;
+    background: url("../assets/images/share-sprite.png") no-repeat;
+    text-indent: -9999px;
+}
+.ui-share-btn-list .sina{
+    background-position: 0 -52px;
+}
+.ui-share-btn-list .qzone{
+    background-position: -36px -52px;
+}
+.ui-share-btn-list .tt{
+    background-position: -72px -52px;
+}
+/*条*/
+.ui-slip {
+    float: left;
+    height: 30px;
+    background: url("../assets/images/slip-sprite.png") 0 -3px no-repeat;
+    margin-left: 20px;
+    padding-left: 25px;
 }
 .ui-slip .ui-slip-inner{
+    position: relative;
+    padding-right: 23px;
+    background: url("../assets/images/slip-sprite.png") right -34px no-repeat;
 }
-.ui-slip .ui-slip-inner h3{
+.ui-slip .ui-slip-inner .small-arrow {
+    display: block;
+    position: absolute;
+    top: 8px;
+    width: 22px;
+    height: 16px;
+    background: url("../assets/images/small-arrow.png") no-repeat;
+}
+.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner .back{
     height: 30px;
-    font: 24px "黑体";
+    line-height: 30px;
+    /*font: 24px "黑体";*/
+    font-size: 18px;
+    color: #fff;
     background: url("../assets/images/slip-line.png") repeat-x;
 }
-
+.ui-slip .ui-slip-inner .back{
+    display: block;
+    padding-left: 20px;
+}
 .arrow{
     width: 0px;
     height: 0px;
@@ -555,4 +594,3 @@
 .viewArrow .next{
     background-position:-53px -103px;
 }
-

@@ -268,7 +268,8 @@
 }
 
 .photo-show {
-    background: url("../assets/images/photo-bg.jpg") repeat-x;
+    background: #ebcaa3 url("../assets/images/photo-bg.jpg") repeat-x;
+
 }
 
 .top-tool {
