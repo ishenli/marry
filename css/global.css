@@ -78,13 +78,13 @@ body{
     width: 30px;
     height: 18px;
     margin: 11px 3px 0 0;
-    background: url("../assets/images/notice-bg.png") -4px -3px no-repeat;
+    background: url("../assets/images/buttons.png") -179px -22px no-repeat;
 }
 .ui-top-nav .user-panel .notice-active{
     line-height: 18px;
     text-indent: 9px;
     font-weight: bold;
-    background: url("../assets/images/notice-bg.png") -4px -29px no-repeat;
+    background: url("../assets/images/buttons.png") -179px -48px no-repeat;
 }
 
 .ui-top-nav .user-panel .user-active{

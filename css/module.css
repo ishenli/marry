@@ -152,16 +152,17 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     overflow: visible;
     font-size: 14px;
     font-weight: 700;
+    color: #fff;
 }
 input.ui-btn-text,button.ui-btn-text{*vertical-align: top;}
 
-.ui-btn:hover{background-color: #9fd22f;color: #fff;text-decoration: none;}
+.ui-btn:hover{color: #fff;text-decoration: none;}
 .ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
-.small.ui-btn{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
-.middle.ui-btn{ padding:0 14px;line-height: 29px; height: 29px;}
+.small.ui-btn .ui-btn-text{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
+.middle.ui-btn .ui-btn-text{ padding:0 14px;line-height: 29px; height: 29px;}
 .large.ui-btn .ui-btn-text{ font-size:18px;padding:0 10px;line-height: 40px; height: 40px;}
-.green.ui-btn { background-color: #b0e441; border-bottom: 2px solid #8bcb02;border-right: 1px solid #8bcb02;}
-.green.ui-btn:hover { background-color: #9fd22f; }
+.green.ui-btn,.ui-btn .ui-btn-text{ background-color: #b0e441; border-bottom: 2px solid #8bcb02;border-right: 1px solid #8bcb02;}
+.green.ui-btn:hover,.ui-btn:hover .ui-btn-text { background-color: #9fd22f; }
 
 .blue.ui-btn { background-color: #2daebf; }
 .blue.ui-btn:hover { background-color: #007d9a; }
@@ -270,20 +271,20 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top;}
     height: 16px;
     display: inline-block;
     vertical-align: top;
-    background: url("../assets/images/counter.png") no-repeat;
+    background: url("../assets/images/sprite.png") no-repeat;
 }
 .marry-list .counter .comments span, .marry-list .counter .fav span, .marry-list .counter .share span{
     height: 16px;
     vertical-align: middle;
 }
 .marry-list .counter .comments .ico{
-    background-position: -0px -3px;
+    background-position: -2px -474px;
 }
 .marry-list .counter .fav .ico{
-    background-position: -47px -3px;
+    background-position: -47px -474px;
 }
 .marry-list .counter .share .ico{
-    background-position: -92px -3px;
+    background-position: -90px -474px;
 }
 /*用户页面顶部导航*/
 .ui-green-header {
@@ -501,13 +502,16 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top;}
 .sly ul li {
     float: left;
     height: 100%;
-    width: 200px;
     margin: 0 1px 0 0;
+    /*width: 750px;*/
 }
 .sly .node-list {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+.sly .node-list img{
+    height: 100%;
 }
 .sly .node-list .cover{
     width: 400px;

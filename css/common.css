@@ -415,12 +415,15 @@
 }
 
 .user-edit-wrap  .user-edit-inner {
-    margin:0 50px;
+    padding:0 50px;
+    border-bottom: 1px solid #ededed;
 }
 .user-edit-wrap  .user-edit-inner h1{
     font-size: 24px;
     height: 55px;
-
+}
+.user-edit-wrap .form-panel{
+    margin-top: 40px;
 }
 
 #photo-user-panel {
