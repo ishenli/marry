@@ -122,34 +122,46 @@
 
 /*各种小组件*/
 /*button*/
-.ui-btn{
-    background: #222 url("http://bcs.duapp.com/webcdn/image%2Fbtn-overlay.png?sign=MBO:37605d0593028e53e3128f4dd3e3e64b:QnBHWqWp8Sls%2BuQvxTHOTwN1lto%3D") repeat-x 0 0;
+.ui-btn *{margin: 0;padding: 0;}
+.ui-btn{ background: #b0e43f ;
+    display: inline-block;
     color: #fff!important;
     text-decoration: none;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    padding:0;
     border-bottom: 1px solid rgba(0,0,0,0.25);
     position: relative;
-    overflow: visible;
-    display: inline-block;
-    text-align: center;
+    text-align:center;
     vertical-align: middle;
     cursor: pointer;
-    font-weight:700;
+    overflow: visible;
     font-size:14px;
     border-radius: 2px;
-    padding: 0 20px;
-    height: 23px;
     line-height: 23px;
 }
-.ui-btn:hover{background-color: #111;color: #fff;text-decoration: none;}
+div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
+.ui-btn-text{
+    display: inline-block;
+    *display:inline;
+    *zoom:1;
+    cursor: pointer;
+    border: 0;
+    text-decoration: none;
+    overflow: visible;
+    font-size: 14px;
+    font-weight: 700;
+}
+input.ui-btn-text,button.ui-btn-text{*vertical-align: top;}
+
+.ui-btn:hover{background-color: #9fd22f;color: #fff;text-decoration: none;}
 .ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
 .small.ui-btn{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
 .middle.ui-btn{ line-height: 29px; height: 29px;}
-.large.ui-btn{ font-size:16px;line-height: 33px; height: 33px;}
-.green.ui-btn { background-color: #91bd09; }
-.green.ui-btn:hover { background-color: #749a02; }
+.large.ui-btn .ui-btn-text{ font-size:18px;padding:0 10px;line-height: 40px; height: 40px;}
+.green.ui-btn { background-color: #b0e441; border-bottom: 2px solid #8bcb02;border-right: 1px solid #8bcb02;}
+.green.ui-btn:hover { background-color: #9fd22f; }
+
 .blue.ui-btn { background-color: #2daebf; }
 .blue.ui-btn:hover { background-color: #007d9a; }
 .red.ui-btn { background-color: #e33100; }
@@ -165,7 +177,7 @@
 /*Strike button*/
 .strike.ui-btn	{background-color: #4ADFC1}
 .strike.ui-btn:hover {background-color: #39ceb0}
-.gray.ui-btn{background-color: #C7C7C7;}
+.gray.ui-btn{background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
 .gray.ui-btn:hover{background-color: #999999;}
 
 .ui-share-btn-list{
@@ -274,9 +286,7 @@
 }
 /*用户页面顶部导航*/
 .ui-green-header {
-    background: #6addd3;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
+    background:#95e5de;
 }
 .ui-page-nav {
     height: 100%;
@@ -294,7 +304,7 @@
     display: none;
 }
 .ui-page-nav-active span{
-    background: #6addd3;
+    background-color: #6addd3;
     padding: 0 4px;
 }
 .ui-page-nav-line span{
@@ -312,12 +322,13 @@
     bottom: 0;
     left: 50%;
     margin-left: -8px;
-    background: #6addd3;
-    border-color: #6addd3 #6addd3 white #6addd3;
+    background: #95e5de;
+    border-color: #95e5de #95e5de white #95e5de;
 }
 /*各种插件*/
 #indexBanner{
     position: relative;
+    *margin-left: 6px;
 }
 #indexBanner .banner-arr{
     height: 60px;
@@ -325,17 +336,18 @@
     position: absolute;
     top: 190px;
     visibility: hidden;
-    background: url("../assets/images/banner-arrow.png");
+    background: url("../assets/images/sprite.png");
     cursor: pointer;
     z-index: 2;
     text-indent: -9999px;
 }
 #indexBanner #scrollerPrev{
+    background-position: 0 -146px;
     left: 11px;
 }
 #indexBanner #scrollerNext{
     right: 11px;
-    background-position: 0 -73px;
+    background-position: 0 -219px;
 }
 #indexBanner:hover .banner-arr{
     visibility: visible;
@@ -372,7 +384,7 @@
 }
 #indexBanner .ui-switchable-content .download-panel h3{
     color: #fff;
-    font: bold 14px "microsoft yahei";
+    font: bold 14px;
 }
 #indexBanner .ui-switchable-content .download-btn a{
     float: left;
@@ -380,11 +392,11 @@
     width: 157px;
     height: 55px;
     text-indent: -9999px;
-    background: url("../assets/images/sprite.png") 0 -78px no-repeat;
+    background: url("../assets/images/buttons.png") -8px -106px no-repeat;
 }
 #indexBanner .ui-switchable-content .download-btn .android{
     margin-left: 25px;
-    background-position:  -185px -78px;
+    background-position:  -182px -106px;
 
 }
 #indexBanner .ui-switchable-nav{

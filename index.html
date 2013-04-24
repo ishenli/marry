@@ -97,27 +97,11 @@
                     </ul>
                     <div class="banner-arr" id="scrollerNext" data-role="next">下一页</div>
                 </div>
-            <script type="text/javascript">
 
-                seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
-                    carousel = new Carousel({
-                        element: '#indexBanner',
-//                        panels: '#indexBanner .ui-switcha/**/ble-content div',
-                        triggers: '#indexBanner .ui-switchable-nav li',
-                        easing: 'easeOutStrong',
-                        effect: 'scrollx',
-                        step: 1,
-                        viewSize: [980],
-                        circular: true,
-                        prevBtn: '#scroller-prev',
-                        nextBtn: '#scroller-next'
-                    }).render();
-                });
-            </script>
-            <div class="w980 ui-body-content">
+            <div class="w980 ui-body-content ui-shadow">
                 <header class="ui-header">
                     <h1>推荐画卷</h1>
-                    <a class="ui-btn ui-header-more" href="/" target="_blank">更多</a>
+                    <a class="ui-btn large green ui-header-more" href="/" target="_blank"> <span class="ui-btn-text"> 更多 </span> </a>
                 </header>
                 <section>
                     <ul class="ui-pic-list clearfix" >
@@ -196,10 +180,10 @@
                     </ul>
                 </section>
             </div>
-                <div class="w980 ui-body-content">
+            <div class="w980 ui-body-content ui-shadow">
                     <header class="ui-header">
                         <h1>推荐画卷</h1>
-                        <a class="ui-btn ui-header-more" href="/" target="_blank">更多</a>
+                        <a class="ui-btn large green ui-header-more" href="/" target="_blank"> <span class="ui-btn-text"> 更多 </span> </a>
                     </header>
                     <section class="template-panel">
                         <ul class="ui-tem-list clearfix" >
@@ -233,7 +217,7 @@
                 </div>
         </section>
     </section>
-    <footer class="ui-footer">
+    <footer class="ui-footer ui-shadow">
         <section class="w980 foot-body">
             <a href="/" class="foot-txt"> 婚礼纪微博 </a>
             <span class="line">|</span>
@@ -258,6 +242,21 @@
     </div>
     </div>
     <script type="text/javascript">
+
+        seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
+            carousel = new Carousel({
+                element: '#indexBanner',
+//                        panels: '#indexBanner .ui-switcha/**/ble-content div',
+                triggers: '#indexBanner .ui-switchable-nav li',
+                easing: 'easeOutStrong',
+                effect: 'scrollx',
+                step: 1,
+                viewSize: [980],
+                circular: true,
+                prevBtn: '#scroller-prev',
+                nextBtn: '#scroller-next'
+            }).render();
+        });
         seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
             var feedBack=new Dialog({
                 trigger: '#feedback',
