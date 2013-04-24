@@ -600,3 +600,18 @@
 .viewArrow .next{
     background-position:-53px -103px;
 }
+/*效果*/
+.ui-shadow{
+    -webkit-box-shadow: 0 0 3px #999;
+    -moz-box-shadow: 0 0 3px #999 ;
+    box-shadow: 0 0 3px #999;
+    /* gte ie8 */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2)";
+
+    /* lte ie7 */
+    *filter:
+        progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2)
+        progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
+        progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2)
+        progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2);
+}
