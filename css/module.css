@@ -129,6 +129,7 @@
     text-decoration: none;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
+    border-radius: 4px;
     padding:0;
     border-bottom: 1px solid rgba(0,0,0,0.25);
     position: relative;
@@ -137,7 +138,7 @@
     cursor: pointer;
     overflow: visible;
     font-size:14px;
-    border-radius: 2px;
+
     line-height: 23px;
 }
 div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
@@ -157,7 +158,7 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top;}
 .ui-btn:hover{background-color: #9fd22f;color: #fff;text-decoration: none;}
 .ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
 .small.ui-btn{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
-.middle.ui-btn{ line-height: 29px; height: 29px;}
+.middle.ui-btn{ padding:0 14px;line-height: 29px; height: 29px;}
 .large.ui-btn .ui-btn-text{ font-size:18px;padding:0 10px;line-height: 40px; height: 40px;}
 .green.ui-btn { background-color: #b0e441; border-bottom: 2px solid #8bcb02;border-right: 1px solid #8bcb02;}
 .green.ui-btn:hover { background-color: #9fd22f; }

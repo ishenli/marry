@@ -164,13 +164,13 @@
     width: 20px;
     height: 20px;
     display: inline-block;
-    background: url("../assets/images/dot.png") -4px -32px no-repeat;
+    background: url("../assets/images/sprite.png") -66px -535px no-repeat;
 }
 .add-panel .icon-active{
-    background-position: -4px -5px;
+    background-position: -66px -508px;
 }
 .add-panel .dot{
-    background-position: -25px -5px;
+    background-position: -88px -508px;
 }
 .add-panel .upload-panel {
     height: 30px;
@@ -187,10 +187,12 @@
     height: 75px;
     margin: -35px 0 0 -30px;
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
+    font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
+    color:#a9dc3c;
 }
 .add-panel .step span{
     color:#a9dc3c;
-    font:bold 40px/75px Latha "microsoft yahei" "sans serif";
+
 }
 .add-panel .txt {
     float: right;
