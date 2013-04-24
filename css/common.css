@@ -412,6 +412,7 @@
     margin:40px auto 0;
     padding-top: 30px;
     color: #666666;
+    position: relative;
 }
 
 .user-edit-wrap  .user-edit-inner {
@@ -425,7 +426,17 @@
 .user-edit-wrap .form-panel{
     margin-top: 40px;
 }
+.user-edit-wrap .img-panel{
+    position: absolute;
+    right: 50px;
+    top: 125px;
+    margin-right: 50px;
 
+}
+.user-edit-wrap .img-panel img{
+    width: 200px;
+    height: 200px;
+}
 #photo-user-panel {
     position: absolute;
     right: 0;
