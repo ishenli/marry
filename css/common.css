@@ -136,6 +136,8 @@
     background: #fff;
     width: 960px;
     margin: 40px 10px 20px;
+}
+.add-panel.first-step{
     text-align: center;
 }
 .add-panel.step-second{
@@ -148,7 +150,7 @@
     line-height: 50px;
     position: relative;
     z-index: 0;
-    border-bottom: 1px solid #aca195;
+    /*border-bottom: 1px solid #aca195;*/
 
 }
 .add-panel .icons{
@@ -189,6 +191,7 @@
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
     font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
     color:#a9dc3c;
+    text-align: center;
 }
 .add-panel .step span{
     color:#a9dc3c;
@@ -206,11 +209,13 @@
 .add-list-item {
     float: left;
     width: 120px;
-    margin: 15px 0 0 15px;
+    margin: 0 0 20px 15px;
     position: relative;
 }
 .add-list.thrid-step{
-    margin: 0 30px 0 -6px;
+    position: relative;
+    margin: 0 0 0 -6px;
+    height: 610px;
 }
 .thrid-step .add-list-item{
     margin-left: 36px;
@@ -284,16 +289,16 @@
 .foot-tol {
     height: 80px;
 }
-#footFool .prev,#footFool .next{
+#footFool .prev-page,#footFool .next-page{
     display: block;
     width: 25px;
     text-indent: -9999px;
     background: url("../assets/images/show-sprite.png") no-repeat;
 }
-#footFool .prev{
+#footFool .prev-page{
     background-position: 0 -53px;
 }
-#footFool .next{
+#footFool .next-page{
     background-position: -31px -53px;
 }
 
@@ -309,6 +314,7 @@
     line-height: 20px;
     color: #fff;
     background: url("../assets/images/show-sprite.png") no-repeat;
+    cursor: pointer;
 }
 #footFool .counter .comments{
     background-position: -44px -29px;
@@ -455,4 +461,54 @@
 #photo-user-panel .user-panel .user-active:hover .arrow{
     background: #fff;
     border-color:#fff #6addd3 #6addd3 #6addd3;
+}
+
+#commentPanel {
+    width: 480px;
+    height: 520px;
+    padding:20px 14px;
+}
+#commentPanel #comments-list {
+    position: relative;
+    width: 462px;
+    height: 440px;
+    overflow: hidden;
+}
+
+#commentPanel .comment-input{
+    width: 462px;
+}
+#commentPanel .ui-comment-form {
+    margin-top: 10px;
+}
+
+#commentPanel .ui-comment-input {
+    width: 360px;
+    padding: 7px 9px 7px 9px;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #ccc;
+    border-top-color: #a6a6a6;
+}
+
+#commentPanel .comment-btn {
+    float: right;
+    margin: 6px 10px 0 0;
+}
+
+
+#noticePanel{
+    position: absolute;
+    right: 0;
+    top:40px;
+    width: 350px;
+    height: 420px;
+    z-index: 20;
+    background: #fff;
+    display: none;
+}
+#noticePanel #noticeList{
+    height: 420px;
+    padding-left: 10px;
+    overflow: hidden;
 }
