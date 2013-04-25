@@ -153,6 +153,9 @@
     /*border-bottom: 1px solid #aca195;*/
 
 }
+.add-panel header .title{
+    padding-left: 65px;
+}
 .add-panel .icons{
     position: absolute;
     right: 0;
@@ -178,8 +181,11 @@
     height: 30px;
     line-height: 30px;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 10px;
+}
+.add-panel .upload-panel .photo{
+    margin-right: 15px;
 }
 .add-panel .step{
     position: absolute;
@@ -269,7 +275,11 @@
 .add-panel .foot-txt {
     padding: 20px 0;
 }
-
+.add-panel .upload-info{
+    font-size: 14px;
+    text-align: right;
+    padding-right: 20px;
+}
 .add-btn {
     text-align: center;
 }
