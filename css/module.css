@@ -156,6 +156,9 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
+.ui-btn:hover .ui-btn-text{
+    color: #fff;
+}tn
 input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 
 .ui-btn:hover{color: #fff;text-decoration: none;}
@@ -191,7 +194,47 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .strike.ui-btn:hover {background-color: #39ceb0}
 .gray.ui-btn{background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
 .gray.ui-btn:hover{background-color: #999999;}
+.gray.ui-btn:hover
 
+/*登录按钮*/
+.ui-login-btn{
+    height: 32px;
+    width: 143px;
+    line-height: 32px;
+
+}
+.ui-login-btn .qq{
+    background: url("../assets/images/buttons.png") -78px -22px no-repeat;
+}
+.ui-login-btn .qq:active{
+    background-position: -78px -66px;
+}
+.ui-login-btn .sina{
+    background: url("../assets/images/buttons.png") -8px -22px no-repeat;
+}
+.ui-login-btn .sina:active{
+    background-position: -8px -66px;
+}
+.ui-login-btn.green .qq{
+    background: url("../assets/images/login-btn.png") -84px -10px no-repeat;
+}
+.ui-login-btn.green .qq:active{
+    background-position: -84px -53px;
+}
+.ui-login-btn.green .sina{
+    background: url("../assets/images/login-btn.png") -14px -10px no-repeat;
+}
+.ui-login-btn.green .sina:active{
+    background-position: -14px -53px;
+}
+.ui-login-btn .ui-login-btn-text{
+    color: #fff;
+    width: 71px;
+    float: right;
+}
+.ui-login-btn .ui-login-btn-text span{
+    margin-left:35px ;
+}
 .ui-share-btn-list{
     float: left;
     height: 30px;

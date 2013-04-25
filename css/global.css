@@ -11,48 +11,28 @@ body{
     /*background: #ccc;*/
 }
 .ui-top-nav{
+    position: relative;
     width: 100%;
     height: 40px;
     line-height: 40px;
     background: #fff url("../assets/images/sprite.png") 0 -1px repeat-x;
     color: #FFF;
+    z-index: 5;
 }
 .ui-top-nav .ui-top-nav-body{
     position: relative;
     margin: 0 auto;
 }
-.ui-top-nav .login-btn,.ui-top-nav .user-panel{
+.ui-top-nav .user-panel{
     float: right;
     width: 145px;
 }
-.ui-top-nav .login-btn{
-    height: 32px;
-    margin: 4px 0;
-    width: 140px;
-    line-height: 32px;
-
-}
-.ui-top-nav .login-btn .qq{
-    background: url("../assets/images/buttons.png") -78px -22px no-repeat;
-}
-.ui-top-nav .login-btn .qq:active{
-    background-position: -78px -66px;
-}
-.ui-top-nav .login-btn .sina{
-    background: url("../assets/images/buttons.png") -8px -22px no-repeat;
-}
-.ui-top-nav .login-btn .sina:active{
-    background-position: -8px -66px;
-}
-.ui-top-nav .login-btn .login-btn-text{
-    color: #fff;
-    width: 70px;
+.ui-top-nav .login{
     float: right;
+    margin: 4px 0;
+}
 
-}
-.ui-top-nav .login-btn .login-btn-text span{
-    margin-left:35px ;
-}
+
 .ui-top-nav .user-panel{
     position: relative;
     height: 40px;

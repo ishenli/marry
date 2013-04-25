@@ -283,8 +283,12 @@ body .mgr-20{margin-right:20px;}
 .w960{
     width: 960px;
 }
+.w920{
+    width: 920px;
+}
 .pd20{padding: 20px;}
 .mt30{margin-top: 30px;}
+.mt10{margin-top: 10px;}
 /*
 @ 名称: hacker
   前缀:sl-
@@ -321,5 +325,29 @@ div.sl-rc-wrap,p.sl-rc-wrap,h2.sl-rc-wrap,h3.sl-rc-wrap,h4.sl-rc-wrap,h5.sl-rc-w
     position: absolute;
     top: 50%;
 }
+.sl-valign{
+    display:table;
+    overflow:hidden;
+    height: 100%;
+    *position:relative;
+}
 
+.sl-valign-cnt{
+    display:table-cell;
+    vertical-align: middle;
+    *position:absolute;
+    top:50%;
+}
 
+.sl-valign-cnt-inner{
+    *position:relative;
+    *top:-50%;
+}
+
+.sl-vertical {
+    position: absolute;
+    top: 50%;
+}
+.text-center{
+    text-align: center;
+}
