@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    <span class="notice notice-active"> 1 </span>
+                    <span class="notice notice-active" id="noticeTrigger"> 1 </span>
                 </div>
             </div>
         </header>
@@ -121,7 +121,7 @@
                         </div>
                         <div class="ui-share-btn-list">
                             <div class="counter">
-                                <span class="comments">11</span>
+                                <span id="commentBack" class="comments">11</span>
                                 <span class="fav">11</span>
                             </div>
                         </div>
@@ -129,6 +129,77 @@
                 </div>
             </div>
         </footer>
+        <div id="commentPanel" class="ui-dialog-container ">
+            <div id="comments-list" class="ui-comment-list">
+                <ul>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                    <li class="big-avatar">
+                        <img src="assets/test/avatar.jpg" class="fn-left">
+                        <div class="comments-text">
+                            <h3>田馥甄</h3>
+                            <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                            <span class="date">2013-4-21</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="ui-scrollbar-vertical"> <div class="handle"></div></div>
+            </div>
+            <div class="comment-input">
+                <form class="ui-comment-form">
+                    <input type="text" class="ui-comment-input">
+                    <div class="ui-btn ui-btn-green middle comment-btn">
+                        <input type="submit" class="ui-btn-text" value="发送">
+                    </div>
+                </form>
+            </div>
+        </div>
     <script type="text/javascript">
         //初始化
         var $frame  = $('#slide');
@@ -161,6 +232,16 @@
             nextPage: $('.next-page')
         });
 
+        $("#comments-list").sly({
+            horizontal:0,
+            itemNav: "basic",
+            scrollBy: 1,
+            speed: 300,
+            dragHandle: 1,
+            dynamicHandle: 1,
+            scrollBar:$(".ui-scrollbar-vertical")
+        });
+
         seajs.config({
             alias: {
                 "$": "gallery/jquery.js"
@@ -168,6 +249,19 @@
         });
         seajs.use(['marry/application', '$'], function(App, $) {
 
+        });
+        seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
+            var feedBack=new Dialog({
+                trigger: '#commentBack',
+                height: '520px',
+                width:'480px',
+                effect: 'fade',
+                content: '#commentPanel'
+
+            })
+            feedBack.after('show',function(){
+                $("#commentPanel").show();
+            });
         });
     </script>
     </body>
