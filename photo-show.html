@@ -77,7 +77,7 @@
                 </div>
                 <div id="horizontal">
                         <div class="sly" id="slide">
-                            <ul class="node-list big cfix">
+                            <ul class="node-list">
                                 <li class="cover">
                                     <div class="cover-dot-top">”</div>
                                     <div class="cover-content">
@@ -99,10 +99,6 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <!--<ul class="pages">-->
-
-                        <!--</ul>-->
                 </div>
             </div>
         </article>
@@ -112,7 +108,7 @@
                     <div class="sl-hvalign-cnt-inner">
                         <div class="ui-slip">
                             <div class="ui-slip-inner">
-                                <a  href="javascript:;"><span class="prev">往左</span></a>
+                                <a  href="javascript:;"><span class="prev-page">往左</span></a>
                             </div>
                         </div>
                         <div class="scrollbar-panel">
@@ -120,7 +116,7 @@
                         </div>
                         <div class="ui-slip">
                             <div class="ui-slip-inner">
-                                <a  href="javascript:;"><span class="next">往右</span></a>
+                                <a  href="javascript:;"><span class="next-page">往右</span></a>
                             </div>
                         </div>
                         <div class="ui-share-btn-list">
@@ -135,35 +131,36 @@
         </footer>
     <script type="text/javascript">
         //初始化
-        var cont = $(".slyWrap"),
-                frame = $("#slide"),
-                slidee = frame.find("ul"),
-                scrollbar = $(".scrollbar"),
-//                pagesbar = $(".pages"),
-                controls = $(".controls"),
-                prevButton = $(".prev"),
-                nextButton = $(".next"),
-                prevPageButton = $(".prevPage"),
-                nextPageButton = $(".nextPage");
+        var $frame  = $('#slide');
+        var $slidee = $frame.children('ul').eq(0);
+        var $wrap   = $frame.parent();
 
-        var options = {
+        // Call Sly on frame
+        $frame.sly({
             horizontal: 1,
-            itemNav: "smart",
-            dragContent: 1,
+            itemNav: 'basic',
+            smart: 1,
+            activateOn: 'click',
+            mouseDragging: 1,
+            touchDragging: 1,
+            releaseSwing: 1,
             startAt: 3,
+            scrollBar: $('.scrollbar'),
             scrollBy: 1,
+            pagesBar: $('.pages'),
+            activatePageOn: 'click',
+            speed: 300,
+            elasticBounds: 1,
+            dragHandle: 1,
+            clickBar: 1,
 
-            scrollBar: scrollbar,
-//            pagesBar: pagesbar,
+            // Buttons
+            prev: $('.prev'),
+            next: $('.next'),
+            prevPage: $('.prev-page'),
+            nextPage: $('.next-page')
+        });
 
-            prev: prevButton,
-            next: nextButton,
-            prevPage: prevPageButton,
-            nextPage: nextPageButton,
-            disabledClass: 'btn-disabled'
-        };
-
-        frame.sly(options);
         seajs.config({
             alias: {
                 "$": "gallery/jquery.js"
