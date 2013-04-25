@@ -119,13 +119,18 @@
                     </div>
                 </div>
                 <script type="text/javascript">
-                    $("#noticeTrigger").on("mouseover",function(){
-                        $("#noticePanel").show().on("mouseover",function(){
-                            $(this).show();
+                    $("#noticeTrigger").on("click",function(e){
+                            e.stopPropagation();
+                            $("#noticePanel").show();
+                            $("#noticePanel").on("click",function(e){
+                                e.stopPropagation();
+                            })
                         });
                        /* $("#noticePanel").on("mouseout",function(){
                             $(this).hide();
                         })*/
+                    $("html").on("click",function(){
+                        $("#noticePanel").hide();
                     });
                 </script>
             </div>
