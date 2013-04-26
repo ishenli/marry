@@ -742,7 +742,7 @@ download-panel h3{
     top: 6px;
     cursor: pointer;
 }
-.full-viewer .left, .full-viewer .right {
+.full-viewer .prev, .full-viewer .next {
     background: url(http://cyjs.qiniudn.com/assets/control-fc-419da6dffe0a9722ab526a6b29a76f66.png) no-repeat;
     width: 60px;
     height: 90px;
@@ -751,11 +751,11 @@ download-panel h3{
     margin-top: -45px;
     cursor: pointer;
 }
-.full-viewer .left {
+.full-viewer .prev {
     background-position: 20px -216px;
     left: 0;
 }
-.full-viewer .right {
+.full-viewer .next {
     background-position: 14px -306px;
     right: 0;
 }
