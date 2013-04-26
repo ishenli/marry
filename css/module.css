@@ -53,6 +53,7 @@
     background: #000;
     opacity: 0.7;
     padding: 5px;
+    border-radius: 4px;
 }
 .ui-dialog-close:hover {
     color: #666;
@@ -88,6 +89,9 @@
     padding: 20px 15px 20px;
     font-size: 12px;
     display: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .ui-dialog-message {
@@ -112,7 +116,7 @@
 .ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
 .ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
 .ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
-.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;font-family:Arial}
+.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;color: #;font-family:Arial;color: #c7c7c7;}
 .ui-radio{width:25px;height: 25px; }
 .ui-radio-txt{position: relative;display: inline-block;height: 25px;line-height: 25px;top: 3px;}
 .ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
@@ -131,7 +135,6 @@
     -webkit-border-radius: 4px;
     border-radius: 4px;
     padding:0;
-    /*border-bottom: 1px solid rgba(0,0,0,0.25);*/
     position: relative;
     text-align:center;
     vertical-align: middle;
@@ -150,47 +153,28 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     border: 0;
     text-decoration: none;
     overflow: visible;
-    /*font-size: 14px;*/
-    /*font-weight: 700;*/
+    font-size: 14px;
     color: #fff;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
+    background: transparent;
 }
 .ui-btn:hover .ui-btn-text{
     color: #fff;
 }
 input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
-
-.ui-btn:hover{color: #fff;text-decoration: none;}
-.ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
-.small.ui-btn .ui-btn-text{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
-.middle.ui-btn .ui-btn-text{
-    padding:0 14px;line-height:30px; height: 30px;
-}
-/*.large.ui-btn .ui-btn-text{
-    font-size:18px;padding:0 10px;line-height: 40px; height: 40px;
-}
-.ui-btn-green,.ui-btn-green .ui-btn-text{ */
-    /*background-color: #b0e441; */
-    /*border-bottom: 1px solid #8bcb02;*/
-    /*border-right: 1px solid #8bcb02;*/
-/*}
-.gray.ui-btn{
-    background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
-.gray.ui-btn:hover{background-color: #999999;}
-*/
 .large.ui-btn{
-    font-size:18px;
     height: 42px;
     line-height: 42px;
     width: 120px;
 }
 .middle.ui-btn{
-    font-size:18px;
     height: 32px;
-    line-height: 32px;
     width: 90px;
+}
+.ui-btn-green .ui-btn-text{
+    text-shadow:0 1px 1px #8bcb02;
 }
 .middle.ui-btn-green{
     background-position: -8px -187px;
@@ -204,25 +188,16 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .large.ui-btn-green:active{
     background-position: -136px -242px;
 }
-.large.gray{
-   background-position: -278px -187px;
+.gray .ui-btn-text{
+    text-shadow:0 1px 1px #c6c7c5;
 }
-.blue.ui-btn { background-color: #2daebf; }
-.blue.ui-btn:hover { background-color: #007d9a; }
-.red.ui-btn { background-color: #e33100; }
-.red.ui-btn:hover { background-color: #872300; }
-.magenta.ui-btn{ background-color: #a9014b; }
-.magenta.ui-btn:hover { background-color: #630030; }
-.orange.ui-btn { background-color: #ff5c00; }
-.orange.ui-btn:hover { background-color: #d45500; }
-.orangellow.ui-btn { background-color: #ffb515; }
-.orangellow.ui-btn:hover { background-color: #fc9200; }
-.white.ui-btn { background-color: #fff; border: 1px solid #ccc; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px rgba(255,255,255,1); }
-.white.ui-btn:hover { background-color: #eee; }
-/*Strike button*/
-.strike.ui-btn	{background-color: #4ADFC1}
-.strike.ui-btn:hover {background-color: #39ceb0}
-
+.large.gray{
+    background-position: -278px -187px;
+}
+.middle.ui-btn-green input.ui-btn-text{
+    height: 30px;
+    line-height: 30px;
+}
 
 /*登录按钮*/
 .ui-login-btn{
@@ -437,7 +412,7 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 #indexBanner{
     width: 980px;
     height: 440px;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     overflow: hidden;
 }
 #indexBanner .ui-switchable-content{
@@ -567,11 +542,12 @@ download-panel h3{
 }
 
 .scrollbar {
-    background: #808080;
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 4px;
-    border: 2px solid #808080;
-    border-top-color: #666;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 0.5);
     line-height: 0;
+
 }
 
 .scrollbar .handle {
@@ -579,10 +555,6 @@ download-panel h3{
     background: #fff;
     cursor: pointer;
     line-height: 0;
-    -webkit-box-shadow: 0 1px 0 #555;
-    -moz-box-shadow: 0 1px 0 #555;
-    -o-box-shadow: 0 1px 0 #555;
-    box-shadow: 0 1px 0 #555;
 }
 .slyWrap .controls {
     margin: 20px 0;
@@ -598,8 +570,13 @@ download-panel h3{
 .sly ul li {
     float: left;
     height: 100%;
-    margin: 0 1px 0 0;
     width: 750px;
+    margin: 10px 5px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+
 }
 .sly .node-list {
     list-style: none;
@@ -636,23 +613,10 @@ download-panel h3{
 .node-list .cover-content{
     margin: 100px 97px;
 }
-.sly > ul li {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    background: #4DBCE9;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-}
 
 .sly > ul li.active {
     background: #fff;
     color: #4DBCE9;
-    -webkit-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
-    -moz-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
-    -o-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
-    box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
 }
 
 .pages {
@@ -762,17 +726,23 @@ download-panel h3{
 /*效果*/
 .ui-shadow{
     _border: 1px solid #ccc;
-    -webkit-box-shadow: 0 0 3px #999;
-    -moz-box-shadow: 0 0 3px #999 ;
-    box-shadow: 0 0 3px #999;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     /* gte ie8 */
     -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2)";
 
-    /* lte ie7 */
-    *filter: progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2)
-progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
-progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2)
-progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2);
+    /* *//* lte ie7 *//*
+     *filter: progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2)
+ progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
+ progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2)
+ progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2);*/
+}
+.ui-shadow-top{
+    *border-top: 1px solid #ccc;
+    -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
 }
 /*滚动条*/
 .ui-scrollbar-vertical {

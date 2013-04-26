@@ -7,7 +7,7 @@ body{
     min-height: 100%;
     height: auto!important;
     height: 100%;
-    background: #f4f4f4 url("../assets/images/bg.jpg") scroll repeat ;
+    background: #f4f4f4 url("../assets/images/bg.png") scroll repeat ;
     /*background: #ccc;*/
 }
 .ui-top-nav{
