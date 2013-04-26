@@ -139,6 +139,7 @@
     overflow: visible;
     font-size:14px;
     line-height: 23px;
+    background: url("../assets/images/buttons.png");
 }
 div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
 .ui-btn-text{
@@ -149,8 +150,8 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     border: 0;
     text-decoration: none;
     overflow: visible;
-    font-size: 14px;
-    font-weight: 700;
+    /*font-size: 14px;*/
+    /*font-weight: 700;*/
     color: #fff;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -164,11 +165,48 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .ui-btn:hover{color: #fff;text-decoration: none;}
 .ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
 .small.ui-btn .ui-btn-text{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
-.middle.ui-btn .ui-btn-text{ padding:0 14px;line-height: 29px; height: 29px;}
-.large.ui-btn .ui-btn-text{ font-size:18px;padding:0 10px;line-height: 40px; height: 40px;}
-.ui-btn-green,.ui-btn-green .ui-btn-text{ background-color: #b0e441; border-bottom: 1px solid #8bcb02; border-right: 1px solid #8bcb02; }
-.ui-btn-green:hover,.ui-btn-green:hover .ui-btn-text { background-color: #9fd22f; }
-
+.middle.ui-btn .ui-btn-text{
+    padding:0 14px;line-height:30px; height: 30px;
+}
+/*.large.ui-btn .ui-btn-text{
+    font-size:18px;padding:0 10px;line-height: 40px; height: 40px;
+}
+.ui-btn-green,.ui-btn-green .ui-btn-text{ */
+    /*background-color: #b0e441; */
+    /*border-bottom: 1px solid #8bcb02;*/
+    /*border-right: 1px solid #8bcb02;*/
+/*}
+.gray.ui-btn{
+    background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
+.gray.ui-btn:hover{background-color: #999999;}
+*/
+.large.ui-btn{
+    font-size:18px;
+    height: 42px;
+    line-height: 42px;
+    width: 120px;
+}
+.middle.ui-btn{
+    font-size:18px;
+    height: 32px;
+    line-height: 32px;
+    width: 90px;
+}
+.middle.ui-btn-green{
+    background-position: -8px -187px;
+}
+.middle.ui-btn-green:active{
+    background-position: -8px -227px;
+}
+.large.ui-btn-green{
+    background-position: -136px -187px;
+}
+.large.ui-btn-green:active{
+    background-position: -136px -242px;
+}
+.large.gray{
+   background-position: -278px -187px;
+}
 .blue.ui-btn { background-color: #2daebf; }
 .blue.ui-btn:hover { background-color: #007d9a; }
 .red.ui-btn { background-color: #e33100; }
@@ -184,8 +222,7 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 /*Strike button*/
 .strike.ui-btn	{background-color: #4ADFC1}
 .strike.ui-btn:hover {background-color: #39ceb0}
-.gray.ui-btn{background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
-.gray.ui-btn:hover{background-color: #999999;}
+
 
 /*登录按钮*/
 .ui-login-btn{
