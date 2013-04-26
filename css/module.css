@@ -166,14 +166,8 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .small.ui-btn .ui-btn-text{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
 .middle.ui-btn .ui-btn-text{ padding:0 14px;line-height: 29px; height: 29px;}
 .large.ui-btn .ui-btn-text{ font-size:18px;padding:0 10px;line-height: 40px; height: 40px;}
-.ui-btn-green,.ui-btn-green .ui-btn-text{
-    background-color: #b0e441;
-    border-bottom: 1px solid #8bcb02;
-    border-right: 1px solid #8bcb02;
-}
-.ui-btn-green:hover,.ui-btn-green:hover .ui-btn-text {
-    background-color: #9fd22f;
-}
+.ui-btn-green,.ui-btn-green .ui-btn-text{ background-color: #b0e441; border-bottom: 1px solid #8bcb02; border-right: 1px solid #8bcb02; }
+.ui-btn-green:hover,.ui-btn-green:hover .ui-btn-text { background-color: #9fd22f; }
 
 .blue.ui-btn { background-color: #2daebf; }
 .blue.ui-btn:hover { background-color: #007d9a; }
@@ -185,23 +179,19 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .orange.ui-btn:hover { background-color: #d45500; }
 .orangellow.ui-btn { background-color: #ffb515; }
 .orangellow.ui-btn:hover { background-color: #fc9200; }
-.white.ui-btn { background-color: #fff;
-    border: 1px solid #ccc; color: #666 !important;
-    font-weight: normal; text-shadow: 0 1px 1px rgba(255,255,255,1); }
+.white.ui-btn { background-color: #fff; border: 1px solid #ccc; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px rgba(255,255,255,1); }
 .white.ui-btn:hover { background-color: #eee; }
 /*Strike button*/
 .strike.ui-btn	{background-color: #4ADFC1}
 .strike.ui-btn:hover {background-color: #39ceb0}
 .gray.ui-btn{background-color: #dcdcdc;border-bottom: 2px solid #c7c7c7;border-right: 1px solid #c7c7c7;}
 .gray.ui-btn:hover{background-color: #999999;}
-.gray.ui-btn:hover
 
 /*登录按钮*/
 .ui-login-btn{
-    height: 32px;
     width: 143px;
+    height: 32px;
     line-height: 32px;
-
 }
 .ui-login-btn .qq{
     background: url("../assets/images/buttons.png") -78px -22px no-repeat;
@@ -438,11 +428,11 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
     width: 340px;
     height: 85px;
 }
-#indexBanner .ui-switchable-content .download-panel h3{
+download-panel h3{
     color: #fff;
     font: bold 14px;
 }
-#indexBanner .ui-switchable-content .download-btn a{
+.ui-download-btn a{
     float: left;
     margin-top: 10px;
     width: 157px;
@@ -450,7 +440,7 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
     text-indent: -9999px;
     background: url("../assets/images/buttons.png") -8px -106px no-repeat;
 }
-#indexBanner .ui-switchable-content .download-btn .android{
+.ui-download-btn .android{
     margin-left: 25px;
     background-position:  -182px -106px;
 
@@ -495,6 +485,21 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
     z-index: 9;
 }
 .note:hover .btn-drag{
+    display:block;
+}
+.note .btn-play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 59px;
+    height: 34px;
+    background: url("../assets/images/buttons.png") -241px -22px no-repeat;
+    margin: -17px 0 0 -30px;
+    display: none;
+    cursor: pointer;
+    z-index: 9;
+}
+.note:hover .btn-drag,.note:hover .btn-play{
     display:block;
 }
 .placeHolder{
@@ -625,13 +630,13 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
     width: 11px;
     height: 11px;
     margin: 0 2px;
-    text-indent: -999px;                                                              ---------------------------------------------
-background: #fff;
-border-radius: 10px;
-cursor: pointer;
-overflow: hidden;
-border: 1px solid #aaa;
-    }
+    text-indent: -999px;
+    background: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid #aaa;
+}
 
 .pages li:hover {
     background: #eee;
@@ -685,7 +690,7 @@ border: 1px solid #aaa;
 progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
 progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2)
 progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2);
-    }
+}
 /*滚动条*/
 .ui-scrollbar-vertical {
     position: absolute;

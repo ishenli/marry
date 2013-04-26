@@ -193,7 +193,7 @@
     top: 0;
     width: 75px;
     height: 75px;
-    margin: -35px 0 0 -30px;
+    margin: -35px 0 0 -15px;
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
     font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
     color:#a9dc3c;
@@ -592,6 +592,16 @@
     background: url("../assets/images/iphone5.png") no-repeat;
     z-index: 1;
 }
+.thrid-step .iphone5{
+    left: 113px;
+    margin-left: 0;
+}
+.iphone5 .screen-inner{
+    border: 1px solid red;
+    width: 256px;
+    height: 456px;
+    margin: 95px 0 0 25px;
+}
 .iphone5-inner{
     margin-left: 82px;
     margin-top: 320px;
@@ -607,4 +617,49 @@
 .invitation-btn div{
     float: right;
     margin-right: 10px;
+}
+
+.weixin-panel {
+    float: right;
+    margin-right: 40px;
+    height: 457px;
+}
+.weixin-panel h2{
+    font-size: 18px;
+    color: #666666;
+}
+.weixin-panel h2 span{
+    font-size: 14px;
+    color: #aca195;
+}
+
+.weixin-panel .wx-wrap {
+    height: 225px;
+}
+.weixin-panel .wx-wrap img{
+    float: left;
+}
+.wx-wrap .download-btn {
+    position: relative;
+    left: 225px;
+    top: 175px;
+    width: 34px;
+    height: 34px;
+    background: url("../assets/images/download-btn.jpg") no-repeat;
+}
+.wx-wrap .download-btn a{
+    display: block;
+    text-indent: -9999px;
+}
+.weixin-panel .code{
+    color: #ef241f;
+    font-size: 18px;
+    margin-left: 35px;
+}
+.weixin-panel .info{
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #b1e441;
+    border-bottom: 1px solid #aca195;
 }
