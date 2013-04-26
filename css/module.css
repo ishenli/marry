@@ -713,6 +713,52 @@ download-panel h3{
 .viewArrow .next{
     background-position:-53px -103px;
 }
+
+.full-viewer-overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+}
+.full-viewer {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1002;
+}
+.full-viewer .close{
+    background: url(http://cyjs.qiniudn.com/assets/show-sprite-58f66b3e75687ab2a8c1027965c93c74.png) no-repeat 12px -868px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 7px;
+    top: 6px;
+    cursor: pointer;
+}
+.full-viewer .left, .full-viewer .right {
+    background: url(http://cyjs.qiniudn.com/assets/control-fc-419da6dffe0a9722ab526a6b29a76f66.png) no-repeat;
+    width: 60px;
+    height: 90px;
+    position: absolute;
+    top: 50%;
+    margin-top: -45px;
+    cursor: pointer;
+}
+.full-viewer .left {
+    background-position: 20px -216px;
+    left: 0;
+}
+.full-viewer .right {
+    background-position: 14px -306px;
+    right: 0;
+}
 /*效果*/
 .ui-shadow{
     _border: 1px solid #ccc;
@@ -781,3 +827,4 @@ progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2)
     font:12px arial;
     color: #6addd3; ;
 }
+
