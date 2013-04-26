@@ -116,7 +116,7 @@
 .ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
 .ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
 .ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
-.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;color: #;font-family:Arial;color: #c7c7c7;}
+.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;;font-family:Arial;color: #c7c7c7;}
 .ui-radio{width:25px;height: 25px; }
 .ui-radio-txt{position: relative;display: inline-block;height: 25px;line-height: 25px;top: 3px;}
 .ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
@@ -571,6 +571,7 @@ download-panel h3{
     float: left;
     height: 100%;
     width: 750px;
+    max-width: 900px;
     margin: 10px 5px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
