@@ -14,6 +14,9 @@
         <script src="js/sea-modules/seajs/1.3.1/sea.js" type="text/javascript"></script>
         <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
         <script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2726144177" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"
+            data-appid="100370679"
+            data-redirecturi="http://marrymemo.com/marry/qc_back.html" charset="utf-8"></script>
         <script src="js/dist/sly.min.js" type="text/javascript"></script>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="js/dist/html5shiv.js"></script>
@@ -34,8 +37,32 @@
                 <img class="top-logo" src="assets/images/logo.png" alt="婚礼纪"/>
             </a>
             <div class="login ui-login-btn">
-                 <a id="qq" class="ui-login-btn-text qq" href="javascript:;"> <span>登录</span> </a>
+                 <a id="qq_content_btn" class="ui-login-btn-text qq" href="javascript:;"> <span>登录</span> </a>
                  <a id="weibo_content_btn" class="ui-login-btn-text sina" href="javascript:;"><span> 登录</span> </a>
+            </div>
+            <div class="fn-hide">
+                <form id="loginWeibo" enctype="application/form-url-encoded" method="post">
+                    <input type="text" name="user[avatar]"/>
+                    <input type="text" name="user[bind_type]"/>
+                    <input type="text" name="user[birthday]"/>
+                    <input type="text" name="user[last_phone_token]"/>
+                    <input type="text" name="user[nick]"/>
+                    <input type="text" name="user[user_id]"/>
+                    <input type="text" name="user[info]"/>
+                    <input type="submit" id="submitWeibo">
+                </form>
+            </div>
+            <div class="fn-hide">
+                <form id="loginQQ" enctype="application/form-url-encoded" method="post">
+                    <input type="text" name="user[avatar]"/>
+                    <input type="text" name="user[bind_type]"/>
+                    <input type="text" name="user[birthday]"/>
+                    <input type="text" name="user[last_phone_token]"/>
+                    <input type="text" name="user[nick]"/>
+                    <input type="text" name="user[user_id]"/>
+                    <input type="text" name="user[info]"/>
+                    <input type="submit" id="submitQQ">
+                </form>
             </div>
            <!-- <div class="user-panel">
                 <div class="user-active">

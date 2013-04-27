@@ -211,19 +211,19 @@
                 </form>
             </div>
         </div>
-        <div class="full-viewer-overlay" id="full-viewer-overlay"></div>
-        <div class="full-viewer" id="fullViewer">
-            <div class="close" title="关闭"></div>
-            <div class="prev fancybox-prev" ></div>
-            <div class="next fancybox-next" ></div>
-        </div>
+        <!--<div class="full-viewer-overlay" id="full-viewer-overlay"></div>-->
+        <!--<div class="full-viewer" id="fullViewer">-->
+            <!--<div class="close" title="关闭"></div>-->
+            <!--<div class="prev fancybox-prev" ></div>-->
+            <!--<div class="next fancybox-next" ></div>-->
+        <!--</div>-->
 
     <script type="text/javascript">
         //初始化
         var $frame  = $('#slide');
         var $slidee = $frame.children('ul').eq(0);
         var $wrap   = $frame.parent();
-/*        var FullView={
+        var FullView={
             src:null,
             show:function(node){
                 $("#full-viewer-overlay").show();
@@ -238,9 +238,9 @@
         $(".node-list li").on("click",function(e){
             FullView.show();
         });
-        $(".fancybox-close").click(function(e){
+        $(".fancybox-close,.full-viewer .close").click(function(e){
             FullView.close();
-        });*/
+        });
         $(document).ready(function() {
             $(".fancybox").fancybox({
                 prevEffect		: 'none',
