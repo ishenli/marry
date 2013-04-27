@@ -1,52 +1,34 @@
 /**
  * Created with JetBrains WebStorm.
- * User: SH201
  * Date: 13-4-19
  * Time: 下午4:33
  * 添加常用的函数
  */
 
 /**
- * 监听窗口大小的变化
+ * 微博登陆
  * @param window
  * @param $
  */
 (function(w, $) {
-    function b() {
-        var a = queue.length, b = 0;
-        setTimeout(function() {
-            for (; b < a; b++)
-                queue[b].call(windowSize)
-        }, 20)
-    }
-    var $window = $(w), windowSize = {measure: function() {
-        var a =$window.width(), b =  $window.height();
-        windowSize.width = a;
-        windowSize.height = b
-    }};
-    windowSize.measure();
-    $(document).ready(function() {
-        windowSize.measure()
-    });
-    var a,
-        r, queue = [], windowResizeListener = {add: function(fn) {
-            if (!a) {
-                $window.resize(function() {
-                    clearTimeout(r);
-                    r = setTimeout(b, 100)
-                });
-                a = true
-            }
-            a: {
-                for (var f = queue.length, g = 0; g < f; g++)
-                    if (fn === queue[g])
-                        break a;
-                queue.push(fn)
-            }
-        }};
-    windowResizeListener.add(function() {
-        windowSize.measure()
-    });
-    w.WindowResizeListener = windowResizeListener;
-    w.WindowSize = windowSize
+    $("#weibo_content_btn").on("click",function(){
+      WB2.login(function(){
+          alert("login");
+      });
+    })
+})(window, jQuery);
+/**
+ * qq登陆
+ * @param window
+ * @param $
+ */
+(function(w, $) {
+    $("#qq_content_btn").on("click",function(){
+        QC.Login.showPopup({
+            appId:"100370679",
+            redirectURI:"http://marrymemo.com/marry/qc_back.html"
+        })
+    })
+    //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
+
 })(window, jQuery);

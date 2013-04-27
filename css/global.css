@@ -1,47 +1,42 @@
 body{
     /*background: #f4f4f4 url("../assets/images/bg.jpg")scroll repeat ;*/
-    background: #ccc;
+    /*background: #ccc;*/
     /*height: auto;*/
 }
 #wrapper{
     min-height: 100%;
     height: auto!important;
     height: 100%;
-    background: #f4f4f4 url("../assets/images/bg.jpg") scroll repeat ;
+    background: #f4f4f4 url("../assets/images/bg.png") scroll repeat ;
+    /*background: #ccc;*/
 }
 .ui-top-nav{
     position: relative;
     width: 100%;
     height: 40px;
     line-height: 40px;
-    background: #fff;
+    background: #fff url("../assets/images/sprite.png") 0 -1px repeat-x;
     color: #FFF;
+    z-index: 5;
 }
 .ui-top-nav .ui-top-nav-body{
+    position: relative;
     margin: 0 auto;
 }
-.ui-top-nav .login-btn,.ui-top-nav .user-panel{
+.ui-top-nav .user-panel{
     float: right;
     width: 145px;
 }
-.ui-top-nav .login-btn{
-    height: 32px;
-    margin: 4px 0;
-    background: url("../assets/images/login-btn.jpg") right no-repeat;
-    line-height: 32px;
-
-}
-.ui-top-nav .login-btn .login-btn-text{
-    color: #fff;
-    width: 70px;
+.ui-top-nav .login{
     float: right;
+    margin: 4px 0;
+}
 
-}
-.ui-top-nav .login-btn .login-btn-text span{
-    margin-left:35px ;
-}
+
 .ui-top-nav .user-panel{
+    position: relative;
     height: 40px;
+    z-index: 5; /*for ie7 overlay */
 }
 .ui-top-nav .user-panel span{
     float: right;
@@ -62,15 +57,16 @@ body{
 
 .ui-top-nav .user-panel .notice{
     width: 30px;
-    height: 18px;
+    height: 20px;
     margin: 11px 3px 0 0;
-    background: url("../assets/images/notice-bg.png") -4px -3px no-repeat;
+    background: url("../assets/images/buttons.png") -179px -22px no-repeat;
 }
 .ui-top-nav .user-panel .notice-active{
+    cursor: pointer;
     line-height: 18px;
     text-indent: 9px;
     font-weight: bold;
-    background: url("../assets/images/notice-bg.png") -4px -29px no-repeat;
+    background: url("../assets/images/buttons.png") -182px -48px no-repeat;
 }
 
 .ui-top-nav .user-panel .user-active{
@@ -91,7 +87,11 @@ body{
     position: absolute;
     right: 0;
     top: 40px;
-    visibility: hidden;
+    display: none;
+    /*display: block;*/
+    z-index: 10;
+}
+.ui-top-nav .user-panel .option ul{
     z-index: 3;
 }
 .ui-top-nav .user-panel .option-item{
@@ -104,10 +104,12 @@ body{
 }
 .ui-top-nav .user-panel .option-item a{
     display: block;
+    *zoom:1;     /*列表间距bug*/
 }
 .ui-top-nav .user-panel .user-active:hover .option{
-    visibility: visible;
+    display: block;
 }
+
 .ui-top-nav .top-logo {
     float: left;
     _display: inline;
@@ -124,7 +126,7 @@ body{
 }
 .ui-top-nav .top-menu .top-menu-item a{
     display: block;
-    float: right;
+    /*float: right;*/
     height: 40px;
     color: #6addd3;
     font-size: 12px;
@@ -143,7 +145,10 @@ body{
 }
 .container{
     width: 980px;
+    *width:992px; /*for shadow*/
     margin:0 auto;
+    position: relative;
+    z-index: 0;
 }
 
 
@@ -165,6 +170,8 @@ body{
     float: right;
     margin-top:-52px;
     font-size: 14px;
+}
+.ui-body-content section{
 
 }
 .ui-footer {
@@ -178,7 +185,7 @@ body{
     *display: inline;
     *zoom:1;
     float:left;
-    color: #fff;
+    color:#fff;
     font-size: 14px;
     height: 40px;
     line-height: 40px;
@@ -195,6 +202,7 @@ body{
     text-indent: -9999px;
     margin-top: 14px;
     height: 12px;
+    line-height: 12px;
 }
 
 .foot-body .copyright{

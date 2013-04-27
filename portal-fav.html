@@ -16,20 +16,6 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-    <!--<script type="text/javascript">
-        seajs.config({
-            alias: {
-                'jquery': 'http://libs.baidu.com/jquery/1.9.0/jquery.min.js', //未模块化
-                "$": "gallery/jquery.js"
-            },
-            preload: ["jquery"]
-        });
-
-        // 将 jQuery 暴露到全局
-        seajs.modify('jquery', function(require, exports) {
-            window.jQuery = window.$ = exports
-        });
-    </script>-->
     <script type="text/javascript" src="js/application.js"></script>
 </head>
 <body>
@@ -111,12 +97,12 @@
             </li>
         </ul>
         <div class="sl-vertical create">
-            <a href="#" target="_blank" class="ui-btn green large">创建画卷</a>
+            <a href="#" target="_blank" class="ui-btn ui-btn-green large"> <span class="ui-btn-text"> 创建画卷 </span> </a>
         </div>
     </div>
 </header>
 <section id="container" class="container">
-    <div class="user-grid">
+    <div class="user-grid ui-shadow">
         <article class="outer">
             <div class="user-grid-item">
                 <img src="assets/test/1.jpg" alt="xxx"/>
@@ -143,7 +129,7 @@
         <a href="#" class="ui-btn gray large">载入更多</a>
     </div>
 </section>
-<section class="user-grid-foot">
+<section class="user-grid-foot ui-shadow-top">
     <div class="outer">
     <div class="marry-list marry-list-small clearfix">
 
@@ -252,7 +238,7 @@
         </div>
     </div>
 </section>
-<footer id="foot" class="ui-footer">
+<footer id="foot" class="ui-footer ">
     <section class="w980 foot-body clearfix">
         <a href="/" class="foot-txt"> 婚礼纪微博 </a>
         <span class="line">|</span>

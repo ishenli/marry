@@ -53,7 +53,6 @@
     background: #000;
     opacity: 0.7;
     padding: 5px;
-    border-radius: 4px;
 }
 .ui-dialog-close:hover {
     color: #666;
@@ -89,9 +88,6 @@
     padding: 20px 15px 20px;
     font-size: 12px;
     display: none;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
 }
 
 .ui-dialog-message {
@@ -116,7 +112,7 @@
 .ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
 .ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
 .ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
-.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;;font-family:Arial;color: #c7c7c7;}
+.ui-textarea{width:422px;height:79px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;font-family:Arial}
 .ui-radio{width:25px;height: 25px; }
 .ui-radio-txt{position: relative;display: inline-block;height: 25px;line-height: 25px;top: 3px;}
 .ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
@@ -126,170 +122,67 @@
 
 /*各种小组件*/
 /*button*/
-.ui-btn *{margin: 0;padding: 0;}
-.ui-btn{ background: #b0e43f ;
-    display: inline-block;
+.ui-btn{
+    background: #222 url("http://bcs.duapp.com/webcdn/image%2Fbtn-overlay.png?sign=MBO:37605d0593028e53e3128f4dd3e3e64b:QnBHWqWp8Sls%2BuQvxTHOTwN1lto%3D") repeat-x 0 0;
     color: #fff!important;
     text-decoration: none;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border-radius: 4px;
-    padding:0;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.25);
     position: relative;
-    text-align:center;
+    overflow: visible;
+    display: inline-block;
+    text-align: center;
     vertical-align: middle;
     cursor: pointer;
-    overflow: visible;
+    font-weight:700;
     font-size:14px;
+    border-radius: 2px;
+    padding: 0 20px;
+    height: 23px;
     line-height: 23px;
-    background: url("../assets/images/buttons.png");
 }
-div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
-.ui-btn-text{
-    display: inline-block;
-    *display:inline;
-    *zoom:1;
-    cursor: pointer;
-    border: 0;
-    text-decoration: none;
-    overflow: visible;
-    font-size: 14px;
-    color: #fff;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    background: transparent;
-}
-input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
-.large.ui-btn{
-    height: 42px;
-    line-height: 42px;
-    width: 120px;
-}
-.middle.ui-btn,.middle .ui-btn-text{
-    height: 32px;
-    line-height: 32px;
-    width: 90px;
-}
-.ui-btn-green .ui-btn-text{
-    text-shadow:0 1px 1px #8bcb02;
-}
-.middle.ui-btn-green{
-    background-position: -8px -187px;
-}
-.middle.ui-btn-green:active{
-    background-position: -8px -227px;
-}
-.large.ui-btn-green{
-    background-position: -136px -187px;
-}
-.large.ui-btn-green:active{
-    background-position: -136px -242px;
-}
-.gray .ui-btn-text{
-    text-shadow:0 1px 1px #c6c7c5;
-}
-.large.gray{
-    background-position: -278px -187px;
-}
-.middle.ui-btn input.ui-btn-text{
+.ui-btn:hover{background-color: #111;color: #fff;text-decoration: none;}
+.ui-btn:active { -webkit-transform: translateY(1px); -moz-transform: translateY(1px); }
+.small.ui-btn{ padding: 0 12px; line-height: 23px; height: 23px; font-size: 12px;}
+.middle.ui-btn{ line-height: 29px; height: 29px;}
+.large.ui-btn{ font-size:16px;line-height: 33px; height: 33px;}
+.green.ui-btn { background-color: #91bd09; }
+.green.ui-btn:hover { background-color: #749a02; }
+.blue.ui-btn { background-color: #2daebf; }
+.blue.ui-btn:hover { background-color: #007d9a; }
+.red.ui-btn { background-color: #e33100; }
+.red.ui-btn:hover { background-color: #872300; }
+.magenta.ui-btn{ background-color: #a9014b; }
+.magenta.ui-btn:hover { background-color: #630030; }
+.orange.ui-btn { background-color: #ff5c00; }
+.orange.ui-btn:hover { background-color: #d45500; }
+.orangellow.ui-btn { background-color: #ffb515; }
+.orangellow.ui-btn:hover { background-color: #fc9200; }
+.white.ui-btn { background-color: #fff; border: 1px solid #ccc; color: #666 !important; font-weight: normal; text-shadow: 0 1px 1px rgba(255,255,255,1); }
+.white.ui-btn:hover { background-color: #eee; }
+/*Strike button*/
+.strike.ui-btn	{background-color: #4ADFC1}
+.strike.ui-btn:hover {background-color: #39ceb0}
+.gray.ui-btn{background-color: #C7C7C7;}
+.gray.ui-btn:hover{background-color: #999999;}
+/*条*/
+
+.ui-slip {
     height: 30px;
     line-height: 30px;
-}
-
-/*登录按钮*/
-.ui-login-btn{
-    width: 143px;
-    height: 32px;
-    line-height: 32px;
-}
-.ui-login-btn .qq{
-    background: url("../assets/images/buttons.png") -78px -22px no-repeat;
-}
-.ui-login-btn .qq:active{
-    background-position: -78px -66px;
-}
-.ui-login-btn .sina{
-    background: url("../assets/images/buttons.png") -8px -22px no-repeat;
-}
-.ui-login-btn .sina:active{
-    background-position: -8px -66px;
-}
-.ui-login-btn.green .qq{
-    background: url("../assets/images/login-btn.png") -84px -10px no-repeat;
-}
-.ui-login-btn.green .qq:active{
-    background-position: -84px -53px;
-}
-.ui-login-btn.green .sina{
-    background: url("../assets/images/login-btn.png") -14px -10px no-repeat;
-}
-.ui-login-btn.green .sina:active{
-    background-position: -14px -53px;
-}
-.ui-login-btn .ui-login-btn-text{
-    color: #fff;
-    width: 71px;
-    float: right;
-}
-.ui-login-btn .ui-login-btn-text span{
-    margin-left:35px ;
-}
-.ui-share-btn-list{
-    float: left;
-    height: 30px;
-}
-.ui-share-btn-list a{
-    margin-left: 6px;
-    float: left;
-    width: 30px;
-    height: 30px;
-    background: url("../assets/images/share-sprite.png") no-repeat;
-    text-indent: -9999px;
-}
-.ui-share-btn-list .sina{
-    background-position: 0 -52px;
-}
-.ui-share-btn-list .qzone{
-    background-position: -36px -52px;
-}
-.ui-share-btn-list .tt{
-    background-position: -72px -52px;
-}
-/*条*/
-.ui-slip {
-    float: left;
-    height: 30px;
-    background: url("../assets/images/slip-sprite.png") 0 -3px no-repeat;
-    margin-left: 20px;
+    background: url("../assets/images/slip-sprite.png") 0  -3px no-repeat;
     padding-left: 25px;
 }
 .ui-slip .ui-slip-inner{
-    position: relative;
-    padding-right: 23px;
-    background: url("../assets/images/slip-sprite.png") right -34px no-repeat;
 }
-.ui-slip .ui-slip-inner .small-arrow {
-    display: block;
-    position: absolute;
-    top: 8px;
-    width: 22px;
-    height: 16px;
-    background: url("../assets/images/small-arrow.png") no-repeat;
-}
-.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner a{
-    display: block;
+.ui-slip .ui-slip-inner h3{
     height: 30px;
-    line-height: 30px;
-    /*font: 24px "黑体";*/
-    font-size: 18px;
-    color: #fff;
+    font: 24px "黑体";
     background: url("../assets/images/slip-line.png") repeat-x;
 }
-.ui-slip .ui-slip-inner .back{
-    display: block;
-    padding-left: 20px;
-}
+
 .arrow{
     width: 0px;
     height: 0px;
@@ -324,24 +217,26 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     height: 16px;
     display: inline-block;
     vertical-align: top;
-    background: url("../assets/images/sprite.png") no-repeat;
+    background: url("../assets/images/counter.png") no-repeat;
 }
 .marry-list .counter .comments span, .marry-list .counter .fav span, .marry-list .counter .share span{
     height: 16px;
     vertical-align: middle;
 }
 .marry-list .counter .comments .ico{
-    background-position: -2px -474px;
+    background-position: -0px -3px;
 }
 .marry-list .counter .fav .ico{
-    background-position: -47px -474px;
+    background-position: -47px -3px;
 }
 .marry-list .counter .share .ico{
-    background-position: -90px -474px;
+    background-position: -92px -3px;
 }
 /*用户页面顶部导航*/
 .ui-green-header {
-    background:#95e5de;
+    background: #6addd3;
+    opacity: 0.7;
+    _filter: alpha(Opacity=70);
 }
 .ui-page-nav {
     height: 100%;
@@ -352,14 +247,14 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     display: inline-block;
     *display: inline;
     *zoom:1;
-    font:18px "microsoft yahei";
+    font: 18px "microsoft yahei";
     color: #fff;
 }
 .ui-page-nav li .arrow{
     display: none;
 }
 .ui-page-nav-active span{
-    background-color: #6addd3;
+    background: #6addd3;
     padding: 0 4px;
 }
 .ui-page-nav-line span{
@@ -377,13 +272,12 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     bottom: 0;
     left: 50%;
     margin-left: -8px;
-    background: #95e5de;
-    border-color: #95e5de #95e5de white #95e5de;
+    background: #6addd3;
+    border-color: #6addd3 #6addd3 white #6addd3;
 }
 /*各种插件*/
 #indexBanner{
     position: relative;
-    *margin-left: 6px;
 }
 #indexBanner .banner-arr{
     height: 60px;
@@ -391,18 +285,17 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     position: absolute;
     top: 190px;
     visibility: hidden;
-    background: url("../assets/images/sprite.png");
+    background: url("../assets/images/banner-arrow.png");
     cursor: pointer;
     z-index: 2;
     text-indent: -9999px;
 }
 #indexBanner #scrollerPrev{
-    background-position: 0 -146px;
     left: 11px;
 }
 #indexBanner #scrollerNext{
     right: 11px;
-    background-position: 0 -219px;
+    background-position: 0 -73px;
 }
 #indexBanner:hover .banner-arr{
     visibility: visible;
@@ -410,7 +303,6 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 #indexBanner{
     width: 980px;
     height: 440px;
-    /*border: 1px solid #ccc;*/
     overflow: hidden;
 }
 #indexBanner .ui-switchable-content{
@@ -438,21 +330,21 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     width: 340px;
     height: 85px;
 }
-download-panel h3{
+#indexBanner .ui-switchable-content .download-panel h3{
     color: #fff;
-    font: bold 14px;
+    font: bold 14px "microsoft yahei";
 }
-.ui-download-btn a{
+#indexBanner .ui-switchable-content .download-btn a{
     float: left;
     margin-top: 10px;
     width: 157px;
     height: 55px;
     text-indent: -9999px;
-    background: url("../assets/images/buttons.png") -8px -106px no-repeat;
+    background: url("../assets/images/sprite.png") 0 -78px no-repeat;
 }
-.ui-download-btn .android{
+#indexBanner .ui-switchable-content .download-btn .android{
     margin-left: 25px;
-    background-position:  -182px -106px;
+    background-position:  -185px -78px;
 
 }
 #indexBanner .ui-switchable-nav{
@@ -497,21 +389,6 @@ download-panel h3{
 .note:hover .btn-drag{
     display:block;
 }
-.note .btn-play {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 59px;
-    height: 34px;
-    background: url("../assets/images/buttons.png") -241px -22px no-repeat;
-    margin: -17px 0 0 -30px;
-    display: none;
-    cursor: pointer;
-    z-index: 9;
-}
-.note:hover .btn-drag,.note:hover .btn-play{
-    display:block;
-}
 .placeHolder{
     float: left;
     width:118px;
@@ -523,36 +400,39 @@ download-panel h3{
     line-height: 118px;
 }
 
-/*浏览相册横向滚动组件*/
-.scrollbar-panel{
-    float: left;
-    margin-left: 20px;
-    width: 365px;
-}
-.scrollbar {
+/*浏览相册组件*/
+
+#horizontal .scrollbar {
     margin: 1em 0;
     height: 5px;
 }
 
-.scrollbar .handle {
+#horizontal .scrollbar .handle {
     width: 100px;
     height: 100%;
 }
-
-.scrollbar {
-    background: rgba(255, 255, 255, 0.5);
+#horizontal .sly ul li {
+    float: left;
+    height: 100%;
+    margin: 0 1px 0 0;
+}
+#horizontal .scrollbar {
+    background: #808080;
     border-radius: 4px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-top-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #808080;
+    border-top-color: #666;
     line-height: 0;
-
 }
 
-.scrollbar .handle {
+#horizontal .scrollbar .handle {
     border-radius: 4px;
     background: #fff;
     cursor: pointer;
     line-height: 0;
+    -webkit-box-shadow: 0 1px 0 #555;
+    -moz-box-shadow: 0 1px 0 #555;
+    -o-box-shadow: 0 1px 0 #555;
+    box-shadow: 0 1px 0 #555;
 }
 .slyWrap .controls {
     margin: 20px 0;
@@ -565,25 +445,11 @@ download-panel h3{
 .sly {
     overflow: hidden;
 }
-.sly ul li {
-    float: left;
-    height: 100%;
-    width: 750px;
-    max-width: 900px;
-    margin: 10px 5px;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
 
-}
 .sly .node-list {
     list-style: none;
     margin: 0;
     padding: 0;
-}
-.sly .node-list img{
-    height: 100%;
 }
 .sly .node-list .cover{
     width: 400px;
@@ -612,10 +478,23 @@ download-panel h3{
 .node-list .cover-content{
     margin: 100px 97px;
 }
+.sly > ul li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background: #4DBCE9;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
 
 .sly > ul li.active {
     background: #fff;
     color: #4DBCE9;
+    -webkit-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
+    -moz-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
+    -o-box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
+    box-shadow: inset 0 0 0 1px #4DBCE9,inset 0 0 40px 20px #97e6f7;
 }
 
 .pages {
@@ -675,125 +554,5 @@ download-panel h3{
 }
 .viewArrow .next{
     background-position:-53px -103px;
-}
-
-.full-viewer-overlay {
-    width: 100%;
-    height: 100%;
-    z-index: 1001;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: rgba(0,0,0,0.9);
-    display: none;
-}
-.full-viewer {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1002;
-}
-.full-viewer .close{
-    background: url(http://cyjs.qiniudn.com/assets/show-sprite-58f66b3e75687ab2a8c1027965c93c74.png) no-repeat 12px -868px;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 7px;
-    top: 6px;
-    cursor: pointer;
-}
-.full-viewer .prev, .full-viewer .next {
-    background: url(http://cyjs.qiniudn.com/assets/control-fc-419da6dffe0a9722ab526a6b29a76f66.png) no-repeat;
-    width: 60px;
-    height: 90px;
-    position: absolute;
-    top: 50%;
-    margin-top: -45px;
-    cursor: pointer;
-}
-.full-viewer .prev {
-    background-position: 20px -216px;
-    left: 0;
-}
-.full-viewer .next {
-    background-position: 14px -306px;
-    right: 0;
-}
-/*效果*/
-.ui-shadow{
-    _border: 1px solid #ccc;
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    /* gte ie8 */
-    -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2)";
-
-    /* *//* lte ie7 *//*
-     *filter: progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2)
- progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
- progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2)
- progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2);*/
-}
-.ui-shadow-top{
-    *border-top: 1px solid #ccc;
-    -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
-}
-/*滚动条*/
-.ui-scrollbar-vertical {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 10px;
-    height: 100%;
-    background: #f0f0f0;
-    z-index: 5;
-}
-.ui-scrollbar-vertical .handle {
-    width: 10px;
-    height:100px;
-}
-
-.ui-scrollbar-vertical .handle {
-    background: #c7c7c7;
-    cursor: pointer;
-}
-
-
-.ui-comment-list ul{
-    width: 100%;
-    margin-right: 10px;
-}
-.ui-comment-list ul li{
-    padding: 10px 10px 0 0;
-    height: 71px;
-    border-bottom: 1px solid #cecece;
-}
-.ui-comment-list .comments-text {
-    position: relative;
-    margin: 0 10px 10px 70px;
-    height: 60px;
-
-}
-.ui-comment-list .comments-text h3{
-    font-size: 14px;
-    height: 21px;
-    line-height: 21px;
-    color: #6addd3;
-}
-.ui-comment-list .comments-text p{
-    font-size: 12px;
-    color: #666666;
-}
-.ui-comment-list .comments-text .date{
-    position: absolute;
-    top: 0;
-    right: 10px;
-    font:12px arial;
-    color: #6addd3; ;
 }
 
