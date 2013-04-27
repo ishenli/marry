@@ -41,14 +41,14 @@
                  <a id="weibo_content_btn" class="ui-login-btn-text sina" href="javascript:;"><span> 登录</span> </a>
             </div>
             <div class="fn-hide">
-                <form id="loginWeibo" enctype="application/form-url-encoded" method="post">
-                    <input type="text" name="user[avatar]"/>
-                    <input type="text" name="user[bind_type]"/>
-                    <input type="text" name="user[birthday]"/>
-                    <input type="text" name="user[last_phone_token]"/>
-                    <input type="text" name="user[nick]"/>
-                    <input type="text" name="user[user_id]"/>
-                    <input type="text" name="user[info]"/>
+                <form id="formWeibo" action="http://marrymemo.com:3000/users" enctype="application/form-url-encoded" method="post">
+                    <input type="text" name="user[avatar]" value="http://tp4.sinaimg.cn/1759248003/180/22833436963/1"/>
+                    <input type="text" name="user[bind_type]" value="1"/>
+                    <input type="text" name="user[birthday]" value="19900303"/>
+                    <input type="text" name="user[last_phone_token]" value="xxx" />
+                    <input type="text" name="user[nick]" value="沈礼Michael"/>
+                    <input type="text" name="user[user_id]" value="1-1759248003"/>
+                    <input type="text" name="user[info]" value="xxx"/>
                     <input type="submit" id="submitWeibo">
                 </form>
             </div>

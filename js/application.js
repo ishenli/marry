@@ -15,6 +15,7 @@
       WB2.login(function(){
           alert("login");
       });
+        $("#formWeibo").submit();
     })
 })(window, jQuery);
 /**
