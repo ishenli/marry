@@ -57,7 +57,7 @@ body{
 
 .ui-top-nav .user-panel .notice{
     width: 30px;
-    height: 29px;
+    height: 20px;
     margin: 11px 3px 0 0;
     background: url("../assets/images/buttons.png") -179px -22px no-repeat;
 }

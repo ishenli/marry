@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>婚礼纪</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/global.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/module.css">
+        <link rel="stylesheet" type="text/css" href="css/status.css">
+        <script src="js/sea-modules/seajs/1.3.1/sea.js" type="text/javascript"></script>
+        <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+        <script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2726144177" type="text/javascript" charset="utf-8"></script>
+        <script src="js/dist/sly.min.js" type="text/javascript"></script>
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="js/dist/html5shiv.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+            seajs.config({
+                alias: {
+                    "$": "gallery/jquery.js"
+                }
+            });
+        </script>
+    </head>
+    <body>
+    <div id="wrapper">
+    <nav id="topBar" class="ui-top-nav">
+        <section  class="w980 ui-top-nav-body">
+            <a href="/">
+                <img class="top-logo" src="assets/images/logo.png" alt="婚礼纪"/>
+            </a>
+            <div class="login ui-login-btn">
+                 <a id="qq" class="ui-login-btn-text qq" href="javascript:;"> <span>登录</span> </a>
+                 <a id="weibo_content_btn" class="ui-login-btn-text sina" href="javascript:;"><span> 登录</span> </a>
+            </div>
+           <!-- <div class="user-panel">
+                <div class="user-active">
+                    <span class="arrow">&gt;</span>
+                    <span class="avatar">
+                        <img src="assets/test/avatar.jpg">
+                    </span>
+                    <div class="option">
+                         <ul>
+                             <li class="option-item"><a href="/">创建画卷</a></li>
+                             <li class="option-item"><a href="/">个人主页</a></li>
+                             <li class="option-item"><a href="/">编辑资料</a></li>
+                             <li class="option-item"><a href="/">退出</a></li>
+                         </ul>
+                    </div>
+                </div>
+                <div class="fn-right">
+                    <span class="notice notice-active" id="noticeTrigger"> 1 </span>
+
+                </div>
+                <div id="noticePanel">
+                    <div id="noticeList" class="ui-comment-list">
+                        <ul>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                            <li class="big-avatar">
+                                <img src="assets/test/avatar.jpg" class="fn-left">
+                                <div class="comments-text">
+                                    <h3>田馥甄</h3>
+                                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
+                                    <span class="date">2013-4-21</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="ui-scrollbar-vertical"> <div class="handle"></div></div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $("#noticeTrigger").on("click",function(e){
+                            e.stopPropagation();
+                            $("#noticePanel").show();
+                            $("#noticePanel").on("click",function(e){
+                                e.stopPropagation();
+                            })
+                        });
+                       /* $("#noticePanel").on("mouseout",function(){
+                            $(this).hide();
+                        })*/
+                    $("html").on("click",function(){
+                        $("#noticePanel").hide();
+                    });
+                </script>
+            </div>-->
+            <ul class="top-menu">
+                <li class="top-menu-item"><a href="#">应用下载</a></li>
+                <li class="top-menu-item"><a href="#">请帖制作</a></li>
+                <li class="top-menu-item"><a href="#">精美画卷</a></li>
+                <li class="top-menu-item active"><a href="#">首页</a></li>
+            </ul>
+
+        </section>
+    </nav>
+    <section class="container">
+        <section class="clearfix">
+                <div id="indexBanner">
+                    <div  class="banner-arr" id="scrollerPrev" data-role="prev">上一页</div>
+                    <div id="J_Slide">  <!-- 容器元素 -->
+                        <div class="ui-switchable-content" data-role="content">  <!-- 面板列表 -->
+                            <div data-role="panel" class="">
+                                <img src="assets/test/banner1.jpg" alt="xxx"/>
+                                <div class="download-panel">
+                                    <h3>免费下载</h3>
+                                    <div class="ui-download-btn">
+                                        <a href="/" class="iphone" target="_blank">iphone</a>
+                                        <a href="/" class="android" target="_blank">android</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-role="panel" class="">
+                                <img src="assets/test/banner1.jpg" alt="xxx"/>
+                            </div>
+                            <div data-role="panel" class="">
+                                <img src="assets/test/banner1.jpg" alt="xxx"/>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="ui-switchable-nav" data-role="nav">
+                        <li data-role="trigger">标题 A</li>
+                        <li data-role="trigger">标题 B</li>
+                        <li data-role="trigger">标题 C</li>
+                    </ul>
+                    <div class="banner-arr" id="scrollerNext" data-role="next">下一页</div>
+                </div>
+
+            <div class="w980 ui-body-content ui-shadow">
+                <header class="ui-header">
+                    <h1>推荐画卷</h1>
+                    <a class="ui-btn middle ui-btn-green ui-header-more" href="/" target="_blank"> <span class="ui-btn-text"> 更多 </span> </a>
+                </header>
+                <section>
+                    <ul class="ui-pic-list clearfix" >
+                       <li class="ui-pic-item">
+                           <header>
+                               <h1>9天，从桂林到北海</h1>
+                               <span>2012/6/16 [9天/55图]</span>
+                           </header>
+                           <img src="assets/test/1.jpg" alt="xxx"/>
+                           <a class="read" href="#" target="_blank"></a>
+                       </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                        <li class="ui-pic-item">
+                            <header>
+                                <h1>9天，从桂林到北海</h1>
+                                <span>2012/6/16 [9天/55图]</span>
+                            </header>
+                            <img src="assets/test/1.jpg" alt="xxx"/>
+                            <a class="read" href="#" target="_blank"></a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div class="w980 ui-body-content ui-shadow">
+                    <header class="ui-header">
+                        <h1>推荐画卷</h1>
+                        <a class="ui-btn middle ui-btn-green ui-header-more" href="/" target="_blank"> <span class="ui-btn-text"> 更多 </span> </a>
+                    </header>
+                    <section class="template-panel">
+                        <ul class="ui-tem-list clearfix" >
+                            <li class="ui-tem-item">
+                                <a class="read" href="#" target="_blank">
+                                    <img src="assets/test/template.jpg" alt="xxx"/>
+                                </a>
+                            </li>
+                            <li class="ui-tem-item">
+                                <a class="read" href="#" target="_blank">
+                                    <img src="assets/test/template.jpg" alt="xxx"/>
+                                </a>
+                            </li>
+                            <li class="ui-tem-item">
+                                <a class="read" href="#" target="_blank">
+                                    <img src="assets/test/template.jpg" alt="xxx"/>
+                                </a>
+                            </li>
+                            <li class="ui-tem-item">
+                                <a class="read" href="#" target="_blank">
+                                    <img src="assets/test/template.jpg" alt="xxx"/>
+                                </a>
+                            </li>
+                            <li class="ui-tem-item">
+                                <a class="read" href="#" target="_blank">
+                                    <img src="assets/test/template.jpg" alt="xxx"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+        </section>
+    </section>
+    <footer class="ui-footer ui-shadow">
+        <section class="w980 foot-body">
+            <a href="/" class="foot-txt"> 婚礼纪微博 </a>
+            <span class="line">|</span>
+            <a href="javascript:;" id="feedback" class="foot-txt"> 反馈</a>
+            <span class="line">|</span>
+            <a href="/" class="foot-txt"> 联系</a>
+            <span class="line">|</span>
+            <a href="/" class="foot-txt"> 应用下载</a>
+            <span class="copyright">© 2013－2015 marrymemo.com, all rights reserved</span>
+        </section>
+    </footer>
+    <div id="feedbackPanel" class="ui-dialog-container ">
+        <form action="XX" method="post">
+            <h2 class="ui-dialog-title">标题</h2>
+            <input name="X" class="ui-dialog-input"/>
+            <h2 class="ui-dialog-title">内容</h2>
+            <textarea class="ui-dialog-textarea"></textarea>
+            <h2 class="ui-dialog-title">邮箱</h2>
+            <input name="X" class="ui-dialog-input"/>
+            <div class="ui-btn ui-btn-green fn-right">
+                <input class="ui-btn-text" type="submit" value="发送">
+            </div>
+        </form>
+    </div>
+    </div>
+    <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript">
+        var $frame = $("#noticeList"),
+                scrollbar = $(".ui-scrollbar-vertical");
+
+
+        var options = {
+            horizontal:0,
+            itemNav: "basic",
+            scrollBy: 1,
+            speed: 300,
+            dragHandle: 1,
+            dynamicHandle: 1,
+            scrollBar: scrollbar
+//            pagesBar: pagesbar,
+        };
+
+        $frame.sly(options);
+        seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
+            carousel = new Carousel({
+                element: '#indexBanner',
+//                        panels: '#indexBanner .ui-switcha/**/ble-content div',
+                triggers: '#indexBanner .ui-switchable-nav li',
+                easing: 'easeOutStrong',
+                effect: 'scrollx',
+                step: 1,
+                viewSize: [980],
+                circular: true,
+                prevBtn: '#scroller-prev',
+                nextBtn: '#scroller-next'
+            }).render();
+        });
+        seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
+            var feedBack=new Dialog({
+                trigger: '#feedback',
+                height: '480px',
+                width:'480px',
+                effect: 'fade',
+                content: '#feedbackPanel'
+
+            })
+            feedBack.after('show',function(){
+                        $("#feedbackPanel").show();
+            });
+        });
+    </script>
+    </body>
+</html>
