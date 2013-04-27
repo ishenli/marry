@@ -160,17 +160,15 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     border-radius: 4px;
     background: transparent;
 }
-.ui-btn:hover .ui-btn-text{
-    color: #fff;
-}
-input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
+input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .large.ui-btn{
     height: 42px;
     line-height: 42px;
     width: 120px;
 }
-.middle.ui-btn{
+.middle.ui-btn,.middle .ui-btn-text{
     height: 32px;
+    line-height: 32px;
     width: 90px;
 }
 .ui-btn-green .ui-btn-text{
@@ -194,7 +192,7 @@ input.ui-btn-text,button.ui-btn-text{*vertical-align: top; }
 .large.gray{
     background-position: -278px -187px;
 }
-.middle.ui-btn-green input.ui-btn-text{
+.middle.ui-btn input.ui-btn-text{
     height: 30px;
     line-height: 30px;
 }
