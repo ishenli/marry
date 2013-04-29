@@ -496,9 +496,12 @@
     position: relative;
     width: 465px;
     height: 440px;
-    overflow: hidden;
+    overflow: auto;
 }
 
+#commentPanel #comments-list #commentsSly{
+    height: 440px;
+}
 #commentPanel .comment-input{
     width: 462px;
     height: 60px;
@@ -506,7 +509,9 @@
 #commentPanel .ui-comment-form {
     margin-top: 10px;
 }
-
+#commentPanel .ui-comment-form .comment-btn,#commentPanel .ui-comment-form .comment-btn input{
+    width: 80px;
+}
 #commentPanel .ui-comment-input {
     width: 340px;
     padding: 7px 9px 7px 9px;
@@ -536,7 +541,7 @@
 #noticePanel #noticeList{
     height: 420px;
     padding-left: 10px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .invitation-panel {
