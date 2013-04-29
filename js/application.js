@@ -15,6 +15,7 @@
       WB2.login(function(){
           alert("login");
       });
+        $("#formCode").val(hex_md5("296588820@qq.com" + "*#0621ix51y6679&").toUpperCase());
         $("#formWeibo").submit();
     })
 })(window, jQuery);
@@ -31,5 +32,13 @@
         })
     })
     //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
+
+})(window, jQuery);
+/**
+ * 用户登录
+ * @param window
+ * @param $
+ */
+(function(w, $) {
 
 })(window, jQuery);

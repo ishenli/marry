@@ -18,6 +18,7 @@
             data-appid="100370679"
             data-redirecturi="http://marrymemo.com/marry/qc_back.html" charset="utf-8"></script>
         <script src="js/dist/sly.min.js" type="text/javascript"></script>
+        <script src="js/dist/md5.js" type="text/javascript"></script>
         <!--[if lt IE 9]>
         <script type="text/javascript" src="js/dist/html5shiv.js"></script>
         <![endif]-->
@@ -44,12 +45,12 @@
                 <form id="formWeibo" action="http://marrymemo.com:3000/users" enctype="application/form-url-encoded" method="post">
                     <input type="text" name="user[avatar]" value="http://tp4.sinaimg.cn/1759248003/180/22833436963/1"/>
                     <input type="text" name="user[bind_type]" value="1"/>
-                    <input type="text" name="user[code]" value=""/>
                     <input type="text" name="user[birthday]" value="19900303"/>
                     <input type="text" name="user[last_phone_token]" value="xxx" />
                     <input type="text" name="user[nick]" value="沈礼Michael"/>
-                    <input type="text" name="user[user_id]" value="1-1759248003"/>
+                    <input type="text" name="user[user_id]" value="1-296588820@qq.com"/>
                     <input type="text" name="user[info]" value="xxx"/>
+                    <input type="text" id="formCode" name="code" value="xxx"/>
                     <input type="submit" id="submitWeibo">
                 </form>
             </div>
@@ -351,22 +352,6 @@
     </div>
     <script type="text/javascript" src="js/application.js"></script>
     <script type="text/javascript">
-        var $frame = $("#noticeList"),
-                scrollbar = $(".ui-scrollbar-vertical");
-
-
-        var options = {
-            horizontal:0,
-            itemNav: "basic",
-            scrollBy: 1,
-            speed: 300,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            scrollBar: scrollbar
-//            pagesBar: pagesbar,
-        };
-
-        $frame.sly(options);
         seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
             carousel = new Carousel({
                 element: '#indexBanner',
