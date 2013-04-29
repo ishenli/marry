@@ -1,4 +1,4 @@
-define("arale/overlay/1.0.1/mask-debug", [ "./overlay-debug", "$-debug", "arale/position/1.0.0/position-debug", "arale/iframe-shim/1.0.1/iframe-shim-debug", "arale/widget/1.0.3/widget-debug", "arale/base/1.0.1/base-debug", "arale/class/1.0.0/class-debug", "arale/events/1.0.0/events-debug" ], function(require, exports, module) {
+define("arale/overlay/1.0.0/mask-debug", [ "./overlay-debug", "$-debug", "arale/position/1.0.0/position-debug", "arale/iframe-shim/1.0.0/iframe-shim-debug", "arale/widget/1.0.3/widget-debug", "arale/base/1.0.1/base-debug", "arale/class/1.0.0/class-debug", "arale/events/1.0.0/events-debug" ], function(require, exports, module) {
     var $ = require("$-debug"), Overlay = require("./overlay-debug"), isIE6 = ($.browser || 0).msie && $.browser.version == 6, body = $(document.body), doc = $(document);
     // Mask
     // ----------
@@ -8,7 +8,7 @@ define("arale/overlay/1.0.1/mask-debug", [ "./overlay-debug", "$-debug", "arale/
             width: isIE6 ? doc.outerWidth(true) : "100%",
             height: isIE6 ? doc.outerHeight(true) : "100%",
             className: "ui-mask",
-            opacity: .5,
+            opacity: .2,
             backgroundColor: "#000",
             style: {
                 position: isIE6 ? "absolute" : "fixed",
