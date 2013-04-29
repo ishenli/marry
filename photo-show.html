@@ -136,71 +136,13 @@
 </footer>
 <div id="commentPanel" class="ui-dialog-container ">
     <div id="comments-list" class="ui-comment-list">
-        <ul>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-            <li class="big-avatar">
-                <img src="assets/test/avatar.jpg" class="fn-left">
-                <div class="comments-text">
-                    <h3>田馥甄</h3>
-                    <p>shdfjkhsdakjfjksldjflasjfkjsdljfalksjlkfjsdjfas</p>
-                    <span class="date">2013-4-21</span>
-                </div>
-            </li>
-        </ul>
-        <div class="ui-scrollbar-vertical"> <div class="handle"></div></div>
+            <ul></ul>
     </div>
     <div class="comment-input">
         <form class="ui-comment-form">
-            <input type="text" class="ui-comment-input" value="写些评论吧">
-            <div class="ui-btn ui-btn-green middle comment-btn" style="width:80px;">
-                <input type="submit" class="ui-btn-text" value="发送">
+            <input type="text" id="commentInput" class="ui-comment-input" onclick="this.value=''"  value="写些评论吧"/>
+            <div class="ui-btn ui-btn-green middle comment-btn" >
+                <input type="submit" id="commentBtn" class="ui-btn-text" value="发送">
             </div>
         </form>
     </div>
@@ -239,15 +181,16 @@
             }
 
         });
-        $("#comments-list").sly({
-            horizontal:0,
-            itemNav: "basic",
-            scrollBy: 1,
-            speed: 300,
-            dragHandle: 1,
-            dynamicHandle: 1,
-            scrollBar:$(".ui-scrollbar-vertical")
-        });
+//        $("#commentsSly").sly({
+//            horizontal:0,
+//            itemNav: "basic",
+//            scrollBy: 1,
+//            speed: 500,
+//            dynamicHandle: 1,
+//            dragHandle:    1,    // Whether the scrollbar handle should be draggable.
+//            scrollBar:$(".ui-scrollbar-vertical")
+//        });
+
     });
     // Call Sly on frame
     var $frame=new Sly("#slide",{
@@ -255,11 +198,7 @@
         itemNav: 'basic',
         smart: 1,
         activateOn: 'click',
-        mouseDragging: 1,
-        touchDragging: 1,
-        releaseSwing: 1,
         startAt: 1,
-        scrollBar: $('.scrollbar'),
         scrollBy: 1,
         activatePageOn: 'click',
         speed: 300,
@@ -268,6 +207,7 @@
         clickBar: 1,
 
         // Buttons
+        scrollBar: $('.scrollbar'),
         prev: $('.prev'),
         next: $('.next'),
         prevPage: $('.prev-page'),
@@ -275,23 +215,18 @@
     });
     $frame.init();
 
-
-
     seajs.config({
         alias: {
             "$": "gallery/jquery.js"
         }
     });
-    seajs.use(['marry/application', '$'], function(App, $) {
+    seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
         $(".lazyload").scrollLoading({
             callback:function(){
                 $(this).parent().parent().width($(this).width());
                 $frame.reload();
             }
         });
-    });
-
-    seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
         var feedBack=new Dialog({
             trigger: '#commentBack',
             height: '520px',
@@ -300,10 +235,22 @@
             content: '#commentPanel'
 
         });
+        var comment=new App.Comment({
+            element:'#comments-list'
+        });
+        comment.get(41,'#comments-list ul');
+
+        $("#commentBtn").click(function(){
+            comment.post(41,7,"#commentInput",function(){
+                alert("good");
+            })
+        });
         feedBack.after('show',function(){
             $("#commentPanel").show();
+
         });
     });
+
 </script>
 </body>
 </html>
