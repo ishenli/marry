@@ -9,8 +9,9 @@
 define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
-        Base = require('arale/base/1.0.1/base');
-        Widget = require('arale/widget/1.0.3/widget');
+        Base = require('arale/base/1.0.1/base'),
+        Widget = require('arale/widget/1.0.3/widget'),
+        Tem=require('arale/widget/1.0.3/templatable');
 
     (function(window){
         function adjustFootPos(){
@@ -37,8 +38,9 @@ define(function(require, exports, module) {
 
     var App={};
     App.Note=Widget.extend({
-        events: {
-            'click .close': 'remove'
+        Implements: Tem,
+        events:{
+          "change #addList":"drag"
         },
         /*initialize:function(){
          this.drag();
@@ -55,12 +57,8 @@ define(function(require, exports, module) {
              $(this).find(".number").text(number);
              number++;
              });*/
-        },
-        remove:function(event){
-            event.preventDefault();
-            $(event.target).parent().remove();
-            adjustFootPos();
         }
+
     });
     App.Comment=Base.extend({
         get:function(id,element){

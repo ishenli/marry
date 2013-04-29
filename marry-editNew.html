@@ -70,6 +70,10 @@
     </section>
 </nav>
 <section id="container" class="container">
+    <form action="" enctype="multipart/form-data" method="post">
+    <div class="fn-hide">
+        <input type="file" id="hiddenFile" multiple/>
+    </div>
     <div class="add-panel ui-shadow first-step">
         <header>
             <div class="icons">
@@ -82,7 +86,7 @@
             <div class="step"> 1</div>
             <span id="choseNum" class="num-txt">4/20</span>
             <div class="upload-panel">
-                <span class="ui-btn middle ui-btn-green fn-right">
+                <span class="ui-btn middle ui-btn-green fn-right" id="uploadBtn">
                     <span class="ui-btn-text"> 上传照片 </span>
                 </span>
                 <span class="txt">按“ctrl”可多选</span>
@@ -90,24 +94,8 @@
         </header>
         <section id="addList" class="add-list clearfix">
             <article class="note add-list-item">
-                <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div>
-                <div class="close">X</div>
-                <!--<div class="number">1</div>-->
-                <div class="btn-drag"></div>
+                <div class="cover">此处可添加图片</div>
             </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
-            <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <!--<div class="number">1</div>--> <div class="btn-drag"></div> </article>
         </section>
         <div class="spacer" id="dragdrop-spacer"></div>
         <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
@@ -120,7 +108,7 @@
             <span class="ui-btn-text"> 下一步 </span>
         </div>
     </div>
-
+    </form>
 </section>
 <footer id="foot" class="ui-footer">
     <section class="w980 foot-body">
@@ -136,17 +124,30 @@
 </footer>
 </div>
 <script type="text/javascript">
+    var params = {
+        fileInput: $("#hiddenFile").get(0),
+        dragDrop: $("#addList").get(0),
+        upButton: $("#fileSubmit").get(0),
+        url: $("#uploadForm").attr("action")
+    };
+    var imgUploader = $.extend(ImgUpload, params);
+    imgUploader.init();
+    $("#uploadBtn").click(function(){
+        $("#hiddenFile").click();
+    })
+</script>
+<script type="text/javascript">
     seajs.config({
         alias: {
             "$": "gallery/jquery.js"
         }
     });
 
-    seajs.use(['marry/application', '$'], function(App, $) {
+    seajs.use(['marry/application', '$'], function(App,$) {
         $(document).ready(function(){
             var notes=new App.Note({
-                element:".note"}
-            );
+                element:".note"
+            });
             notes.drag();
         });
     });
