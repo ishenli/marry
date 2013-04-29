@@ -1,5 +1,5 @@
 define(function(require, exports, module) {
-    var jQuery=require("marry/extendJq"),Base = require('arale/base/1.0.1/base');
+    var $=require("marry/extendJq"),Base = require('arale/base/1.0.1/base');
     var uploadImg = Base.extend({
         initialize: function(option) {
             this.fileInput = $(option.el).get(0);
@@ -27,8 +27,11 @@ define(function(require, exports, module) {
             $("#preview").html('<div class="upload_loading"></div>');
             var funAppendImage = function() {
                 file = files[i];
+                console.log("the files length is "+files.length);
                 if (file) {
                     var reader = new FileReader();
+                    console.log(file);
+                    reader.readAsDataURL(file);
                     reader.onload = function(e) {
                         html = html + '<article id="uploadList_'+ i +'" class="note add-list-item">' + file.name+
                             '<a href="javascript:" class="close" title="删除" data-index="'+ i +'">删除</a>' +
@@ -40,7 +43,7 @@ define(function(require, exports, module) {
                         console.log("upload!!!!!");
                         funAppendImage();
                     }
-                    reader.readAsDataURL(file);
+
                 } else {
                     console.log("no file");
                     $("#addList").append(html);
@@ -108,8 +111,7 @@ define(function(require, exports, module) {
                 //增加唯一索引值
                 file.index = i;
             }
-            console.log("dealing  file");
-            //执行选择回调
+            console.log("dealing  file and the i is "+i);
             this.onSelect(this.fileFilter);
             return this;
         },

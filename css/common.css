@@ -273,6 +273,7 @@
 .add-list-item .close{
     top:0;
     right: 0;
+    z-index: 30;
 }
 .add-list-item .number{
     top: 100px;
