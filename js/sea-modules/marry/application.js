@@ -24,6 +24,7 @@ define(function(require, exports, module) {
             var height=WindowSize.height-140;
             $("#viewer").height(height).find(".node-list li,.viewArrow").height(height);
             $("#slide").height(height);
+            $(".cover-content").height(height-200);
             $("#viewer-wrapper").height(WindowSize.height-140);
         }
         WindowResizeListener.add(adjustFootPos);

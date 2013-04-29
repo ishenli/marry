@@ -683,4 +683,14 @@
     border-bottom: 1px solid #aca195;
 }
 
+.pre-load{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin: -32px 0 0 -32px;
+    width: 64px;
+    height: 64px;
+    background: url(http://cyjs.qiniudn.com/assets/ajax-loader-64-97067b43f6ccea90bc18939af5d65893.gif);
+}
+
 
