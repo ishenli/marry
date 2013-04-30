@@ -40,6 +40,9 @@
  * @param $
  */
 (function($,w){
+    function updateNumber(){
+        $("#imgNum").html($(".note").size());
+    }
     var ImgUpload = {
         fileInput: null,				//html file控件
         dragDrop: null,					//拖拽敏感区域
@@ -80,10 +83,12 @@
                     reader.readAsDataURL(file);
                 } else {
                     $("#addList").html(html);
+                    updateNumber();
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
                             ImgUpload.funDeleteFile(files[parseInt($(this).attr("data-index"))]);
+                            updateNumber();
                             return false;
                         });
                         //提交按钮显示
@@ -97,7 +102,7 @@
             funAppendImage();
         },
         onDelete: function(file) {
-            $("#uploadList_" + file.index).fadeOut();
+            $("#uploadList_" + file.index).remove();
         },
         onDragOver: function() {
             $(this).addClass("upload_drag_hover");
