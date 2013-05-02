@@ -102,7 +102,7 @@
     </div>
 </header>
 <section id="container" class="container">
-    <div class="user-grid ui-shadow">
+    <div class="user-grid ui-shadow" id="motageList">
         <article class="outer">
             <div class="user-grid-item">
                 <img src="assets/test/1.jpg" alt="xxx"/>
@@ -126,7 +126,9 @@
         </article>
     </div>
     <div class="load-more">
-        <a href="#" class="ui-btn gray large">载入更多</a>
+        <a id="loadmore" href="javascript:;" class="ui-btn gray large">
+            <span class="ui-btn-text"> 载入更多 </span>
+        </a>
     </div>
 </section>
 <section class="user-grid-foot ui-shadow-top">
@@ -259,9 +261,15 @@
     });
 
     seajs.use(['marry/application', '$'], function(App, $) {
+
         $(document).ready(function(){
+            var motage=new App.montage();
+            $("#loadmore").on("click",function(){
+                motage.get(1,"#motageList");
+            })
         });
     });
+
 </script>
 </body>
 </html>

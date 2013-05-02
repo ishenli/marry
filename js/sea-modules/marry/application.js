@@ -94,6 +94,23 @@ define(function(require, exports, module) {
             })
         }
     });
+    App.montage=Base.extend({
+        get:function(id,element,type){
+            util.FlyJSONP.get({
+                url:'http://marrymemo.com:3000/montages.json',
+                success:function(result){
+                    var data=result.montages;
+                    var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1> <p>{p}</p> </div> </article>';
+                    var output='';
+                    for(var i in data){
+                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{title}",data[i].title).replace("{content}",data[i].content)
+                    }
+                    console.log(output);
+                    $(element).append(output);
+                }
+            });
+        }
+    })
     module.exports = App;
 });
 
