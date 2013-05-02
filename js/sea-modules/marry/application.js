@@ -10,8 +10,8 @@ define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
         Base = require('arale/base/1.0.1/base'),
-        Widget = require('arale/widget/1.0.3/widget'),
-        Tem=require('arale/widget/1.0.3/templatable');
+        Widget = require('arale/widget/1.0.2/widget'),
+        Tem=require('arale/widget/1.0.2/templatable');
 
     (function(window){
         function adjustFootPos(){

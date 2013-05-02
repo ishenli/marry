@@ -320,6 +320,9 @@
     text-indent: -9999px;
     background: url("../assets/images/show-sprite.png") no-repeat;
 }
+#footFool .prevPage,#footFool .nextPage{
+    cursor: pointer;
+}
 #footFool .prev-page{
     background-position: 0 -53px;
 }
@@ -406,9 +409,13 @@
 .user-grid .outer{
     border-bottom: 1px solid #000000;
 }
+.user-grid .outer:last-child{
+    border:none;
+}
 .user-grid .user-grid-item{
     padding-top:40px;
     margin: 0 80px;
+    color: #666666;
 }
 .user-grid .user-grid-item img{
     width: 800px;
@@ -416,10 +423,12 @@
 .user-grid .user-grid-item h1{
     height: 60px;
     line-height: 60px;
-    font-size: 24px;
+    font-size: 14px;
+
 }
 .user-grid .user-grid-item p{
     height: 40px;
+    font-size: 12px;
 }
 .load-more {
     margin-top: 20px;
@@ -491,24 +500,25 @@
 #commentPanel {
     width: 480px;
     height: 520px;
-    padding:20px 14px;
 }
 #commentPanel #comments-list {
     position: relative;
     width: 465px;
-    height: 440px;
+    height: 460px;
     overflow: auto;
+    margin: 0 0 0 15px;
 }
 
 #commentPanel #comments-list #commentsSly{
     height: 440px;
 }
 #commentPanel .comment-input{
-    width: 462px;
+    width: 480px;
     height: 60px;
+    background-color: #F0F0F0;
+    border-radius: 6px;
 }
 #commentPanel .ui-comment-form {
-    margin-top: 10px;
 }
 #commentPanel .ui-comment-form .comment-btn,#commentPanel .ui-comment-form .comment-btn input{
     width: 80px;
@@ -521,11 +531,12 @@
     color:#c7c7c7;
     border: 1px solid #ccc;
     border-top-color: #a6a6a6;
+    margin: 10px 0 0 15px;
 }
 
 #commentPanel .comment-btn {
     float: right;
-    margin: 6px 10px 0 0;
+    margin: 14px 10px 0 0;
 }
 
 
@@ -699,4 +710,11 @@
     background: url(http://cyjs.qiniudn.com/assets/ajax-loader-64-97067b43f6ccea90bc18939af5d65893.gif);
 }
 
+#feedbackPanel .feedback-inner{
+    margin: 20px 0 0 15px;
+}
+#feedbackPanel .feedback-inner .ui-btn{
+    margin: 14px 15px 0 0;
+    float: right;
+}
 
