@@ -34,7 +34,7 @@
                 </div>
                 <div class="ui-slip">
                     <div class="ui-slip-inner">
-                        <h3>返画卷标题文字</h3>
+                        <h3 id="montageTitle">返画卷标题文字</h3>
                     </div>
                 </div>
                 <div class="ui-slip">
@@ -81,26 +81,21 @@
         <div id="horizontal">
             <div class="sly" id="slide">
                 <ul class="node-list" id="slideBody">
-                    <li class="cover fancybox"> <div class="cover-dot-top">”</div> <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt"> <div class="sl-hvalign-cnt-inner"> 字数限制在四十五字以内的一段话，用于介绍自己创建的画卷的。</div> </div> </div> </div> <div class="cover-dot-bottom">”</div> </li>
-                    <li>
-                        <a class="fancybox" rel="gallery1" href="assets/test/show.jpg">
-                            <img src="assets/test/show.jpg" alt="xxd"/>
-                        </a>
+                    <li class="cover fancybox" id="firstcover"> <div class="cover-dot-top"></div>
+                        <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt">
+                            <div class="sl-hvalign-cnt-inner"> <p id="introduction">miaosu</p></div>
+                        </div> </div> </div> <div class="cover-dot-bottom">”</div>
                     </li>
-                    <li>
-                        <a class="fancybox" rel="gallery1" href="assets/test/1.jpg">
-                            <img src="assets/test/1.jpg" alt="xxd"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="fancybox" rel="gallery1" href="assets/test/banner1.jpg">
-                            <img class="lazyload" src="assets/test/banner1.jpg" alt="xxd"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="fancybox" rel="gallery1" href="assets/test/template.jpg">
-                            <img class="lazyload" src="assets/test/template.jpg" alt="xxd"/>
-                        </a>
+                    <li class="cover fancybox">
+                        <div class="cover-dot-top"></div>
+                        <div class="cover-content">
+                            <div class="sl-hvalign">
+                                <div class="sl-hvalign-cnt">
+                                    <div class="sl-hvalign-cnt-inner">最后一页啦 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cover-dot-bottom">”</div>
                     </li>
                 </ul>
             </div>
@@ -127,7 +122,7 @@
                 <div class="ui-share-btn-list">
                     <div class="ui-counter counter">
                         <span id="commentBack" class="comments">11</span>
-                        <span class="fav">11</span>
+                        <span id="favBtn" class="fav">11</span>
                     </div>
                 </div>
             </div>
@@ -147,21 +142,7 @@
         </form>
     </div>
 </div>
-
-<script>
-    var data={ "id":41,"collection_count":0,"introduction":"\u653e\u70df\u82b1\u5e7f\u544a\u8d39\u798f\u9ec4\u82b1\u5c97\u7535\u89c6\u7f51\u591a\u591a\u5c11\u5c11\u4e1c\u65b9\u5e7f\u573a\u798f\u5730\u65b9\u54e5\u54e5\u53d1\u73b0\u7684\u53cd\u53cd\u590d\u590d\u98ce\u683c","share_count":0,"title":"\u82b3\u534e\u5e7f\u544a\u8d39","created_at":"2013-04-28T07:33:18Z","ending":"image_montage/242MM.jpg","discussion_count":2,"collect_count":1,"collected":0,"user":{"nick":"\u5e2d\u5929\u5e55\u5730","avatar":"avatar/72013-04-26T19:46:05+08:00+200.jpg","id":7},"photos":[{"created_at":"2013-04-28T07:33:16Z","height":1240.0,"id":238,"montage_id":41,"path":"image_montage/238.jpg","title":"\u5171\u548c\u56fd\u798f","updated_at":"2013-04-28T07:33:18Z","width":930.0},{"created_at":"2013-04-28T07:33:16Z","height":1240.0,"id":239,"montage_id":41,"path":"image_montage/239.jpg","title":"","updated_at":"2013-04-28T07:33:18Z","width":930.0},{"created_at":"2013-04-28T07:33:16Z","height":1240.0,"id":240,"montage_id":41,"path":"image_montage/240.jpg","title":"","updated_at":"2013-04-28T07:33:18Z","width":930.0},{"created_at":"2013-04-28T07:33:17Z","height":930.0,"id":241,"montage_id":41,"path":"image_montage/241.jpg","title":"","updated_at":"2013-04-28T07:33:18Z","width":1240.0},{"created_at":"2013-04-28T07:33:17Z","height":930.0,"id":242,"montage_id":41,"path":"image_montage/242.jpg","title":"","updated_at":"2013-04-28T07:33:18Z","width":1240.0}],"x":1}
-</script>
-
 <script type="text/javascript">
-    var length=data.photos.length,$ul=$("#slideBody"),output='';;
-    (function(){
-        var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"><img class="lazyload" src="http://marrymemo.com:3000/{path}"></a></li>';
-        for(var i=0;i<length;i++){
-            output+=htmlTem.replace('{pic}',data.photos[i].path).replace('{path}',data.photos[i].path);
-        }
-        $ul.append(output+' <li class="cover fancybox"> <div class="cover-dot-top"></div> <div class="cover-content"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt"> <div class="sl-hvalign-cnt-inner"> 最后一页啦 </div> </div> </div> </div> </div> <div class="cover-dot-bottom">”</div></li>');
-        console.log("sly-------------end");
-    }());
 
     //初始化
     $(document).ready(function() {
@@ -213,7 +194,6 @@
         prevPage: $('.prev-page'),
         nextPage: $('.nextPage')
     });
-    $frame.init();
 
     seajs.config({
         alias: {
@@ -221,6 +201,9 @@
         }
     });
     seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
+        var montages=new App.montage();
+        montages.get(41,"#firstcover");
+        $frame.init();
         $(".lazyload").scrollLoading({
             callback:function(){
 //                alert("fuck");
