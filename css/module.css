@@ -192,6 +192,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     line-height: 42px;
     width: 120px;
 }
+.large .ui-btn-text{
+    font-size: 18px;
+}
 .middle.ui-btn,.middle .ui-btn-text{
     height: 32px;
     line-height: 32px;
