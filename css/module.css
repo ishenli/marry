@@ -379,6 +379,26 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .marry-list .counter .share .ico{
     background-position: -90px -474px;
 }
+.ui-counter span{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    background: url("../assets/images/show-sprite.png") no-repeat;
+    cursor: pointer;
+}
+.ui-counter .comments{
+    background-position: -44px -29px;
+    padding-left: 26px;
+
+}
+.ui-counter .fav{
+    margin-left: 15px;
+    padding-left: 26px;
+    background-position: 0 -29px;
+}
 /*用户页面顶部导航*/
 .ui-green-header {
     /*background:#95e5de;*/

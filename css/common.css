@@ -334,26 +334,7 @@
     height: 20px;
     margin: 8px 0 0 32px;
 }
-#footFool .counter span{
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    height: 20px;
-    line-height: 20px;
-    color: #fff;
-    background: url("../assets/images/show-sprite.png") no-repeat;
-    cursor: pointer;
-}
-#footFool .counter .comments{
-    background-position: -44px -29px;
-    padding-left: 26px;
 
-}
-#footFool .counter .fav{
-    margin-left: 15px;
-    padding-left: 26px;
-    background-position: 0 -29px;
-}
 .viewer {
 }
 .viewer .viewport-wrapper {
@@ -416,6 +397,7 @@
     padding-top:40px;
     margin: 0 80px;
     color: #666666;
+    position: relative;
 }
 .user-grid .user-grid-item img{
     width: 800px;
@@ -429,6 +411,54 @@
 .user-grid .user-grid-item p{
     height: 40px;
     font-size: 12px;
+}
+.user-grid .user-grid-item .btns{
+    position: absolute;
+    top: 60px;
+    right: 0;
+
+    width: 200px;
+}
+.btns .trash{
+    float: left;
+}
+.btns a{
+    display: inline-block;
+    text-indent: -9999px;
+}
+.btns .trash a{
+    width: 32px;
+    height: 32px;
+    background:url("../assets/images/sprite.png") -124px -595px no-repeat;
+}
+.btns .fc{
+    display: inline-block;
+    margin-left: 16px;
+    width: 135px;
+    height: 32px;
+    background: url("../assets/images/sprite.png") -5px -665px no-repeat;
+
+}
+.btns .fc .counter{
+    margin: 6px 0 0 20px;
+}
+.user-grid .user-grid-item .view-btn{
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    bottom: 105px;
+    margin: 0 0 0 -50px;
+    background: url("../assets/images/sprite.png") -2px -576px no-repeat;
+}
+.user-grid .user-grid-item .view-btn a{
+    display: block;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
 }
 .load-more {
     margin-top: 20px;
