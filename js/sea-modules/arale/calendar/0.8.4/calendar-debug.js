@@ -709,12 +709,12 @@ define("arale/calendar/0.8.4/model-debug", [ "$-debug", "arale/base/1.0.1/base-d
 //
 // Need more complex task? Head over to Options section.
 //
-define("arale/calendar/0.8.4/calendar-debug", [ "./calendar-tpl-debug", "./model-debug", "$-debug", "gallery/moment/1.6.2/moment-debug", "arale/overlay/1.0.0/overlay-debug", "arale/position/1.0.0/position-debug", "arale/iframe-shim/1.0.0/iframe-shim-debug", "arale/widget/1.0.3/widget-debug", "arale/base/1.0.1/base-debug", "arale/class/1.0.0/class-debug", "arale/events/1.0.0/events-debug", "arale/widget/1.0.3/templatable-debug", "gallery/handlebars/1.0.0/handlebars-debug" ], function(require, exports, module) {
+define("arale/calendar/0.8.4/calendar-debug", [ "./calendar-tpl-debug", "./model-debug", "$-debug", "gallery/moment/1.6.2/moment-debug", "arale/overlay/1.0.0/overlay-debug", "arale/position/1.0.0/position-debug", "arale/iframe-shim/1.0.0/iframe-shim-debug", "arale/widget/1.0.2/widget-debug", "arale/base/1.0.1/base-debug", "arale/class/1.0.0/class-debug", "arale/events/1.0.0/events-debug", "arale/widget/1.0.2/templatable-debug", "gallery/handlebars/1.0.0/handlebars-debug" ], function(require, exports, module) {
     // Calendar is designed for desktop, we don't need to consider ``zepto``.
     var $ = require("$-debug");
     var moment = require("gallery/moment/1.6.2/moment-debug");
     var Overlay = require("arale/overlay/1.0.0/overlay-debug");
-    var Templatable = require("arale/widget/1.0.3/templatable-debug");
+    var Templatable = require("arale/widget/1.0.2/templatable-debug");
     var i18nlang = "i18n!lang";
     var lang = require(i18nlang) || {};
     var template = require("./calendar-tpl-debug");
