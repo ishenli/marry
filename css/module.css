@@ -630,7 +630,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 .sly ul li {
     float: left;
-    width: 750px;
+    /*width: 750px;*/
     /*min-width: 360px;*/
     margin: 10px 5px;
 

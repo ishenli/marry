@@ -447,7 +447,7 @@
     height: 50px;
     position: absolute;
     left: 50%;
-    bottom: 105px;
+    bottom: 65px;
     margin: 0 0 0 -50px;
     background: url("../assets/images/sprite.png") -2px -576px no-repeat;
 }

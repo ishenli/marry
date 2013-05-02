@@ -16,11 +16,9 @@ define(function(require, exports, module) {
     (function(window){
         function adjustFootPos(){
             if($("#container").height()<(WindowSize.height-150)){
-                $("#foot").css({
-                    "position":"absolute",
-                    "left":0,
-                    "bottom":0
-                });
+                $("#foot").addClass("atFoot");
+            }else{
+                $("#foot").removeClass("atFoot");
             }}
         function adjustViewer(){
             var height=WindowSize.height-140;
@@ -95,24 +93,48 @@ define(function(require, exports, module) {
         }
     });
     App.montage=Base.extend({
-        get:function(id,element,type){
-            util.FlyJSONP.get({
-                url:'http://marrymemo.com:3000/montages.json',
-                success:function(result){
-                    var data=result.montages;
-                    var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1><p>{p}</p> '
-                        +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montages/{id}" target="_blank">查看画卷</a> </div>'+
-                        '</div> </article>';
-                    var output='';
-                    for(var i in data){
-                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+        get:function(id,element,type,callback){
+            var args=util.slice(arguments);
+            switch (type){
+                case "index": //index
+                util.FlyJSONP.get({
+                    url:'http://marrymemo.com:3000/montages.json',
+                    success:function(result){
+                        var data=result.montages;
+                        var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
+                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montages/{id}" target="_blank">查看画卷</a> </div>'+
+                            '</div> </article>';
+                        var output='';
+                        for(var i in data){
+                            output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                        }
+                        $(element).append(output);
+                        callback();
                     }
-                    console.log(output);
-                    $(element).append(output);
-                }
-            });
-        }
-    })
+                });
+                break;
+            case "show"://get
+                util.FlyJSONP.get({
+                    url:'http://marrymemo.com:3000/montages/'+id+'.json',
+                    success:function(result){
+                        var data=result,output="";
+                        $("#introduction").text(data.introduction);
+                        var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"><img class="lazyload" src="http://marrymemo.com:3000/{path}"></a></li>';
+                        for(var i=0;i<data.photos.length;i++){
+                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace('{path}',data.photos[i].path);
+                        }
+                        $(element).after(output);
+                        $frame.reload();
+                        $("#montageTitle").text(data.title);
+                        $("#commentBack").text(data.discussion_count);
+                        $("#favBtn").text(data.collection_count);
+                    }
+                });
+                break;
+            default:
+                return null;
+        }}
+    });
     module.exports = App;
 });
 

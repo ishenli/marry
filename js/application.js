@@ -12,10 +12,11 @@
  */
 (function(w, $) {
     $("#weibo_content_btn").on("click",function(){
-      WB2.login(function(){
+/*      WB2.login(function(){
           alert("login");
-      });
-        $("#formCode").val(hex_md5("296588820@qq.com" + "*#0621ix51y6679&").toUpperCase());
+      });*/
+//        $("#formCode").val(hex_md5("296588820@qq.com" + "*#0621ix51y6679&").toUpperCase());
+        $("#formCode").val("e80a8a0eaa59c6e49653f29ac934fbb1".toUpperCase());
         $("#formWeibo").submit();
     })
 })(window, jQuery);
