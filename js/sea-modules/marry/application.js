@@ -102,11 +102,11 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
-                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montages/{id}" target="_blank">查看画卷</a> </div>'+
+                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}" target="_blank">查看画卷</a> </div>'+
                             '</div> </article>';
                         var output='';
                         for(var i in data){
-                            output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                            output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(element).append(output);
                         callback();

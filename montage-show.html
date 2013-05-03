@@ -200,8 +200,8 @@
         }
     });
     seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
-        var montages=new App.montage();
-        montages.get(41,"#firstcover","show");
+        var montages=new App.montage(),id=location.hash.substring(1);
+        montages.get(id,"#firstcover","show");
         $frame.init();
         $(".lazyload").scrollLoading({
             callback:function(){
@@ -221,7 +221,7 @@
         var comment=new App.Comment({
             element:'#comments-list'
         });
-        comment.get(41,'#comments-list ul');
+        comment.get(id,'#comments-list ul');
 
         $("#commentBtn").click(function(){
             comment.post(41,7,"#commentInput",function(){
