@@ -187,18 +187,15 @@
         </div>
     </div>
 </section>
-<footer id="foot" class="ui-footer ">
-    <section class="w980 foot-body clearfix">
-        <a href="/" class="foot-txt"> 婚礼纪微博 </a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 反馈</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 联系</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 应用下载</a>
-        <span class="copyright">© 2013－2015 marrymemo.com, all rights reserved</span>
-    </section>
-</footer>
+    <footer class="ui-footer ui-shadow-top" id="foot">
+
+    </footer>
+    <script type="text/javascript">
+        seajs.use(['marry/application', '$'], function(App, $) {
+            var template=new App.template();
+            template.loadFoot();
+        });
+    </script>
 </div>
 <input type="text" value="0" id="montagePage">
 <script type="text/javascript">

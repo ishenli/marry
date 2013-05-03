@@ -29,11 +29,11 @@
     opacity: 0.7;
     *filter: alpha(opacity=70);
     color: #FFF;
-    padding: 6px 18px;
 }
 .ui-pic-item header h1{
-    font:bold 12px/1.5 "microsoft yahei";
-    margin-bottom: 6px;
+    height: 46px;
+    line-height: 46px;
+    text-indent: 17px;
 }
 .template-panel {
     margin: 20px auto 0;
