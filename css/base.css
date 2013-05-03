@@ -112,7 +112,7 @@ caption, th {
 /* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
 h1, h2, h3, h4, h5, h6 {
     font:500 100%/1;
-    font-weight:700\9; /* todo: make some font-family detection */
+    /*font-weight:700\9; *//* todo: make some font-family detection */
 }
 
 q:before, q:after {
@@ -289,6 +289,7 @@ body .mgr-20{margin-right:20px;}
 .pd20{padding: 20px;}
 .mt30{margin-top: 30px;}
 .mt10{margin-top: 10px;}
+.ml30{margin-left: 30px;}
 /*
 @ 名称: hacker
   前缀:sl-

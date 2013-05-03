@@ -18,54 +18,23 @@
         <script type="text/javascript">
             seajs.config({
                 alias: {
-                    'jquery': 'http://libs.baidu.com/jquery/1.9.0/jquery.min.js', //未模块化
                     "$": "gallery/jquery.js"
-                },
-                preload: ["jquery"]
-            });
-
-            // 将 jQuery 暴露到全局
-            seajs.modify('jquery', function(require, exports) {
-                window.jQuery = window.$ = exports
+                }
             });
         </script>
     </head>
     <body>
     <div id="wrapper">
     <nav id="topBar" class="ui-top-nav">
-        <section  class="w980 ui-top-nav-body">
-            <a href="/">
-                <img class="top-logo" src="assets/images/logo.png" alt="婚礼纪"/>
-            </a>
-            <!--<div class="login-btn">
-                 <a id="qq" class="login-btn-text" href="/"> <span>登录</span> </a>
-                 <a id="weibo" class="login-btn-text" href="/"><span> 登录</span> </a>
-            </div>-->
-            <div class="user-panel">
-                <div class="user-active">
-                    <span class="arrow">&gt;</span>
-                    <span class="avatar">
-                        <img src="assets/test/avatar.jpg">
-                    </span>
-                    <div class="option">
-                         <ul>
-                             <li class="option-item"><a href="/">创建画卷</a></li>
-                             <li class="option-item"><a href="/">个人主页</a></li>
-                             <li class="option-item"><a href="/">编辑资料</a></li>
-                             <li class="option-item"><a href="/">退出</a></li>
-                         </ul>
-                    </div>
-                </div>
-                <span class="notice"> 1 </span>
-            </div>
-            <ul class="top-menu">
-                <li class="top-menu-item"><a href="#">应用下载</a></li>
-                <li class="top-menu-item"><a href="#">请帖制作</a></li>
-                <li class="top-menu-item active"><a href="#">精美画卷</a></li>
-                <li class="top-menu-item "><a href="#">首页</a></li>
-            </ul>
-        </section>
+
     </nav>
+        <script type="text/javascript">
+            seajs.use(['marry/application', '$'], function(App, $) {
+                var template=new App.template();
+                template.loadHeader("#montageUrl");
+            });
+        </script>
+
     <section class="ui-green-header page-header">
         <div class="page-inner">
               <ul class="ui-page-nav">

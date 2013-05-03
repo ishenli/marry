@@ -43,9 +43,6 @@ define(function(require, exports, module) {
     var App={};
     App.Note=Widget.extend({
         Implements: Tem,
-        events:{
-          "change #addList":"drag"
-        },
         /*initialize:function(){
          this.drag();
          },*/
@@ -110,13 +107,16 @@ define(function(require, exports, module) {
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
                             +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
-                        var output='',page=$("#montagePage").val(),len=(page+6)>data.length?page+6:data.length;
+                        console.log(data.length);
+                        console.log($("#montagePage").val());
+                        var output='',page=parseInt($("#montagePage").val()),len=(page+6)<=data.length?page+6:data.length;
+                        console.log(len);
                         for(var i=page;i<len;i++){
                             output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(element).append(output);
                         $("#montagePage").val(len);
-                        len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray");
+                        len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         callback();
                     }
                 });

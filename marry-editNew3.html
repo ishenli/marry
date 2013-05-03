@@ -68,8 +68,8 @@
                 <span>3</span>
             </div>
         </header>
-        <section id="addList" class="add-list thrid-step clearfix">
-                <div class="slidee">
+        <section id="addList" class="add-list third-step clearfix">
+                <div class="slidee ui-scrollbar">
                     <form class="clearfix" action="xx" method="post">
                 <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article><article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
                 <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
@@ -96,29 +96,24 @@
                 <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
             </form>
                 </div>
-            <div class="ui-scrollbar-vertical"> <div class="handle"></div> </div>
         </section>
     </div>
     <div class="add-btn">
-        <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 下一步 </span> </a>
+        <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
+        <a class="ui-btn middle ui-btn-green ml30"> <span class="ui-btn-text"> 下一步 </span> </a>
     </div>
 
 </section>
-<footer id="foot" class="ui-footer">
-    <section class="w980 foot-body">
-        <a href="/" class="foot-txt"> 婚礼纪微博 </a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 反馈</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 联系</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 应用下载</a>
-        <span class="copyright">© 2013－2015 marrymemo.com, all rights reserved</span>
-    </section>
-</footer>
+    <footer class="ui-footer ui-shadow-top atFoot" id="foot"></footer>
+    <script type="text/javascript">
+        seajs.use(['marry/application', '$'], function(App, $) {
+            var template=new App.template();
+            template.loadFoot();
+        });
+    </script>
 </div>
 <script type="text/javascript">
-             var $frame = $("#addList"),
+/*             var $frame = $("#addList"),
                 scrollbar = $(".ui-scrollbar-vertical");
 
 
@@ -133,7 +128,7 @@
 //            pagesBar: pagesbar,
             };
 
-            $frame.sly(options);
+            $frame.sly(options);*/
     seajs.config({
         alias: {
             "$": "gallery/jquery.js"

@@ -40,12 +40,10 @@ define(function(require, exports, module) {
                             '</article>';
 
                         i++;
-                        console.log("upload!!!!!");
                         funAppendImage();
                     }
 
                 } else {
-                    console.log("no file");
                     $("#addList").append(html);
                     if (html) {
                         //删除方法

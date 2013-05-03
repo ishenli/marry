@@ -17,6 +17,13 @@
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
     <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript">
+        seajs.config({
+            alias: {
+                "$": "gallery/jquery.js"
+            }
+        });
+    </script>
 </head>
 <body>
 <div id="wrapper">
@@ -72,8 +79,17 @@
 <section id="container" class="container">
     <div class="user-grid ui-shadow" id="montageList">
     </div>
+    <script type="text/javascript">
+        seajs.use(['marry/application', '$'], function(App, $) {
+            var montage=new App.montage();
+            montage.get("","#montageList","index",adjustFootPos);
+            $("#loadmore").on("click",function(){
+                montage.get("","#montageList","index");
+            });
+        });
+    </script>
     <div class="load-more">
-        <a id="loadmore" href="javascript:;" class="ui-btn gray large">
+        <a id="loadmore" href="javascript:;" class="ui-btn ui-btn-green large">
             <span class="ui-btn-text"> 载入更多 </span>
         </a>
     </div>
@@ -187,9 +203,7 @@
         </div>
     </div>
 </section>
-    <footer class="ui-footer ui-shadow-top" id="foot">
-
-    </footer>
+    <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
         seajs.use(['marry/application', '$'], function(App, $) {
             var template=new App.template();
@@ -206,17 +220,8 @@
     });
 
     seajs.use(['marry/application', '$'], function(App, $) {
-
-        $(document).ready(function(){
-            var montage=new App.montage();
-            montage.get("","#montageList","index",adjustFootPos);
-            $("#loadmore").on("click",function(){
-                montage.get("","#montageList","index");
-            });
-
             var template=new App.template();
             template.loadHeader("#montageUrl");
-        });
     });
 
 </script>

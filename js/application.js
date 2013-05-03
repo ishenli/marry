@@ -75,7 +75,7 @@
                         html = html + '<article id="uploadList_'+ i +'" class="note add-list-item">'+
                             '<div class="close" title="删除" data-index="'+ i +'">X</div>' +
                             '<div class="cover"><img id="uploadImage_' + i + '" src="' + e.target.result + '"/>'+
-                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span><div class="btn-drag"></div>' +
+                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
                             '</article>';
 
                         i++;
@@ -92,6 +92,13 @@
                             updateNumber();
                             return false;
                         });
+                        seajs.use(['marry/application'], function(App) {
+                            var notes=new App.Note({
+                                element:".note"
+                            });
+                            notes.drag();
+                        });
+                        adjustFootPos();
                         //提交按钮显示
                         $("#fileSubmit").show();
                     } else {
