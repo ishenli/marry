@@ -18,6 +18,13 @@
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+            seajs.config({
+                alias: {
+                    "$": "gallery/jquery.js"
+                }
+            });
+    </script>
 </head>
 <body>
 <div id="wrapper">
@@ -79,9 +86,8 @@
             </div>
         </header>
         <section id="addList" class="add-list clearfix">
-            <article class="note add-list-item">
-                <div class="cover">此处可添加图片</div>
-            </article>
+        <!--<section id="addList" class="add-list clearfix upload-img-panel ui-scrollbar">-->
+            <div class="note"></div>
         </section>
         <div class="spacer" id="dragdrop-spacer"></div>
         <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
@@ -96,18 +102,13 @@
     </div>
     </form>
 </section>
-<footer id="foot" class="ui-footer">
-    <section class="w980 foot-body">
-        <a href="/" class="foot-txt"> 婚礼纪微博 </a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 反馈</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 联系</a>
-        <span class="line">|</span>
-        <a href="/" class="foot-txt"> 应用下载</a>
-        <span class="copyright">© 2013－2015 marrymemo.com, all rights reserved</span>
-    </section>
-</footer>
+    <footer class="ui-footer ui-shadow-top" id="foot"></footer>
+    <script type="text/javascript">
+        seajs.use(['marry/application', '$'], function(App, $) {
+            var template=new App.template();
+            template.loadFoot();
+        });
+    </script>
 </div>
 <script type="text/javascript">
     var params = {
@@ -121,22 +122,8 @@
     $("#uploadBtn").click(function(){
         $("#hiddenFile").click();
     })
-</script>
-<script type="text/javascript">
-    seajs.config({
-        alias: {
-            "$": "gallery/jquery.js"
-        }
-    });
+    adjustFootPos();
 
-    seajs.use(['marry/application', '$'], function(App,$) {
-        $(document).ready(function(){
-            var notes=new App.Note({
-                element:".note"
-            });
-            notes.drag();
-        });
-    });
 </script>
 </body>
 </html>
