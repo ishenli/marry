@@ -119,15 +119,26 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result,output="";
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"><img class="lazyload" src="http://marrymemo.com:3000/{path}"></a></li>';
+                        var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a></li>';
                         for(var i=0;i<data.photos.length;i++){
-                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace('{path}',data.photos[i].path);
+                            output+=htmlTem.replace('{pic}',data.photos[i].path);
                         }
                         $(element).after(output);
-                        $frame.reload();
+                        for(var j=0;j<data.photos.length;j++){
+                            var img=new Image();
+                            img.src="http://marrymemo.com:3000/"+data.photos[j].path;
+                            img.index=j;
+                            img.onload=function(){
+                                $(".fancybox").eq(this.index+1).append($(this));
+                                $(".fancybox").eq(this.index+1).parent().width($(this).width());
+                                $frame.reload();
+                            }
+                        }
+
                         $("#montageTitle").text(data.title);
                         $("#commentBack").text(data.discussion_count);
                         $("#favBtn").text(data.collection_count);
+
                     }
                 });
                 break;

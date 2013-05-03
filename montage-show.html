@@ -29,12 +29,12 @@
                 <div class="ui-slip">
                     <div class="ui-slip-inner">
                         <i class="small-arrow"></i>
-                        <a class="back" href="/">返回</a>
+                        <a class="back" href="montage-index.html">返回</a>
                     </div>
                 </div>
                 <div class="ui-slip">
                     <div class="ui-slip-inner">
-                        <h3 id="montageTitle">返画卷标题文字</h3>
+                        <h3 id="montageTitle">画卷标题文字</h3>
                     </div>
                 </div>
                 <div class="ui-slip">
@@ -133,17 +133,16 @@
     <div id="comments-list" class="ui-comment-list">
             <ul></ul>
     </div>
-    <div class="comment-input">
+<!--    <div class="comment-input">
         <form class="ui-comment-form">
             <input type="text" id="commentInput" class="ui-comment-input" onclick="this.value=''"  value="写些评论吧"/>
             <div class="ui-btn ui-btn-green middle comment-btn" >
                 <input type="submit" id="commentBtn" class="ui-btn-text" value="发送">
             </div>
         </form>
-    </div>
+    </div>-->
 </div>
 <script type="text/javascript">
-
     //初始化
     $(document).ready(function() {
         $(".fancybox").fancybox({
@@ -202,7 +201,7 @@
     });
     seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
         var montages=new App.montage();
-        montages.get(41,"#firstcover");
+        montages.get(41,"#firstcover","show");
         $frame.init();
         $(".lazyload").scrollLoading({
             callback:function(){
