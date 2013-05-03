@@ -14,6 +14,7 @@ define(function(require, exports, module) {
         Tem=require('arale/widget/1.0.2/templatable');
 
     (function(window){
+        var $li,img;
         function adjustFootPos(){
             if($("#container").height()<(WindowSize.height-150)){
                 $("#foot").addClass("atFoot");
@@ -22,15 +23,20 @@ define(function(require, exports, module) {
             }}
         function adjustViewer(){
             var height=WindowSize.height-140;
+            $li=$("#slideBody li");
             $("#viewer").height(height).find(".node-list li,.viewArrow").height(height);
             $("#slide").height(height);
             $(".cover-content").height(height-200);
             $("#viewer-wrapper").height(WindowSize.height-140);
+            for(var i=0;i<$li.length;i++){
+               img= $(".fancybox").eq(i).find("img");
+               img.parent().parent().width(img.width());
+               $frame.reload();
+            }
         }
         WindowResizeListener.add(adjustFootPos);
         WindowResizeListener.add(adjustViewer);
         window.adjustFootPos=adjustFootPos;
-        adjustFootPos();
         adjustViewer();
     }(window))
 
@@ -102,13 +108,15 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
-                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}" target="_blank">查看画卷</a> </div>'+
+                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
-                        var output='';
-                        for(var i in data){
+                        var output='',page=$("#montagePage").val(),len=(page+6)>data.length?page+6:data.length;
+                        for(var i=page;i<len;i++){
                             output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(element).append(output);
+                        $("#montagePage").val(len);
+                        len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray");
                         callback();
                     }
                 });
@@ -117,7 +125,7 @@ define(function(require, exports, module) {
                 util.FlyJSONP.get({
                     url:'http://marrymemo.com:3000/montages/'+id+'.json',
                     success:function(result){
-                        var data=result,output="";
+                        var data=result,output="",$ul;
                         $("#introduction").text(data.introduction);
                         var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a></li>';
                         for(var i=0;i<data.photos.length;i++){
@@ -131,6 +139,8 @@ define(function(require, exports, module) {
                             img.onload=function(){
                                 $(".fancybox").eq(this.index+1).append($(this));
                                 $(".fancybox").eq(this.index+1).parent().width($(this).width());
+//                                $ul= $(".fancybox").parent().parent().parent();
+//                                $ul.css({width:$ul.width()+$(this).width()});
                                 $frame.reload();
                             }
                         }
@@ -142,10 +152,36 @@ define(function(require, exports, module) {
                     }
                 });
                 break;
+            case "include":
+                util.FlyJSONP.get({
+                    url:'http://marrymemo.com:3000/montages.json',
+                    success:function(result){
+                        var data=result.montages,output="";
+                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header> <img src="{pic}" alt="xxx"/> <a class="read" href="montage-show.html#{id}"></a> </li>';
+                        for(var i=0;i<9;i++){
+                            output+=htmlTem.replace('{pic}',"http://marrymemo.com:3000/"+data[i].image_path).replace("{title}",data[i].title)
+                                .replace("{id}",data[i].id);
+                        }
+                        console.log(output);
+                        $(element).append(output);
+                    }
+                });
             default:
                 return null;
         }}
     });
+
+    App.template=Base.extend({
+        loadHeader:function(id){ // the id is the element which should be added a active class
+            $("#topBar").load("head.html",function(){
+                $(id).addClass("active");
+            });
+        },
+        loadFoot:function(){
+            $("#foot").load("foot.html",function(){
+            });
+        }
+    })
     module.exports = App;
 });
 

@@ -239,4 +239,4 @@
         }
     };
     w.ImgUpload=ImgUpload;
-}($,window))
+}($,window));
