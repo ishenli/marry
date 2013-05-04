@@ -371,7 +371,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 .marry-list .counter .comments span, .marry-list .counter .fav span, .marry-list .counter .share span{
     height: 16px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .marry-list .counter .comments .ico{
     background-position: -2px -474px;
