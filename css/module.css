@@ -993,8 +993,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     float: right;
 }
 /* ie fix */
-.ui-calendar ul,
-.ui-calendar .ui-calendar-data-container {
+.ui-calendar ul,.ui-calendar .ui-calendar-data-container {
     *float: left;
     *clear: both;
 }

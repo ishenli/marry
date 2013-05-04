@@ -400,7 +400,7 @@
 
 }
 .user-grid .outer{
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #ededed;
 }
 .user-grid .outer:last-child{
     border:none;
@@ -769,4 +769,3 @@
     margin: 14px 15px 0 0;
     float: right;
 }
-
