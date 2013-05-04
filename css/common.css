@@ -518,6 +518,13 @@
 .user-edit-wrap .img-panel img{
     width: 200px;
     height: 200px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.user-edit-wrap .img-panel p{
+    color: #a9dc3c;
+    text-align: center;
 }
 #photo-user-panel {
     position: absolute;
