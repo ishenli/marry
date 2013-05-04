@@ -357,7 +357,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     -o-border-radius: 5px;
 }
 .savatar{
-    margin:0 0 0 -15px;
+    margin:0 0 0 -14px;
 }
 .savatar img{
     float: left;
@@ -648,7 +648,8 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     float: left;
     /*width: 750px;*/
     /*min-width: 360px;*/
-    margin: 0 5px;
+    padding: 10px 5px;
+    background: #fff;
 
 }
 .sly .node-list {
@@ -659,6 +660,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 .sly .node-list img{
     height: 100%;
+    /*display: block;*/
 }
 .sly .node-list .cover{
     position: relative;
@@ -667,6 +669,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     font-size: 14px;
     color: #c7c7c7;
     line-height: 100%;
+    height: 100%;
 }
 .sly .node-list .cover.prev{
     margin-left: 185px;

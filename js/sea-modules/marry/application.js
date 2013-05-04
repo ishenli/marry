@@ -24,10 +24,13 @@ define(function(require, exports, module) {
         function adjustViewer(){
             var height=WindowSize.height-140;
             $li=$("#slideBody li");
-            $("#viewer").height(height).find(".node-list li,.viewArrow").height(height);
-            $("#slide").height(height);
-            $(".cover-content").height(height-200);
+            $("#viewer").height(height).find(".viewArrow").height(height);
             $("#viewer-wrapper").height(WindowSize.height-140);
+            $("#slide").height(height);
+            $(".img-wrap").each(function(){
+                $(this).height(height-20);
+            })
+            $(".cover-content").height(height-200);
             for(var i=0;i<$li.length;i++){
                img= $(".fancybox").eq(i).find("img");
                img.parent().parent().width(img.width());
@@ -130,7 +133,7 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result,output="",$ul;
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a></li>';
+                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a></div></li>';
                         for(var i=0;i<data.photos.length;i++){
                             output+=htmlTem.replace('{pic}',data.photos[i].path);
                         }
@@ -147,7 +150,9 @@ define(function(require, exports, module) {
                                 $frame.reload();
                             }
                         }
-
+                        $(".img-wrap").each(function(){
+                            $(".img-wrap").height(WindowSize.height-160);
+                        });
                         $("#montageTitle").text(data.title);
                         $("#commentBack").text(data.discussion_count);
                         $("#favBtn").text(data.collection_count);
