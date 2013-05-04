@@ -27,20 +27,14 @@
         <div class="sl-hvalign-cnt">
             <div class="sl-hvalign-cnt-inner">
                 <div class="ui-slip">
-                    <div class="ui-slip-inner">
                         <i class="small-arrow"></i>
                         <a class="back" href="user-fav.html">返回</a>
-                    </div>
                 </div>
                 <div class="ui-slip">
-                    <div class="ui-slip-inner">
                         <h3 id="montageTitle">画卷标题文字</h3>
-                    </div>
                 </div>
                 <div class="ui-slip">
-                    <div class="ui-slip-inner">
                         <h3>分享到：</h3>
-                    </div>
                 </div>
                 <div class="ui-share-btn-list">
                     <a href="#" target="_blank" class="sina">sina</a>
@@ -50,7 +44,7 @@
             </div>
         </div>
     </div> <!-- .sl-hvalign -->
-    <div class="ui-top-nav" id="photo-user-panel">
+    <!--<div class="ui-top-nav" id="photo-user-panel">
         <div  class="user-panel">
             <div class="user-active">
                 <span class="arrow">&gt;</span>
@@ -68,25 +62,22 @@
             </div>
             <span class="notice notice-active" id="noticeTrigger"> 1 </span>
         </div>
-    </div>
+    </div>-->
 </header>
 <article class="viewer" id="viewer">
     <div class="viewport-wrapper" id="viewer-wrapper">
         <div id="viewPrev" class="viewArrow viewArrow-left">
             <div class="prev">&lt; </div>
         </div>
-        <div class="viewArrow viewArrow-right">
-            <div class="next">&gt;</div>
-        </div>
         <div id="horizontal">
             <div class="sly" id="slide">
                 <ul class="node-list" id="slideBody">
-                    <li class="cover fancybox" id="firstcover"> <div class="cover-dot-top"></div>
+                    <li class="cover fancybox prev" id="firstcover"> <div class="cover-dot-top"></div>
                         <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt">
                             <div class="sl-hvalign-cnt-inner"> <p id="introduction">miaosu</p></div>
                         </div> </div> </div> <div class="cover-dot-bottom">”</div>
                     </li>
-                    <li class="cover fancybox">
+                    <li class="cover next fancybox">
                         <div class="cover-dot-top"></div>
                         <div class="cover-content">
                             <div class="sl-hvalign">
@@ -100,26 +91,32 @@
                 </ul>
             </div>
         </div>
+        <div class="viewArrow viewArrow-right">
+            <div class="next">&gt;</div>
+        </div>
     </div>
 </article>
 <footer id="footFool" class="foot-tol">
     <div class="sl-hvalign">
         <div class="sl-hvalign-cnt">
             <div class="sl-hvalign-cnt-inner">
-                <div class="ui-slip prevPage">
-                    <div class="ui-slip-inner">
-                        <a  href="javascript:;"><span class="prev-page">往左</span></a>
+                <div class="ui-slip">
+                    <div class="savatar">
+                        <img src="assets/test/avatar.jpg" class="radius30"/>
+                        <span>yybukn</span>
                     </div>
+                </div>
+                <div class="ui-slip prevPage">
+                    <a  href="javascript:;"><span class="prev-page">往左</span></a>
                 </div>
                 <div class="scrollbar-panel">
                     <div class="scrollbar"> <div class="handle"></div> </div>
                 </div>
                 <div class="ui-slip nextPage">
-                    <div class="ui-slip-inner">
                         <a  href="javascript:;"><span class="next-page">往右</span></a>
-                    </div>
                 </div>
-                <div class="ui-share-btn-list">
+
+                <div class="ui-share-btn-list ui-slip">
                     <div class="ui-counter counter">
                         <span id="commentBack" class="comments">11</span>
                         <span id="favBtn" class="fav">11</span>

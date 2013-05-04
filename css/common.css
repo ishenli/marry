@@ -328,6 +328,7 @@
 #footFool .prev-page,#footFool .next-page{
     display: block;
     width: 25px;
+    height: 30px;
     text-indent: -9999px;
     background: url("../assets/images/show-sprite.png") no-repeat;
 }
@@ -343,7 +344,7 @@
 
 #footFool .counter {
     height: 20px;
-    margin: 8px 0 0 32px;
+    margin: 8px 0 0 0;
 }
 
 .viewer {

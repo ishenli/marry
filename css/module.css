@@ -303,17 +303,16 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .ui-slip {
     float: left;
     height: 30px;
-    background: url("../assets/images/slip-sprite.png") 0 -3px no-repeat;
     margin-left: 20px;
-    padding-left: 25px;
-}
-.ui-slip .ui-slip-inner{
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0 15px;
     position: relative;
-    padding-right: 23px;
-    background: url("../assets/images/slip-sprite.png") right -34px no-repeat;
-    z-index: 30;
 }
-.ui-slip .ui-slip-inner .small-arrow {
+
+.ui-slip  .small-arrow {
     display: block;
     position: absolute;
     top: 8px;
@@ -321,16 +320,16 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     height: 16px;
     background: url("../assets/images/small-arrow.png") no-repeat;
 }
-.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner a{
+.ui-slip  h3,.ui-slip  a{
     display: block;
     height: 30px;
     line-height: 30px;
     /*font: 24px "黑体";*/
     font-size: 18px;
+    font-weight: normal;
     color: #fff;
-    background: url("../assets/images/slip-line.png") repeat-x;
 }
-.ui-slip .ui-slip-inner .back{
+.ui-slip .back{
     padding-left: 20px;
 }
 .arrow{
@@ -356,6 +355,20 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
+}
+.savatar{
+    margin:0 0 0 -15px;
+}
+.savatar img{
+    float: left;
+}
+.savatar span{
+    display: inline-block;
+    margin-left: 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #fff;
 }
 .marry-list .counter .comments, .marry-list .counter .fav, .marry-list .counter .share {
     display: inline-block;
@@ -624,7 +637,10 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .controls {
     text-align: center;
 }
-
+#horizontal{
+    position: relative;
+    z-index: 100;
+}
 .sly {
     overflow: hidden;
 }
@@ -651,6 +667,12 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     font-size: 14px;
     color: #c7c7c7;
     line-height: 100%;
+}
+.sly .node-list .cover.prev{
+    margin-left: 185px;
+}
+.sly .node-list .cover.next{
+    margin-right: 185px;
 }
 .sly .node-list .cover-dot-top,.sly .node-list .cover-dot-bottom{
     position: absolute;
@@ -703,12 +725,12 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 
 .viewArrow{
-    position: absolute;
+    position:absolute;
+    top: 0;
     width: 185px;
     height: 104px;
     z-index: 3;
     text-indent: -9999px;
-
 }
 .viewArrow-right{
     right: 0;
