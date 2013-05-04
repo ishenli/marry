@@ -156,6 +156,7 @@ define(function(require, exports, module) {
                         $("#montageTitle").text(data.title);
                         $("#commentBack").text(data.discussion_count);
                         $("#favBtn").text(data.collection_count);
+                        $("#sAvatar").attr("src",data.user.avatar);
 
                     }
                 });
