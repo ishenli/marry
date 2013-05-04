@@ -117,7 +117,7 @@ define(function(require, exports, module) {
                         $(element).append(output);
                         $("#montagePage").val(len);
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                        callback();
+                        if(callback!=="")callback();
                     }
                 });
                 break;
@@ -161,11 +161,27 @@ define(function(require, exports, module) {
                         for(var i=0;i<9;i++){
                             output+=htmlTem.replace('{pic}',"http://marrymemo.com:3000/"+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
-                        }
-                        console.log(output);
+                        };
+                        console.log(output)
                         $(element).append(output);
                     }
                 });
+                break;
+            case "recommend":
+                    util.FlyJSONP.get({
+                        url:'http://marrymemo.com:3000/montages.json',
+                        success:function(result){
+                            var data=result.montages;
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}" target="_blank"> <header> <h1>{title}</h1> <span>{date}</span> </header> <img src="{pic}" alt="xxx"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{id}">{name}</a> </div> </footer> </article>';
+                            var output='',page=parseInt($("#montagePage").val()),len=(page+18)<=data.length?page+18:data.length;
+                            for(var i=0;i<data.length;i++){
+                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                    .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                            }
+                            $(element).append(output);
+                        }
+                    });
+                break;
             default:
                 return null;
         }}
@@ -174,6 +190,7 @@ define(function(require, exports, module) {
     App.template=Base.extend({
         loadHeader:function(id){ // the id is the element which should be added a active class
             $("#topBar").load("head.html",function(){
+                $(this).addClass("bottom-shadow");
                 $(id).addClass("active");
             });
         },
