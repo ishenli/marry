@@ -88,10 +88,13 @@
     <script type="text/javascript">
         seajs.use(['marry/application', '$'], function(App, $) {
             var montage=new App.montage();
-            montage.get("","#montageList","index",adjustFootPos);
-            $("#loadmore").on("click",function(){
-                montage.get("","#montageList","index");
-            });
+            montage.get({
+                element:"#montageList",
+                type:"index",
+                pageItems:2,
+                callback:adjustFootPos
+
+            })
         });
     </script>
     <div class="load-more">

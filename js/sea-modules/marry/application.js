@@ -107,26 +107,33 @@ define(function(require, exports, module) {
                     url:'http://marrymemo.com:3000/montages.json',
                     success:function(result){
                         var data=result.montages;
-                        /*var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
-                            +'<div class="btns"> <span class="trash"><a href="javasript:;">删除</a></span> <div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
-                            '</div> </article>'; */
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
                             +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
-                        var output='',page=parseInt($("#montagePage").val()),len=(page+6)<=data.length?page+6:data.length;
+                        var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                         for(var i=page;i<len;i++){
                             output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
-                        $(element).append(output);
+                        $(option.element).append(output);
                         $("#montagePage").val(len);
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         if(option.callback!=="") option.callback();
+                        $("#loadmore").on("click",function(){
+                            var output='',page=parseInt($("#montagePage").val()),len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
+                            for(var i=page;i<len;i++){
+                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                            }
+                            $(option.element).append(output);
+                            $("#montagePage").val(len);
+                            len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
+                            if(option.callback!=="") option.callback();
+                        });
                     }
                 });
                 break;
             case "show"://get
                 util.FlyJSONP.get({
-                    url:'http://marrymemo.com:3000/montages/'+id+'.json',
+                    url:'http://marrymemo.com:3000/montages/'+option.id+'.json',
                     success:function(result){
                         var data=result,output="",$ul;
                         $("#introduction").text(data.introduction);
@@ -134,7 +141,7 @@ define(function(require, exports, module) {
                         for(var i=0;i<data.photos.length;i++){
                             output+=htmlTem.replace('{pic}',data.photos[i].path);
                         }
-                        $(element).after(output);
+                        $(option.element).after(output);
                         for(var j=0;j<data.photos.length;j++){
                             var img=new Image();
                             img.src="http://marrymemo.com:3000/"+data.photos[j].path;
@@ -170,7 +177,7 @@ define(function(require, exports, module) {
                                 .replace("{id}",data[i].id);
                         };
                         console.log(output)
-                        $(element).append(output);
+                        $(option.element).append(output);
                     }
                 });
                 break;

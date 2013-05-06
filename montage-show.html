@@ -191,7 +191,11 @@
     });
     seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
         var montages=new App.montage(),id=location.hash.substring(1);
-        montages.get(id,"#firstcover","show");
+        montages.get({
+            id:id,
+            element:"#firstcover",
+            type:"show"
+        });
         $frame.init();
         $(".lazyload").scrollLoading({
             callback:function(){
