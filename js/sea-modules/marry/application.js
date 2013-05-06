@@ -107,7 +107,7 @@ define(function(require, exports, module) {
                     url:'http://marrymemo.com:3000/montages.json',
                     success:function(result){
                         var data=result.montages;
-                        var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
+                        var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
                             +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
                         var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
@@ -171,7 +171,7 @@ define(function(require, exports, module) {
                     url:'http://marrymemo.com:3000/montages.json',
                     success:function(result){
                         var data=result.montages,output="";
-                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header> <img src="{pic}" alt="xxx"/> <a class="read" href="montage-show.html#{id}"></a> </li>';
+                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header> <img src="{pic}"/> <a class="read" href="montage-show.html#{id}"></a> </li>';
                         for(var i=0;i<9;i++){
                             output+=htmlTem.replace('{pic}',"http://marrymemo.com:3000/"+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
@@ -187,7 +187,7 @@ define(function(require, exports, module) {
                         success:function(result){
                             var data=result.montages;
                             console.log(data);
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}" alt="xxx"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{id}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             //分页
                             $(option.pagination).pagination(data.length, {
                                 items_per_page:option.pageNumber,
@@ -203,7 +203,7 @@ define(function(require, exports, module) {
                                     var max_elem = Math.min((page_index+1) * items_per_page, data.length);
                                     for(var i=page_index*items_per_page;i<max_elem;i++)
                                     {
-                                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                         .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                                     }
