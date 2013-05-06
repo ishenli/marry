@@ -115,16 +115,16 @@ define(function(require, exports, module) {
                             output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(option.element).append(output);
-                        $("#montagePage").val(len);
+                        page=len;
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         if(option.callback!=="") option.callback();
                         $("#loadmore").on("click",function(){
-                            var output='',page=parseInt($("#montagePage").val()),len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
+                            var output='',len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                             for(var i=page;i<len;i++){
                                 output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                             }
                             $(option.element).append(output);
-                            $("#montagePage").val(len);
+                            page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                             if(option.callback!=="") option.callback();
                         });
