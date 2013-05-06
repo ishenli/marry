@@ -214,6 +214,23 @@ define(function(require, exports, module) {
                         }
                     });
                 break;
+                case "favRecommend":
+                    util.FlyJSONP.get({
+                        url:'http://marrymemo.com:3000/montages.json',
+                        success:function(result){
+                            var data=result.montages;
+                            var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            for(var i=0;i<option.pageItems;i++)
+                            {
+                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+
+                            }
+                            $(option.element).html(output);
+                            return false;
+                        }
+                    });
+                break;
             default:
                 return null;
         }}
@@ -231,24 +248,6 @@ define(function(require, exports, module) {
             });
         }
     });
-    App.pagination=Base.extend({
-        init:function(option){
-            $(option.element).pagination(option.length, {
-                callback:function(page_index, jq){
-                    var items_per_page = option.number;
-                    var max_elem = Math.min((page_index+1) * items_per_page, members.length);
-                    // Iterate through a selection of the content and build an HTML string
-                    for(var i=page_index*items_per_page;i<max_elem;i++)
-                    {
-                    }
-
-                    $('#Searchresult').html(newcontent);
-
-                    return false;
-                }
-            });
-        }
-    })
     module.exports = App;
 });
 

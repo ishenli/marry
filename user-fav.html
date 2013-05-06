@@ -85,6 +85,21 @@
 <section id="container" class="container">
     <div class="user-grid ui-shadow" id="montageList">
     </div>
+
+    <div class="load-more">
+        <a id="loadmore" href="javascript:;" class="ui-btn ui-btn-green large">
+            <span class="ui-btn-text"> 载入更多 </span>
+        </a>
+    </div>
+</section>
+<section class="user-grid-foot ui-shadow-top">
+    <div class="outer">
+    <div class="marry-list marry-list-small clearfix" id="marryList">
+
+    </div>
+
+    </div>
+</section>
     <script type="text/javascript">
         seajs.use(['marry/application', '$'], function(App, $) {
             var montage=new App.montage();
@@ -95,123 +110,14 @@
                 callback:adjustFootPos
 
             })
+            montage.get({
+                element:"#marryList",
+                type:"favRecommend",
+                pageItems:3
+
+            })
         });
     </script>
-    <div class="load-more">
-        <a id="loadmore" href="javascript:;" class="ui-btn ui-btn-green large">
-            <span class="ui-btn-text"> 载入更多 </span>
-        </a>
-    </div>
-</section>
-<section class="user-grid-foot ui-shadow-top">
-    <div class="outer">
-    <div class="marry-list marry-list-small clearfix">
-
-            <article class="marry-list-item ui-shadow" >
-                <div class="cover">
-                    <header>
-                        <h1>9天，从桂林到北海</h1>
-                        <span>2012/6/16 [9天/55图]</span>
-                    </header>
-                    <img src="assets/test/1.jpg" alt="xxx"/>
-                    <a class="read" href="#" target="_blank"></a>
-                </div>
-                <footer class="footer">
-                    <div class="counter">
-                                <span class="comments">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="fav">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="share">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                    </div>
-                    <div class="user avatar">
-                        <a href="/" target="_blank">
-                            <img src="assets/test/avatar.jpg">
-                        </a>
-                        <a href="/" target="_blank">
-                            张三
-                        </a>
-                    </div>
-                </footer>
-            </article>
-            <article class="marry-list-item ui-shadow" >
-                <div class="cover">
-                    <header>
-                        <h1>9天，从桂林到北海</h1>
-                        <span>2012/6/16 [9天/55图]</span>
-                    </header>
-                    <img src="assets/test/1.jpg" alt="xxx"/>
-                    <a class="read" href="#" target="_blank"></a>
-                </div>
-                <footer class="footer">
-                    <div class="counter">
-                                <span class="comments">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="fav">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="share">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                    </div>
-                    <div class="user avatar">
-                        <a href="/" target="_blank">
-                            <img src="assets/test/avatar.jpg">
-                        </a>
-                        <a href="/" target="_blank">
-                            张三
-                        </a>
-                    </div>
-                </footer>
-            </article>
-            <article class="marry-list-item ui-shadow" >
-                <div class="cover">
-                    <header>
-                        <h1>9天，从桂林到北海</h1>
-                        <span>2012/6/16 [9天/55图]</span>
-                    </header>
-                    <img src="assets/test/1.jpg" alt="xxx"/>
-                    <a class="read" href="#" target="_blank"></a>
-                </div>
-                <footer class="footer">
-                    <div class="counter">
-                                <span class="comments">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="fav">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                                <span class="share">
-                                    <i class="ico"></i>
-                                    <span>100</span>
-                                </span>
-                    </div>
-                    <div class="user avatar">
-                        <a href="/" target="_blank">
-                            <img src="assets/test/avatar.jpg">
-                        </a>
-                        <a href="/" target="_blank">
-                            张三
-                        </a>
-                    </div>
-                </footer>
-            </article>
-        </div>
-    </div>
-</section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
         seajs.use(['marry/application', '$'], function(App, $) {
