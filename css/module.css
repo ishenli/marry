@@ -653,7 +653,73 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     /*min-width: 360px;*/
     padding: 10px 5px;
     background: #fff;
+}
+.sly ul li .img-wrap{
+    position: relative;
 
+}
+.sly ul li .img-wrap:hover .hover-panel{
+    visibility: visible;
+}
+.img-wrap .hover-panel{
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 60px;
+    background: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    visibility: hidden;
+}
+.img-wrap .hover-panel .description{
+    width: 100px;
+    float: right;
+    margin-top: 12px;
+    height: 36px;
+    border-right: 1px solid #aca195;
+    padding: 0 15px;
+
+}
+.img-wrap .hover-panel .share-btn{
+    margin-top: 12px;
+    float: right;
+    height: 36px;
+    width: 36px;
+    background: url("../assets/images/sprite.png") -82px -465px no-repeat;
+}
+.img-wrap .hover-panel .btns{
+    position: absolute;
+    top:10px;
+    right: -106px;
+    height: 40px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius:4px;
+    background: #a9dc3c;
+}
+.img-wrap .hover-panel .btns a{
+    background: url("../assets/images/share-sprite.png") no-repeat;
+    display: inline-block;
+    height: 40px;
+}
+.img-wrap .hover-panel .btns a:hover span{
+    display: block;
+    height: 40px;
+    background: rgba(0,0,0,0.1);
+}
+.img-wrap .hover-panel .btns a.sina{
+    width: 30px;
+
+    background-position: 1px -3px;
+}
+.img-wrap .hover-panel .btns a.qq{
+    width: 30px;
+
+    background-position: -35px -5px;
+}
+.img-wrap .hover-panel .btns a.tt{
+    width: 40px;
+
+    background-position: -70px -4px;
 }
 .sly .node-list {
     list-style: none;

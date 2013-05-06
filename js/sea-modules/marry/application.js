@@ -135,11 +135,11 @@ define(function(require, exports, module) {
                 util.FlyJSONP.get({
                     url:'http://marrymemo.com:3000/montages/'+option.id+'.json',
                     success:function(result){
-                        var data=result,output="",$ul;
+                        var data=result,output="";
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a></div></li>';
+                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="#"><span>sina</span></a> <a class="qq" href="#"><span>qq</span></a> <a class="tt" href="#"><span>tt</span></a> </div> </div></div></li>';
                         for(var i=0;i<data.photos.length;i++){
-                            output+=htmlTem.replace('{pic}',data.photos[i].path);
+                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title);
                         }
                         $(option.element).after(output);
                         for(var j=0;j<data.photos.length;j++){
@@ -147,10 +147,9 @@ define(function(require, exports, module) {
                             img.src="http://marrymemo.com:3000/"+data.photos[j].path;
                             img.index=j;
                             img.onload=function(){
-                                $(".fancybox").eq(this.index+1).append($(this));
-                                $(".fancybox").eq(this.index+1).parent().width($(this).width());
-//                                $ul= $(".fancybox").parent().parent().parent();
-//                                $ul.css({width:$ul.width()+$(this).width()});
+                                var item= $(".fancybox").eq(this.index+1);
+                                item.append($(this));
+                                item.parent().width($(this).width());
                                 $frame.reload();
                             }
                         }
@@ -219,7 +218,7 @@ define(function(require, exports, module) {
                         url:'http://marrymemo.com:3000/montages.json',
                         success:function(result){
                             var data=result.montages;
-                            var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}" target="_blank"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}" target="_blank">{name}</a> </div> </footer> </article>';
                             for(var i=0;i<option.pageItems;i++)
                             {
                                 output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
