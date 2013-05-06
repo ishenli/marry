@@ -16,7 +16,7 @@ define(function(require, exports, module) {
     (function(window){
         var $li,img;
         function adjustFootPos(){
-            if($("#container").height()<(WindowSize.height-150)){
+            if($("#container").height()<(WindowSize.height-110)){
                 $("#foot").addClass("atFoot");
             }else{
                 $("#foot").removeClass("atFoot");
@@ -181,35 +181,72 @@ define(function(require, exports, module) {
                 });
                 break;
             case "recommend":
+                if(option.nice===1){
+                    url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'';
+                }else{
+                    url='http://marrymemo.com:3000/montages.json?page='+option.page+'';
+                }
                     util.FlyJSONP.get({
-                        url:'http://marrymemo.com:3000/montages.json',
+                        url:url,
                         success:function(result){
                             var data=result.montages;
-                            console.log(data);
                             var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
-                            //分页
-                            $(option.pagination).pagination(data.length, {
-                                items_per_page:option.pageNumber,
-                                num_display_entries:7,
-                                current_page:0,
-                                num_edge_entries:0,
-                                link_to:"#",
-                                prev_text:"<",
-                                next_text:">",
-                                ellipse_text:"...",
-                                callback:function(page_index){
-                                    var items_per_page = this.items_per_page,output="";
-                                    var max_elem = Math.min((page_index+1) * items_per_page, data.length);
-                                    for(var i=page_index*items_per_page;i<max_elem;i++)
-                                    {
-                                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                        .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                            if(data.length===0){
+                                adjustFootPos();
+                                $("#ellipsis").remove();
+                                return $("#next").remove();
+                            }
+                            var len=(data.length<10?data.length:10),output="";
+                            for(var i=0;i<len;i++)
+                            {
+                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
-                                    }
-                                    $(option.element).html(output);
-                                    return false;
-                                }
-                            });
+                            }
+                            if(len===10){
+                                $("#montagePage").val(parseInt(option.page)+1)
+                            }
+                            $("#pages a").removeClass("ui-paging-current");
+                            $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
+                            if(len<10){
+                                $("#ellipsis").remove();
+                                $("#next").remove();
+                            }else{
+                                $("#next").text(">").removeClass("ui-paging-current");
+                            }
+                            $(option.element).html(output);
+                            if($.isFunction(option.callback)){
+                                option.callback();
+                            }
+                            adjustFootPos();
+                        }
+                    });
+
+                break;
+                case "recommendPage":
+                    var url;
+                    if(option.nice===1){
+                        url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'';
+                    }else{
+                        url='http://marrymemo.com:3000/montages.json?page='+option.page+'';
+                    }
+                    util.FlyJSONP.get({
+                        url:url,
+                        success:function(result){
+                            var data=result.montages,output="";
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            for(var i=0;i<data.length;i++)
+                            {
+                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                    .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+
+                            }
+                            $("#pages a").removeClass("ui-paging-current");
+                            $(option.element).html(output);
+                            if($.isFunction(option.callback)){
+                                option.callback();
+                            }
+                            adjustFootPos();
                         }
                     });
                 break;
@@ -222,7 +259,7 @@ define(function(require, exports, module) {
                             for(var i=0;i<option.pageItems;i++)
                             {
                                 output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
                             $(option.element).html(output);
@@ -232,7 +269,9 @@ define(function(require, exports, module) {
                 break;
             default:
                 return null;
-        }}
+        }
+        }
+
     });
 
     App.template=Base.extend({
@@ -244,6 +283,7 @@ define(function(require, exports, module) {
         },
         loadFoot:function(){
             $("#foot").load("foot.html",function(){
+                adjustFootPos();
             });
         }
     });

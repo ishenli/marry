@@ -37,11 +37,11 @@
     <section class="ui-green-header page-header">
         <div class="page-inner">
               <ul class="ui-page-nav">
-                  <li >
+                  <li class="ui-page-nav-active">
                       <div class="sl-hvalign"> <!-- 记得加宽度, 不要写行内样式, 这里只是一个提示 -->
                           <div class="sl-hvalign-cnt">
                               <div class="sl-hvalign-cnt-inner">
-                                  <a href="montage-nice.html">推荐</a>
+                                  <a href="javascript:;">推荐</a>
                               </div>
                           </div>
                       </div> <!-- .sl-hvalign -->
@@ -56,7 +56,7 @@
                           </div>
                       </div> <!-- .sl-hvalign -->
                   </li>
-                  <li class="ui-page-nav-active">
+                  <li>
                       <div class="sl-hvalign"> <!-- 记得加宽度, 不要写行内样式, 这里只是一个提示 -->
                           <div class="sl-hvalign-cnt">
                               <div class="sl-hvalign-cnt-inner">
@@ -86,15 +86,18 @@
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
                 var montage=new App.montage();
-                $("#montagePage").val(1);
                 montage.get({
                     element:"#montageList",
                     type:"recommend",
-                    page:$("#montagePage").val()
+                    nice:1,
+                    page:$("#montagePage").val(),
+                    callback:function(){
+                    }
                 });
                 $("#next").click(function(){
                     montage.get({
                         id:'',
+                        nice:1,
                         element:"#montageList",
                         type:"recommend",
                         page:$("#montagePage").val(),
@@ -106,6 +109,7 @@
                     var self=this;
                     montage.get({
                         id:'',
+                        nice:1,
                         element:"#montageList",
                         type:"recommendPage",
                         pageItem:10,

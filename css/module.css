@@ -12,7 +12,7 @@
     display: inline-block;
     vertical-align: middle;
     height: 30px;
-    width: 30px;
+    padding: 0 10px;
     text-align: center;
     line-height: 30px;
     background: #fff;
@@ -438,9 +438,13 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .ui-page-nav li .arrow{
     display: none;
 }
-.ui-page-nav-active span{
+.ui-page-nav li a{
+    color: #fff;
+}
+.ui-page-nav-active a{
     background-color: #6addd3;
     padding: 0 4px;
+
 }
 .ui-page-nav-line span{
     width: 2px;

@@ -774,3 +774,19 @@
     margin: 14px 15px 0 0;
     float: right;
 }
+
+#downloadCon{
+    margin-top: 20px;
+    position: relative;
+}
+#downloadCon .download-panel{
+    position: absolute;
+    top:288px;
+    left: 71px;
+    width: 340px;
+    height: 85px;
+}
+
+#downloadCon .code {
+    margin-top: 23px;
+}
