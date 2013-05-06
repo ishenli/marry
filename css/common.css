@@ -4,10 +4,11 @@
     margin: 20px 0 0 20px;
     width: 300px;
     height: 185px;
+    overflow: hidden;
 }
 .ui-pic-item img{
     width: 300px;
-    height: 185px;
+    /*height: 185px;*/
 
 }
 .ui-pic-item .read{
@@ -104,10 +105,11 @@
 .marry-list .marry-list-item .cover {
     position: relative;
 
+    height: 190px;
+    overflow: hidden;
 }
 .marry-list-medium .marry-list-item .cover img{
     width: 306px;
-    height: 190px;
     margin: 4px 4px 0 4px;
 }
 .marry-list-small .marry-list-item .cover img{
@@ -128,12 +130,13 @@
     border-bottom-right-radius: 2px;
 }
 .marry-list .marry-list-item header h1{
-    font:bold 12px/1.5 "microsoft yahei";
+    height: 46px;
+    line-height: 46px;
     margin-bottom: 6px;
 }
 .marry-list .footer {
     height: 30px;
-    margin: 0 4px 4px 4px;
+    margin: 4px;
     position: relative;
     color: #aca195;
 }

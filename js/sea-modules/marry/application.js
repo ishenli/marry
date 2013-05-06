@@ -99,9 +99,9 @@ define(function(require, exports, module) {
         }
     });
     App.montage=Base.extend({
-        get:function(id,element,type,callback){
-            var args=util.slice(arguments);
-            switch (type){
+        get:function(options){
+            var option=$.extend({},options);
+            switch (option.type){
                 case "index": //index
                 util.FlyJSONP.get({
                     url:'http://marrymemo.com:3000/montages.json',
@@ -113,17 +113,14 @@ define(function(require, exports, module) {
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}" alt="xxx"/> <h1>{title}</h1>'
                             +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
-                        console.log(data.length);
-                        console.log($("#montagePage").val());
                         var output='',page=parseInt($("#montagePage").val()),len=(page+6)<=data.length?page+6:data.length;
-                        console.log(len);
                         for(var i=page;i<len;i++){
                             output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(element).append(output);
                         $("#montagePage").val(len);
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                        if(callback!=="")callback();
+                        if(option.callback!=="") option.callback();
                     }
                 });
                 break;
@@ -157,6 +154,7 @@ define(function(require, exports, module) {
                         $("#commentBack").text(data.discussion_count);
                         $("#favBtn").text(data.collection_count);
                         $("#sAvatar").attr("src",data.user.avatar);
+                        $("#username").text(data.user.nick);
 
                     }
                 });
@@ -181,13 +179,31 @@ define(function(require, exports, module) {
                         url:'http://marrymemo.com:3000/montages.json',
                         success:function(result){
                             var data=result.montages;
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}" target="_blank"> <header> <h1>{title}</h1> <span>{date}</span> </header> <img src="{pic}" alt="xxx"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{id}">{name}</a> </div> </footer> </article>';
-                            var output='',page=parseInt($("#montagePage").val()),len=(page+18)<=data.length?page+18:data.length;
-                            for(var i=0;i<data.length;i++){
-                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                    .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
-                            }
-                            $(element).append(output);
+                            console.log(data);
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}" alt="xxx"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{id}">{name}</a> </div> </footer> </article>';
+                            //分页
+                            $(option.pagination).pagination(data.length, {
+                                items_per_page:option.pageNumber,
+                                num_display_entries:7,
+                                current_page:0,
+                                num_edge_entries:0,
+                                link_to:"#",
+                                prev_text:"<",
+                                next_text:">",
+                                ellipse_text:"...",
+                                callback:function(page_index){
+                                    var items_per_page = this.items_per_page,output="";
+                                    var max_elem = Math.min((page_index+1) * items_per_page, data.length);
+                                    for(var i=page_index*items_per_page;i<max_elem;i++)
+                                    {
+                                        output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                        .replace("{fav}","none").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+
+                                    }
+                                    $(option.element).html(output);
+                                    return false;
+                                }
+                            });
                         }
                     });
                 break;
@@ -205,6 +221,24 @@ define(function(require, exports, module) {
         },
         loadFoot:function(){
             $("#foot").load("foot.html",function(){
+            });
+        }
+    });
+    App.pagination=Base.extend({
+        init:function(option){
+            $(option.element).pagination(option.length, {
+                callback:function(page_index, jq){
+                    var items_per_page = option.number;
+                    var max_elem = Math.min((page_index+1) * items_per_page, members.length);
+                    // Iterate through a selection of the content and build an HTML string
+                    for(var i=page_index*items_per_page;i<max_elem;i++)
+                    {
+                    }
+
+                    $('#Searchresult').html(newcontent);
+
+                    return false;
+                }
             });
         }
     })

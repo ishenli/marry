@@ -70,29 +70,29 @@
     </section>
     <section class="container" id="container">
         <div id="montageList" class="marry-list marry-list-medium clearfix"></div>
+
+
+        <footer class="mt30">
+            <div class="ui-paging" id="pagination">
+                <a href="javacript:;" data-page="1" class="ui-paging-item ui-shadow">1</a>
+                <a href="javacripr:;" data-page="2" class="ui-paging-item ui-paging-current">2</a>
+            </div>
+        </footer>
+
+    </section>
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
                 var montage=new App.montage();
-                montage.get("","#montageList","recommend");
+                montage.get({
+                    id:'',
+                    element:"#montageList",
+                    type:"recommend",
+                    callback:"",
+                    pageNumber:"6",
+                    pagination:"#pagination"
+                });
             });
         </script>
-
-        <footer class="mt30">
-            <div class="ui-paging">
-                <a href="#" class="ui-paging-prev ui-shadow"> &lt; </a>
-                <a href="#" class="ui-paging-item ui-shadow">1</a>
-                <a href="#" class="ui-paging-item ui-paging-current">2</a>
-                <a href="#" class="ui-paging-item ui-shadow">3</a>
-                <a href="#" class="ui-paging-item ui-shadow">4</a>
-                <a href="#" class="ui-paging-item ui-shadow">5</a>
-                <a href="#" class="ui-paging-item ui-shadow">6</a>
-                <a href="#" class="ui-paging-item ui-shadow">7</a>
-                <span class="ui-paging-ellipsis">...</span>
-                <a href="#" class="ui-paging-item ui-shadow">31</a>
-                <a href="#" class="ui-paging-next ui-shadow"> &gt; </a>
-            </div>
-        </footer>
-    </section>
         <footer class="ui-footer ui-shadow-top" id="foot"></footer>
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
@@ -102,4 +102,7 @@
         </script>
     </div>
     </body>
+    <script id="ajaxData">
+
+    </script>
 </html>
