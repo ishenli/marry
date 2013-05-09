@@ -177,6 +177,7 @@ define(function(require, exports, module) {
                         };
                         console.log(output)
                         $(option.element).append(output);
+                        adjustFootPos();
                     }
                 });
                 break;
