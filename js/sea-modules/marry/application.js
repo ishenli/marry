@@ -174,8 +174,8 @@ define(function(require, exports, module) {
                         for(var i=0;i<9;i++){
                             output+=htmlTem.replace('{pic}',"http://marrymemo.com:3000/"+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
-                        };
-                        console.log(output)
+                        }
+                        console.log(output);
                         $(option.element).append(output);
                         adjustFootPos();
                     }
