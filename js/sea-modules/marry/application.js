@@ -183,9 +183,9 @@ define(function(require, exports, module) {
                 break;
             case "recommend":
                 if(option.nice===1){
-                    url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'';
+                    url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
                 }else{
-                    url='http://marrymemo.com:3000/montages.json?page='+option.page+'';
+                    url='http://marrymemo.com:3000/montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
                     util.FlyJSONP.get({
                         url:url,
@@ -204,12 +204,12 @@ define(function(require, exports, module) {
                                 .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
-                            if(len===10){
+                            if(len===option.itemNumber){
                                 $("#montagePage").val(parseInt(option.page)+1)
                             }
                             $("#pages a").removeClass("ui-paging-current");
                             $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
-                            if(len<10){
+                            if(len<option.itemNumber){
                                 $("#ellipsis").remove();
                                 $("#next").remove();
                             }else{
@@ -227,9 +227,9 @@ define(function(require, exports, module) {
                 case "recommendPage":
                     var url;
                     if(option.nice===1){
-                        url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'';
+                        url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
                     }else{
-                        url='http://marrymemo.com:3000/montages.json?page='+option.page+'';
+                        url='http://marrymemo.com:3000/montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                     }
                     util.FlyJSONP.get({
                         url:url,

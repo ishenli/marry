@@ -90,6 +90,7 @@
                 montage.get({
                     element:"#montageList",
                     type:"recommend",
+                    itemNumber:9,
                     page:$("#montagePage").val()
                 });
                 $("#next").click(function(){
@@ -97,6 +98,7 @@
                         id:'',
                         element:"#montageList",
                         type:"recommend",
+                        itemNumber:9,
                         page:$("#montagePage").val(),
                         callback:function(){
                         }
@@ -108,7 +110,7 @@
                         id:'',
                         element:"#montageList",
                         type:"recommendPage",
-                        pageItem:10,
+                        itemNumber:9,
                         page:$(this).attr("data-page"),
                         callback:function(){
                             $(self).addClass("ui-paging-current");
