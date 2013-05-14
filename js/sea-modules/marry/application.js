@@ -31,7 +31,7 @@ define(function(require, exports, module) {
             $("#slide").height(height);
             $(".img-wrap").each(function(){
                 $(this).height(height-20);
-            })
+            });
             $(".cover-content").height(height-200);
             for(var i=0;i<$li.length;i++){
                img= $(".fancybox").eq(i).find("img");
@@ -43,7 +43,7 @@ define(function(require, exports, module) {
         WindowResizeListener.add(adjustViewer);
         window.adjustFootPos=adjustFootPos;
         adjustViewer();
-    }(window))
+    }(window));
 
     var App={};
     App.Note=Widget.extend({
@@ -97,7 +97,7 @@ define(function(require, exports, module) {
             success: function(data) {
                 alert(data);
             }
-            })
+            });
         }
     });
     App.montage=Base.extend({
@@ -153,7 +153,7 @@ define(function(require, exports, module) {
                                 item.append($(this));
                                 item.parent().width($(this).width());
                                 $frame.reload();
-                            }
+                            };
                         }
                         $(".img-wrap").each(function(){
                             $(".img-wrap").height(WindowSize.height-160);
@@ -161,7 +161,7 @@ define(function(require, exports, module) {
                         $("#montageTitle").text(data.title);
                         $("#commentBack").text(data.discussion_count);
                         $("#favBtn").text(data.collection_count);
-                        $("#sAvatar").attr("src",data.user.avatar);
+                        $("#sAvatar").attr("src",data.user.avatar.indexOf("http") == 0 ? data.user.avatar : HOST + data.user.avatar);
                         $("#username").text(data.user.nick);
 
                     }
@@ -203,11 +203,11 @@ define(function(require, exports, module) {
                             for(var i=0;i<len;i++)
                             {
                                 output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
                             if(len===option.itemNumber){
-                                $("#montagePage").val(parseInt(option.page)+1)
+                                $("#montagePage").val(parseInt(option.page)+1);
                             }
                             $("#pages a").removeClass("ui-paging-current");
                             $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
