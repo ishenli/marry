@@ -12,6 +12,8 @@ define(function(require, exports, module) {
         Base = require('arale/base/1.0.1/base'),
         Widget = require('arale/widget/1.0.2/widget'),
         Tem=require('arale/widget/1.0.2/templatable');
+    
+    var HOST = "http://marrymemo.com/";
 
     (function(window){
         var $li,img;
@@ -67,13 +69,13 @@ define(function(require, exports, module) {
     App.Comment=Base.extend({
         get:function(id,element){
             util.FlyJSONP.get({
-                url:'http://marrymemo.com:3000/montages/'+id+'/discussions.json',
+                url:HOST + 'montages/'+id+'/discussions.json',
                 success:function(result){
                 var data=result.discussions;
                     var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
                     var output='';
                     for(var i in data){
-                       output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
+                       output+=htmlTep.replace("{pic}",HOST+data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
                            .replace("{date}",data[i].created_at.substring(0,10));
                    }
                     $(element).append(output);
@@ -82,7 +84,7 @@ define(function(require, exports, module) {
         },
         post:function(id,userid,input,callback){
             util.FlyJSONP.post({
-            url: 'http://marrymemo.com:3000/montages/'+id+'/discussions.json',
+            url: HOST + 'montages/'+id+'/discussions.json',
             parameters: {
                 "discussion": {
                     "content" :$(input).val(),
@@ -104,7 +106,7 @@ define(function(require, exports, module) {
             switch (option.type){
                 case "index": //index
                 util.FlyJSONP.get({
-                    url:'http://marrymemo.com:3000/montages.json',
+                    url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
@@ -112,7 +114,7 @@ define(function(require, exports, module) {
                             '</div> </article>';
                         var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                         for(var i=page;i<len;i++){
-                            output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                         }
                         $(option.element).append(output);
                         page=len;
@@ -121,7 +123,7 @@ define(function(require, exports, module) {
                         $("#loadmore").on("click",function(){
                             var output='',len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                             for(var i=page;i<len;i++){
-                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
                             }
                             $(option.element).append(output);
                             page=len;
@@ -133,18 +135,18 @@ define(function(require, exports, module) {
                 break;
             case "show"://get
                 util.FlyJSONP.get({
-                    url:'http://marrymemo.com:3000/montages/'+option.id+'.json',
+                    url:HOST + 'montages/'+option.id+'.json',
                     success:function(result){
                         var data=result,output="";
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="#"><span>sina</span></a> <a class="qq" href="#"><span>qq</span></a> <a class="tt" href="#"><span>tt</span></a> </div> </div></div></li>';
+                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="' + HOST + '{pic}"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="#"><span>sina</span></a> <a class="qq" href="#"><span>qq</span></a> <a class="tt" href="#"><span>tt</span></a> </div> </div></div></li>';
                         for(var i=0;i<data.photos.length;i++){
                             output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title);
                         }
                         $(option.element).after(output);
                         for(var j=0;j<data.photos.length;j++){
                             var img=new Image();
-                            img.src="http://marrymemo.com:3000/"+data.photos[j].path;
+                            img.src=HOST+data.photos[j].path;
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".fancybox").eq(this.index+1);
@@ -167,15 +169,15 @@ define(function(require, exports, module) {
                 break;
             case "include":
                 util.FlyJSONP.get({
-                    url:'http://marrymemo.com:3000/montages.json',
+                    url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages,output="";
                         var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header> <img src="{pic}"/> <a class="read" href="montage-show.html#{id}"></a> </li>';
                         for(var i=0;i<9;i++){
-                            output+=htmlTem.replace('{pic}',"http://marrymemo.com:3000/"+data[i].image_path).replace("{title}",data[i].title)
+                            output+=htmlTem.replace('{pic}',HOST+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
                         }
-                        console.log(output);
+//                        console.log(output);
                         $(option.element).append(output);
                         adjustFootPos();
                     }
@@ -183,9 +185,9 @@ define(function(require, exports, module) {
                 break;
             case "recommend":
                 if(option.nice===1){
-                    url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
+                    url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
                 }else{
-                    url='http://marrymemo.com:3000/montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
+                    url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
                     util.FlyJSONP.get({
                         url:url,
@@ -200,7 +202,7 @@ define(function(require, exports, module) {
                             var len=(data.length<10?data.length:10),output="";
                             for(var i=0;i<len;i++)
                             {
-                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                 .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
@@ -227,9 +229,9 @@ define(function(require, exports, module) {
                 case "recommendPage":
                     var url;
                     if(option.nice===1){
-                        url='http://marrymemo.com:3000/montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
+                        url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
                     }else{
-                        url='http://marrymemo.com:3000/montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
+                        url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                     }
                     util.FlyJSONP.get({
                         url:url,
@@ -238,7 +240,7 @@ define(function(require, exports, module) {
                             var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             for(var i=0;i<data.length;i++)
                             {
-                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                     .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
@@ -253,13 +255,13 @@ define(function(require, exports, module) {
                 break;
                 case "favRecommend":
                     util.FlyJSONP.get({
-                        url:'http://marrymemo.com:3000/montages.json',
+                        url:HOST + 'montages.json',
                         success:function(result){
                             var data=result.montages;
                             var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}" target="_blank"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}" target="_blank">{name}</a> </div> </footer> </article>';
                             for(var i=0;i<option.pageItems;i++)
                             {
-                                output+=htmlTep.replace("{pic}",'http://marrymemo.com:3000/'+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                 .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }

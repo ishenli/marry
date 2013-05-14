@@ -98,7 +98,7 @@ var SALT = "*#0621ix51y6679&";
 	 * @param window
 	 * @param $
 	 */
-	$("#qq_content_btn").on("click", function() {
+	$("#qq_content_btn").click(function() {
 		var win = QC.Login.showPopup({
 			appId : "100416913",
 			redirectURI: "http://marrymemo.com/marry/qc_back.html"
