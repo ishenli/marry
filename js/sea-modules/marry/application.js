@@ -149,7 +149,7 @@ define(function(require, exports, module) {
                             img.src=HOST+data.photos[j].path;
                             img.index=j;
                             img.onload=function(){
-                                var item= $(".fancybox").eq(this.index+1);
+                                var item= $(".fancybox").eq(this.index);
                                 item.append($(this));
                                 item.parent().width($(this).width());
                                 $frame.reload();
@@ -241,7 +241,7 @@ define(function(require, exports, module) {
                             for(var i=0;i<data.length;i++)
                             {
                                 output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                    .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                                    .replace("{fav}","0").replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
 
                             }
                             $("#pages a").removeClass("ui-paging-current");
