@@ -122,6 +122,14 @@
     position: relative;
     left: 0;
 }
+.marry-list-medium .marry-list-item .cover .line{
+    height: 4px;
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 200;
+}
 .marry-list-small .marry-list-item .cover img{
     width: 306px;
     margin: 4px 4px 0 4px;
