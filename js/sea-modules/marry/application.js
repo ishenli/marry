@@ -173,6 +173,7 @@ define(function(require, exports, module) {
                         $("#favBtn").text(data.collection_count);
                         $("#sAvatar").attr("src",data.user.avatar.indexOf("http") == 0 ? data.user.avatar : HOST + data.user.avatar);
                         $("#username").text(data.user.nick);
+                        $("#montageEnding").text(data.ending);
 
                     }
                 });
