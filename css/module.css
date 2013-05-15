@@ -12,11 +12,14 @@
     display: inline-block;
     vertical-align: middle;
     height: 30px;
-    width: 30px;
+    padding: 0 10px;
     text-align: center;
     line-height: 30px;
     background: #fff;
     font-size: 14px;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 .ui-paging a.ui-paging-current, .ui-paging a:hover {
     color: #fff;
@@ -26,7 +29,6 @@
 .ui-dialog {
     border: none;
     /*FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000, endColorstr=#88000000);*/
-    padding: 6px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -35,7 +37,12 @@
 :root .ui-dialog {
     FILTER: none\9;
 }
-
+.ui-dialog-content{
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    overflow: hidden;
+}
 .ui-dialog-close {
     color: #fff;
     cursor: pointer;
@@ -46,9 +53,9 @@
     height: 18px;
     line-height: 14px;
     position: absolute;
-    right: -24px;
+    right: -30px;
     text-decoration: none;
-    top: 10px;
+    top: 20px;
     z-index: 10;
     background: #000;
     opacity: 0.7;
@@ -65,13 +72,13 @@
     font-size: 24px;
     font-family: '微软雅黑', '黑体', Arial;
     line-height: 37px;
-    border-bottom: 1px solid #E1E1E1;
+    /*border-bottom: 1px solid #E1E1E1;*/
     color: #4d4d4d;
 }
 .ui-dialog-input,.ui-dialog-textarea{
     padding:7px 9px;
     width: 430px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 .ui-dialog-input{
     vertical-align: middle;
@@ -86,7 +93,6 @@
     line-height: 15px;
 }
 .ui-dialog-container {
-    padding: 20px 15px 20px;
     font-size: 12px;
     display: none;
     -webkit-border-radius: 6px;
@@ -110,20 +116,43 @@
     margin-right: 4px;
 }
 /*表单*/
+.ui-form{margin-top:30px}
 .ui-form legend{display:none}
-.ui-form-other{_display:inline-block;margin-left:4px}
+.ui-form-required{margin-right:6px; font-family:SimSun; font-size:14px; color:#f00}
+.ui-form-explain{padding:3px 0 0; padding:5px 0 0\9; _padding-top:3px; *margin-top:-1px; _margin-left:3px; font-size:12px; color:#B2B2B2}
+.ui-form-other{_display:inline-block; margin-left:4px}
+.ui-form-text{display:inline-block; margin-top:4px; *margin-top:6px; _margin-top:4px; zoom:1}
+.ui-form-status{color:#20B907; background:url(https://img.alipay.com/alice/ui-fm-loading.gif) right bottom no-repeat; padding-right:15px}
+.ui-form-list{_float:left; _width:100%}
+/*表单项*/
 .ui-lable{ float: left; margin-left: -180px; width: 170px; text-align: right; padding-top: 4px; font-size: 14px; }
 .ui-input{width:170px;padding:7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6}
 .ui-input:hover,.ui-textarea:hover{border:1px #a6a6a6 solid;border-top-color:#808080}
 .ui-input:focus,.ui-textarea:focus{border:1px #68acff solid;outline:1px aqua solid}
-.ui-textarea{width: 272px;height: 102px;line-height:15px;border:1px #9c9c9c solid;padding:1px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;;font-family:Arial;color: #c7c7c7;}
+.ui-textarea{width: 272px;height: 90px;line-height:15px;border:1px #9c9c9c solid;padding: 8px 3px 0 4px;_padding:1px 2px 0 5px;overflow:auto;;font-family:Arial;color: #c7c7c7;}
 .ui-radio{width:25px;height: 25px; }
 .ui-radio-txt{position: relative;display: inline-block;height: 25px;line-height: 25px;top: 3px;}
 .ui-form-item:after{clear:both;content:'.';display:block;height:0;visibility:hidden}
 .ui-form-item{padding:0 5px 15px 170px;*padding:0 5px 12px 170px;_padding:0 5px 13px 170px;zoom:1;}
 .ui-form-item .ui-input{font-size:12px;*font-size:11px;_font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px}
 .ui-form-item .ui-select{font-size:12px;*font-size:11px;_font-size:12px;color:#595959;vertical-align:middle;*vertical-align:-5px;width: 190px;height: 28px;margin-top: 0px;}
-
+/*表单验证*/
+.ui-form-item-hover .ui-input, .ui-form-item-hover .ui-textarea{border:1px #727272 solid}
+.ui-form-item-focus .ui-input, .ui-form-item-focus .ui-textarea{border:1px #68ACFF solid; outline:1px aqua solid;  *padding:3px 0 3px 2px; *border:2px #95DDFF solid; cursor:text}
+.ui-form-item-focus .ui-textarea{*padding:1px 0 1px 2px}
+.ui-form-item-focus .ui-form-explain, .ui-form-item-hover .ui-form-explain{color:#333;}
+.ui-form-item-error .ui-input, .ui-form-item-error .ui-textarea{border:1px #F00 solid; color:#FF5243}
+.ui-form-item-error .ui-input-reset{border:1px #9C9C9C solid; color:#000}
+.ui-form-item-error .ui-form-explain, .ui-form-item-warn .ui-form-explain,
+.ui-form-item-success .ui-form-explain{background-image:url(https://img.alipay.com/alice/ui-fm.png); background-repeat:no-repeat; padding-left:20px; *zoom:1}
+.ui-form-item-error .ui-form-explain{color:#FF5243; background-position:-186px 6px}
+.ui-form-item-warn .ui-form-explain{background-position:-138px -80px}
+.ui-form-item-error .ui-input:hover,
+.ui-form-item-error .ui-textarea:hover{border:1px #a6a6a6 solid;}
+.ui-form-item-error .ui-input:focus,
+.ui-form-item-error .ui-textarea:focus{border:1px #68ACFF solid; color:#727272}
+.ui-form-item-success .ui-form-explain{ background-position:-114px -123px}
+.ui-form-item-loading .ui-form-explain{ padding-left:20px;    background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 4px no-repeat}
 /*各种小组件*/
 /*button*/
 .ui-btn *{margin: 0;padding: 0;}
@@ -165,6 +194,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     height: 42px;
     line-height: 42px;
     width: 120px;
+}
+.large .ui-btn-text{
+    font-size: 18px;
 }
 .middle.ui-btn,.middle .ui-btn-text{
     height: 32px;
@@ -256,20 +288,34 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .ui-share-btn-list .tt{
     background-position: -72px -52px;
 }
+.ui-share-btn-list-v {
+    position:absolute;
+    bottom: 95px;
+    right: -35px;
+}
+.ui-share-btn-list-v a{
+    display: block;
+    float: none;
+    width: 30px;
+    height: 30px;
+    margin-top: 8px;
+}
+
+
 /*条*/
 .ui-slip {
     float: left;
     height: 30px;
-    background: url("../assets/images/slip-sprite.png") 0 -3px no-repeat;
     margin-left: 20px;
-    padding-left: 25px;
-}
-.ui-slip .ui-slip-inner{
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 0 15px;
     position: relative;
-    padding-right: 23px;
-    background: url("../assets/images/slip-sprite.png") right -34px no-repeat;
 }
-.ui-slip .ui-slip-inner .small-arrow {
+
+.ui-slip  .small-arrow {
     display: block;
     position: absolute;
     top: 8px;
@@ -277,17 +323,16 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     height: 16px;
     background: url("../assets/images/small-arrow.png") no-repeat;
 }
-.ui-slip .ui-slip-inner h3,.ui-slip .ui-slip-inner a{
+.ui-slip  h3,.ui-slip  a{
     display: block;
     height: 30px;
     line-height: 30px;
     /*font: 24px "黑体";*/
     font-size: 18px;
+    font-weight: normal;
     color: #fff;
-    background: url("../assets/images/slip-line.png") repeat-x;
 }
-.ui-slip .ui-slip-inner .back{
-    display: block;
+.ui-slip .back{
     padding-left: 20px;
 }
 .arrow{
@@ -314,6 +359,20 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
 }
+.savatar{
+    margin:0 0 0 -14px;
+}
+.savatar img{
+    float: left;
+}
+.savatar span{
+    display: inline-block;
+    margin-left: 20px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #fff;
+}
 .marry-list .counter .comments, .marry-list .counter .fav, .marry-list .counter .share {
     display: inline-block;
     margin-right: 5px;
@@ -328,7 +387,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 .marry-list .counter .comments span, .marry-list .counter .fav span, .marry-list .counter .share span{
     height: 16px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .marry-list .counter .comments .ico{
     background-position: -2px -474px;
@@ -339,9 +398,30 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .marry-list .counter .share .ico{
     background-position: -90px -474px;
 }
+.ui-counter span{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    background: url("../assets/images/show-sprite.png") no-repeat;
+    cursor: pointer;
+}
+.ui-counter .comments{
+    background-position: -44px -29px;
+    padding-left: 26px;
+
+}
+.ui-counter .fav{
+    margin-left: 15px;
+    padding-left: 26px;
+    background-position: 0 -29px;
+}
 /*用户页面顶部导航*/
 .ui-green-header {
-    background:#95e5de;
+    /*background:#95e5de;*/
+    background:rgba(105,221,211,0.3);
 }
 .ui-page-nav {
     height: 100%;
@@ -358,9 +438,13 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .ui-page-nav li .arrow{
     display: none;
 }
-.ui-page-nav-active span{
+.ui-page-nav li a{
+    color: #fff;
+}
+.ui-page-nav-active a{
     background-color: #6addd3;
     padding: 0 4px;
+
 }
 .ui-page-nav-line span{
     width: 2px;
@@ -377,8 +461,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     bottom: 0;
     left: 50%;
     margin-left: -8px;
-    background: #95e5de;
-    border-color: #95e5de #95e5de white #95e5de;
+    border-color: transparent transparent white transparent;
 }
 /*各种插件*/
 #indexBanner{
@@ -438,7 +521,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     width: 340px;
     height: 85px;
 }
-download-panel h3{
+.download-panel h3{
     color: #fff;
     font: bold 14px;
 }
@@ -561,36 +644,111 @@ download-panel h3{
 .controls {
     text-align: center;
 }
-
+#horizontal{
+    position: relative;
+    z-index: 100;
+}
 .sly {
     overflow: hidden;
 }
 .sly ul li {
     float: left;
-    height: 100%;
-    width: 750px;
-    max-width: 900px;
-    margin: 10px 5px;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.20);
+    /*width: 750px;*/
+    /*min-width: 360px;*/
+    padding: 10px 5px;
+    background: #fff;
+}
+.sly ul li .img-wrap{
+    position: relative;
 
+}
+.sly ul li .img-wrap:hover .hover-panel{
+    visibility: visible;
+}
+.img-wrap .hover-panel{
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 60px;
+    background: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    visibility: hidden;
+}
+.img-wrap .hover-panel .description{
+    width: 100px;
+    float: right;
+    margin-top: 12px;
+    height: 36px;
+    border-right: 1px solid #aca195;
+    padding: 0 15px;
+
+}
+.img-wrap .hover-panel .share-btn{
+    margin-top: 12px;
+    float: right;
+    height: 36px;
+    width: 36px;
+    background: url("../assets/images/sprite.png") -82px -465px no-repeat;
+}
+.img-wrap .hover-panel .btns{
+    position: absolute;
+    top:10px;
+    right: -106px;
+    height: 40px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius:4px;
+    background: #a9dc3c;
+}
+.img-wrap .hover-panel .btns a{
+    background: url("../assets/images/share-sprite.png") no-repeat;
+    display: inline-block;
+    height: 40px;
+}
+.img-wrap .hover-panel .btns a:hover span{
+    display: block;
+    height: 40px;
+    background: rgba(0,0,0,0.1);
+}
+.img-wrap .hover-panel .btns a.sina{
+    width: 30px;
+
+    background-position: 1px -3px;
+}
+.img-wrap .hover-panel .btns a.qq{
+    width: 30px;
+
+    background-position: -35px -5px;
+}
+.img-wrap .hover-panel .btns a.tt{
+    width: 40px;
+
+    background-position: -70px -4px;
 }
 .sly .node-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 9999px;
 }
 .sly .node-list img{
     height: 100%;
+    /*display: block;*/
 }
 .sly .node-list .cover{
+    position: relative;
     width: 400px;
     background: #fff;
     font-size: 14px;
     color: #c7c7c7;
     line-height: 100%;
+    height: 100%;
+}
+.sly .node-list .cover.prev{
+    margin-left: 185px;
+}
+.sly .node-list .cover.next{
+    margin-right: 185px;
 }
 .sly .node-list .cover-dot-top,.sly .node-list .cover-dot-bottom{
     position: absolute;
@@ -612,12 +770,6 @@ download-panel h3{
 .node-list .cover-content{
     margin: 100px 97px;
 }
-
-.sly > ul li.active {
-    background: #fff;
-    color: #4DBCE9;
-}
-
 .pages {
     list-style: none;
     margin: 20px 0;
@@ -649,12 +801,12 @@ download-panel h3{
 }
 
 .viewArrow{
-    position: absolute;
+    position:absolute;
+    top: 0;
     width: 185px;
     height: 104px;
     z-index: 3;
     text-indent: -9999px;
-
 }
 .viewArrow-right{
     right: 0;
@@ -728,9 +880,6 @@ download-panel h3{
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    /* gte ie8 */
-    -ms-filter:"progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=180,strength=2) progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=270,strength=2)";
-
     /* *//* lte ie7 *//*
      *filter: progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=0,strength=2)
  progid:DXImageTransform.Microsoft.Shadow(color=#999999,direction=90,strength=2)
@@ -744,6 +893,33 @@ download-panel h3{
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.15);
 }
 /*滚动条*/
+.ui-scrollbar::-webkit-scrollbar{
+    width: 15px;
+}
+.ui-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px 1px 1px 6px;
+    min-height: 28px;
+    width: 10px;
+    padding: 100px 0 0;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+}
+.ui-comment-list::-webkit-scrollbar{
+    width: 15px;
+}
+.ui-comment-list::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px 1px 1px 6px;
+    min-height: 28px;
+    width: 10px;
+    padding: 100px 0 0;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+}
+
 .ui-scrollbar-vertical {
     position: absolute;
     right: 0;
@@ -756,9 +932,6 @@ download-panel h3{
 .ui-scrollbar-vertical .handle {
     width: 10px;
     height:100px;
-}
-
-.ui-scrollbar-vertical .handle {
     background: #c7c7c7;
     cursor: pointer;
 }
@@ -767,6 +940,7 @@ download-panel h3{
 .ui-comment-list ul{
     width: 100%;
     margin-right: 10px;
+    padding-top: 10px;
 }
 .ui-comment-list ul li{
     padding: 10px 10px 0 0;
@@ -796,4 +970,106 @@ download-panel h3{
     font:12px arial;
     color: #6addd3; ;
 }
-
+/*日历*/
+.ui-calendar {
+    position: absolute;
+    font: 16px/20px 'Xin Gothic', 'PT Sans', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #f9f9f9;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #dadada;
+    box-shadow: 1px 1px 9px #ccc;
+    text-align: center;
+}
+.ui-calendar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    width: 210px;
+    color: #333;
+    zoom: 1;
+}
+.ui-calendar ul:after {
+    display: block;
+    content: "";
+    visibility: hidden;
+    font-size: 0;
+    clear: both;
+    height: 0;
+}
+.ui-calendar li {
+    float: left;
+    text-align: center;
+    width: 30px;
+    padding: 3px 0;
+    cursor: pointer;
+}
+.ui-calendar .ui-calendar-navigation {
+    font-size: 14px;
+    border-bottom: 1px solid #dadada;
+}
+.ui-calendar .ui-calendar-month-year {
+    width: 90px;
+}
+.ui-calendar .month:hover, .ui-calendar .year:hover {
+    color: #d64;
+}
+.ui-calendar .ui-calendar-previous-year:hover,
+.ui-calendar .ui-calendar-previous-month:hover,
+.ui-calendar .ui-calendar-next-month:hover,
+.ui-calendar .ui-calendar-next-year:hover {
+    color: #d64;
+}
+.ui-calendar .ui-calendar-data-container {
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+}
+.ui-calendar .ui-calendar-date-column .previous-month,
+.ui-calendar .ui-calendar-date-column .next-month {
+    color: #ccc;
+}
+.ui-calendar .ui-calendar-year-column li,
+.ui-calendar .ui-calendar-month-column li {
+    width: 65px;
+    margin: 2px;
+    padding: 2px 0;
+    border-radius: 4px;
+}
+.ui-calendar li.ui-calendar-day-0,
+.ui-calendar li.ui-calendar-day-6 {
+    color: #d64;
+}
+.ui-calendar .ui-calendar-year-column li:hover,
+.ui-calendar .ui-calendar-month-column li:hover,
+.ui-calendar .ui-calendar-date-column li:hover {
+    color: #333;
+    background: #dadada;
+}
+.ui-calendar .ui-calendar-date-column li.disabled-date {
+    background: #eee;
+    color: #bbb;
+    cursor: not-allowed;
+}
+.ui-calendar .ui-calendar-year-column li.focused-element,
+.ui-calendar .ui-calendar-month-column li.focused-element,
+.ui-calendar .ui-calendar-date-column li.focused-element {
+    color: #fff;
+    background: #d64;
+}
+.ui-calendar .ui-calendar-footer {
+    color: #999;
+}
+.ui-calendar .ui-calendar-today,
+.ui-calendar .ui-calendar-time {
+    width: auto;
+    padding: 3px 4px;
+}
+.ui-calendar .ui-calendar-time {
+    float: right;
+}
+/* ie fix */
+.ui-calendar ul,.ui-calendar .ui-calendar-data-container {
+    *float: left;
+    *clear: both;
+}

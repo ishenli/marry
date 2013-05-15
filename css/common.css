@@ -4,10 +4,18 @@
     margin: 20px 0 0 20px;
     width: 300px;
     height: 185px;
+    overflow: hidden;
+    background: url("../assets/images/ajax-loader-64.gif") no-repeat center;
+}
+.ui-pic-item .imgwrap{
+    position: relative;
 }
 .ui-pic-item img{
     width: 300px;
-    height: 185px;
+    position: relative;
+    /*top: 92px;*/
+    left: 0;
+    /*margin-top: -50%;*/
 
 }
 .ui-pic-item .read{
@@ -27,13 +35,16 @@
     width: 140px;
     background: #000;
     opacity: 0.7;
-    *filter: alpha(opacity=70);
     color: #FFF;
-    padding: 6px 18px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    z-index: 10;
+
 }
 .ui-pic-item header h1{
-    font:bold 12px/1.5 "microsoft yahei";
-    margin-bottom: 6px;
+    height: 46px;
+    line-height: 46px;
+    text-indent: 17px;
 }
 .template-panel {
     margin: 20px auto 0;
@@ -63,7 +74,7 @@
     height: 285px;
     background: #000;
     opacity: .08;
-    *filter: alpha(opacity=80);
+    /**filter: alpha(opacity=80);*/
     display: none;
 }
 .ui-tem-item:hover .overlay{
@@ -100,16 +111,27 @@
 }
 .marry-list .marry-list-item .cover {
     position: relative;
-
+    height: 190px;
+    overflow: hidden;
+    background:#fff url("../assets/images/ajax-loader-64.gif") no-repeat center;
+;
 }
 .marry-list-medium .marry-list-item .cover img{
     width: 306px;
-    height: 190px;
     margin: 4px 4px 0 4px;
+    position: relative;
+    left: 0;
+}
+.marry-list-medium .marry-list-item .cover .line{
+    height: 4px;
+    background: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 200;
 }
 .marry-list-small .marry-list-item .cover img{
     width: 306px;
-    height: 190px;
     margin: 4px 4px 0 4px;
 }
 .marry-list .marry-list-item header{
@@ -121,9 +143,12 @@
     background: rgba(0,0,0,0.7);
     color: #FFF;
     padding: 6px 18px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 .marry-list .marry-list-item header h1{
-    font:bold 12px/1.5 "microsoft yahei";
+    height: 46px;
+    line-height: 46px;
     margin-bottom: 6px;
 }
 .marry-list .footer {
@@ -209,7 +234,7 @@
     height: 75px;
     margin: -35px 0 0 -15px;
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
-    font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
+    font:bold 40px/75px "????????????" "microsoft yahei" "sans serif";
     color:#a9dc3c;
     text-align: center;
 }
@@ -225,19 +250,26 @@
 .add-panel .num-txt {
     font-size: 24px;
 }
-
+.upload-img-panel{
+    height: 322px;
+    overflow-y:scroll;
+}
 .add-list-item {
     float: left;
     width: 120px;
     margin: 0 0 20px 15px;
     position: relative;
 }
-.add-list.thrid-step{
+.add-list.third-step{
     position: relative;
     margin: 0 0 0 -6px;
-    height: 610px;
+    height: 390px;
 }
-.thrid-step .add-list-item{
+.add-list.third-step .slidee{
+    overflow-y: scroll;
+    height: 370px;
+}
+.third-step .add-list-item{
     margin-left: 36px;
 
 }
@@ -273,6 +305,7 @@
 .add-list-item .close{
     top:0;
     right: 0;
+    z-index: 30;
 }
 .add-list-item .number{
     top: 100px;
@@ -280,11 +313,13 @@
 }
 .add-panel .add-form{
     text-align:left;
-    margin:35px 45px 0;
+    margin: -6px 45px 0;
     padding-bottom: 63px;
 }
 .add-panel .add-form .form-title{
     font-size: 24px;
+    color: #666666;
+    font-weight: normal;
 }
 .add-panel .foot-txt {
     padding: 20px 0;
@@ -303,7 +338,6 @@
 
 .photo-show {
     background: #ebcaa3 url("../assets/images/photo-bg.jpg") repeat-x;
-
 }
 
 .top-tool {
@@ -313,11 +347,16 @@
 .foot-tol {
     height: 80px;
 }
+
 #footFool .prev-page,#footFool .next-page{
     display: block;
     width: 25px;
+    height: 30px;
     text-indent: -9999px;
     background: url("../assets/images/show-sprite.png") no-repeat;
+}
+#footFool .prevPage,#footFool .nextPage{
+    cursor: pointer;
 }
 #footFool .prev-page{
     background-position: 0 -53px;
@@ -328,28 +367,9 @@
 
 #footFool .counter {
     height: 20px;
-    margin: 8px 0 0 32px;
+    margin: 8px 0 0 0;
 }
-#footFool .counter span{
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    height: 20px;
-    line-height: 20px;
-    color: #fff;
-    background: url("../assets/images/show-sprite.png") no-repeat;
-    cursor: pointer;
-}
-#footFool .counter .comments{
-    background-position: -44px -29px;
-    padding-left: 26px;
 
-}
-#footFool .counter .fav{
-    margin-left: 15px;
-    padding-left: 26px;
-    background-position: 0 -29px;
-}
 .viewer {
 }
 .viewer .viewport-wrapper {
@@ -403,11 +423,16 @@
 
 }
 .user-grid .outer{
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #ededed;
+}
+.user-grid .outer:last-child{
+    border:none;
 }
 .user-grid .user-grid-item{
     padding-top:40px;
     margin: 0 80px;
+    color: #666666;
+    position: relative;
 }
 .user-grid .user-grid-item img{
     width: 800px;
@@ -415,10 +440,60 @@
 .user-grid .user-grid-item h1{
     height: 60px;
     line-height: 60px;
-    font-size: 24px;
+    font-size: 14px;
+
 }
 .user-grid .user-grid-item p{
     height: 40px;
+    font-size: 12px;
+}
+.user-grid .user-grid-item .btns{
+    position: absolute;
+    top: 60px;
+    right: 0;
+
+    width: 200px;
+}
+.btns .trash{
+    float: left;
+}
+.btns a{
+    display: inline-block;
+    text-indent: -9999px;
+}
+.btns .trash a{
+    width: 32px;
+    height: 32px;
+    background:url("../assets/images/sprite.png") -124px -595px no-repeat;
+}
+.btns .fc{
+    display: inline-block;
+    margin-left: 16px;
+    width: 135px;
+    height: 32px;
+    background: url("../assets/images/sprite.png") -5px -665px no-repeat;
+
+}
+.btns .fc .counter{
+    margin: 6px 0 0 20px;
+}
+.user-grid .user-grid-item .view-btn{
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    bottom: 65px;
+    margin: 0 0 0 -50px;
+    background: url("../assets/images/sprite.png") -2px -576px no-repeat;
+}
+.user-grid .user-grid-item .view-btn a{
+    display: block;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
 }
 .load-more {
     margin-top: 20px;
@@ -466,6 +541,13 @@
 .user-edit-wrap .img-panel img{
     width: 200px;
     height: 200px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.user-edit-wrap .img-panel p{
+    color: #a9dc3c;
+    text-align: center;
 }
 #photo-user-panel {
     position: absolute;
@@ -490,23 +572,29 @@
 #commentPanel {
     width: 480px;
     height: 520px;
-    padding:20px 14px;
 }
 #commentPanel #comments-list {
     position: relative;
     width: 465px;
-    height: 440px;
-    overflow: hidden;
+    height: 460px;
+    overflow: auto;
+    margin: 0 0 0 15px;
 }
 
+#commentPanel #comments-list #commentsSly{
+    height: 440px;
+}
 #commentPanel .comment-input{
-    width: 462px;
+    width: 480px;
     height: 60px;
+    background-color: #F0F0F0;
+    border-radius: 6px;
 }
 #commentPanel .ui-comment-form {
-    margin-top: 10px;
 }
-
+#commentPanel .ui-comment-form .comment-btn,#commentPanel .ui-comment-form .comment-btn input{
+    width: 80px;
+}
 #commentPanel .ui-comment-input {
     width: 340px;
     padding: 7px 9px 7px 9px;
@@ -515,11 +603,12 @@
     color:#c7c7c7;
     border: 1px solid #ccc;
     border-top-color: #a6a6a6;
+    margin: 10px 0 0 15px;
 }
 
 #commentPanel .comment-btn {
     float: right;
-    margin: 6px 10px 0 0;
+    margin: 14px 10px 0 0;
 }
 
 
@@ -536,7 +625,7 @@
 #noticePanel #noticeList{
     height: 420px;
     padding-left: 10px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .invitation-panel {
@@ -611,7 +700,7 @@
     background: url("../assets/images/iphone5.png") no-repeat;
     z-index: 1;
 }
-.thrid-step .iphone5{
+.third-step .iphone5{
     left: 113px;
     margin-left: 0;
 }
@@ -632,7 +721,10 @@
 .iphone5-inner .login{
     margin-top: 15px;
 }
-
+.invitation-btn{
+    padding-right: 10px;
+    text-align: right;
+}
 .invitation-btn a{
     float: right;
     margin-right: 10px;
@@ -683,4 +775,36 @@
     border-bottom: 1px solid #aca195;
 }
 
+.pre-load{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin: -32px 0 0 -32px;
+    width: 64px;
+    height: 64px;
+    background: url(http://cyjs.qiniudn.com/assets/ajax-loader-64-97067b43f6ccea90bc18939af5d65893.gif);
+}
 
+#feedbackPanel .feedback-inner{
+    margin: 20px 0 0 15px;
+}
+#feedbackPanel .feedback-inner .ui-btn{
+    margin: 14px 15px 0 0;
+    float: right;
+}
+
+#downloadCon{
+    margin-top: 20px;
+    position: relative;
+}
+#downloadCon .download-panel{
+    position: absolute;
+    top:288px;
+    left: 71px;
+    width: 340px;
+    height: 85px;
+}
+
+#downloadCon .code {
+    margin-top: 23px;
+}

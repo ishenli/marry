@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>婚礼纪</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/module.css">
+    <link rel="stylesheet" type="text/css" href="css/status.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
+
+    <script src="js/sea-modules/seajs/1.3.1/sea.js" type="text/javascript"></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+    <script src="js/dist/sly.min.js" type="text/javascript"></script>
+    <script src="js/dist/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/dist/html5shiv.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .fancybox{
+            display: block;
+            background:#fff url("assets/images/ajax-loader-64.gif") no-repeat center;;
+        }
+    </style>
+</head>
+<body class="photo-show">
+<header class="top-tool">
+    <div class="sl-hvalign">
+        <div class="sl-hvalign-cnt">
+            <div class="sl-hvalign-cnt-inner">
+                <div class="ui-slip">
+                        <i class="small-arrow"></i>
+                        <a class="back" href="javascript:;" id="backHistory">返回</a>
+                </div>
+                <div class="ui-slip">
+                        <h3 id="montageTitle">画卷标题文字</h3>
+                        <div class="fn-hide" id="montageEnding"></div>
+                </div>
+                <div class="ui-slip">
+                        <h3>分享到：</h3>
+                </div>
+                <div class="ui-share-btn-list">
+                    <a href="javascript:;" class="sina">sina</a>
+                    <a href="javascript:;" class="qzone">qq</a>
+                    <a href="javascript:;" class="tt">t</a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .sl-hvalign -->
+    <!--<div class="ui-top-nav" id="photo-user-panel">
+        <div  class="user-panel">
+            <div class="user-active">
+                <span class="arrow">&gt;</span>
+                                <span class="avatar">
+                                    <img src="assets/test/avatar.jpg">
+                                </span>
+                <div class="option">
+                    <ul>
+                        <li class="option-item"><a href="/">创建画卷</a></li>
+                        <li class="option-item"><a href="/">个人主页</a></li>
+                        <li class="option-item"><a href="/">编辑资料</a></li>
+                        <li class="option-item"><a href="/">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <span class="notice notice-active" id="noticeTrigger"> 1 </span>
+        </div>
+    </div>-->
+</header>
+<article class="viewer" id="viewer">
+    <div class="viewport-wrapper" id="viewer-wrapper">
+        <div id="viewPrev" class="viewArrow viewArrow-left">
+            <div class="prev">&lt; </div>
+        </div>
+        <div id="horizontal">
+            <div class="sly" id="slide">
+                <ul class="node-list" id="slideBody">
+                    <!--<li>
+                        <div class="img-wrap" style="width:162px;">
+                            <a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}">
+                                <img src="assets/test/show.jpg"/>
+                            </a>
+                            <div class="hover-panel">
+                                <div class="share-btn"></div>
+                                <div class="description"></div>
+                                <div class="btns">
+                                    <a class="sina" href="#"><span>sina</span></a>
+                                    <a class="qq" href="#"><span>qq</span></a>
+                                    <a class="tt" href="#"><span>tt</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>-->
+                    <li class="cover  prev" id="firstcover"> <div class="cover-dot-top"></div>
+                        <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt">
+                            <div class="sl-hvalign-cnt-inner"> <p id="introduction"></p></div>
+                        </div> </div> </div> <div class="cover-dot-bottom">”</div>
+                    </li>
+
+                    <li class="cover next">
+                        <div class="cover-dot-top"></div>
+                        <div class="cover-content">
+                            <div class="sl-hvalign">
+                                <div class="sl-hvalign-cnt">
+                                    <div class="sl-hvalign-cnt-inner">最后一页啦 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cover-dot-bottom">”</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="viewArrow viewArrow-right">
+            <div class="next">&gt;</div>
+        </div>
+    </div>
+</article>
+<footer id="footFool" class="foot-tol">
+    <div class="sl-hvalign">
+        <div class="sl-hvalign-cnt">
+            <div class="sl-hvalign-cnt-inner">
+                <div class="ui-slip">
+                    <div class="savatar">
+                        <img src="assets/test/avatar.jpg" id="sAvatar" class="radius30"/>
+                        <span id="username">username</span>
+                    </div>
+                </div>
+                <div class="ui-slip prevPage">
+                    <a  href="javascript:;"><span class="prev-page">往左</span></a>
+                </div>
+                <div class="scrollbar-panel">
+                    <div class="scrollbar"> <div class="handle"></div> </div>
+                </div>
+                <div class="ui-slip nextPage">
+                        <a  href="javascript:;"><span class="next-page">往右</span></a>
+                </div>
+
+                <div class="ui-share-btn-list ui-slip">
+                    <div class="ui-counter counter">
+                        <span id="commentBack" class="comments">11</span>
+                        <span id="favBtn" class="fav">11</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="commentPanel" class="ui-dialog-container ">
+    <div id="comments-list" class="ui-comment-list">
+            <ul></ul>
+    </div>
+<!--    <div class="comment-input">
+        <form class="ui-comment-form">
+            <input type="text" id="commentInput" class="ui-comment-input" onclick="this.value=''"  value="写些评论吧"/>
+            <div class="ui-btn ui-btn-green middle comment-btn" >
+                <input type="submit" id="commentBtn" class="ui-btn-text" value="发送">
+            </div>
+        </form>
+    </div>-->
+</div>
+<script type="text/javascript">
+    //初始化
+    $(window).ready(function() {
+        $(".fancybox").fancybox({
+            prevEffect		: 'none',
+            nextEffect		: 'none',
+            closeBtn		: true,
+            padding:0,
+            autoSize:true,
+            nextBtn:true,
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(0, 0, 0, 0.7)'
+                    }
+                }
+            }
+
+        });
+        $("#backHistory").click(function(){
+            window.history.back();
+        })
+    });
+    // Call Sly on frame
+    var $frame=new Sly("#slide",{
+        horizontal: 1,
+        itemNav: 'basic',
+        smart: 1,
+        activateOn: 'click',
+        startAt: 1,
+        scrollBy: 1,
+        activatePageOn: 'click',
+        speed: 300,
+        elasticBounds: 1,
+        dragHandle: 1,
+        clickBar: 1,
+
+        // Buttons
+        scrollBar: $('.scrollbar'),
+        prev: $('.prev'),
+        next: $('.next'),
+        prevPage: $('.prev-page'),
+        nextPage: $('.nextPage')
+    });
+
+    seajs.config({
+        alias: {
+            "$": "gallery/jquery.js"
+        }
+    });
+    seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
+        var montages=new App.montage(),id=location.hash.substring(1);
+        montages.get({
+            id:id,
+            element:"#firstcover",
+            type:"show"
+        });
+        $frame.init();
+        $(".facybox img").scrollLoading({
+            callback:function(){
+
+            }
+        });
+        var feedBack=new Dialog({
+            trigger: '#commentBack',
+            height: '520px',
+            width:'480px',
+            effect: 'fade',
+            content: '#commentPanel'
+
+        });
+        var comment=new App.Comment({
+            element:'#comments-list'
+        });
+        comment.get(id,'#comments-list ul');
+
+        $("#commentBtn").click(function(){
+            comment.post(41,7,"#commentInput",function(){
+                alert("good");
+            })
+        });
+        feedBack.after('show',function(){
+            $("#commentPanel").show();
+
+        });
+    });
+
+</script>
+<script src="js/application.js" type="text/javascript"></script>
+</body>
+</html>
