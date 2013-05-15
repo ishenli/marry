@@ -182,13 +182,23 @@ define(function(require, exports, module) {
                     url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages,output="";
-                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header> <img src="{pic}"/> <a class="read" href="montage-show.html#{id}"></a> </li>';
-                        for(var i=0;i<9;i++){
+                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}"></a> </li>';
+                        for(var i=0;i<option.pageNumber;i++){
                             output+=htmlTem.replace('{pic}',HOST+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
                         }
-//                        console.log(output);
+                        console.log(output);
                         $(option.element).append(output);
+                        for(var j=0;j<option.pageNumber;j++){
+                            var img=new Image();
+                            img.src=HOST+data[j].image_path,
+                            img.index=j;
+                            img.onload=function(){
+                                var item= $(".ui-pic-item header").eq(this.index);
+                                item.after($(this));
+                                $(this).css({"marginTop":-$(this).height()/2,"top":92})
+                            };
+                        }
                         adjustFootPos();
                     }
                 });
