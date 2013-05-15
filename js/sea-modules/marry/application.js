@@ -227,7 +227,7 @@ define(function(require, exports, module) {
 
                             }
                             $(option.element).html(output);
-                            for(var j=0;j<option.itemNumber;j++){
+                            for(var j=0;j<len;j++){
                                 var img=new Image();
                                 img.src=HOST+data[j].image_path,
                                 img.index=j;
