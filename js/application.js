@@ -70,6 +70,19 @@ var SALT = "*#0621ix51y6679&";
 			method : 'get'
 		});
 	};
+	
+	$(".ui-share-btn-list>.sina").click(function(){
+		var url = "http://service.weibo.com/share/share.php?appkey=2726144177&url=" +
+		encodeURI(HOST) +
+		"&title=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
+		"&pic=" + 
+		HOST + $("#montageEnding").text()
+		"&source=cnBeta.com&sourceUrl=http%3A%2F%2Fwww.cnbeta.com";
+		window.open(url, 400, 300);
+		return false;
+	});
+	
 	var showUser = function() {
 		if (typeof(localStorage["user"]) != "undefined") {
 			var user = JSON.parse(localStorage["user"]);
@@ -145,6 +158,7 @@ var SALT = "*#0621ix51y6679&";
 		});
 		interval = setInterval("$.checkQQLogin()", 500);
 	});
+	
 })(window, jQuery);
 /**
  * img uploader
