@@ -71,15 +71,51 @@ var SALT = "*#0621ix51y6679&";
 		});
 	};
 	
+	//分享画卷到新浪微博
 	$(".ui-share-btn-list>.sina").click(function(){
-		var url = "http://service.weibo.com/share/share.php?appkey=2726144177&url=" +
-		encodeURI(HOST) +
+		var url = "http://service.weibo.com/share/share.php?appkey=2726144177" +
 		"&title=" + 
 		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
 		"&pic=" + 
-		HOST + $("#montageEnding").text()
-		"&source=cnBeta.com&sourceUrl=http%3A%2F%2Fwww.cnbeta.com";
-		window.open(url, 400, 300);
+		HOST + $("#montageEnding").text() +
+		"&ralateUid=3215211301";
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
+		return false;
+	});
+	
+	//分享画卷单张到新浪微博
+	$(".btns>.sina").click(function(){
+		var url = "http://service.weibo.com/share/share.php?appkey=2726144177" +
+		"&title=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
+		"&pic=" + 
+		HOST + $(this).parent(".img-wrap").find("fancybox").attr("href") +
+		"&ralateUid=3215211301";
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
+		return false;
+	});
+	
+	$(".ui-share-btn-list>.qzone").click(function(){
+		var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
+		encodeURIComponent(window.location) +
+		"&desc=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
+		"&summary=%20" +
+		"&pics=" + 
+		HOST + $("#montageEnding").text() + 
+		"&site=marrymemo.com";
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
+		return false;
+	});
+	
+	$(".ui-share-btn-list>.tt").click(function(){
+		var url = "http://share.v.t.qq.com/index.php?c=share&a=index&url=" +
+		encodeURIComponent(window.location) +
+		"&title=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』 (来自@marry_memo)") + 
+		"&pic=" + 
+		HOST + $("#montageEnding").text();
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
 		return false;
 	});
 	
