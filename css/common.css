@@ -111,13 +111,16 @@
 }
 .marry-list .marry-list-item .cover {
     position: relative;
-
     height: 190px;
     overflow: hidden;
+    background:#fff url("../assets/images/ajax-loader-64.gif") no-repeat center;
+;
 }
 .marry-list-medium .marry-list-item .cover img{
     width: 306px;
     margin: 4px 4px 0 4px;
+    position: relative;
+    left: 0;
 }
 .marry-list-small .marry-list-item .cover img{
     width: 306px;

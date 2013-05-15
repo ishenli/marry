@@ -187,7 +187,6 @@ define(function(require, exports, module) {
                             output+=htmlTem.replace('{pic}',HOST+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
                         }
-                        console.log(output);
                         $(option.element).append(output);
                         for(var j=0;j<option.pageNumber;j++){
                             var img=new Image();
@@ -213,18 +212,29 @@ define(function(require, exports, module) {
                         url:url,
                         success:function(result){
                             var data=result.montages;
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             if(data.length===0){
                                 adjustFootPos();
                                 $("#ellipsis").remove();
                                 return $("#next").remove();
                             }
-                            var len=(data.length<10?data.length:10),output="";
+                            var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
                             for(var i=0;i<len;i++)
                             {
-                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                 .replace("{fav}","0").replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
 
+                            }
+                            $(option.element).html(output);
+                            for(var j=0;j<option.itemNumber;j++){
+                                var img=new Image();
+                                img.src=HOST+data[j].image_path,
+                                img.index=j;
+                                img.onload=function(){
+                                    var item= $(".marry-list-item header").eq(this.index);
+                                    item.after($(this));
+                                    $(this).css({"marginTop":-$(this).height()/2,"top":95})
+                                };
                             }
                             if(len===option.itemNumber){
                                 $("#montagePage").val(parseInt(option.page)+1);
@@ -237,7 +247,7 @@ define(function(require, exports, module) {
                             }else{
                                 $("#next").text(">").removeClass("ui-paging-current");
                             }
-                            $(option.element).html(output);
+
                             if($.isFunction(option.callback)){
                                 option.callback();
                             }
@@ -257,7 +267,7 @@ define(function(require, exports, module) {
                         url:url,
                         success:function(result){
                             var data=result.montages,output="";
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             for(var i=0;i<data.length;i++)
                             {
                                 output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
@@ -266,6 +276,16 @@ define(function(require, exports, module) {
                             }
                             $("#pages a").removeClass("ui-paging-current");
                             $(option.element).html(output);
+                            for(var j=0;j<data.length;j++){
+                                var img=new Image();
+                                img.src=HOST+data[j].image_path,
+                                img.index=j;
+                                img.onload=function(){
+                                    var item= $(".marry-list-item header").eq(this.index);
+                                    item.after($(this));
+                                    $(this).css({"marginTop":-$(this).height()/2,"top":95})
+                                };
+                            }
                             if($.isFunction(option.callback)){
                                 option.callback();
                             }
