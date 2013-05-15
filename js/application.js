@@ -4,36 +4,147 @@
  * Time: 下午4:33
  * 添加常用的函数
  */
-
+var HOST = "http://marrymemo.com/";
+var SALT = "*#0621ix51y6679&";
 /**
  * 微博登陆
+ * 
  * @param window
  * @param $
  */
-(function(w, $) {
-    $("#weibo_content_btn").on("click",function(){
-/*      WB2.login(function(){
-          alert("login");
-      });*/
-//        $("#formCode").val(hex_md5("296588820@qq.com" + "*#0621ix51y6679&").toUpperCase());
-        $("#formCode").val("e80a8a0eaa59c6e49653f29ac934fbb1".toUpperCase());
-        $("#formWeibo").submit();
-    })
-})(window, jQuery);
-/**
- * qq登陆
- * @param window
- * @param $
- */
-(function(w, $) {
-    $("#qq_content_btn").on("click",function(){
-        QC.Login.showPopup({
-            appId:"100370679",
-            redirectURI:"http://marrymemo.com/marry/qc_back.html"
-        })
-    })
-    //调用QC.Login方法，指定btnId参数将按钮绑定在容器节点中
 
+(function(w, $) {
+	$("#weibo_content_btn").on("click", function() {
+		// if (!WB2.checkLogin()) {
+		WB2.login(function() {
+			WB2.anyWhere(function(W) {
+				weibologin(W);
+			});
+		});
+		// } else {
+		// weibologin(W);
+		// }
+		//
+	});
+	var weibologin = function(W) {
+		W.parseCMD("/account/get_uid.json", function(sResult, bStatus) {
+			if (typeof (sResult.error) == "undefined") {
+				var uid = sResult.uid;
+				W.parseCMD("/users/show.json", function(sResult, bStatus) {
+					var user_id = "1-" + sResult.id;
+					var nick = sResult.name;
+					var avatar = sResult.profile_image_url;
+					var bind_type = "1";
+					var info = JSON.stringify(sResult);
+					var code = hex_md5(user_id + SALT).toUpperCase();
+
+					$.post(HOST + "users.json", {
+						"user[user_id]" : user_id,
+						"user[avatar]" : avatar,
+						"user[nick]" : nick,
+						"user[info]" : info,
+						"user[bind_type]" : bind_type,
+						"code" : code
+					}, function(data) {
+						// 这里处理登录成功后的事情，保存到localstorage，显示用户名等等的
+						data.id;
+						localStorage["token"] = data.token;
+						localStorage["secret"] = hex_md5(data.token + SALT);
+						$.get(HOST + "users/" + data.id + ".json", {
+							token : localStorage["token"],
+							secret : localStorage["secret"]
+						}, function(user) {
+							localStorage["user"] = JSON.stringify(user);
+							showUser();
+						});
+					});
+				}, {
+					uid : uid
+				}, {
+					method : "get"
+				});
+			} else {
+				alert(JSON.stringify(sResult));
+			}
+		}, {}, {
+			method : 'get'
+		});
+	};
+	var showUser = function() {
+		if (typeof(localStorage["user"]) != "undefined") {
+			var user = JSON.parse(localStorage["user"]);
+			$(".avatar>img").attr("src", user.avatar);
+			$(".user-panel").show();
+			$(".ui-login-btn").hide();
+		} else {
+			$(".user-panel").hide();
+			$(".ui-login-btn").show();
+		}
+	};
+
+	if (localStorage["user"]) {
+		showUser();
+	}
+	
+	$(".logout>a").click(function(){
+		localStorage.clear();
+		showUser();
+		return false;
+	});
+	
+	/**
+	 * qq登陆
+	 * 
+	 * @param window
+	 * @param $
+	 */
+	$("#qq_content_btn").click(function() {
+		var win = QC.Login.showPopup({
+			appId : "100416913",
+			redirectURI: "http://marrymemo.com/marry/qc_back.html"
+		});
+		var interval;
+		$.extend({
+		checkQQLogin : function(){
+			if (win.closed || QC.Login.check()) {
+				QC.api("get_user_info", {}).success(function(s){
+					var sResult = s.data;
+					var user_id = "3-" + sResult.figureurl_2.replace(/http:\/\/qzapp.qlogo.cn\/qzapp\/[^\/]+\/([^\/]+)\/100/g, "$1");;
+					var nick = sResult.nickname;
+					var avatar = sResult.figureurl_2 ;
+					var bind_type = "3";
+					var info = JSON.stringify(sResult);
+					var code = hex_md5(user_id + SALT).toUpperCase();
+
+					$.post(HOST + "users.json", {
+						"user[user_id]" : user_id,
+						"user[avatar]" : avatar,
+						"user[nick]" : nick,
+						"user[info]" : info,
+						"user[bind_type]" : bind_type,
+						"code" : code
+					}, function(data) {
+						// 这里处理登录成功后的事情，保存到localstorage，显示用户名等等的
+						data.id;
+						localStorage["token"] = data.token;
+						localStorage["secret"] = hex_md5(data.token + SALT);
+						$.get(HOST + "users/" + data.id + ".json", {
+							token : localStorage["token"],
+							secret : localStorage["secret"]
+						}, function(user) {
+							localStorage["user"] = JSON.stringify(user);
+							showUser();
+						});
+					});
+				});
+				clearInterval(interval);
+//			} else {
+				// console.log(win);
+			}
+		}
+		});
+		interval = setInterval("$.checkQQLogin()", 500);
+	});
 })(window, jQuery);
 /**
  * img uploader
