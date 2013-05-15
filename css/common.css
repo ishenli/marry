@@ -6,9 +6,15 @@
     height: 185px;
     overflow: hidden;
 }
+.ui-pic-item .imgwrap{
+    position: relative;
+}
 .ui-pic-item img{
     width: 300px;
-    /*height: 185px;*/
+    position: relative;
+    /*top: 92px;*/
+    left: 0;
+    /*margin-top: -50%;*/
 
 }
 .ui-pic-item .read{
@@ -28,10 +34,10 @@
     width: 140px;
     background: #000;
     opacity: 0.7;
-    /**filter: alpha(opacity=70);*/
     color: #FFF;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
+    z-index: 10;
 
 }
 .ui-pic-item header h1{
