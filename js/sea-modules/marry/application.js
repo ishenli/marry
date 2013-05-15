@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     (function(window){
         var $li,img;
         function adjustFootPos(){
-            if($("#container").height()<(WindowSize.height-110)){
+            if($("#container").offset().top+$("#container").height()+70<WindowSize.height){
                 $("#foot").addClass("atFoot");
             }else{
                 $("#foot").removeClass("atFoot");
@@ -252,7 +252,9 @@ define(function(require, exports, module) {
                             if($.isFunction(option.callback)){
                                 option.callback();
                             }
-                            adjustFootPos();
+                            $(".marry-list-item img").on("load",function(){
+                                adjustFootPos();
+                            });
                         }
                     });
 
