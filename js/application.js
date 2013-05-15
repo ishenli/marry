@@ -84,12 +84,12 @@ var SALT = "*#0621ix51y6679&";
 	});
 	
 	//分享画卷单张到新浪微博
-	$(".btns>.sina").click(function(){
+	$("#slideBody").on("click", ".btns>.sina", function(){
 		var url = "http://service.weibo.com/share/share.php?appkey=2726144177" +
 		"&title=" + 
 		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
 		"&pic=" + 
-		HOST + $(this).parent(".img-wrap").find("fancybox").attr("href") +
+		$(this).parents(".img-wrap").find(".fancybox").attr("href") +
 		"&ralateUid=3215211301";
 		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
 		return false;
@@ -107,6 +107,19 @@ var SALT = "*#0621ix51y6679&";
 		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
 		return false;
 	});
+
+	$("#slideBody").on("click", ".btns>.qq", function(){
+		var url = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" +
+		encodeURIComponent(window.location) +
+		"&desc=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』") + 
+		"&summary=%20" +
+		"&pics=" + 
+		$(this).parents(".img-wrap").find(".fancybox").attr("href") + 
+		"&site=marrymemo.com";
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
+		return false;
+	});
 	
 	$(".ui-share-btn-list>.tt").click(function(){
 		var url = "http://share.v.t.qq.com/index.php?c=share&a=index&url=" +
@@ -115,6 +128,17 @@ var SALT = "*#0621ix51y6679&";
 		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』 (来自@marry_memo)") + 
 		"&pic=" + 
 		HOST + $("#montageEnding").text();
+		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
+		return false;
+	});
+
+	$("#slideBody").on("click", ".btns>.tt", function(){
+		var url = "http://share.v.t.qq.com/index.php?c=share&a=index&url=" +
+		encodeURIComponent(window.location) +
+		"&title=" + 
+		encodeURIComponent("分享#婚礼纪# 『" + $("#montageTitle").text() + "』 (来自@marry_memo)") + 
+		"&pic=" + 
+		$(this).parents(".img-wrap").find(".fancybox").attr("href");
 		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
 		return false;
 	});
