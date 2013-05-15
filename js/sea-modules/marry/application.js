@@ -13,7 +13,7 @@ define(function(require, exports, module) {
         Widget = require('arale/widget/1.0.2/widget'),
         Tem=require('arale/widget/1.0.2/templatable');
     
-    var HOST = "http://marrymemo.com/";
+    var HOST = "http://marrymemo.com:3000/";
 
     (function(window){
         var $li,img;
@@ -31,7 +31,10 @@ define(function(require, exports, module) {
             $("#slide").height(height);
             $(".img-wrap").each(function(){
                 $(this).height(height-20);
-            });
+            })
+            /*$(".img-wrap a").each(function(){
+                $(this).width((height-20)*$(this).attr("data-width")/$(this).attr("data-height"));
+            });*/
             $(".cover-content").height(height-200);
             for(var i=0;i<$li.length;i++){
                img= $(".fancybox").eq(i).find("img");
@@ -137,22 +140,29 @@ define(function(require, exports, module) {
                 util.FlyJSONP.get({
                     url:HOST + 'montages/'+option.id+'.json',
                     success:function(result){
-                        var data=result,output="";
+                        var data=result,output="",height=WindowSize.height-160;
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="' + HOST + '{pic}"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="#"><span>sina</span></a> <a class="qq" href="#"><span>qq</span></a> <a class="tt" href="#"><span>tt</span></a> </div> </div></div></li>';
+                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="'+HOST+'{pic}" data-width="{width}" data-height="{height}" style="height:{adjustHeight}px;width:{adjustWidth}px;"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="#"><span>sina</span></a> <a class="qq" href="#"><span>qq</span></a> <a class="tt" href="#"><span>tt</span></a> </div> </div></div></li>';
                         for(var i=0;i<data.photos.length;i++){
-                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title);
+                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title)
+                                .replace("{width}",data.photos[i].width).replace("{height}",data.photos[i].height)
+                                .replace("{adjustWidth}",height*data.photos[i].width/data.photos[i].height)
+                                .replace("{adjustHeight}",height);
                         }
                         $(option.element).after(output);
+                        $frame.reload();
+
                         for(var j=0;j<data.photos.length;j++){
                             var img=new Image();
                             img.src=HOST+data.photos[j].path;
                             img.index=j;
+//                            img.width=data.photos[i].width;
                             img.onload=function(){
                                 var item= $(".fancybox").eq(this.index);
                                 item.append($(this));
                                 item.parent().width($(this).width());
                                 $frame.reload();
+                                item.removeAttr("style").css({"background":"#fff","display":"inline"});
                             };
                         }
                         $(".img-wrap").each(function(){
