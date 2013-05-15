@@ -8,7 +8,7 @@ var HOST = "http://marrymemo.com/";
 var SALT = "*#0621ix51y6679&";
 /**
  * 微博登陆
- * 
+ *
  * @param window
  * @param $
  */
@@ -134,16 +134,16 @@ var SALT = "*#0621ix51y6679&";
 	if (localStorage["user"]) {
 		showUser();
 	}
-	
+
 	$(".logout>a").click(function(){
 		localStorage.clear();
 		showUser();
 		return false;
 	});
-	
+
 	/**
 	 * qq登陆
-	 * 
+	 *
 	 * @param window
 	 * @param $
 	 */

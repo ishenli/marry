@@ -5,10 +5,17 @@
     width: 300px;
     height: 185px;
     overflow: hidden;
+    background: url("../assets/images/ajax-loader-64.gif") no-repeat center;
+}
+.ui-pic-item .imgwrap{
+    position: relative;
 }
 .ui-pic-item img{
     width: 300px;
-    /*height: 185px;*/
+    position: relative;
+    /*top: 92px;*/
+    left: 0;
+    /*margin-top: -50%;*/
 
 }
 .ui-pic-item .read{
@@ -28,10 +35,10 @@
     width: 140px;
     background: #000;
     opacity: 0.7;
-    /**filter: alpha(opacity=70);*/
     color: #FFF;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
+    z-index: 10;
 
 }
 .ui-pic-item header h1{
@@ -104,13 +111,16 @@
 }
 .marry-list .marry-list-item .cover {
     position: relative;
-
     height: 190px;
     overflow: hidden;
+    background:#fff url("../assets/images/ajax-loader-64.gif") no-repeat center;
+;
 }
 .marry-list-medium .marry-list-item .cover img{
     width: 306px;
     margin: 4px 4px 0 4px;
+    position: relative;
+    left: 0;
 }
 .marry-list-small .marry-list-item .cover img{
     width: 306px;
@@ -216,7 +226,7 @@
     height: 75px;
     margin: -35px 0 0 -15px;
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
-    font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
+    font:bold 40px/75px "????????????" "microsoft yahei" "sans serif";
     color:#a9dc3c;
     text-align: center;
 }

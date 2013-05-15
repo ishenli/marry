@@ -79,8 +79,10 @@
                             var montage=new App.montage();
                             montage.get({
                                 element:"#montageInclude",
-                                type:"include"
+                                type:"include",
+                                pageNumber:9
                             });
+
                             var template=new App.template();
                             template.loadHeader("#indexUrl");
                         });
@@ -133,7 +135,9 @@
     </section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
+
         seajs.use(['marry/application', '$'], function(App, $) {
+
             var template=new App.template();
             template.loadFoot();
         });
