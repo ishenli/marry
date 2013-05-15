@@ -137,13 +137,18 @@ define(function(require, exports, module) {
                 util.FlyJSONP.get({
                     url:HOST + 'montages/'+option.id+'.json',
                     success:function(result){
-                        var data=result,output="";
+                        var data=result,output="",height=WindowSize.height-160;
                         $("#introduction").text(data.introduction);
                         var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="' + HOST + '{pic}"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="javascript:;"><span>sina</span></a> <a class="qq" href="javascript:;"><span>qq</span></a> <a class="tt" href="javascript:;"><span>tt</span></a> </div> </div></div></li>';
                         for(var i=0;i<data.photos.length;i++){
-                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title);
+                            output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title)
+                                .replace("{width}",data.photos[i].width).replace("{height}",data.photos[i].height)
+                                .replace("{adjustWidth}",height*data.photos[i].width/data.photos[i].height)
+                                .replace("{adjustHeight}",height);
                         }
                         $(option.element).after(output);
+                        $frame.reload();
+
                         for(var j=0;j<data.photos.length;j++){
                             var img=new Image();
                             img.src=HOST+data.photos[j].path;
@@ -153,6 +158,7 @@ define(function(require, exports, module) {
                                 item.append($(this));
                                 item.parent().width($(this).width());
                                 $frame.reload();
+                                item.removeAttr("style").css({"background":"#fff","display":"inline"});
                             };
                         }
                         $(".img-wrap").each(function(){
@@ -180,6 +186,16 @@ define(function(require, exports, module) {
                         }
 //                        console.log(output);
                         $(option.element).append(output);
+                        for(var j=0;j<option.pageNumber;j++){
+                            var img=new Image();
+                            img.src=HOST+data[j].image_path,
+                            img.index=j;
+                            img.onload=function(){
+                                var item= $(".ui-pic-item header").eq(this.index);
+                                item.after($(this));
+                                $(this).css({"marginTop":-$(this).height()/2,"top":92})
+                            };
+                        }
                         adjustFootPos();
                     }
                 });
