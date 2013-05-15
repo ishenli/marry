@@ -148,13 +148,14 @@
         seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
             carousel = new Carousel({
                 element: '#indexBanner',
-//                        panels: '#indexBanner .ui-switcha/**/ble-content div',
                 triggers: '#indexBanner .ui-switchable-nav li',
                 easing: 'easeOutStrong',
                 effect: 'scrollx',
                 step: 1,
+                autoplay:true,
+                circular:false,
+                interval:3000,
                 viewSize: [980],
-                circular: true,
                 prevBtn: '#scroller-prev',
                 nextBtn: '#scroller-next'
             }).render();

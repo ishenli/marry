@@ -13,7 +13,7 @@ define(function(require, exports, module) {
         Widget = require('arale/widget/1.0.2/widget'),
         Tem=require('arale/widget/1.0.2/templatable');
     
-    var HOST = "http://marrymemo.com:3000/";
+    var HOST = "http://marrymemo.com/";
 
     (function(window){
         var $li,img;
@@ -213,7 +213,7 @@ define(function(require, exports, module) {
                         url:url,
                         success:function(result){
                             var data=result.montages;
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             if(data.length===0){
                                 adjustFootPos();
                                 $("#ellipsis").remove();
@@ -227,14 +227,14 @@ define(function(require, exports, module) {
 
                             }
                             $(option.element).html(output);
-                            for(var j=0;j<option.itemNumber;j++){
+                            for(var j=0;j<len;j++){
                                 var img=new Image();
                                 img.src=HOST+data[j].image_path,
                                 img.index=j;
                                 img.onload=function(){
                                     var item= $(".marry-list-item header").eq(this.index);
                                     item.after($(this));
-                                    $(this).css({"marginTop":-$(this).height()/2,"top":95})
+                                    $(this).css({"marginTop":-$(this).height()/2,"top":99})
                                 };
                             }
                             if(len===option.itemNumber){
