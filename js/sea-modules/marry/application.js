@@ -180,7 +180,7 @@ define(function(require, exports, module) {
                 break;
             case "include":
                 util.FlyJSONP.get({
-                    url:HOST + 'montages.json',
+                    url:HOST + 'montages.json?nice=1',
                     success:function(result){
                         var data=result.montages,output="";
                         var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}"></a> </li>';
