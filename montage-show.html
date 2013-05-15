@@ -20,6 +20,11 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .fancybox{
+            display: block;
+        }
+    </style>
 </head>
 <body class="photo-show">
 <header class="top-tool">
@@ -158,7 +163,7 @@
 </div>
 <script type="text/javascript">
     //初始化
-    $(document).ready(function() {
+    $(window).ready(function() {
         $(".fancybox").fancybox({
             prevEffect		: 'none',
             nextEffect		: 'none',
@@ -214,11 +219,9 @@
             type:"show"
         });
         $frame.init();
-        $(".lazyload").scrollLoading({
+        $(".facybox img").scrollLoading({
             callback:function(){
-//                alert("fuck");
-                $(this).on("load complete",$(this).parent().parent().width($(this).width()));
-                $frame.reload();
+
             }
         });
         var feedBack=new Dialog({
