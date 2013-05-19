@@ -13,7 +13,7 @@ define(function(require, exports, module) {
         Widget = require('arale/widget/1.0.2/widget'),
         Tem=require('arale/widget/1.0.2/templatable');
     
-    var HOST = "http://marrymemo.com:3000/";
+    var HOST = "http://marrymemo.com/";
 
     (function(window){
         var $li,img;

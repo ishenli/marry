@@ -443,16 +443,17 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 }
 .ui-page-nav-active a{
     background-color: #6addd3;
-    padding: 0 4px;
+    padding: 2px 4px;
 
 }
 .ui-page-nav-line span{
+    display: inline-block;
     width: 2px;
-    padding: 0;
     margin-left: 18px;
     margin-right:18px;
-    background: #fff;
+    background-color: white;
     text-indent: -9999px;
+    height: 21px;
 }
 .ui-page-nav .ui-page-nav-active .arrow{
     display: block;
@@ -943,7 +944,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     padding-top: 10px;
 }
 .ui-comment-list ul li{
-    margin: 10px 10px 0 0;
+    padding: 10px 10px 0 0;
     height: 71px;
     border-bottom: 1px solid #cecece;
 }
