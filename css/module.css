@@ -943,7 +943,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     padding-top: 10px;
 }
 .ui-comment-list ul li{
-    padding: 10px 10px 0 0;
+    margin: 10px 10px 0 0;
     height: 71px;
     border-bottom: 1px solid #cecece;
 }
