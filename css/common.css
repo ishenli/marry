@@ -25,7 +25,9 @@
     width: 300px;
     height: 185px;
     text-indent: -9999px;
-    /*background: url(http://cyjs.qiniudn.com/assets/transparent-d2444f2249f274e32a3b935fb24bd4d1.png);*/
+    display: block;
+    z-index: 20;
+    background:url("../assets/images/ajax-loader-64.gif") no-repeat -9999px 0;
 }
 .ui-pic-item header{
     position: absolute;

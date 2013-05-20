@@ -183,20 +183,25 @@ define(function(require, exports, module) {
                     url:HOST + 'montages.json?nice=1',
                     success:function(result){
                         var data=result.montages,output="";
-                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}"></a> </li>';
+                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}">查看画卷</a> </li>';
                         for(var i=0;i<option.pageNumber;i++){
                             output+=htmlTem.replace('{pic}',HOST+data[i].image_path).replace("{title}",data[i].title)
                                 .replace("{id}",data[i].id);
                         }
                         $(option.element).append(output);
+                        var height,oWidth,oHeight;
                         for(var j=0;j<option.pageNumber;j++){
                             var img=new Image();
                             img.src=HOST+data[j].image_path,
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".ui-pic-item header").eq(this.index);
+                                oWidth=this.width,oHeight=this.height;
+                                height=oHeight/ oWidth*300;
                                 item.after($(this));
-                                $(this).css({"marginTop":-$(this).height()/2,"top":92})
+                                $(this).css({"height":height});
+                                $(this).css({"marginTop":-height/2,"top":92});
+
                             };
                         }
                         adjustFootPos();
