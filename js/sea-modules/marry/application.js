@@ -10,9 +10,9 @@ define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
         Base = require('arale/base/1.0.1/base'),
-        Widget = require('arale/widget/1.0.2/widget'),
-        Tem=require('arale/widget/1.0.2/templatable');
-    
+        Widget = require('arale/widget/1.0.2/widget');
+//        Backbone = require('gallery/backbone/1.0.0/backbone');
+
     var HOST = "http://marrymemo.com/";
 
     (function(window){
@@ -50,10 +50,6 @@ define(function(require, exports, module) {
 
     var App={};
     App.Note=Widget.extend({
-        Implements: Tem,
-        /*initialize:function(){
-         this.drag();
-         },*/
         drag:function(){
             $("#addList").dragsort({
                 dragSelector: "article", dragBetween: true, dragEnd:this.afterDrag(),
@@ -69,6 +65,25 @@ define(function(require, exports, module) {
         }
 
     });
+
+/*    App.B=Backbone.Model.extend({
+        model:'',
+        initialize: function(){
+            var self=this;
+            util.FlyJSONP.get({
+                url:HOST + 'montages/'+self.id+'/discussions.json',
+                success:function(result){
+                    self.model=result;
+                    console.log(self.model);
+                }
+            })
+
+        },
+        outModel:function(){
+            alert(this.model);
+        }
+
+    })*/
     App.Comment=Base.extend({
         get:function(id,element){
             util.FlyJSONP.get({
@@ -91,7 +106,7 @@ define(function(require, exports, module) {
             parameters: {
                discussion:{
                     content: $(input).val(),
-                    user_id: 7
+                    user_id: 85
                }
             },
             error:function(){
