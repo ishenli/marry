@@ -78,7 +78,7 @@ define(function(require, exports, module) {
                     var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
                     var output='';
                     for(var i in data){
-                       output+=htmlTep.replace("{pic}",HOST+data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
+                       output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data.data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
                            .replace("{date}",data[i].created_at.substring(0,10));
                    }
                     $(element).append(output);
@@ -87,15 +87,15 @@ define(function(require, exports, module) {
         },
         post:function(id,userid,input,callback){
             util.FlyJSONP.post({
-            url: HOST + 'montages/'+id+'/discussions.json',
+            url: 'http://www.marrymemo.com/montages/'+id+'/discussions.json',
             parameters: {
-                "discussion": {
-                    "content" :$(input).val(),
-                    "user_id" :userid
-                }
+               discussion:{
+                    content: $(input).val(),
+                    user_id: 7
+               }
             },
             error:function(){
-                alert("error");
+                return alert("error");
             },
             success: function(data) {
                 alert(data);
