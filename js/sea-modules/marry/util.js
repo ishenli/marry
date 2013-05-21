@@ -1,49 +1,4 @@
 define(function(require, exports, module) {
-    var jQuery=require("marry/extendJq");
-    /**
-     * 监听窗口大小的变化
-     * @param window
-     * @param $
-     */
-    (function(w, $) {
-        function b() {
-            var a = queue.length, b = 0;
-            setTimeout(function() {
-                for (; b < a; b++)
-                    queue[b].call(windowSize)
-            }, 20)
-        }
-        var $window = $(w), windowSize = {measure: function() {
-            var a =$window.width(), b =  $window.height();
-            windowSize.width = a;
-            windowSize.height = b
-        }};
-        windowSize.measure();
-        $(document).ready(function() {
-            windowSize.measure()
-        });
-        var a,
-            r, queue = [], windowResizeListener = {add: function(fn) {
-                if (!a) {
-                    $window.resize(function() {
-                        clearTimeout(r);
-                        r = setTimeout(b, 100)
-                    });
-                    a = true
-                }
-                a: {
-                    for (var f = queue.length, g = 0; g < f; g++)
-                        if (fn === queue[g])
-                            break a;
-                    queue.push(fn)
-                }
-            }};
-        windowResizeListener.add(function() {
-            windowSize.measure()
-        });
-        w.WindowResizeListener = windowResizeListener;
-        w.WindowSize = windowSize
-    })(window, jQuery);
     var Util={};
      Util.FlyJSONP=function(e){var c,l,i,j,m,g,n,o,k;l=function(a,b,c){a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent?a.attachEvent("on"+b,c):a["on"+b]=c};i=function(a,b){c.log("Garbage collecting!");b.parentNode.removeChild(b);e[a]=void 0;try{delete e[a]}catch(p){}};j=function(a,b){var c="",d,f;for(d in a)a.hasOwnProperty(d)&&(d=b?encodeURIComponent(d):d,f=b?encodeURIComponent(a[d]):a[d],c+=d+"="+f+"&");return c.replace(/&$/,"")};m=function(){for(var a="",a=[],b=0,b=0;b<32;b+=1)a[b]="0123456789ABCDEF".substr(Math.floor(Math.random()*
         16),1);a[12]="4";a[16]="0123456789ABCDEF".substr(a[16]&3|8,1);return a="flyjsonp_"+a.join("")};g=function(a,b){c.log(b);typeof a!=="undefined"&&a(b)};n=function(a,b){c.log("GET success");typeof a!=="undefined"&&a(b);c.log(b)};o=function(a,b){c.log("POST success");typeof a!=="undefined"&&a(b);c.log(b)};k=function(a){c.log("Request complete");typeof a!=="undefined"&&a()};c={options:{debug:!1}};c.init=function(a){var b;c.log("Initializing!");for(b in a)a.hasOwnProperty(b)&&(c.options[b]=a[b]);c.log("Initialization options");
