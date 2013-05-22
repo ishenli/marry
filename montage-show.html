@@ -234,13 +234,22 @@
         comment.get(id,'#comments-list ul');
 
         $("#commentBtn").click(function(){
-            comment.post(id,7,"#commentInput",function(){
-                alert("good");
+            comment.post(id,"","#commentInput",function(){
+                comment.get(id,'#comments-list ul');
             })
         });
         feedBack.after('show',function(){
             $("#commentPanel").show();
 
+        });
+
+        $("#favBtn").click(function(){
+            $.post(HOST+'collect?montage_id='+id+'&user_id='+JSON.parse(localStorage.user).id,{
+                token : localStorage["token"],
+                secret : localStorage["secret"]
+            }, function(data) {
+                alert(data);
+            });
         });
     });
 

@@ -13,7 +13,7 @@ define(function(require, exports, module) {
         Widget = require('arale/widget/1.0.2/widget');
 //        Backbone = require('gallery/backbone/1.0.0/backbone');
 
-    var HOST = "http://marrymemo.com/";
+    var HOST = "http://www.marrymemo.com/";
 
     (function(window){
         var $li,img;
@@ -33,13 +33,13 @@ define(function(require, exports, module) {
                 $(this).height(height-20);
             })
             /*$(".img-wrap a").each(function(){
-                $(this).width((height-20)*$(this).attr("data-width")/$(this).attr("data-height"));
-            });*/
+             $(this).width((height-20)*$(this).attr("data-width")/$(this).attr("data-height"));
+             });*/
             $(".cover-content").height(height-200);
             for(var i=0;i<$li.length;i++){
-               img= $(".fancybox").eq(i).find("img");
-               img.parent().parent().width(img.width());
-               $frame.reload();
+                img= $(".fancybox").eq(i).find("img");
+                img.parent().parent().width(img.width());
+                $frame.reload();
             }
         }
         WindowResizeListener.add(adjustFootPos);
@@ -66,71 +66,65 @@ define(function(require, exports, module) {
 
     });
 
-/*    App.B=Backbone.Model.extend({
-        model:'',
-        initialize: function(){
-            var self=this;
-            util.FlyJSONP.get({
-                url:HOST + 'montages/'+self.id+'/discussions.json',
-                success:function(result){
-                    self.model=result;
-                    console.log(self.model);
-                }
-            })
+    /*    App.B=Backbone.Model.extend({
+     model:'',
+     initialize: function(){
+     var self=this;
+     util.FlyJSONP.get({
+     url:HOST + 'montages/'+self.id+'/discussions.json',
+     success:function(result){
+     self.model=result;
+     console.log(self.model);
+     }
+     })
 
-        },
-        outModel:function(){
-            alert(this.model);
-        }
+     },
+     outModel:function(){
+     alert(this.model);
+     }
 
-    })*/
+     })*/
     App.Comment=Base.extend({
         get:function(id,element){
             util.FlyJSONP.get({
                 url:HOST + 'montages/'+id+'/discussions.json',
                 success:function(result){
-                var data=result.discussions;
+                    var data=result.discussions;
                     var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
                     var output='';
                     for(var i in data){
-                        console.log(i);
-                       output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
-                           .replace("{date}",data[i].created_at.substring(0,10));
-                   }
-                   $(element).append(output);
+                        output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
+                            .replace("{date}",data[i].created_at.substring(0,10));
+                    }
+                    $(element).html(output);
                 }
             });
         },
         post:function(id,userid,input,callback){
-            alert(id);
-            util.FlyJSONP.post({
-            url: HOST+'/montages/'+id+'/discussions.json',
-            parameters: {
-               discussion:{
+            $.post(HOST + 'montages/'+id+'/discussions.json', {
+                discussion:{
                     content: $(input).val(),
-                    user_id: 1621
-               }
-            },
-            error:function(){
-                return alert("error");
-            },
-            success: function(data) {
-                alert(data);
-            }
+                    user_id:  JSON.parse(localStorage.user).id
+                },
+                token : localStorage["token"],
+                secret : localStorage["secret"]
+            }, function(data) {
+                console.log(data);
+                callback();
             });
-        }
-    });
-    App.montage=Base.extend({
-        get:function(options){
-            var option=$.extend({},options);
-            switch (option.type){
-                case "index": //index
+}
+});
+App.montage=Base.extend({
+    get:function(options){
+        var option=$.extend({},options);
+        switch (option.type){
+            case "index": //index
                 util.FlyJSONP.get({
                     url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
-                            +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
+                            +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
                         var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                         for(var i=page;i<len;i++){
@@ -209,7 +203,7 @@ define(function(require, exports, module) {
                         for(var j=0;j<option.pageNumber;j++){
                             var img=new Image();
                             img.src=HOST+data[j].image_path,
-                            img.index=j;
+                                img.index=j;
                             img.onload=function(){
                                 var item= $(".ui-pic-item header").eq(this.index);
                                 oWidth=this.width;
@@ -231,130 +225,130 @@ define(function(require, exports, module) {
                 }else{
                     url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
-                    util.FlyJSONP.get({
-                        url:url,
-                        success:function(result){
-                            var data=result.montages;
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
-                            if(data.length===0){
-                                adjustFootPos();
-                                $("#ellipsis").remove();
-                                return $("#next").remove();
-                            }
-                            var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
-                            for(var i=0;i<len;i++)
-                            {
-                                output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count)
+                util.FlyJSONP.get({
+                    url:url,
+                    success:function(result){
+                        var data=result.montages;
+                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                        if(data.length===0){
+                            adjustFootPos();
+                            $("#ellipsis").remove();
+                            return $("#next").remove();
+                        }
+                        var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
+                        for(var i=0;i<len;i++)
+                        {
+                            output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count)
                                 .replace("{share}",data[i].share_count).replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
 
-                            }
-                            $(option.element).html(output);
-                            for(var j=0;j<len;j++){
-                                var img=new Image();
-                                img.src=HOST+data[j].image_path;
-                                img.index=j;
-                                img.onload=function(){
-                                    var item= $(".marry-list-item header").eq(this.index);
-                                    item.after($(this));
-                                    $(this).css({"marginTop":-$(this).height()/2,"top":99})
-                                };
-                            }
-                            if(len===option.itemNumber){
-                                $("#montagePage").val(parseInt(option.page)+1);
-                            }
-                            $("#pages a").removeClass("ui-paging-current");
-                            $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
-                            if(len<option.itemNumber){
-                                $("#ellipsis").remove();
-                                $("#next").remove();
-                            }else{
-                                $("#next").text(">").removeClass("ui-paging-current");
-                            }
-
-                            if($.isFunction(option.callback)){
-                                option.callback();
-                            }
-                            $(".marry-list-item img").on("load",function(){
-                                adjustFootPos();
-                            });
                         }
-                    });
+                        $(option.element).html(output);
+                        for(var j=0;j<len;j++){
+                            var img=new Image();
+                            img.src=HOST+data[j].image_path;
+                            img.index=j;
+                            img.onload=function(){
+                                var item= $(".marry-list-item header").eq(this.index);
+                                item.after($(this));
+                                $(this).css({"marginTop":-$(this).height()/2,"top":99})
+                            };
+                        }
+                        if(len===option.itemNumber){
+                            $("#montagePage").val(parseInt(option.page)+1);
+                        }
+                        $("#pages a").removeClass("ui-paging-current");
+                        $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
+                        if(len<option.itemNumber){
+                            $("#ellipsis").remove();
+                            $("#next").remove();
+                        }else{
+                            $("#next").text(">").removeClass("ui-paging-current");
+                        }
 
-                break;
-                case "recommendPage":
-                    var url;
-                    if(option.nice===1){
-                        url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
-                    }else{
-                        url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
-                    }
-                    util.FlyJSONP.get({
-                        url:url,
-                        success:function(result){
-                            var data=result.montages,output="";
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
-                            for(var i=0;i<data.length;i++)
-                            {
-                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                    .replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
-
-                            }
-                            $("#pages a").removeClass("ui-paging-current");
-                            $(option.element).html(output);
-                            for(var j=0;j<data.length;j++){
-                                var img=new Image();
-                                img.src=HOST+data[j].image_path,
-                                img.index=j;
-                                img.onload=function(){
-                                    var item= $(".marry-list-item header").eq(this.index);
-                                    item.after($(this));
-                                    $(this).css({"marginTop":-$(this).height()/2,"top":99})
-                                };
-                            }
-                            if($.isFunction(option.callback)){
-                                option.callback();
-                            }
+                        if($.isFunction(option.callback)){
+                            option.callback();
+                        }
+                        $(".marry-list-item img").on("load",function(){
                             adjustFootPos();
-                        }
-                    });
+                        });
+                    }
+                });
+
                 break;
-                case "favRecommend":
-                    util.FlyJSONP.get({
-                        url:HOST + 'montages.json',
-                        success:function(result){
-                            var data=result.montages;
-                            var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}" target="_blank"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}" target="_blank">{name}</a> </div> </footer> </article>';
-                            for(var i=0;i<option.pageItems;i++)
-                            {
-                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
+            case "recommendPage":
+                var url;
+                if(option.nice===1){
+                    url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
+                }else{
+                    url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
+                }
+                util.FlyJSONP.get({
+                    url:url,
+                    success:function(result){
+                        var data=result.montages,output="";
+                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                        for(var i=0;i<data.length;i++)
+                        {
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                .replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
+
+                        }
+                        $("#pages a").removeClass("ui-paging-current");
+                        $(option.element).html(output);
+                        for(var j=0;j<data.length;j++){
+                            var img=new Image();
+                            img.src=HOST+data[j].image_path,
+                                img.index=j;
+                            img.onload=function(){
+                                var item= $(".marry-list-item header").eq(this.index);
+                                item.after($(this));
+                                $(this).css({"marginTop":-$(this).height()/2,"top":99})
+                            };
+                        }
+                        if($.isFunction(option.callback)){
+                            option.callback();
+                        }
+                        adjustFootPos();
+                    }
+                });
+                break;
+            case "favRecommend":
+                util.FlyJSONP.get({
+                    url:HOST + 'montages.json',
+                    success:function(result){
+                        var data=result.montages;
+                        var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}" target="_blank"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}" target="_blank">{name}</a> </div> </footer> </article>';
+                        for(var i=0;i<option.pageItems;i++)
+                        {
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
                                 .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
-                            }
-                            $(option.element).html(output);
-                            return false;
                         }
-                    });
+                        $(option.element).html(output);
+                        return false;
+                    }
+                });
                 break;
             default:
                 return null;
         }
-        }
+    }
 
-    });
+});
 
-    App.template=Base.extend({
-        loadHeader:function(id){ // the id is the element which should be added a active class
-            $("#topBar").load("head.html",function(){
-                $(this).addClass("bottom-shadow");
-                $(id).addClass("active");
-            });
-        },
-        loadFoot:function(){
-            $("#foot").load("foot.html",function(){
-                adjustFootPos();
-            });
-        }
-    });
-    module.exports = App;
+App.template=Base.extend({
+    loadHeader:function(id){ // the id is the element which should be added a active class
+        $("#topBar").load("head.html",function(){
+            $(this).addClass("bottom-shadow");
+            $(id).addClass("active");
+        });
+    },
+    loadFoot:function(){
+        $("#foot").load("foot.html",function(){
+            adjustFootPos();
+        });
+    }
+});
+module.exports = App;
 });
 
