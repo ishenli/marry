@@ -96,13 +96,13 @@ define(function(require, exports, module) {
                        output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data.data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
                            .replace("{date}",data[i].created_at.substring(0,10));
                    }
-                    $(element).append(output);
+                   $(element).append(output);
                 }
             });
         },
         post:function(id,userid,input,callback){
             util.FlyJSONP.post({
-            url: 'http://www.marrymemo.com/montages/'+id+'/discussions.json',
+            url: HOST+'/montages/discussions/'+id+'.json',
             parameters: {
                discussion:{
                     content: $(input).val(),
