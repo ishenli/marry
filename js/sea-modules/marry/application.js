@@ -93,7 +93,8 @@ define(function(require, exports, module) {
                     var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
                     var output='';
                     for(var i in data){
-                       output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data.data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
+                        console.log(i);
+                       output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
                            .replace("{date}",data[i].created_at.substring(0,10));
                    }
                    $(element).append(output);
@@ -101,12 +102,13 @@ define(function(require, exports, module) {
             });
         },
         post:function(id,userid,input,callback){
+            alert(id);
             util.FlyJSONP.post({
-            url: HOST+'/montages/discussions/'+id+'.json',
+            url: HOST+'/montages/'+id+'/discussions.json',
             parameters: {
                discussion:{
                     content: $(input).val(),
-                    user_id: 85
+                    user_id: 1621
                }
             },
             error:function(){
@@ -171,7 +173,6 @@ define(function(require, exports, module) {
                             var img=new Image();
                             img.src=HOST+data.photos[j].path;
                             img.index=j;
-//                            img.width=data.photos[i].width;
                             img.onload=function(){
                                 var item= $(".fancybox").eq(this.index);
                                 item.append($(this));
@@ -185,7 +186,7 @@ define(function(require, exports, module) {
                         });
                         $("#montageTitle").text(data.title);
                         $("#commentBack").text(data.discussion_count);
-                        $("#favBtn").text(data.collection_count);
+                        $("#favBtn").text(data.collect_count);
                         $("#sAvatar").attr("src",data.user.avatar.indexOf("http") == 0 ? data.user.avatar : HOST + data.user.avatar);
                         $("#username").text(data.user.nick);
                         $("#montageEnding").text(data.ending);
@@ -211,7 +212,8 @@ define(function(require, exports, module) {
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".ui-pic-item header").eq(this.index);
-                                oWidth=this.width,oHeight=this.height;
+                                oWidth=this.width;
+                                oHeight=this.height;
                                 height=oHeight/ oWidth*300;
                                 item.after($(this));
                                 $(this).css({"height":height});
@@ -233,7 +235,7 @@ define(function(require, exports, module) {
                         url:url,
                         success:function(result){
                             var data=result.montages;
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             if(data.length===0){
                                 adjustFootPos();
                                 $("#ellipsis").remove();
@@ -242,8 +244,8 @@ define(function(require, exports, module) {
                             var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
                             for(var i=0;i<len;i++)
                             {
-                                output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
+                                output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count)
+                                .replace("{share}",data[i].share_count).replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                             }
                             $(option.element).html(output);
@@ -290,11 +292,11 @@ define(function(require, exports, module) {
                         url:url,
                         success:function(result){
                             var data=result.montages,output="";
-                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
+                            var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}">{name}</a> </div> </footer> </article>';
                             for(var i=0;i<data.length;i++)
                             {
-                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                    .replace("{fav}","0").replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
+                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                    .replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
 
                             }
                             $("#pages a").removeClass("ui-paging-current");
