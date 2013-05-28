@@ -400,7 +400,6 @@ var SALT = "*#0621ix51y6679&";
                             }
                         };
 
-                        // 开始上传
                         xhr.open("POST", self.url, true);
                         xhr.setRequestHeader("X_FILENAME", file.name);
                         xhr.send(file);
