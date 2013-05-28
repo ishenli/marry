@@ -225,9 +225,18 @@ var SALT = "*#0621ix51y6679&";
  * @param window
  * @param $
  */
+seajs.use(['marry/application'], function(App) {
+    window.notes=new App.Note({
+        element:".note"
+    });
+
+});
 (function($,w){
     function updateNumber(){
-        $("#imgNum").html($(".note").size());
+        $("#imgNum").html($("#addList article").size());
+    }
+    function updateNextState(){
+        $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
     }
     var ImgUpload = {
         fileInput: null,				//html file控件
@@ -270,6 +279,7 @@ var SALT = "*#0621ix51y6679&";
                 } else {
                     $("#addList").html(html);
                     updateNumber();
+                    updateNextState();
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
@@ -277,12 +287,7 @@ var SALT = "*#0621ix51y6679&";
                             updateNumber();
                             return false;
                         });
-                        seajs.use(['marry/application'], function(App) {
-                            var notes=new App.Note({
-                                element:".note"
-                            });
-                            notes.drag();
-                        });
+
                         adjustFootPos();
                         //提交按钮显示
                         $("#fileSubmit").show();
