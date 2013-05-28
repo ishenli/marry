@@ -280,6 +280,7 @@ seajs.use(['marry/application'], function(App) {
                     $("#addList").html(html);
                     updateNumber();
                     updateNextState();
+                    notes.drag();
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
