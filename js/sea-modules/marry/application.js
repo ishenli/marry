@@ -208,7 +208,7 @@ App.montage=Base.extend({
                                 var item= $(".ui-pic-item header").eq(this.index);
                                 oWidth=this.width;
                                 oHeight=this.height;
-                                height=oHeight/ oWidth*300;
+                                height=oHeight/ oWidth*300<200?200:oHeight/ oWidth*300;
                                 item.after($(this));
                                 $(this).css({"height":height});
                                 $(this).css({"marginTop":-height/2,"top":92});
