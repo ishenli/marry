@@ -225,12 +225,7 @@ var SALT = "*#0621ix51y6679&";
  * @param window
  * @param $
  */
-seajs.use(['marry/application'], function(App) {
-    window.notes=new App.Note({
-        element:".note"
-    });
 
-});
 (function($,w){
     function updateNumber(){
         $("#imgNum").html($("#addList article").size());
@@ -280,7 +275,13 @@ seajs.use(['marry/application'], function(App) {
                     $("#addList").html(html);
                     updateNumber();
                     updateNextState();
-                    notes.drag();
+                    seajs.use(['marry/application'], function(App) {
+                        window.notes=new App.Note({
+                            element:".note"
+                        });
+                        notes.drag();
+
+                    });
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
