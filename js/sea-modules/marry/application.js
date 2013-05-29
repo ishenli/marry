@@ -52,7 +52,7 @@ define(function(require, exports, module) {
     App.Note=Widget.extend({
         drag:function(){
             $("#addList").dragsort({
-                dragSelector: "article", dragBetween: true, dragEnd:this.afterDrag(),
+                dragSelector: "#addList article", dragBetween: true, dragEnd:this.afterDrag(),
                 placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
             });
         },

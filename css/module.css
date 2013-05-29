@@ -600,7 +600,7 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     float: left;
     width:118px;
     height:118px;
-    margin: 13px 0 0 13px;
+    margin: 0 0 0 13px;
     background-color:white !important;
     border:dashed 1px gray !important;
     text-align: center;
