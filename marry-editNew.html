@@ -41,7 +41,7 @@
     });
 </script>
 <section id="container" class="container">
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action="" enctype="multipart/form-data" method="post" id="editNew">
     <div class="fn-hide">
         <input type="file" id="hiddenFile" multiple/>
     </div>
@@ -75,7 +75,7 @@
             </footer>
         </div>
         <div class="add-btn">
-            <div class="ui-btn gray large" id="index1" data-next="true">
+            <div class="ui-btn gray large" id="index1" data-next="false">
                 <span class="ui-btn-text"> 下一步 </span>
             </div>
         </div>
@@ -96,20 +96,18 @@
             </header>
             <section class="add-form">
                 <h3 class="form-title">给画卷取个名字吧</h3>
-                <input type="text" class="ui-dialog-input" name=""/>
+                <input type="text" class="ui-dialog-input" name="" id="montageName" required="required"/>
                 <h3 class="form-title">当然，还要有些描述</h3>
-                <textarea class="ui-dialog-textarea"></textarea>
+                <textarea class="ui-dialog-textarea" id="montageDescription" required="required"></textarea>
             </section>
         </div>
         <div class="add-btn">
-            <a class="ui-btn ui-btn-green large " href="#">
+            <div class="ui-btn ui-btn-green large " id="2to1">
                 <span class="ui-btn-text"> 上一步 </span>
-            </a>
-        <span id="nextBtn">
-            <a href="#" class="ui-btn gray large">
+            </div>
+            <div href="#" class="ui-btn gray large nextBtn" id="2to3">
                 <span class="ui-btn-text"> 下一步 </span>
-            </a>
-        </span>
+            </div>
         </div>
     </section>
     <section id="thirdStep">
@@ -189,7 +187,8 @@
     imgUploader.init();
     $("#uploadBtn").click(function(){
         $("#hiddenFile").click();
-    })
+    });
+
     var stepNav={
         init:function(){
             var self=this;
@@ -203,12 +202,47 @@
             });
         },
         goSecond:function(){
+            var self=this;
             $("#firstStep").hide();
             $("#secondStep").show();
+            $("#2to1").on("click",function(){
+                $("#firstStep").show();
+                $("#secondStep").hide();
+            });
+            $("#2to3").on("click",function(){
+                self.validate();
+                if(self.validate()!==true) return;
+                $("#secondStep").hide();
+                $("#thirdStep").show();
 
+            });
+
+        },
+        validate:function(){
+            console.log("validate!!!");
+           var name= $("montageName").val(),description=$("montageDescription").val();
+            if(name===""||description===""){
+                alert("no")
+                return false;
+            }
         }
     }
     stepNav.init();
+    seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
+        $(function() {
+            var validator = new Validator({
+                element: '#editNew'
+            });
+
+            validator.addItem({
+                element: '[id=montageName]',
+                required: true
+            }).addItem({
+                        element: '[id=montageDescription]',
+                        required: true
+                    })
+        });
+    });
 </script>
 </body>
 </html>
