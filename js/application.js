@@ -4,7 +4,7 @@
  * Time: 下午4:33
  * 添加常用的函数
  */
-var HOST = "http://www.marrymemo.com/";
+var HOST = "http://" + window.location.host + "/";
 var SALT = "*#0621ix51y6679&";
 /**
  * 微博登陆
