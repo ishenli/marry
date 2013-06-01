@@ -4,7 +4,7 @@
  * Time: 下午4:33
  * 添加常用的函数
  */
-var HOST = "http://www.marrymemo.com/";
+var HOST = "http://" + window.location.host + "/";
 var SALT = "*#0621ix51y6679&";
 /**
  * 微博登陆
@@ -225,9 +225,13 @@ var SALT = "*#0621ix51y6679&";
  * @param window
  * @param $
  */
+
 (function($,w){
     function updateNumber(){
-        $("#imgNum").html($(".note").size());
+        $("#imgNum").html($("#addList article").size());
+    }
+    function updateNextState(){
+        $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
     }
     var ImgUpload = {
         fileInput: null,				//html file控件
@@ -270,6 +274,14 @@ var SALT = "*#0621ix51y6679&";
                 } else {
                     $("#addList").html(html);
                     updateNumber();
+                    updateNextState();
+                    seajs.use(['marry/application'], function(App) {
+                        window.notes=new App.Note({
+                            element:".note"
+                        });
+                        notes.drag();
+
+                    });
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
@@ -277,12 +289,7 @@ var SALT = "*#0621ix51y6679&";
                             updateNumber();
                             return false;
                         });
-                        seajs.use(['marry/application'], function(App) {
-                            var notes=new App.Note({
-                                element:".note"
-                            });
-                            notes.drag();
-                        });
+
                         adjustFootPos();
                         //提交按钮显示
                         $("#fileSubmit").show();
@@ -400,7 +407,6 @@ var SALT = "*#0621ix51y6679&";
                             }
                         };
 
-                        // 开始上传
                         xhr.open("POST", self.url, true);
                         xhr.setRequestHeader("X_FILENAME", file.name);
                         xhr.send(file);
