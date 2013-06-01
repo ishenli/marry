@@ -25,81 +25,140 @@
                 }
             });
     </script>
+    <style type="text/css">
+        #secondStep,#thirdStep{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
-<nav id="topBar" class="ui-top-nav">
-    <section  class="w980 ui-top-nav-body">
-       <!-- <a href="/">
-            <img class="top-logo" src="assets/images/logo.png" alt="婚礼纪"/>
-        </a>-->
-        <!--<div class="login-btn">
-             <a id="qq" class="login-btn-text" href="/"> <span>登录</span> </a>
-             <a id="weibo" class="login-btn-text" href="/"><span> 登录</span> </a>
-        </div>-->
-        <div class="user-panel">
-            <div class="user-active">
-                <span class="arrow">&gt;</span>
-                    <span class="avatar">
-                        <img src="assets/test/avatar.jpg">
-                    </span>
-                <div class="option">
-                    <ul>
-                        <li class="option-item"><a href="/">创建画卷</a></li>
-                        <li class="option-item"><a href="/">个人主页</a></li>
-                        <li class="option-item"><a href="/">编辑资料</a></li>
-                        <li class="option-item"><a href="/">退出</a></li>
-                    </ul>
-                </div>
-            </div>
-            <span class="notice notice-active"> 1 </span>
-        </div>
-        <ul class="top-menu">
-            <li class="top-menu-item"><a href="#">应用下载</a></li>
-            <li class="top-menu-item"><a href="#">请帖制作</a></li>
-            <li class="top-menu-item active"><a href="#">精美画卷</a></li>
-            <li class="top-menu-item "><a href="#">首页</a></li>
-        </ul>
-    </section>
-</nav>
+<nav id="topBar" class="ui-top-nav"></nav>
+<script type="text/javascript">
+    seajs.use(['marry/application', '$'], function(App, $) {
+        var template=new App.template();
+        template.loadHeader("#indexUrl");
+    });
+</script>
 <section id="container" class="container">
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action="" enctype="multipart/form-data" method="post" id="editNew">
     <div class="fn-hide">
         <input type="file" id="hiddenFile" multiple/>
     </div>
-    <div class="add-panel ui-shadow first-step">
-        <header>
-            <div class="icons">
-                <i class="icon icon-active"></i>
-                <i class="dot"></i>
-                <i class="icon"></i>
-                <i class="dot"></i>
-                <i class="icon"></i>
-            </div>
-            <div class="step"> 1</div>
-            <span id="choseNum" class="num-txt"><span id="imgNum">0</span>/20</span>
-            <div class="upload-panel">
-                <span class="ui-btn middle ui-btn-green fn-right" id="uploadBtn">
-                    <span class="ui-btn-text"> 上传照片 </span>
-                </span>
-                <span class="txt">按“ctrl”可多选</span>
-            </div>
-        </header>
-        <section id="addList" class="add-list clearfix">
-        <!--<section id="addList" class="add-list clearfix upload-img-panel ui-scrollbar">-->
-            <div class="note"></div>
-        </section>
-        <div class="spacer" id="dragdrop-spacer"></div>
-        <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
-        <footer class="foot-txt">
-            拖动照片可排序，第一张照片默认显示为封面
-        </footer>
-    </div>
-    <div class="add-btn">
-        <div class="ui-btn ui-btn-green large">
-            <span class="ui-btn-text"> 下一步 </span>
+    <section id="firstStep">
+        <div class="add-panel ui-shadow first-step" id="">
+            <header>
+                <div class="icons">
+                    <i class="icon icon-active"></i>
+                    <i class="dot"></i>
+                    <i class="icon"></i>
+                    <i class="dot"></i>
+                    <i class="icon"></i>
+                </div>
+                <div class="step"> 1</div>
+                <span id="choseNum" class="num-txt"><span id="imgNum">0</span>/20</span>
+                <div class="upload-panel">
+                    <span class="ui-btn middle ui-btn-green fn-right" id="uploadBtn">
+                        <span class="ui-btn-text"> 上传照片 </span>
+                    </span>
+                    <span class="txt">按“ctrl”可多选</span>
+                </div>
+            </header>
+            <section id="addList" class="add-list clearfix">
+            <!--<section id="addList" class="add-list clearfix upload-img-panel ui-scrollbar">-->
+                <div class="note"></div>
+            </section>
+            <div class="spacer" id="dragdrop-spacer"></div>
+            <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
+            <footer class="foot-txt">
+                拖动照片可排序，第一张照片默认显示为封面
+            </footer>
         </div>
-    </div>
+        <div class="add-btn">
+            <div class="ui-btn gray large" id="index1" data-next="false">
+                <span class="ui-btn-text"> 下一步 </span>
+            </div>
+        </div>
+    </section>
+    <section id="secondStep">
+        <div class="add-panel step-second ui-shadow" id="">
+            <header>
+                <div class="icons">
+                    <i class="icon "></i>
+                    <i class="dot"></i>
+                    <i class="icon icon-active"></i>
+                    <i class="dot"></i>
+                    <i class="icon"></i>
+                </div>
+                <div class="step">
+                    <span>2</span>
+                </div>
+            </header>
+            <section class="add-form">
+                <h3 class="form-title">给画卷取个名字吧</h3>
+                <input type="text" class="ui-dialog-input" name="" id="montageName" required="required"/>
+                <h3 class="form-title">当然，还要有些描述</h3>
+                <textarea class="ui-dialog-textarea" id="montageDescription" required="required"></textarea>
+            </section>
+        </div>
+        <div class="add-btn">
+            <div class="ui-btn ui-btn-green large " id="2to1">
+                <span class="ui-btn-text"> 上一步 </span>
+            </div>
+            <div href="#" class="ui-btn gray large nextBtn" id="2to3">
+                <span class="ui-btn-text"> 下一步 </span>
+            </div>
+        </div>
+    </section>
+    <section id="thirdStep">
+        <div class="add-panel ui-shadow" id="">
+            <header>
+                <div class="icons">
+                    <i class="icon "></i>
+                    <i class="dot"></i>
+                    <i class="icon"></i>
+                    <i class="dot"></i>
+                    <i class="icon icon-active"></i>
+                </div>
+                <div class="step">
+                    <span>3</span>
+                </div>
+            </header>
+            <section id="" class="add-list third-step clearfix">
+                <div class="slidee ui-scrollbar">
+                    <form class="clearfix" action="xx" method="post">
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article><article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <div class="add-btn">
+            <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
+            <a class="ui-btn middle ui-btn-green ml30"> <span class="ui-btn-text"> 下一步 </span> </a>
+        </div>
+    </section>
     </form>
 </section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
@@ -111,6 +170,13 @@
     </script>
 </div>
 <script type="text/javascript">
+/*    seajs.use(['marry/application'], function(App) {
+        var notes=new App.Note({
+            element:".note"
+        });
+        notes.drag();
+
+    });*/
     var params = {
         fileInput: $("#hiddenFile").get(0),
         dragDrop: $("#addList").get(0),
@@ -121,9 +187,62 @@
     imgUploader.init();
     $("#uploadBtn").click(function(){
         $("#hiddenFile").click();
-    })
-    adjustFootPos();
+    });
 
+    var stepNav={
+        init:function(){
+            var self=this;
+            $("#index1").on("click",function(){
+                alert("1"+$(this).attr("data-next"));
+                if($(this).attr("data-next")==="true"){
+                    self.goSecond();
+                }else{
+                    alert("no");
+                }
+            });
+        },
+        goSecond:function(){
+            var self=this;
+            $("#firstStep").hide();
+            $("#secondStep").show();
+            $("#2to1").on("click",function(){
+                $("#firstStep").show();
+                $("#secondStep").hide();
+            });
+            $("#2to3").on("click",function(){
+                self.validate();
+                if(self.validate()!==true) return;
+                $("#secondStep").hide();
+                $("#thirdStep").show();
+
+            });
+
+        },
+        validate:function(){
+            console.log("validate!!!");
+           var name= $("montageName").val(),description=$("montageDescription").val();
+            if(name===""||description===""){
+                alert("no")
+                return false;
+            }
+        }
+    }
+    stepNav.init();
+    seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
+        $(function() {
+            var validator = new Validator({
+                element: '#editNew'
+            });
+
+            validator.addItem({
+                element: '[id=montageName]',
+                required: true
+            }).addItem({
+                        element: '[id=montageDescription]',
+                        required: true
+                    })
+        });
+    });
 </script>
 </body>
 </html>

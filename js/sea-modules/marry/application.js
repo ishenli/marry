@@ -1,6 +1,6 @@
 /**
  * Created with JetBrains WebStorm.
- * User: SH201
+ * User: shenli
  * Date: 13-4-17
  * Time: 下午12:49
  * To change this template use File | Settings | File Templates.
@@ -52,7 +52,7 @@ define(function(require, exports, module) {
     App.Note=Widget.extend({
         drag:function(){
             $("#addList").dragsort({
-                dragSelector: "article", dragBetween: true, dragEnd:this.afterDrag(),
+                dragSelector: "#addList article", dragBetween: true, dragEnd:this.afterDrag(),
                 placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
             });
         },
@@ -208,7 +208,7 @@ App.montage=Base.extend({
                                 var item= $(".ui-pic-item header").eq(this.index);
                                 oWidth=this.width;
                                 oHeight=this.height;
-                                height=oHeight/ oWidth*300;
+                                height=oHeight/ oWidth*300<200?200:oHeight/ oWidth*300;
                                 item.after($(this));
                                 $(this).css({"height":height});
                                 $(this).css({"marginTop":-height/2,"top":92});
