@@ -243,8 +243,8 @@ var SALT = "*#0621ix51y6679&";
             var arrFiles = [];
             for (var i = 0, file; file = files[i]; i++) {
                 if (file.type.indexOf("image") == 0 || (!file.type && /\.(?:jpg|png|gif)$/.test(file.name) /* for IE10 */)) {
-                    if (file.size >= 512000) {
-                        alert('您这张"'+ file.name +'"图片大小过大，应小于500k');
+                    if (file.size < 512000) {
+                        alert('您这张"'+ file.name +'"图片大小过小，应大于500k');
                     } else {
                         arrFiles.push(file);
                     }
@@ -265,6 +265,7 @@ var SALT = "*#0621ix51y6679&";
                             '<div class="close" title="删除" data-index="'+ i +'">X</div>' +
                             '<div class="cover"><img id="uploadImage_' + i + '" src="' + e.target.result + '"/>'+
                             '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
+                            '<input type="file" name="file_name"'+i+' value='+ e.target.result+'/>'+
                             '</article>';
 
                         i++;
@@ -291,11 +292,6 @@ var SALT = "*#0621ix51y6679&";
                         });
 
                         adjustFootPos();
-                        //提交按钮显示
-                        $("#fileSubmit").show();
-                    } else {
-                        //提交按钮隐藏
-                        $("#fileSubmit").hide();
                     }
                 }
             };

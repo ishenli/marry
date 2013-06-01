@@ -27,7 +27,7 @@
     </script>
     <style type="text/css">
         #secondStep,#thirdStep{
-            display: none;
+            /*display: none;*/
         }
     </style>
 </head>
@@ -41,10 +41,15 @@
     });
 </script>
 <section id="container" class="container">
-    <form action="" enctype="multipart/form-data" method="post" id="editNew">
+    <form action="http://www.marrymemo.com/montages.json" enctype="multipart/form-data" method="post" id="editNew">
     <div class="fn-hide">
         <input type="file" id="hiddenFile" multiple/>
     </div>
+    <input type="hidden" name="token" value="" id="token"/>
+    <input type="hidden" name="secret" value="" id="secret"/>
+    <input type="hidden" name="montage[user_id]" id="userId">
+    <input type="text" name="file_name1" id="fileName">
+    <input type="file" name="image_file1"/>
     <section id="firstStep">
         <div class="add-panel ui-shadow first-step" id="">
             <header>
@@ -96,9 +101,9 @@
             </header>
             <section class="add-form">
                 <h3 class="form-title">给画卷取个名字吧</h3>
-                <input type="text" class="ui-dialog-input" name="" id="montageName" required="required"/>
+                <input type="text" class="ui-dialog-input" name="montage[title]" id="montageTitle" required="required"/>
                 <h3 class="form-title">当然，还要有些描述</h3>
-                <textarea class="ui-dialog-textarea" id="montageDescription" required="required"></textarea>
+                <textarea name="montage[introduction]" class="ui-dialog-textarea" id="montageIntroduction" required="required"></textarea>
             </section>
         </div>
         <div class="add-btn">
@@ -158,6 +163,7 @@
             <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
             <a class="ui-btn middle ui-btn-green ml30"> <span class="ui-btn-text"> 下一步 </span> </a>
         </div>
+        <input type="submit"/>
     </section>
     </form>
 </section>
@@ -177,6 +183,10 @@
         notes.drag();
 
     });*/
+    $("#token").val(localStorage["token"]);
+    $("#secret").val(localStorage["secret"]);
+    $("#userId").val(JSON.parse(localStorage["user"]).id);
+
     var params = {
         fileInput: $("#hiddenFile").get(0),
         dragDrop: $("#addList").get(0),
@@ -231,14 +241,14 @@
     seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
         $(function() {
             var validator = new Validator({
-                element: '#editNew'
+                element: $("#editNew")
             });
 
             validator.addItem({
-                element: '[id=montageName]',
+                element: '[name=montageTitle]',
                 required: true
             }).addItem({
-                        element: '[id=montageDescription]',
+                        element: '[name=montageIntroduction]',
                         required: true
                     })
         });
