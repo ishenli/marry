@@ -237,14 +237,14 @@ var SALT = "*#0621ix51y6679&";
         fileInput: null,				//html file控件
         dragDrop: null,					//拖拽敏感区域
         upButton: null,					//提交按钮
-        url: "",						//ajax地址
+        url: HOST+"montages.json",		//ajax地址
         fileFilter: [],					//过滤后的文件数组
         filter: function(files) {
             var arrFiles = [];
             for (var i = 0, file; file = files[i]; i++) {
                 if (file.type.indexOf("image") == 0 || (!file.type && /\.(?:jpg|png|gif)$/.test(file.name) /* for IE10 */)) {
-                    if (file.size < 512000) {
-                        alert('您这张"'+ file.name +'"图片大小过小，应大于500k');
+                    if (file.size < 51200) {
+                        alert('您这张"'+ file.name +'"图片大小过小，应大于50k');
                     } else {
                         arrFiles.push(file);
                     }
@@ -264,8 +264,8 @@ var SALT = "*#0621ix51y6679&";
                         html = html + '<article id="uploadList_'+ i +'" class="note add-list-item">'+
                             '<div class="close" title="删除" data-index="'+ i +'">X</div>' +
                             '<div class="cover"><img id="uploadImage_' + i + '" src="' + e.target.result + '"/>'+
-                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
-                            '<input type="file" name="file_name"'+i+' value='+ e.target.result+'/>'+
+                            '<span id="uploadProgress_'+i+'" class="upload_progress"></span>' +
+                            '<input type="file" name="file_name'+(i+1)+'" value='+ e.target.result+'/>'+
                             '</article>';
 
                         i++;
@@ -276,13 +276,13 @@ var SALT = "*#0621ix51y6679&";
                     $("#addList").html(html);
                     updateNumber();
                     updateNextState();
-                    seajs.use(['marry/application'], function(App) {
+                    /*seajs.use(['marry/application'], function(App) {
                         window.notes=new App.Note({
                             element:".note"
                         });
                         notes.drag();
 
-                    });
+                    });*/
                     if (html) {
                         //删除方法
                         $(".close").click(function() {
@@ -311,7 +311,8 @@ var SALT = "*#0621ix51y6679&";
             eleProgress.show().html(percent);
         },
         onSuccess: function(file, response) {
-            $("#uploadInf").append("<p>上传成功，图片地址是：" + response + "</p>");
+//            $("#").append("<p>上传成功，图片地址是：" + response + "</p>");
+            console.log(response);
         },
         onFailure: function(file) {
             $("#uploadInf").append("<p>图片" + file.name + "上传失败！</p>");
@@ -378,7 +379,17 @@ var SALT = "*#0621ix51y6679&";
                 //非站点服务器上运行
                 return;
             }
+            var data={};
+            data.montage={
+                title:"hello",
+                introduction:"no",
+                user_id:126
+            }
+            data.token="a5ec84dddcd53874e4488b0c3e18cb8f";
+            data.secret="84dfa397c2312e35cd9cfc9b46650c68";
             for (var i = 0, file; file = this.fileFilter[i]; i++) {
+                data["image_file"+i]=file;
+                data["file_name"+i]="hello";
                 (function(file) {
                     var xhr = new XMLHttpRequest();
                     if (xhr.upload) {
@@ -402,14 +413,24 @@ var SALT = "*#0621ix51y6679&";
                                 }
                             }
                         };
-
                         xhr.open("POST", self.url, true);
-                        xhr.setRequestHeader("X_FILENAME", file.name);
+                        xhr.setRequestHeader("image_file"+(i+1), file.name);
+                        xhr.setRequestHeader("file_name"+(i+1),"girl");
+                        xhr.setRequestHeader("montage.title","hello");
+                        xhr.setRequestHeader("montage.introduction","hello");
+                        xhr.setRequestHeader("montage.user_id","126");
+                        xhr.setRequestHeader("token","a5ec84dddcd53874e4488b0c3e18cb8f");
+                        xhr.setRequestHeader("secret","84dfa397c2312e35cd9cfc9b46650c68");
                         xhr.send(file);
                     }
                 })(file);
             }
 
+//            $.ajax({
+//                url:self.url,
+//                type:'post',
+//                data:data
+//            })
         },
 
         init: function() {

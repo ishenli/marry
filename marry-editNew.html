@@ -17,7 +17,6 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-
     <script type="text/javascript">
             seajs.config({
                 alias: {
@@ -41,15 +40,17 @@
     });
 </script>
 <section id="container" class="container">
-    <form action="http://www.marrymemo.com/montages.json" enctype="multipart/form-data" method="post" id="editNew">
+    <!--<form action="http://www.marrymemo.com/montages.json" enctype="multipart/form-data" method="post" id="editNew">-->
     <div class="fn-hide">
         <input type="file" id="hiddenFile" multiple/>
     </div>
-    <input type="hidden" name="token" value="" id="token"/>
-    <input type="hidden" name="secret" value="" id="secret"/>
-    <input type="hidden" name="montage[user_id]" id="userId">
+    <input type="hidden" name="token" value="a5ec84dddcd53874e4488b0c3e18cb8f" id="token"/>
+    <input type="hidden" name="secret" value="84dfa397c2312e35cd9cfc9b46650c68" id="secret"/>
+    <input type="hidden" name="montage[user_id]" value="126" id="userId">
     <input type="text" name="file_name1" id="fileName">
+    <input type="text" name="file_name2" >
     <input type="file" name="image_file1"/>
+    <input type="file" name="image_file2"/>
     <section id="firstStep">
         <div class="add-panel ui-shadow first-step" id="">
             <header>
@@ -72,6 +73,13 @@
             <section id="addList" class="add-list clearfix">
             <!--<section id="addList" class="add-list clearfix upload-img-panel ui-scrollbar">-->
                 <div class="note"></div>
+                <!--<article id="uploadList_0" class="note add-list-item fn-hide">
+                    <div class="close" title="删除" data-index="0">X</div>
+                    <div class="cover"><img id="uploadImage_0" src=""/>
+                        <span id="uploadProgress_' + i + '" class="upload_progress"></span>
+                        <input id="fileInput1" type="file" name="file_name0" value=''/>
+                    </div>
+                </article>-->
             </section>
             <div class="spacer" id="dragdrop-spacer"></div>
             <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
@@ -131,7 +139,6 @@
             </header>
             <section id="" class="add-list third-step clearfix">
                 <div class="slidee ui-scrollbar">
-                    <form class="clearfix" action="xx" method="post">
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article><article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
@@ -155,17 +162,17 @@
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
                         <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                    </form>
                 </div>
             </section>
         </div>
         <div class="add-btn">
             <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
-            <a class="ui-btn middle ui-btn-green ml30"> <span class="ui-btn-text"> 下一步 </span> </a>
+            <div class="ui-btn middle ui-btn-green ml30">
+                <input id="createBtn" type="submit" class="ui-btn-text" value="开始创建">
+            </div>
         </div>
-        <input type="submit"/>
     </section>
-    </form>
+    <!--</form>-->
 </section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
@@ -183,15 +190,14 @@
         notes.drag();
 
     });*/
-    $("#token").val(localStorage["token"]);
+   /* $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
-    $("#userId").val(JSON.parse(localStorage["user"]).id);
+    $("#userId").val(JSON.parse(localStorage["user"]).id);*/
 
     var params = {
         fileInput: $("#hiddenFile").get(0),
         dragDrop: $("#addList").get(0),
-        upButton: $("#fileSubmit").get(0),
-        url: $("#uploadForm").attr("action")
+        upButton: document.getElementById("createBtn")
     };
     var imgUploader = $.extend(ImgUpload, params);
     imgUploader.init();
@@ -238,10 +244,10 @@
         }
     }
     stepNav.init();
-    seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
+    seajs.use(['arale/validator/0.9.2/validator', 'gallery/jquery'], function(Validator, $) {
         $(function() {
             var validator = new Validator({
-                element: $("#editNew")
+                element: "#editNew"
             });
 
             validator.addItem({
