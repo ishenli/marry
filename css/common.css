@@ -325,6 +325,7 @@
     font-weight: normal;
 }
 .add-panel .foot-txt {
+    text-align: center;
     padding: 20px 0;
 }
 .add-panel .upload-info{

@@ -495,13 +495,6 @@ var SALT = "*#0621ix51y6679&";
                     document.getElementById("file"+i).addEventListener("change", function(e) { self.funGetFiles(e); }, false);
                     updateNumber();
                     updateNextState();
-                    /*seajs.use(['marry/application'], function(App) {
-                     window.notes=new App.Note({
-                     element:".note"
-                     });
-                     notes.drag();
-
-                     });*/
                     if (html) {
                         //删除方法
                         $("#1stPanel .close").click(function() {

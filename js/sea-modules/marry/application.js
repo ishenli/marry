@@ -51,10 +51,13 @@ define(function(require, exports, module) {
     var App={};
     App.Note=Base.extend({
         drag:function(){
-            $("#1stPanel").dragsort({
-                dragSelector: "#1stPanel article", dragBetween: true, dragEnd:this.afterDrag(),
-                placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
-            });
+            if( typeof window.dragFlag==="undefined"){
+                $("#3rdPanel").dragsort({
+                    dragSelector: "#3rdPanel article", dragBetween: true, dragEnd:this.afterDrag(),
+                    placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
+                });
+                window.dragFlag=true;
+            }
         },
         afterDrag:function(number){
             /*var number=1;

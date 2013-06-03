@@ -35,7 +35,7 @@
         #firstStep .show-txt input[type="text"]{
             display: inline;
         }
-        #dropTxt{
+        #thirdStep .close{
             display: none;
         }
     </style>
@@ -84,16 +84,8 @@
                     <input type="text" class="description" name="file_name1">
                 </article>
             </section>
-            <div class="spacer" id="dragdrop-spacer"></div>
-            <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
-            <footer class="foot-txt" id="dropTxt">
-                拖动照片可排序，第一张照片默认显示为封面
-            </footer>
         </div>
         <div class="add-btn">
-            <div class="ui-btn gray large fn-hide" id="3to1">
-                <span class="ui-btn-text"> 上一步 </span>
-            </div>
             <div class="ui-btn gray large" id="index1" data-next="false">
                 <span class="ui-btn-text"> 下一步 </span>
             </div>
@@ -148,12 +140,16 @@
 
                 </div>
             </section>
+            <div class="spacer" id="dragdrop-spacer"></div>
+            <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
+            <footer class="foot-txt" id="dropTxt">
+                拖动照片可排序，第一张照片默认显示为封面
+            </footer>
         </div>
         <div class="add-btn">
-            <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
-            <a class="ui-btn middle ui-btn-green ml30"> <span class="ui-btn-text"> 下一步 </span> </a>
+            <div class="ui-btn middle ui-btn-green" id="3to2"> <span class="ui-btn-text"> 上一步 </span> </div>
+            <div class="ui-btn middle ui-btn-green ml30"> <input type="submit" class="ui-btn-text" value="创建画卷"></div>
         </div>
-        <input type="submit"/>
     </section>
      <iframe name="hidden_frame" id="hidden_frame"></iframe>
     </form>
@@ -190,7 +186,9 @@
          var index=parseInt($("#fileIndex").val());
         $("#file"+index).click();
     });
-
+    seajs.use(['marry/application'], function(App) {
+    window.notes=new App.Note();
+    });
     var stepNav={
         init:function(){
             var self=this;
@@ -211,32 +209,27 @@
                 $("#firstStep").show();
                 $("#secondStep").hide();
             });
-            $("#uploadPanel").hide();
             self.formBlur();
             $("#2to3").on("click",function(){
                 self.goThird();
             });
-
+            $("#3rdPanel").html($("#1stPanel").children().clone());
+            $("#3rdPanel").find("input[type='file']").each(function(){
+                $(this).remove();
+            });
+                notes.drag();
         },
         goThird:function(){
+            var self=this;
             if(self.validate()!==true) return;
             $("#secondStep").hide();
-            $("#firstStep").show();
-            $("#stepNum").text(3);
-            $("#firstStep .icon").removeClass("icon-active").eq(2).addClass("icon-active");
-            $("#1stPanel").addClass("show-txt");
-            $("#dropTxt").show();
-            $("#3to1").removeClass("fn-hide").click(function(){
+            $("#thirdStep").show();
+            $("#3to2").click(function(){
                 self.backSecond();
-            });
-
-            seajs.use(['marry/application'], function(App) {
-                var notes=new App.Note();
-                notes.drag();
             });
         },
         backSecond:function(){
-            $("#firstStep").hide();
+            $("#thirdStep").hide();
             $("#secondStep").show();
         },
         validate:function(){
@@ -250,7 +243,6 @@
         },
         formBlur:function(){
             $("#secondStep input,#secondStep textarea").blur(function(){
-                alert("blur");
                 var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
                 if(name!==""&&description!==""){
                     $("#2to3").removeClass("gray").addClass("ui-btn-green");
