@@ -474,19 +474,18 @@ var SALT = "*#0621ix51y6679&";
                     var reader = new FileReader();
                     reader.onload = function(e) {
                         i=parseInt($("#fileIndex").val());
-                        j=parseInt(i)+1;
+                        j=i+1;
                         $("#uploadList_"+i).removeClass("fn-hide").find("img").attr("src",e.target.result);
                         html = html + '<article id="uploadList_'+ j +'" class="note add-list-item fn-hide">'+
                             '<div class="close" title="删除" data-index="'+j+'">X</div>'+
                             '<div class="cover"><img id="uploadImage_' +j+'" src=""/>'+
 //                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
                             '<input type="file" name="image_file'+j+'" id="file'+j+'"/></div>'+
-                            '<input type="text" name="file_name'+j+'" class="description"/>'+
+                            '<input type="text" class="description"/>'+
                             '</article>';
 
                         i++;
                         funAppendImage();
-                        console.log("the i is"+i);
                         $("#fileIndex").val(j);
                     }
                     reader.readAsDataURL(file);
