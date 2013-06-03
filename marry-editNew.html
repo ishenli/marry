@@ -41,7 +41,7 @@
     });
 </script>
 <section id="container" class="container">
-    <form action="http://www.marrymemo.com/montages.json" enctype="multipart/form-data" method="post" id="editNew">
+    <form action="http://www.marrymemo.com/montages.json" target="hidden_frame" enctype="multipart/form-data" method="post" id="editNew">
     <div class="fn-hide">
         <input type="file" id="hiddenFile" multiple/>
     </div>
@@ -165,11 +165,12 @@
         </div>
         <input type="submit"/>
     </section>
+     <iframe name="hidden_frame" id="hidden_frame"></iframe>
     </form>
 </section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
-        seajs.use(['marry/application', '$'], function(App, $) {
+        seajs.use(['marry/application'], function(App) {
             var template=new App.template();
             template.loadFoot();
         });
@@ -183,9 +184,9 @@
         notes.drag();
 
     });*/
-    $("#token").val(localStorage["token"]);
+/*    $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
-    $("#userId").val(JSON.parse(localStorage["user"]).id);
+    $("#userId").val(JSON.parse(localStorage["user"]).id);*/
 
     var params = {
         fileInput: $("#hiddenFile").get(0),
@@ -238,10 +239,9 @@
         }
     }
     stepNav.init();
-    seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
-        $(function() {
+    /*seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
             var validator = new Validator({
-                element: $("#editNew")
+                element: "#editNew"
             });
 
             validator.addItem({
@@ -251,6 +251,12 @@
                         element: '[name=montageIntroduction]',
                         required: true
                     })
+    });*/
+    $("#createBtn").click(function(){
+        $("hidden_frame").on("load",function(){
+            var data=$("body").html();
+            if(data.result==="ok")
+                window.location.href=HOST+"montage-show.html#"+data.idl;
         });
     });
 </script>
