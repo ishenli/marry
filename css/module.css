@@ -188,6 +188,7 @@ div.ui-btn,p.ui-btn,span.ui-btn{*display:inline}
     -webkit-border-radius: 4px;
     border-radius: 4px;
     background: transparent;
+    height: 100%;
 }
 input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .large.ui-btn{
