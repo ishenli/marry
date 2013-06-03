@@ -445,6 +445,9 @@ var SALT = "*#0621ix51y6679&";
     function updateNextState(){
         $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
     }
+    seajs.use(['marry/application'], function(App) {
+        window.notes=new App.Note();
+    });
     var ImgUpload = {
         fileInput: null,				//html file控件
         dragDrop: null,					//拖拽敏感区域
@@ -455,8 +458,8 @@ var SALT = "*#0621ix51y6679&";
             var arrFiles = [];
             for (var i = 0, file; file = files[i]; i++) {
                 if (file.type.indexOf("image") == 0 || (!file.type && /\.(?:jpg|png|gif)$/.test(file.name) /* for IE10 */)) {
-                    if (file.size < 512000) {
-                        alert('您这张"'+ file.name +'"图片大小过小，应大于500k');
+                    if (file.size < 5120) {
+                        alert('您这张"'+ file.name +'"图片大小过小，应大于5k');
                     } else {
                         arrFiles.push(file);
                     }
@@ -494,6 +497,7 @@ var SALT = "*#0621ix51y6679&";
                     document.getElementById("file"+i).addEventListener("change", function(e) { self.funGetFiles(e); }, false);
                     updateNumber();
                     updateNextState();
+                    notes.drag();
                     if (html) {
                         //删除方法
                         $("#1stPanel .close").click(function() {

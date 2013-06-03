@@ -52,8 +52,8 @@ define(function(require, exports, module) {
     App.Note=Base.extend({
         drag:function(){
             if( typeof window.dragFlag==="undefined"){
-                $("#3rdPanel").dragsort({
-                    dragSelector: "#3rdPanel article", dragBetween: true, dragEnd:this.afterDrag(),
+                $("#1stPanel").dragsort({
+                    dragSelector: "#1stPanel article", dragBetween: true, dragEnd:this.afterDrag(),
                     placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
                 });
                 window.dragFlag=true;

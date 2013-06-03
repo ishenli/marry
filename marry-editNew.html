@@ -38,6 +38,9 @@
         #thirdStep .close{
             display: none;
         }
+        #hidden_frame{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -84,6 +87,9 @@
                     <input type="text" class="description" name="file_name1">
                 </article>
             </section>
+            <footer class="foot-txt" id="dropTxt">
+                拖动照片可排序，第一张照片默认显示为封面
+            </footer>
         </div>
         <div class="add-btn">
             <div class="ui-btn gray large" id="index1" data-next="false">
@@ -116,7 +122,7 @@
             <div class="ui-btn ui-btn-green large " id="2to1">
                 <span class="ui-btn-text"> 上一步 </span>
             </div>
-            <div href="#" class="ui-btn gray large nextBtn" id="2to3">
+            <div class="ui-btn gray large nextBtn" id="2to3">
                 <span class="ui-btn-text"> 下一步 </span>
             </div>
         </div>
@@ -142,13 +148,10 @@
             </section>
             <div class="spacer" id="dragdrop-spacer"></div>
             <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
-            <footer class="foot-txt" id="dropTxt">
-                拖动照片可排序，第一张照片默认显示为封面
-            </footer>
         </div>
         <div class="add-btn">
-            <div class="ui-btn middle ui-btn-green" id="3to2"> <span class="ui-btn-text"> 上一步 </span> </div>
-            <div class="ui-btn middle ui-btn-green ml30"> <input type="submit" class="ui-btn-text" value="创建画卷"></div>
+            <div class="ui-btn large ui-btn-green" id="3to2"> <span class="ui-btn-text"> 上一步 </span> </div>
+            <div class="ui-btn large ui-btn-green ml30"> <input type="submit" class="ui-btn-text" id="createSubmit" value="创建画卷"></div>
         </div>
     </section>
      <iframe name="hidden_frame" id="hidden_frame"></iframe>
@@ -170,9 +173,9 @@
         notes.drag();
 
     });*/
-/*    $("#token").val(localStorage["token"]);
+    $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
-    $("#userId").val(JSON.parse(localStorage["user"]).id);*/
+    $("#userId").val(JSON.parse(localStorage["user"]).id);
 
     var params = {
         fileInput: $("#file1").get(0),
@@ -186,18 +189,14 @@
          var index=parseInt($("#fileIndex").val());
         $("#file"+index).click();
     });
-    seajs.use(['marry/application'], function(App) {
-    window.notes=new App.Note();
-    });
     var stepNav={
         init:function(){
             var self=this;
             $("#index1").on("click",function(){
-                alert("1"+$(this).attr("data-next"));
                 if($(this).attr("data-next")==="true"){
                     self.goSecond();
                 }else{
-                    alert("no");
+                    alert("请上传图片");
                 }
             });
         },
@@ -213,11 +212,13 @@
             $("#2to3").on("click",function(){
                 self.goThird();
             });
+            for(var i=0;i<($("#1stPanel article").size()-1);i++){
+                $("#1stPanel article").eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
+            }
             $("#3rdPanel").html($("#1stPanel").children().clone());
             $("#3rdPanel").find("input[type='file']").each(function(){
                 $(this).remove();
             });
-                notes.drag();
         },
         goThird:function(){
             var self=this;
@@ -227,6 +228,10 @@
             $("#3to2").click(function(){
                 self.backSecond();
             });
+            $("#createSubmit").on("click",self.submit);
+            for(var i=0;i<($("#3rdPanel article").size()-1);i++){
+                $("#3rdPanel article").eq(i).find("input.description").attr("name","file_name"+(i+1));
+            }
         },
         backSecond:function(){
             $("#thirdStep").hide();
@@ -236,7 +241,7 @@
            console.log("validate!!!");
            var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
             if(name===""||description===""){
-                alert("no")
+                alert("请输入相关信息");
                 return false;
             }
             return true;
@@ -247,6 +252,15 @@
                 if(name!==""&&description!==""){
                     $("#2to3").removeClass("gray").addClass("ui-btn-green");
                 }
+            });
+        },
+        submit:function(){
+            $("#hidden_frame").on("load complete",function(){
+                var data=$(window.frames["hidden_frame"].document).find("pre").html();
+                console.log(data);
+                if(data.indexOf("ok")!==-1)
+//                    var id=data.indexOf(":",data.length-10);
+                    window.location.href=HOST+"/marry/montage-index.html";
             });
         }
     }
@@ -264,13 +278,6 @@
                         required: true
                     })
     });*/
-    $("#createBtn").click(function(){
-        $("hidden_frame").on("load",function(){
-            var data=$("body").html();
-            if(data.result==="ok")
-                window.location.href=HOST+"montage-show.html#"+data.id;
-        });
-    });
 </script>
 </body>
 </html>
