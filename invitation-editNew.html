@@ -101,13 +101,17 @@
                     <h2>请帖模板</h2>
                 </header>
                 <section class="invitation-list">
-                    <ul>
-                        <li><a href="#" target="_blank"> <img src="assets/test/1.jpg" alt="#"/> </a></li>
-                        <li><a href="#" target="_blank"> <img src="assets/test/1.jpg" alt="#"/> </a></li>
-                        <li><a href="#" target="_blank"> <img src="assets/test/1.jpg" alt="#"/> </a></li>
-                        <li><a href="#" target="_blank"> <img src="assets/test/1.jpg" alt="#"/> </a></li>
+                    <ul id="templatePanel">
                     </ul>
                 </section>
+                <script type="text/javascript">
+                    seajs.use(['marry/application', '$'], function(App, $) {
+                        var invitation=new App.Invitation();
+                        invitation.getTemplate({
+                            element:"#templatePanel"
+                        });
+                    });
+                </script>
             </div>
         </section>
     </div>
