@@ -103,7 +103,7 @@ var SALT = "*#0621ix51y6679&";
 		"&summary=%20" +
 		"&pics=" + 
 		HOST + $("#montageEnding").text() + 
-		"&site=marrymemo.com";
+		"&site=" + window.location.host;
 		window.open(url, "_blank", "height=450, width=600, location=no, status=no");
 		return false;
 	});
@@ -174,12 +174,14 @@ var SALT = "*#0621ix51y6679&";
 	$("#qq_content_btn").click(function() {
 		var win = QC.Login.showPopup({
 			appId : "100416913",
-			redirectURI: "http://marrymemo.com/marry/qc_back.html"
+			redirectURI: "http://www.marrymemo.com/marry/qc_back.html"
 		});
 		var interval;
 		$.extend({
 		checkQQLogin : function(){
+			console.log("check");
 			if (win.closed || QC.Login.check()) {
+				console.log("login success");
 				QC.api("get_user_info", {}).success(function(s){
 					var sResult = s.data;
 					var user_id = "3-" + sResult.figureurl_2.replace(/http:\/\/qzapp.qlogo.cn\/qzapp\/[^\/]+\/([^\/]+)\/100/g, "$1");;
