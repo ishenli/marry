@@ -225,6 +225,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .large.gray{
     background-position: -278px -187px;
 }
+.middle.gray{
+    background-position: -278px -243px;
+}
 .middle.ui-btn input.ui-btn-text{
     height: 30px;
     line-height: 30px;
