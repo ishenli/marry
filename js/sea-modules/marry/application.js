@@ -49,10 +49,10 @@ define(function(require, exports, module) {
     }(window));
 
     var App={};
-    App.Note=Widget.extend({
+    App.Note=Base.extend({
         drag:function(){
-            $("#addList").dragsort({
-                dragSelector: "#addList article", dragBetween: true, dragEnd:this.afterDrag(),
+            $("#1stPanel").dragsort({
+                dragSelector: "#1stPanel article", dragBetween: true, dragEnd:this.afterDrag(),
                 placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
             });
         },
