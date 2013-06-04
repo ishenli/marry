@@ -36,92 +36,242 @@
             template.loadHeader("#indexUrl");
         });
     </script>
-<section id="container" class="container">
-    <div class="add-panel ui-shadow">
-        <header>
-            <div class="icons">
-                <i class="icon icon-active"></i>
-                <i class="dot"></i>
-                <i class="icon"></i>
-                <i class="dot"></i>
-                <i class="icon"></i>
-            </div>
-            <div class="step"> 1</div>
-        </header>
-        <section class="invitation-panel clearfix">
-            <div class="invitation-form">
-                <form class="ui-form" action="#" post="#">
-                    <fieldset>
-                        <legend>创建请帖</legend>
-                        <div class="form-item">
-                            <label class="label">你的身份:</label>
-                            <input class="ui-radio" type="radio" name="sex"/>
-                            <span class="ui-radio-txt"> 新郎</span>
-                            <input class="ui-radio" type="radio" name="sex"/>
-                            <span class="ui-radio-txt"> 新娘</span>
+
+        <div id="container" class="container">
+            <form class="ui-form" action="#" post="#">
+            <section id="firstStep" >
+                <div class="add-panel ui-shadow">
+                    <header>
+                        <div class="icons">
+                            <i class="icon icon-active"></i>
+                            <i class="dot"></i>
+                            <i class="icon"></i>
+                            <i class="dot"></i>
+                            <i class="icon"></i>
                         </div>
-                        <div class="form-item">
-                            <label for="" class="label">你的名字:</label>
-                            <input class="input" type="text"/>
+                        <div class="step"> 1</div>
+                    </header>
+
+                    <section class="invitation-panel clearfix">
+                        <div class="invitation-form">
+                            <fieldset>
+                                <legend>创建请帖</legend>
+                                <div class="form-item">
+                                    <label class="label">你的身份:</label>
+                                    <input class="ui-radio" type="radio" name="sex"/>
+                                    <span class="ui-radio-txt"> 新郎</span>
+                                    <input class="ui-radio" type="radio" name="sex"/>
+                                    <span class="ui-radio-txt"> 新娘</span>
+                                </div>
+                                <div class="form-item">
+                                    <label for="" class="label">你的名字:</label>
+                                    <input class="input" type="text"/>
+                                </div>
+                                <div class="form-item">
+                                    <label for="" class="label">Ta的名字:</label>
+                                    <input class="input" type="text"/>
+                                </div>
+                                <div class="form-item">
+                                    <label for="" class="label">婚礼时间:</label>
+                                    <input class="input" type="text"/>
+                                </div>
+                                <div class="form-item form-item-error">
+                                    <label for="" class="label">婚礼地址:</label>
+                                    <textarea class="textarea"></textarea>
+                                </div>
+                                <div class="form-item text-center">
+                                    <div class="ui-btn middle ui-btn-green">
+                                        <input type="submit" class="ui-btn-text" value="上传照片"/>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
-                        <div class="form-item">
-                            <label for="" class="label">Ta的名字:</label>
-                            <input class="input" type="text"/>
-                        </div>
-                        <div class="form-item">
-                            <label for="" class="label">婚礼时间:</label>
-                            <input class="input" type="text"/>
-                        </div>
-                        <div class="form-item form-item-error">
-                            <label for="" class="label">婚礼地址:</label>
-                            <textarea class="textarea"></textarea>
-                        </div>
-                        <div class="form-item text-center">
-                            <div class="ui-btn middle ui-btn-green">
-                                <input type="submit" class="ui-btn-text" value="上传照片"/>
+                        <div class="iphone5">
+                            <div class="iphone5-inner">
+                                <h3>请登录后进行操作</h3>
+                                <div class="login ui-login-btn green">
+                                    <a id="qq" class="ui-login-btn-text qq" href="/"> <span>??</span> </a>
+                                    <a id="weibo" class="ui-login-btn-text sina" href="/"><span> ??</span> </a>
+                                </div>
                             </div>
                         </div>
-                    </fieldset>
-               </form>
-            </div>
-            <div class="iphone5">
-                <div class="iphone5-inner">
-                    <h3>请登录后进行制作</h3>
-                    <div class="login ui-login-btn green">
-                        <a id="qq" class="ui-login-btn-text qq" href="/"> <span>登录</span> </a>
-                        <a id="weibo" class="ui-login-btn-text sina" href="/"><span> 登录</span> </a>
+                        <div class="invitation-template">
+                            <header>
+                                <a class="ui-btn middle gray fn-right">
+                                    <span href="#" class="ui-btn-text" target="_blank">购买套餐</span>
+                                </a>
+                                <h2>请帖模板</h2>
+                            </header>
+                            <section class="invitation-list">
+                                <ul id="templatePanel">
+                                </ul>
+                            </section>
+                            <script type="text/javascript">
+                                seajs.use(['marry/application', '$'], function(App, $) {
+                                    var invitation=new App.Invitation();
+                                    invitation.getTemplate({
+                                        element:"#templatePanel"
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </section>
+
+                </div>
+                <div class="invitation-btn clearfix">
+                    <div class="ui-btn ui-btn-green middle">
+                        <span class="ui-btn-text"> ??? </span>
                     </div>
                 </div>
-            </div>
-            <div class="invitation-template">
-                <header>
-                    <a class="ui-btn middle gray fn-right">
-                        <span href="#" class="ui-btn-text" target="_blank">购买套餐</span>
-                    </a>
-                    <h2>请帖模板</h2>
-                </header>
-                <section class="invitation-list">
-                    <ul id="templatePanel">
-                    </ul>
-                </section>
-                <script type="text/javascript">
-                    seajs.use(['marry/application', '$'], function(App, $) {
-                        var invitation=new App.Invitation();
-                        invitation.getTemplate({
-                            element:"#templatePanel"
-                        });
-                    });
-                </script>
-            </div>
-        </section>
-    </div>
-    <div class="invitation-btn clearfix">
-        <div class="ui-btn ui-btn-green middle">
-            <span class="ui-btn-text"> 下一步 </span>
-        </div>
-    </div>
+            </section>
+            <section id="secondStep">
+                <div class="add-panel ui-shadow">
+                    <header>
+                        <h2 class="title">请帖相册</h2>
+                        <div class="icons">
+                            <i class="icon icon-active"></i>
+                            <i class="dot"></i>
+                            <i class="icon"></i>
+                            <i class="dot"></i>
+                            <i class="icon"></i>
+                        </div>
+                        <div class="step"> 2</div>
+                        <div class="upload-panel">
+                            <span class="ui-btn middle ui-btn-green fn-right video">
+                                <span class="ui-btn-text"> 上传视频 </span>
+                            </span>
+                            <span class="ui-btn middle ui-btn-green fn-right photo">
+                                <span class="ui-btn-text"> 上传照片 </span>
+                            </span>
+                            <span class="txt">按“ctrl”可多选</span>
+                        </div>
+                    </header>
+                    <section class="add-list clearfix">
+                        <article class="note add-list-item">
+                            <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div>
+                            <div class="close">X</div>
+                            <div class="btn-play"></div>
+                        </article>
+                    </section>
+                    <footer class="foot-txt upload-info">
+            <span>
+              视频1/1
+            </span>
+            <span>
+              照片3/15
+            </span>
+                    </footer>
+                </div>
+                <div class="clearfix text-center">
+                    <div class="ui-btn ui-btn-green large">
+                        <span class="ui-btn-text"> 上一步 </span>
+                    </div>
 
-</section>
+                    <div class="ui-btn gray large">
+                        <span class="ui-btn-text"> 下一步 </span>
+                    </div>
+                </div>
+            </section>
+            <section id="thirdStep">
+                <div class="add-panel ui-shadow">
+                    <header>
+                        <div class="icons">
+                            <i class="icon "></i>
+                            <i class="dot"></i>
+                            <i class="icon"></i>
+                            <i class="dot"></i>
+                            <i class="icon icon-active"></i>
+                        </div>
+                        <div class="step"> 3</div>
+                    </header>
+                    <section class="invitation-panel third-step clearfix">
+                        <div class="iphone5">
+                            <div class="screen-inner">
+                            </div>
+                        </div>
+                        <div class="weixin-panel">
+                            <h2>邀请二维码:<span>（未安装应用也可查看请帖)</span></h2>
+                            <div class="wx-wrap">
+
+                                <div class="sl-hvalign">
+                                    <div class="sl-hvalign-cnt">
+                                        <div class="sl-hvalign-cnt-inner">
+                                            <div style="width: 260px;">
+                                                <img src="assets/images/weixin.jpg">
+                                                <div class="download-btn">
+                                                    <a href="#" class="download-btn-txt">下载</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- .sl-hvalign -->
+                            </div>
+                            <h2>邀请字符码:<span class="code">X3SP3O</span></h2>
+                            <div class="info">将邀请发送给你的亲朋好友，邀请他们来参加婚礼吧！</div>
+                            <div class="app">
+                                <h2>应用下载</h2>
+                                <div class="ui-download-btn">
+                                    <a href="/" class="iphone" target="_blank">iphone</a>
+                                    <a href="/" class="android" target="_blank">android</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="clearfix invitation-btn">
+                    <a class="ui-btn ui-btn-green large">
+                        <span class="ui-btn-text"> 完成 </span>
+                    </a>
+                    <a class="ui-btn ui-btn-green large">
+                        <span class="ui-btn-text"> 上一步 </span>
+                    </a>
+                </div>
+            </section>
+            <section id="forthStep">
+                <div class="add-panel ui-shadow">
+                    <section class="invitation-panel third-step clearfix">
+                        <header></header>
+                        <div class="iphone5">
+                            <div class="screen-inner">
+                            </div>
+                        </div>
+                        <div class="weixin-panel">
+                            <h2>邀请二维码:<span>（未安装应用也可查看请帖)</span></h2>
+                            <div class="wx-wrap">
+
+                                <div class="sl-hvalign">
+                                    <div class="sl-hvalign-cnt">
+                                        <div class="sl-hvalign-cnt-inner">
+                                            <div style="width: 260px;">
+                                                <img src="assets/images/weixin.jpg">
+                                                <div class="download-btn">
+                                                    <a href="#" class="download-btn-txt">下载</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- .sl-hvalign -->
+                            </div>
+                            <h2>邀请字符码:<span class="code">X3SP3O</span></h2>
+                            <div class="info">将邀请发送给你的亲朋好友，邀请他们来参加婚礼吧！</div>
+                            <div class="app">
+                                <h2>应用下载</h2>
+                                <div class="ui-download-btn">
+                                    <a href="/" class="iphone" target="_blank">iphone</a>
+                                    <a href="/" class="android" target="_blank">android</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="clearfix invitation-btn">
+                    <div class="ui-btn ui-btn-green large">
+                        <span class="ui-btn-text"> 编辑请帖 </span>
+                    </div>
+                </div>
+            </section>
+            </form>
+    </div>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
         seajs.use(['marry/application', '$'], function(App, $) {
