@@ -679,7 +679,12 @@
     font-size: 18px;
     color: #666666;
 }
-
+.invitation-template .invitation-list{
+    height: 410px;
+    width: 260px;
+    overflow-y: auto;
+;
+}
 .invitation-template .invitation-list li{
     float: left;
     width: 110px;

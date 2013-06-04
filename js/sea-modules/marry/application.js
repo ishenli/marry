@@ -358,7 +358,8 @@ define(function(require, exports, module) {
                 url:HOST + 'themes.json',
                 success:function(data){
                     var html="",template='<li><a href="javascript:void(0)"> <img src="{pic}" alt="{name}"/> </a></li>';
-                    var len=(data.length<4?data.length:4)
+//                    var len=(data.length<4?data.length:4)
+                    var len=data.length;
                     for(var i=0;i<len;i++){
                         html+=template.replace("{pic}",HOST+data[i].thumb_path).replace("{name}",data[i].name);
                     }

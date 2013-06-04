@@ -302,26 +302,116 @@ var SALT = "*#0621ix51y6679&";
             };
             funAppendImage();
         },
-        onDelete: function(file) {
-            $("#uploadList_" + file.index).remove();
+        //获取选择文件，file控件或拖放
+        funGetFiles: function(e) {
+            // 获取文件列表对象
+            var files = e.target.files || e.dataTransfer.files;
+            //继续添加文件
+//            this.fileFilter = this.fileFilter.concat(this.filter(files));
+            this.fileFilter=this.filter(files);
+            this.funDealFiles();
+            return this;
         },
-        onProgress: function(file, loaded, total) {
-            var eleProgress = $("#uploadProgress_" + file.index), percent = (loaded / total * 100).toFixed(2) + '%';
-            eleProgress.show().html(percent);
+
+        //选中文件的处理与回调
+        funDealFiles: function() {
+            for (var i = 0, file; file = this.fileFilter[i]; i++) {
+                //增加唯一索引值
+                file.index = i;
+            }
+            //执行选择回调
+            this.onSelect(this.fileFilter);
+            return this;
         },
-        onSuccess: function(file, response) {
-            $("#uploadInf").append("<p>上传成功，图片地址是：" + response + "</p>");
+
+
+        init: function() {
+            var self = this;
+
+            //文件选择控件选择
+            if (this.fileInput) {
+                this.fileInput.addEventListener("change", function(e) { self.funGetFiles(e); }, false);
+            }
+            //上传按钮提交
+            if (this.upButton) {
+                this.upButton.addEventListener("click", function(e) { self.funUploadFile(e); }, false);
+            }
+        }
+    };
+    w.ImgUpload=ImgUpload;
+}($,window));
+
+(function($,w){
+    function updateNextState(){
+        $("#2to3").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
+    }
+    function updateNumber(){
+        $("#photoNum").html($("#2ndPanel article").size()-1);
+    }
+    seajs.use(['marry/application'], function(App) {
+        window.notes=new App.Note();
+    });
+    var photoUpload = {
+        fileInput: null,				//html file控件
+        dragDrop: null,					//拖拽敏感区域
+        upButton: null,					//提交按钮
+        url: "",						//ajax地址
+        fileFilter: [],					//过滤后的文件数组
+        filter: function(files) {
+            var arrFiles = [];
+            for (var i = 0, file; file = files[i]; i++) {
+                if (file.type.indexOf("image") == 0 || (!file.type && /\.(?:jpg|png|gif)$/.test(file.name) /* for IE10 */)) {
+                    if (file.size < 5120) {
+                        alert('您这张"'+ file.name +'"图片大小过小，应大于5k');
+                    } else {
+                        arrFiles.push(file);
+                    }
+                } else {
+                    alert('文件"' + file.name + '"不是图片。');
+                }
+            }
+            return arrFiles;
         },
-        onFailure: function(file) {
-            $("#uploadInf").append("<p>图片" + file.name + "上传失败！</p>");
-            $("#uploadImage_" + file.index).css("opacity", 0.2);
-        },
-        onComplete: function() {
-            //提交按钮隐藏
-            $("#fileSubmit").hide();
-            //file控件value置空
-            $("#fileImage").val("");
-            $("#uploadInf").append("<p>当前图片全部上传完毕，可继续添加上传。</p>");
+        onSelect: function(files) {
+            var html = '', i = 0, j,self=this;
+            var funAppendImage = function() {
+                file = files[i];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        i=parseInt($("#fileIndex").val());
+                        j=i+1;
+                        $("#uploadList_"+i).removeClass("fn-hide").find("img").attr("src",e.target.result);
+                        html = html + '<article id="uploadList_'+ j +'" class="note add-list-item fn-hide">'+
+                            '<div class="close" title="删除" data-index="'+j+'">X</div>'+
+                            '<div class="cover"><img id="uploadImage_' +j+'" src=""/>'+
+//                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
+                            '<input type="file" name="image_file'+j+'" id="file'+j+'"/></div>'+
+                            '</article>';
+
+                        i++;
+                        funAppendImage();
+                        $("#fileIndex").val(j);
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $("#2ndPanel").append(html);
+                    document.getElementById("file"+i).addEventListener("change", function(e) { self.funGetFiles(e); }, false);
+                    updateNextState();
+                    updateNumber();
+                    notes.drag();
+                    if (html) {
+                        //删除方法
+                        $("#2ndPanel .close").click(function() {
+                            $(this).parent().remove();
+                            return false;
+                        });
+
+                        adjustFootPos();
+                    }
+                }
+            };
+            funAppendImage();
         },
         //获取选择文件，file控件或拖放
         funGetFiles: function(e) {
@@ -345,60 +435,6 @@ var SALT = "*#0621ix51y6679&";
             return this;
         },
 
-        //删除对应的文件
-        funDeleteFile: function(fileDelete) {
-            var arrFile = [];
-            for (var i = 0, file; file = this.fileFilter[i]; i++) {
-                if (file != fileDelete) {
-                    arrFile.push(file);
-                } else {
-                    this.onDelete(fileDelete);
-                }
-            }
-            this.fileFilter = arrFile;
-            return this;
-        },
-
-        //文件上传
-        funUploadFile: function() {
-            var self = this;
-            if (location.host.indexOf("sitepointstatic") >= 0) {
-                //非站点服务器上运行
-                return;
-            }
-            for (var i = 0, file; file = this.fileFilter[i]; i++) {
-                (function(file) {
-                    var xhr = new XMLHttpRequest();
-                    if (xhr.upload) {
-                        // 上传中
-                        xhr.upload.addEventListener("progress", function(e) {
-                            self.onProgress(file, e.loaded, e.total);
-                        }, false);
-
-                        // 文件上传成功或是失败
-                        xhr.onreadystatechange = function(e) {
-                            if (xhr.readyState == 4) {
-                                if (xhr.status == 200) {
-                                    self.onSuccess(file, xhr.responseText);
-                                    self.funDeleteFile(file);
-                                    if (!self.fileFilter.length) {
-                                        //全部完毕
-                                        self.onComplete();
-                                    }
-                                } else {
-                                    self.onFailure(file, xhr.responseText);
-                                }
-                            }
-                        };
-
-                        xhr.open("POST", self.url, true);
-                        xhr.setRequestHeader("X_FILENAME", file.name);
-                        xhr.send(file);
-                    }
-                })(file);
-            }
-
-        },
 
         init: function() {
             var self = this;
@@ -413,5 +449,5 @@ var SALT = "*#0621ix51y6679&";
             }
         }
     };
-    w.ImgUpload=ImgUpload;
+    w.photoUpload=photoUpload;
 }($,window));
