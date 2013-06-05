@@ -40,7 +40,8 @@
         <form class="ui-form" action="#" post="#">
         <input type="hidden" name="token" value="" id="token"/>
         <input type="hidden" name="secret" value="" id="secret"/>
-        <input type="hidden" name="montage[user_id]" id="userId">
+        <input type="hidden" name="card[user_id]" id="userId">
+        <input type="hidden" name="card[theme_id]" id="templateId">
         <input type="text" class="fn-hide"  id="fileIndex" value="1">
         <section id="firstStep" >
             <div class="add-panel ui-shadow">
@@ -113,7 +114,13 @@
                             seajs.use(['marry/application'], function(App) {
                                 var invitation=new App.Invitation();
                                 invitation.getTemplate({
-                                    element:"#templatePanel"
+                                    element:"#templatePanel",
+                                    callback:function(){
+                                        $("#templatePanel li").click(function(){
+                                            alert($(this).attr("data-id"));
+                                            $("#templateId").val($(this).attr("data-id"));
+                                        })
+                                    }
                                 });
                             });
                         </script>
