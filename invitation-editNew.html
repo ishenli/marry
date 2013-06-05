@@ -67,19 +67,20 @@
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">你的名字:</label>
-                                <input class="input" type="text"/>
+                                <input class="input" type="text" id="yourName"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">Ta的名字:</label>
-                                <input class="input" type="text"/>
+                                <input class="input" type="text" id="halfName"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">婚礼时间:</label>
                                 <input class="input" type="text"/>
                             </div>
-                            <div class="form-item form-item-error">
+                            <div class="form-item form-item-error position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
                                 <textarea id="place" name="card[place]" class="textarea"></textarea>
+                                <span class="position-btn">定位</span>
                             </div>
                             <div class="form-item text-center">
                                 <div class="ui-btn middle ui-btn-green">
@@ -248,10 +249,29 @@
     };
     var photoUploader= $.extend(photoUpload, params);
     photoUploader.init();
+
     $("#uploadPhoto").click(function(){
         var index=parseInt($("#fileIndex").val());
         $("#file"+index).click();
     });
+    var formWidget={
+        init:function(){
+            this.chooseSex();
+        },
+        chooseSex:function(){
+            $("input[name='sex']").on("click",function(){
+                var sex= $("input:radio[name='sex']:checked").val();
+                if(sex==="groom"){
+                    $("#yourName").attr("name","groom_name");
+                    $("#halfName").attr("name","bride_name");
+                }else{
+                    $("#yourName").attr("name","bride_name");
+                    $("#halfName").attr("name","groom_name");
+                }
+            })
+        }
+    }
+    formWidget.init();
     var stepNav={
         init:function(){
             var self=this;
@@ -276,14 +296,17 @@
             $("#2to3").on("click",function(){
                 self.goThird();
             });
-            for(var i=0;i<($("#1stPanel article").size()-1);i++){
-                $("#2ndPanel article").eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
-            }
+
         },
         goThird:function(){
             var self=this;
-            if(self.validate()!==true) return;
+            if($("#2ndPanel article").size()<2) return alert("请上传图片");
+
             $("#secondStep").hide();
+            var photoList=$("#2ndPanelPanel article");
+            for(var i=0;i<(photoList.size()-1);i++){
+                photoList.eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
+            }
             $("#thirdStep").show();
             $("#3to2").click(function(){
                 self.backSecond();
