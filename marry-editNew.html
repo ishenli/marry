@@ -17,6 +17,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
+
     <script type="text/javascript">
             seajs.config({
                 alias: {
@@ -26,7 +27,19 @@
     </script>
     <style type="text/css">
         #secondStep,#thirdStep{
-            /*display: none;*/
+            display: none;
+        }
+        #firstStep input{
+            display: none;
+        }
+        #firstStep .show-txt input[type="text"]{
+            display: inline;
+        }
+        #thirdStep .close{
+            display: none;
+        }
+        #hidden_frame{
+            display: none;
         }
     </style>
 </head>
@@ -40,17 +53,11 @@
     });
 </script>
 <section id="container" class="container">
-    <!--<form action="http://www.marrymemo.com/montages.json" enctype="multipart/form-data" method="post" id="editNew">-->
-    <div class="fn-hide">
-        <input type="file" id="hiddenFile" multiple/>
-    </div>
-    <input type="hidden" name="token" value="a5ec84dddcd53874e4488b0c3e18cb8f" id="token"/>
-    <input type="hidden" name="secret" value="84dfa397c2312e35cd9cfc9b46650c68" id="secret"/>
-    <input type="hidden" name="montage[user_id]" value="126" id="userId">
-    <input type="text" name="file_name1" id="fileName">
-    <input type="text" name="file_name2" >
-    <input type="file" name="image_file1"/>
-    <input type="file" name="image_file2"/>
+    <form action="http://www.marrymemo.com/montages.json" target="hidden_frame" enctype="multipart/form-data" method="post" id="editNew">
+    <input type="hidden" name="token" value="" id="token"/>
+    <input type="hidden" name="secret" value="" id="secret"/>
+    <input type="hidden" name="montage[user_id]" id="userId">
+    <input type="text" class="fn-hide"  id="fileIndex" value="1">
     <section id="firstStep">
         <div class="add-panel ui-shadow first-step" id="">
             <header>
@@ -61,29 +68,26 @@
                     <i class="dot"></i>
                     <i class="icon"></i>
                 </div>
-                <div class="step"> 1</div>
+                <div class="step" id="stepNum">1</div>
                 <span id="choseNum" class="num-txt"><span id="imgNum">0</span>/20</span>
-                <div class="upload-panel">
+                <div class="upload-panel" id="uploadPanel">
                     <span class="ui-btn middle ui-btn-green fn-right" id="uploadBtn">
                         <span class="ui-btn-text"> 上传照片 </span>
                     </span>
-                    <span class="txt">按“ctrl”可多选</span>
+                    <!--<span class="txt">按“ctrl”可多选</span>-->
                 </div>
             </header>
-            <section id="addList" class="add-list clearfix">
-            <!--<section id="addList" class="add-list clearfix upload-img-panel ui-scrollbar">-->
-                <div class="note"></div>
-                <!--<article id="uploadList_0" class="note add-list-item fn-hide">
+            <section id="1stPanel" class="add-list clearfix">
+                <article id="uploadList_1" class="note add-list-item fn-hide">
                     <div class="close" title="删除" data-index="0">X</div>
-                    <div class="cover"><img id="uploadImage_0" src=""/>
-                        <span id="uploadProgress_' + i + '" class="upload_progress"></span>
-                        <input id="fileInput1" type="file" name="file_name0" value=''/>
+                    <div class="cover">
+                        <img id="uploadImage_1" src=""/>
+                        <input type="file" name="image_file1" id="file1"/>
                     </div>
-                </article>-->
+                    <input type="text" class="description" name="file_name1">
+                </article>
             </section>
-            <div class="spacer" id="dragdrop-spacer"></div>
-            <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
-            <footer class="foot-txt">
+            <footer class="foot-txt" id="dropTxt">
                 拖动照片可排序，第一张照片默认显示为封面
             </footer>
         </div>
@@ -118,7 +122,7 @@
             <div class="ui-btn ui-btn-green large " id="2to1">
                 <span class="ui-btn-text"> 上一步 </span>
             </div>
-            <div href="#" class="ui-btn gray large nextBtn" id="2to3">
+            <div class="ui-btn gray large nextBtn" id="2to3">
                 <span class="ui-btn-text"> 下一步 </span>
             </div>
         </div>
@@ -138,45 +142,24 @@
                 </div>
             </header>
             <section id="" class="add-list third-step clearfix">
-                <div class="slidee ui-scrollbar">
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article><article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
-                        <article class="note add-list-item"> <div class="cover"><img src="assets/test/1.jpg" alt="xsf"/></div> <div class="close">X</div> <div class="number">1</div> <div> <input type="text" name="" class="description"/> </div> </article>
+                <div class="slidee ui-scrollbar" id="3rdPanel">
+
                 </div>
             </section>
+            <div class="spacer" id="dragdrop-spacer"></div>
+            <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
         </div>
         <div class="add-btn">
-            <a class="ui-btn middle ui-btn-green"> <span class="ui-btn-text"> 上一步 </span> </a>
-            <div class="ui-btn middle ui-btn-green ml30">
-                <input id="createBtn" type="submit" class="ui-btn-text" value="开始创建">
-            </div>
+            <div class="ui-btn large ui-btn-green" id="3to2"> <span class="ui-btn-text"> 上一步 </span> </div>
+            <div class="ui-btn large ui-btn-green ml30"> <input type="submit" class="ui-btn-text" id="createSubmit" value="创建画卷"></div>
         </div>
     </section>
-    <!--</form>-->
+     <iframe name="hidden_frame" id="hidden_frame"></iframe>
+    </form>
 </section>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
-        seajs.use(['marry/application', '$'], function(App, $) {
+        seajs.use(['marry/application'], function(App) {
             var template=new App.template();
             template.loadFoot();
         });
@@ -190,30 +173,28 @@
         notes.drag();
 
     });*/
-   /* $("#token").val(localStorage["token"]);
+    $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
-    $("#userId").val(JSON.parse(localStorage["user"]).id);*/
+    $("#userId").val(JSON.parse(localStorage["user"]).id);
 
     var params = {
-        fileInput: $("#hiddenFile").get(0),
-        dragDrop: $("#addList").get(0),
-        upButton: document.getElementById("createBtn")
+        fileInput: $("#file1").get(0),
+        addPanel:"#1stPanel"
     };
     var imgUploader = $.extend(ImgUpload, params);
     imgUploader.init();
     $("#uploadBtn").click(function(){
-        $("#hiddenFile").click();
+         var index=parseInt($("#fileIndex").val());
+        $("#file"+index).click();
     });
-
     var stepNav={
         init:function(){
             var self=this;
             $("#index1").on("click",function(){
-                alert("1"+$(this).attr("data-next"));
                 if($(this).attr("data-next")==="true"){
                     self.goSecond();
                 }else{
-                    alert("no");
+                    alert("请上传图片");
                 }
             });
         },
@@ -225,27 +206,64 @@
                 $("#firstStep").show();
                 $("#secondStep").hide();
             });
+            self.formBlur();
             $("#2to3").on("click",function(){
-                self.validate();
-                if(self.validate()!==true) return;
-                $("#secondStep").hide();
-                $("#thirdStep").show();
-
+                self.goThird();
             });
-
+            for(var i=0;i<($("#1stPanel article").size()-1);i++){
+                $("#1stPanel article").eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
+            }
+            $("#3rdPanel").html($("#1stPanel").children().clone());
+            $("#3rdPanel").find("input[type='file']").each(function(){
+                $(this).remove();
+            });
+        },
+        goThird:function(){
+            var self=this;
+            if(self.validate()!==true) return;
+            $("#secondStep").hide();
+            $("#thirdStep").show();
+            $("#3to2").click(function(){
+                self.backSecond();
+            });
+            $("#createSubmit").on("click",self.submit);
+            for(var i=0;i<($("#3rdPanel article").size()-1);i++){
+                $("#3rdPanel article").eq(i).find("input.description").attr("name","file_name"+(i+1));
+            }
+        },
+        backSecond:function(){
+            $("#thirdStep").hide();
+            $("#secondStep").show();
         },
         validate:function(){
-            console.log("validate!!!");
-           var name= $("montageName").val(),description=$("montageDescription").val();
+           console.log("validate!!!");
+           var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
             if(name===""||description===""){
-                alert("no")
+                alert("请输入相关信息");
                 return false;
             }
+            return true;
+        },
+        formBlur:function(){
+            $("#secondStep input,#secondStep textarea").blur(function(){
+                var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
+                if(name!==""&&description!==""){
+                    $("#2to3").removeClass("gray").addClass("ui-btn-green");
+                }
+            });
+        },
+        submit:function(){
+            $("#hidden_frame").on("load complete",function(){
+                var data=$(window.frames["hidden_frame"].document).find("pre").html();
+                console.log(data);
+                if(data.indexOf("ok")!==-1)
+//                    var id=data.indexOf(":",data.length-10);
+                    window.location.href=HOST+"/marry/montage-index.html";
+            });
         }
     }
     stepNav.init();
-    seajs.use(['arale/validator/0.9.2/validator', 'gallery/jquery'], function(Validator, $) {
-        $(function() {
+    /*seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
             var validator = new Validator({
                 element: "#editNew"
             });
@@ -257,8 +275,7 @@
                         element: '[name=montageIntroduction]',
                         required: true
                     })
-        });
-    });
+    });*/
 </script>
 </body>
 </html>

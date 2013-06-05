@@ -49,12 +49,15 @@ define(function(require, exports, module) {
     }(window));
 
     var App={};
-    App.Note=Widget.extend({
+    App.Note=Base.extend({
         drag:function(){
-            $("#addList").dragsort({
-                dragSelector: "#addList article", dragBetween: true, dragEnd:this.afterDrag(),
-                placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
-            });
+            if( typeof window.dragFlag==="undefined"){
+                $("#1stPanel").dragsort({
+                    dragSelector: "#1stPanel article", dragBetween: true, dragEnd:this.afterDrag(),
+                    placeHolderTemplate: "<article class='placeHolder'>放于该位置</article>"
+                });
+                window.dragFlag=true;
+            }
         },
         afterDrag:function(number){
             /*var number=1;
@@ -85,36 +88,36 @@ define(function(require, exports, module) {
 
      })*/
     App.Comment=Base.extend({
-        get:function(id,element){
-            util.FlyJSONP.get({
-                url:HOST + 'montages/'+id+'/discussions.json',
-                success:function(result){
-                    var data=result.discussions;
-                    var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
-                    var output='';
-                    for(var i in data){
-                        output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
-                            .replace("{date}",data[i].created_at.substring(0,10));
+            get:function(id,element){
+                util.FlyJSONP.get({
+                    url:HOST + 'montages/'+id+'/discussions.json',
+                    success:function(result){
+                        var data=result.discussions;
+                        var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
+                        var output='';
+                        for(var i in data){
+                            output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
+                                .replace("{date}",data[i].created_at.substring(0,10));
+                        }
+                        $(element).html(output);
                     }
-                    $(element).html(output);
-                }
-            });
-        },
-        post:function(id,userid,input,callback){
-            $.post(HOST + 'montages/'+id+'/discussions.json', {
-                discussion:{
-                    content: $(input).val(),
-                    user_id:  JSON.parse(localStorage.user).id
-                },
-                token : localStorage["token"],
-                secret : localStorage["secret"]
-            }, function(data) {
-                console.log(data);
-                callback();
-            });
-}
-});
-App.montage=Base.extend({
+                });
+            },
+            post:function(id,userid,input,callback){
+                $.post(HOST + 'montages/'+id+'/discussions.json', {
+                    discussion:{
+                        content: $(input).val(),
+                        user_id:  JSON.parse(localStorage.user).id
+                    },
+                    token : localStorage["token"],
+                    secret : localStorage["secret"]
+                }, function(data) {
+                    console.log(data);
+                    callback();
+                });
+        }
+    });
+    App.montage=Base.extend({
     get:function(options){
         var option=$.extend({},options);
         switch (option.type){
@@ -336,19 +339,35 @@ App.montage=Base.extend({
 
 });
 
-App.template=Base.extend({
-    loadHeader:function(id){ // the id is the element which should be added a active class
-        $("#topBar").load("head.html",function(){
-            $(this).addClass("bottom-shadow");
-            $(id).addClass("active");
-        });
-    },
-    loadFoot:function(){
-        $("#foot").load("foot.html",function(){
-            adjustFootPos();
-        });
-    }
-});
+    App.template=Base.extend({
+        loadHeader:function(id){ // the id is the element which should be added a active class
+            $("#topBar").load("head.html",function(){
+                $(this).addClass("bottom-shadow");
+                $(id).addClass("active");
+            });
+        },
+        loadFoot:function(){
+            $("#foot").load("foot.html",function(){
+                adjustFootPos();
+            });
+        }
+    });
+    App.Invitation=Base.extend({
+        getTemplate:function(option){
+            util.FlyJSONP.get({
+                url:HOST + 'themes.json',
+                success:function(data){
+                    var html="",template='<li><a href="javascript:void(0)"> <img src="{pic}" alt="{name}"/> </a></li>';
+//                    var len=(data.length<4?data.length:4)
+                    var len=data.length;
+                    for(var i=0;i<len;i++){
+                        html+=template.replace("{pic}",HOST+data[i].thumb_path).replace("{name}",data[i].name);
+                    }
+                    $(option.element).html(html);
+                }
+            })
+        }
+    })
 module.exports = App;
 });
 
