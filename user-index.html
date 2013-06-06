@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>婚礼纪--我的收藏</title>
+    <title>婚礼纪--我的画卷</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/base.css">
@@ -35,29 +35,23 @@
     });
 
 </script>
-<header class="ui-green-header user-header">
+<!--<header class="ui-green-header user-header">
     <div class="user-header-inner">
         <div class="user-info">
              <span class="big-avatar fn-left">
-                 <img src="" id="avatar" alt="个人头像">
+                 <img src="assets/test/avatar.jpg">
              </span>
-            <a href="#" class="username" id="username"></a>
-            <p class="description" id="description"></p>
+            <a href="javascript:;" class="username" id="username"></a>
+            <p class="description">
+                描述文字，啊啊啊啊啊啊
+            </p>
         </div>
-        <script type="text/javascript">
-            var user=JSON.parse(localStorage["user"]);
-            $("#username").text(user.nick);
-            $("#avatar").attr("src",user.avatar);
-            if(user.description!==null){
-                $("#description").text(user.description);
-            }
-        </script>
         <ul class="ui-page-nav user-nav">
-            <li class="ui-page-nav-active">
+            <li>
                 <div class="sl-hvalign">
                     <div class="sl-hvalign-cnt">
                         <div class="sl-hvalign-cnt-inner">
-                            <a href="javascript:;">我的收藏</a>
+                            <a href="user-fav.html">我的收藏</a>
                         </div>
                     </div>
                 </div>
@@ -72,7 +66,7 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="ui-page-nav-active">
                 <div class="sl-hvalign">
                     <div class="sl-hvalign-cnt">
                         <div class="sl-hvalign-cnt-inner">
@@ -84,12 +78,10 @@
             </li>
         </ul>
         <div class="sl-vertical create">
-            <a href="marry-editNew.html" class="ui-btn ui-btn-green large">
-                <span class="ui-btn-text"> 创建画卷 </span>
-            </a>
+            <a href="#" target="_blank" class="ui-btn ui-btn-green large"> <span class="ui-btn-text"> 创建画卷 </span> </a>
         </div>
     </div>
-</header>
+</header>-->
 <section id="container" class="container">
     <div class="user-grid ui-shadow" id="montageList">
     </div>
@@ -112,10 +104,12 @@
                 element:"#montageList",
                 type:"index",
                 param:{
-                    user_id: JSON.parse(localStorage["user"]).id,
-                    token : localStorage["token"],
-                    secret : localStorage["secret"],
-                    nice:1
+//                    user_id: JSON.parse(localStorage["user"]).id,
+//                    token : localStorage["token"],
+//                  secret : localStorage["secret"]
+                    user_id: location.hash.substring(1),
+                    token :"a5ec84dddcd53874e4488b0c3e18cb8f",
+                    secret : "84dfa397c2312e35cd9cfc9b46650c68"
                 },
                 pageItems:6,
                 callback:adjustFootPos

@@ -468,6 +468,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     margin-left: -8px;
     border-color: transparent transparent white transparent;
 }
+.ui-page-nav .ui-page-nav-active span{
+    background: #b0e43f ;
+}
 /*各种插件*/
 #indexBanner{
     position: relative;
