@@ -166,13 +166,6 @@
     </script>
 </div>
 <script type="text/javascript">
-/*    seajs.use(['marry/application'], function(App) {
-        var notes=new App.Note({
-            element:".note"
-        });
-        notes.drag();
-
-    });*/
     $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
     $("#userId").val(JSON.parse(localStorage["user"]).id);
@@ -253,6 +246,7 @@
             });
         },
         submit:function(){
+            $("#createSubmit").val("创建中...");
             $("#hidden_frame").on("load complete",function(){
                 var data=$(window.frames["hidden_frame"].document).find("pre").html();
                 console.log(data);

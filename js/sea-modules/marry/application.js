@@ -146,7 +146,7 @@ define(function(require, exports, module) {
                             $(option.element).append(output);
                             page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                            if(option.callback!=="") option.callback();
+                            option.callback();
                         });
                     }
                 });

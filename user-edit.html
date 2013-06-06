@@ -41,13 +41,16 @@
         <h1>资料修改</h1>
     </div>
     <div class="form-panel" id="container">
-        <form class="ui-form" name="" method="post" action="#" id="infoEdit">
+        <form class="ui-form" name="" method="post" action="users.json" id="infoEdit">
+            <input type="hidden" name="token" value="" id="token"/>
+            <input type="hidden" name="secret" value="" id="secret"/>
+            <input type="hidden" name="montage[user_id]" id="userId">
             <fieldset>
                 <legend>表单标题</legend>
                 <div class="ui-form-item ui-form-item-error">
                     <label for="username" class="ui-lable">昵称:</label>
                     <input class="ui-input" id="username" name="username" type="text">
-                    <div class="ui-form-explain">昵称为电子邮箱。</div>
+                    <div class="ui-form-explain">昵称不能为空</div>
                 </div>
                 <div class="ui-form-item ui-form-item-error">
                     <label for="" class="ui-lable">性别:</label>
@@ -79,7 +82,6 @@
 </section>
 <footer class="ui-footer ui-shadow-top" id="foot"></footer>
 <script type="text/javascript">
-
     seajs.use(['marry/application', '$'], function(App, $) {
         var template=new App.template();
         template.loadFoot();
@@ -87,6 +89,9 @@
 </script>
 </div>
 <script type="text/javascript">
+    $("#token").val(localStorage["token"]);
+    $("#secret").val(localStorage["secret"]);
+    $("#userId").val(JSON.parse(localStorage["user"]).id);
     seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
         $(function() {
             var validator = new Validator({
