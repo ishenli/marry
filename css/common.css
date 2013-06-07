@@ -1,3 +1,4 @@
+@charset "utf-8";
 .ui-pic-item {
     position: relative;
     float: left;
@@ -237,7 +238,9 @@
     height: 75px;
     margin: -35px 0 0 -15px;
     background: url("../assets/images/number-bg.png") -10px 0 no-repeat;
-    font:bold 40px/75px "微软雅黑" "microsoft yahei" "sans serif";
+    font-weight:bold;
+    font-size:40px;
+    line-height:70px;
     color:#a9dc3c;
     text-align: center;
 }
@@ -664,20 +667,6 @@
     width: 240px;
     height: 55px;
 }
-.position-panel {
-    position: relative;
-}
-.position-btn{
-    position: absolute;
-    display: inline-block;
-    background-color: #b1e441;
-    color: #fff;
-    height: 20px;
-    line-height: 20px;
-    padding: 0 10px;
-    right: 10px;
-    bottom: 20px;
-}
 
 .invitation-panel .invitation-template {
     width: 280px;
@@ -693,12 +682,7 @@
     font-size: 18px;
     color: #666666;
 }
-.invitation-template .invitation-list{
-    height: 410px;
-    width: 260px;
-    overflow-y: auto;
-;
-}
+
 .invitation-template .invitation-list li{
     float: left;
     width: 110px;
@@ -831,4 +815,3 @@
 #downloadCon .code {
     margin-top: 23px;
 }
-

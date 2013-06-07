@@ -177,7 +177,7 @@
     var imgUploader = $.extend(ImgUpload, params);
     imgUploader.init();
     $("#uploadBtn").click(function(){
-         var index=parseInt($("#fileIndex").val());
+         var index=$("#fileIndex").val();
         $("#file"+index).click();
     });
     var stepNav={
