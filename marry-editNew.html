@@ -59,7 +59,7 @@
     <input type="hidden" name="montage[user_id]" id="userId">
     <input type="text" class="fn-hide"  id="fileIndex" value="1">
     <section id="firstStep">
-        <div class="add-panel ui-shadow first-step" id="">
+        <div class="add-panel ui-shadow first-step" >
             <header>
                 <div class="icons">
                     <i class="icon icon-active"></i>
@@ -98,7 +98,7 @@
         </div>
     </section>
     <section id="secondStep">
-        <div class="add-panel step-second ui-shadow" id="">
+        <div class="add-panel step-second ui-shadow">
             <header>
                 <div class="icons">
                     <i class="icon "></i>
@@ -141,7 +141,7 @@
                     <span>3</span>
                 </div>
             </header>
-            <section id="" class="add-list third-step clearfix">
+            <section class="add-list third-step clearfix">
                 <div class="slidee ui-scrollbar" id="3rdPanel"></div>
             </section>
             <div class="spacer" id="dragdrop-spacer"></div>
@@ -190,9 +190,15 @@
                     alert("请上传图片");
                 }
             });
+            /*$("#1stPanel").change(function(){
+                if($("#1stPanel article").size()<2){
+                    $("#index1").removeClass("ui-btn-green").addClass("gray").attr("data-next","false");
+                }
+            });*/
         },
         goSecond:function(){
             var self=this;
+            if($("#1stPanel article").size()<2) return alert("请上传图片");
             $("#firstStep").hide();
             $("#secondStep").show();
             $("#2to1").on("click",function(){
@@ -240,7 +246,9 @@
         formBlur:function(){
             $("#secondStep input,#secondStep textarea").change(function(){
                 var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
-                if(name!==""&&description!==""){
+                if(name==""||description==""){
+                    $("#2to3").removeClass("ui-btn-green").addClass("gray");
+                }else{
                     $("#2to3").removeClass("gray").addClass("ui-btn-green");
                 }
             });

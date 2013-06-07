@@ -233,7 +233,7 @@ var SALT = "*#0621ix51y6679&";
         $("#imgNum").html($("#1stPanel article").size()-1);
     }
     function updateNextState(){
-        $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
+            $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
     }
     seajs.use(['marry/application'], function(App) {
         window.notes=new App.Note();
