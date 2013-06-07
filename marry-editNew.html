@@ -238,7 +238,7 @@
             return true;
         },
         formBlur:function(){
-            $("#secondStep input,#secondStep textarea").blur(function(){
+            $("#secondStep input,#secondStep textarea").change(function(){
                 var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
                 if(name!==""&&description!==""){
                     $("#2to3").removeClass("gray").addClass("ui-btn-green");
