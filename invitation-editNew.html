@@ -62,18 +62,18 @@
                             <legend>创建请帖</legend>
                             <div class="form-item">
                                 <label class="label">你的身份:</label>
-                                <input class="ui-radio" type="radio" name="sex" value="groom"/>
+                                <input class="ui-radio" type="radio" name="sex" checked value="groom"/>
                                 <span class="ui-radio-txt"> 新郎</span>
                                 <input class="ui-radio" type="radio" name="sex" value="bride"/>
                                 <span class="ui-radio-txt"> 新娘</span>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">你的名字:</label>
-                                <input class="input" type="text" id="yourName"/>
+                                <input class="input" type="text" id="yourName" name="groom_name"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">Ta的名字:</label>
-                                <input class="input" type="text" id="halfName"/>
+                                <input class="input" type="text" id="halfName" name="bride_name"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">婚礼时间:</label>
@@ -85,8 +85,9 @@
                                 <span class="position-btn">定位</span>
                             </div>
                             <div class="form-item text-center">
-                                <div class="ui-btn middle ui-btn-green">
-                                    <input type="submit" class="ui-btn-text" value="上传照片"/>
+                                <input type="file" name="file1" id="cover">
+                                <div class="ui-btn middle ui-btn-green" id="uploadCover">
+                                    <span  class="ui-btn-text">上传照片</span>
                                 </div>
                             </div>
                         </fieldset>
@@ -100,6 +101,7 @@
                             </div>
                         </div>-->
                         <div class="phone-layer" id="phoneLayer">
+                            <img src="" id="coverImg" class="fn-hide">
                             <div class="bg"><img src=""></div>
                             <div class="info" id="bride_info"></div>
                             <div class="info" id="groom_info"></div>
@@ -261,6 +263,7 @@
         fileInput: $("#file1").get(0),
         addPanel:'#2ndPanel'
     };
+
     var photoUploader= $.extend(photoUpload, params);
     photoUploader.init();
 
@@ -284,12 +287,25 @@
                     $("#halfName").attr("name","groom_name");
                 }
             })
+        },
+        validate:function(){
+
         }
     }
     formWidget.init();
     var templateWidget={
         init:function(){
             this.chooseTemplate();
+        },
+        changeCover:function(e){
+            var files = e.target.files || e.dataTransfer.files;
+            if (files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#coverImg").attr("src",e.target.result).removeClass("fn-hide");
+                }
+                reader.readAsDataURL(files[0]);
+            }
         },
         chooseTemplate:function(){
             var self=this;
@@ -305,6 +321,7 @@
                         })
                     }
                 })*/
+                if($("input[name='groom_name']").val());
                 $("#groom_info").text($("input[name='groom_name']").val()).css(self.transStyle(data.groom_info));
                 $("#bride_info").text($("input[name='bride_name']").val()).css(self.transStyle(data.bride_info));
                 $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
@@ -395,7 +412,10 @@
         }
     }
 //    stepNav.init();
-
+    $("#uploadCover").on("click",function(){
+        document.getElementById("cover").addEventListener("change",function(e){templateWidget.changeCover(e)}, false);
+        $("#cover").click();
+    })
 
     seajs.use(['arale/validator/0.9.2/validator', 'gallery/jquery.js'], function(Validator, $) {
         $(function() {
