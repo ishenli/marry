@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>拖拽插件</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 工具类函数
+		var isIE=(document.all)?true:false;
+		var $=function(id){
+			return "string"=== typeof id?document.getElementById(id):id;
+		}
+		var Class={
+			create:function(){
+				return function(){this.initialize.apply(this,arguments);}
+			}
+		}
+
+		var Extend = function(destination, source) {
+	        for (var property in source) {
+	            destination[property] = source[property];
+	        }
+	    }
+
+		var getCurrentStule=function(element){
+			return element.currentStyle||document.defaultView.getComputedStyle(element,null);
+		}
+
+		//事件监听
+		function addEventHandler(target,type,handler){
+			if(target.addEventListener){
+				target.addEventListener(type,handler,false);
+			}else if(target.attachEvent) {//for ie
+				target.attachEvent("on"+type,handler);
+			}else{
+				target["on"+type]=handler;
+			}
+		}
+
+		function removeEventHandler(target,type,handler){
+			if(target.removeEventListener){
+				target.removeEventListener(type,handler,false);
+			}else if(target.detachEvent) {//for ie
+				target.detachEvent("on"+type,handler);
+			}else{
+				target["on"+type]=null;
+			}
+		}
+		var BindAsEventListener = function(object, fun) {
+	        return function(event) {
+	            return fun.call(object, (event || window.event));
+	        }
+    	}
+
+		//drag 
+		var Drag=Class.create();
+		Drag.prototype={
+			initialize:function(drag,options){
+				this.Drag=$(drag);
+				this.self=this 
+				this._x=this._y=0;
+				this._marginLeft=this._marginTop=0;
+
+				this.setOptions(options);
+
+				this._Handle = $(this.options.Handle) || this.Drag;
+
+				addEventListener(this._Handle,"mousedown",BindAsEventListener(this,this.Start));
+			}
+			//设置默认属性
+			setOptions:function(options){
+				this.options={
+					handler:'',
+					onStart:function(){},
+					onStop:function(){},
+					onMove:function(){}
+				};
+				Extend(this.options,options||{})
+			},
+			Start:function(e){
+				 //记录鼠标相对拖放对象的位置
+            	this._x = oEvent.clientX - this.Drag.offsetLeft;
+            	this._y = oEvent.clientY - this.Drag.offsetTop;
+
+            	 //记录margin
+            	this._marginLeft = parseInt(CurrentStyle(this.Drag).marginLeft) || 0;
+            	this._marginTop = parseInt(CurrentStyle(this.Drag).marginTop) || 0;
+
+            	addEventHandler(document, "mousemove", this._fM);
+	            addEventHandler(document, "mouseup", this._fS);
+	            if(isIE){
+	                //焦点丢失
+	                addEventHandler(this._Handle, "losecapture", this._fS);
+	                //设置鼠标捕获
+	                this._Handle.setCapture();
+	            }else{
+	                //焦点丢失
+	                addEventHandler(window, "blur", this._fS);
+	                //阻止默认动作
+	                oEvent.preventDefault();
+	            };
+	            //附加程序
+	            this.onStart();
+				}
+		}
+	</script>
+</body>
+</html>

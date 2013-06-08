@@ -355,7 +355,6 @@ var SALT = "*#0621ix51y6679&";
         fileInput: null,				//html file控件
         dragDrop: null,					//拖拽敏感区域
         upButton: null,					//提交按钮
-        url: "",						//ajax地址
         fileFilter: [],					//过滤后的文件数组
         filter: function(files) {
             var arrFiles = [];
