@@ -682,7 +682,11 @@
     font-size: 18px;
     color: #666666;
 }
-
+.invitation-template .invitation-list{
+    height: 410px;
+    overflow: auto;
+    width: 260px;
+}
 .invitation-template .invitation-list li{
     float: left;
     width: 110px;
@@ -704,7 +708,7 @@
     left: 50%;
     margin-left:-150px;
     margin-top: -117px;
-    background: url("../assets/images/iphone5.png") no-repeat;
+    background: url("../assets/images/iphone5_bg.png") no-repeat;
     z-index: 1;
 }
 .third-step .iphone5{
@@ -814,4 +818,24 @@
 
 #downloadCon .code {
     margin-top: 23px;
+}
+
+.phone-layer {
+    margin: 97px 0 0 28px;
+    position: relative;
+}
+.phone-layer .bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 460px;
+    display: none;
+}
+.phone-layer .bg img{
+    width: 260px;
+    height: 460px;
+}
+.phone-layer .info{
+    position: absolute;
 }
