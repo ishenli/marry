@@ -69,11 +69,11 @@
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">你的名字:</label>
-                                <input class="input" type="text" id="yourName" name="groom_name"/>
+                                <input class="input" type="text" id="yourName" name="card[groom_name]"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">Ta的名字:</label>
-                                <input class="input" type="text" id="halfName" name="bride_name"/>
+                                <input class="input" type="text" id="halfName" name="card[bride_name]"/>
                             </div>
                             <div class="form-item">
                                 <label for="" class="label">婚礼时间:</label>
@@ -101,10 +101,11 @@
                             </div>
                         </div>-->
                         <div class="phone-layer" id="phoneLayer">
-                            <img src="" id="coverImg" class="fn-hide">
+                            <img src="" id="coverImg" class="fn-hide info">
                             <div class="bg"><img src=""></div>
                             <div class="info" id="bride_info"></div>
                             <div class="info" id="groom_info"></div>
+                            <div class="info" id="place_info"></div>
                         </div>
                     </div>
                     <div class="invitation-template">
@@ -122,13 +123,7 @@
                             seajs.use(['marry/application'], function(App) {
                                 var invitation=new App.Invitation();
                                 invitation.getTemplate({
-                                    element:"#templatePanel",
-                                    callback:function(){
-                                        $("#templatePanel li").click(function(){
-                                            alert($(this).attr("data-id"));
-                                            $("#templateId").val($(this).attr("data-id"));
-                                        })
-                                    }
+                                    element:"#templatePanel"
                                 });
                             });
                         </script>
@@ -321,12 +316,29 @@
                         })
                     }
                 })*/
-                if($("input[name='groom_name']").val());
-                $("#groom_info").text($("input[name='groom_name']").val()).css(self.transStyle(data.groom_info));
-                $("#bride_info").text($("input[name='bride_name']").val()).css(self.transStyle(data.bride_info));
-                $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
+                var templates= window.temData,data;
+                for(var i in templates){
+                   if(id==templates[i].id){
+                      data=templates[i];
+                      break;
+                   }
+                }
+                self.updateTemplate(data);
 
             });
+        },
+        updateTemplate:function(data){
+            var self=this;
+            if(!self.validate()) return alert("请输入完整的信息,^_^");
+            $("#groom_info").text($("input[name='card[groom_name]']").val()).css(self.transStyle(data.groom_info));
+            $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
+            $("#place_info").text($("#place").val()).css(self.transStyle(data.time_info));
+            $("#coverImg").css(self.transImg(data.image_info)[0]);
+            $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
+
+        },
+        validate:function(){
+            return true;
         },
         transStyle:function(data){
            var result=data;
@@ -336,6 +348,14 @@
             result.fontSize=data.font;
             console.log(result);
             return result;
+        },
+        transImg:function(data){
+           var result=data;
+           for(var i in result){
+               result.left=result.x;
+               result.top=result.y;
+           }
+           return result
         }
     }
     templateWidget.init();
@@ -393,7 +413,7 @@
             }
             return true;
         },
-        formBlur:function(){
+        formChange:function(){
             $("#secondStep input,#secondStep textarea").blur(function(){
                 var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
                 if(name!==""&&description!==""){
