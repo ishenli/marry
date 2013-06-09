@@ -233,7 +233,7 @@ define(function(require, exports, module) {
                     url:url,
                     success:function(result){
                         var data=result.montages;
-                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{userid}">{name}</a> </div> </footer> </article>';
+                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:void(0)"> <img src="{avatar}"> </a> <a href="javascript:void(0)">{name}</a> </div> </footer> </article>';
                         if(data.length===0){
                             adjustFootPos();
                             $("#ellipsis").remove();
@@ -242,7 +242,7 @@ define(function(require, exports, module) {
                         var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
                         for(var i=0;i<len;i++)
                         {
-                            output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count)
+                            output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{fav}", data[i].collection_count)
                                 .replace("{share}",data[i].share_count).replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                         }

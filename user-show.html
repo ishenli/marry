@@ -35,17 +35,23 @@
     });
 
 </script>
-<!--<header class="ui-green-header user-header">
+<header class="ui-green-header user-header">
     <div class="user-header-inner">
         <div class="user-info">
              <span class="big-avatar fn-left">
-                 <img src="assets/test/avatar.jpg">
+                 <img src="" id="avatar" alt="个人头像">
              </span>
-            <a href="javascript:;" class="username" id="username"></a>
-            <p class="description">
-                描述文字，啊啊啊啊啊啊
-            </p>
+            <a href="#" class="username" id="username"></a>
+            <p class="description" id="description"></p>
         </div>
+        <script type="text/javascript">
+            var user=JSON.parse(localStorage["user"]);
+            $("#username").text(user.nick);
+            $("#avatar").attr("src",user.avatar);
+            if(user.description!==null){
+                $("#description").text(user.description);
+            }
+        </script>
         <ul class="ui-page-nav user-nav">
             <li>
                 <div class="sl-hvalign">
@@ -70,7 +76,7 @@
                 <div class="sl-hvalign">
                     <div class="sl-hvalign-cnt">
                         <div class="sl-hvalign-cnt-inner">
-                            <a href="#">我的画卷</a>
+                            <a href="javascript:;">我的画卷</a>
                         </div>
                     </div>
                 </div>
@@ -78,10 +84,12 @@
             </li>
         </ul>
         <div class="sl-vertical create">
-            <a href="#" target="_blank" class="ui-btn ui-btn-green large"> <span class="ui-btn-text"> 创建画卷 </span> </a>
+            <a href="marry-editNew.html" class="ui-btn ui-btn-green large">
+                <span class="ui-btn-text"> 创建画卷 </span>
+            </a>
         </div>
     </div>
-</header>-->
+</header>
 <section id="container" class="container">
     <div class="user-grid ui-shadow" id="montageList">
     </div>
@@ -104,9 +112,10 @@
                 element:"#montageList",
                 type:"index",
                 param:{
+                    user_id: JSON.parse(localStorage["user"]).id,
                     token : localStorage["token"],
                     secret : localStorage["secret"],
-                    user_id: location.hash.substring(1)
+                    create:1
                 },
                 pageItems:6,
                 callback:adjustFootPos
