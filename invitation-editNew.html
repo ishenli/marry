@@ -101,12 +101,12 @@
                             </div>
                         </div>-->
                         <div class="phone-layer" id="phoneLayer">
-                            <img src="" id="coverImg" class="fn-hide info">
+                            <img src="" id="coverImg" class="fn-hide info cover-img">
                             <div class="bg"><img src=""></div>
-                            <div class="info" id="bride_info"></div>
-                            <div class="info" id="groom_info"></div>
-                            <div class="info" id="place_info"></div>
                         </div>
+                        <div class="info" id="bride_info"></div>
+                        <div class="info" id="groom_info"></div>
+                        <div class="info" id="place_info"></div>
                     </div>
                     <div class="invitation-template">
                         <header>
@@ -306,7 +306,6 @@
             var self=this;
             $(document).on("click", "#templatePanel>li",function(){
                var id=$(this).attr("data-id");
-                console.log("the id is "+id);
 /*                Window.util.FlyJSONP.get({
                     url:"http://www.marrymemo.com/themes/"+id+".json",
                     success:function(data){
@@ -332,8 +331,12 @@
             if(!self.validate()) return alert("请输入完整的信息,^_^");
             $("#groom_info").text($("input[name='card[groom_name]']").val()).css(self.transStyle(data.groom_info));
             $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
-            $("#place_info").text($("#place").val()).css(self.transStyle(data.time_info));
-            $("#coverImg").css(self.transImg(data.image_info)[0]);
+            $("#place_info").text($("#place").val()).css(self.transStyle(data.location_info));
+            var imgList=self.transImg(data.image_info);
+            for(var i in imgList){
+                console.log(i);
+                $(".cover-img").eq(i).css(imgList[i]);
+            }
             $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
 
         },
@@ -341,20 +344,23 @@
             return true;
         },
         transStyle:function(data){
+           console.log(data);
+
            var result=data;
             result.color="RGB("+data.color+")";
             result.left=data.x;
             result.top=data.y;
             result.fontSize=data.font;
-            console.log(result);
             return result;
         },
         transImg:function(data){
            var result=data;
-           for(var i in result){
-               result.left=result.x;
-               result.top=result.y;
-           }
+           for(var i= 0,len=data.length;i<len;i++){
+               result[i].left=result[i].x;
+               result[i].top=result[i].y;
+            }
+           console.log("the image x is "+data.length);
+           console.log("the image is "+result[0].left);
            return result
         }
     }
