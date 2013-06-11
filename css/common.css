@@ -763,7 +763,7 @@
     margin-top: 23px;
 }
 .phone-layer {
-    margin: 97px 0 0 28px;
+    margin: 94px 0 0 28px;
     position: relative;
 }
 .phone-layer .bg {
@@ -771,7 +771,7 @@
     height: 455px;
     left: 0;
     position: absolute;
-    top: 0;
+    top: 3px;
     width: 256px;
 }
 .phone-layer img {

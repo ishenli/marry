@@ -352,7 +352,7 @@
         },
         parameter:{
            xAdjust:257/320,
-           yAdjust:462/568
+           yAdjust:455/568
         },
         transStyle:function(data){
            console.log(data);
@@ -362,6 +362,7 @@
             result.left=(data.x)*this.parameter.xAdjust;
             result.top=(data.y)*this.parameter.yAdjust;
             result.fontSize=data.font;
+            result.textAlign=(data.alignment===2?"center":"left");
             return result;
         },
         transImg:function(data){
