@@ -763,20 +763,20 @@
     margin-top: 23px;
 }
 .phone-layer {
-    margin: 94px 0 0 24px;
+    margin: 97px 0 0 28px;
     position: relative;
 }
 .phone-layer .bg {
     display: none;
-    height: 460px;
+    height: 455px;
     left: 0;
     position: absolute;
     top: 0;
-    width: 260px;
+    width: 256px;
 }
 .phone-layer img {
-    height: 462px;
-    width: 264px;
+    height: 455px;
+    width: 256px;
 }
 .iphone5 .info {
     position: absolute;

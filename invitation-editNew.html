@@ -68,16 +68,16 @@
                                 <span class="ui-radio-txt"> 新娘</span>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">你的名字:</label>
+                                <label for="yourName" class="label">你的名字:</label>
                                 <input class="input" type="text" id="yourName" name="card[groom_name]"/>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">Ta的名字:</label>
+                                <label for="halfName" class="label">Ta的名字:</label>
                                 <input class="input" type="text" id="halfName" name="card[bride_name]"/>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">婚礼时间:</label>
-                                <input class="input" type="text"/>
+                                <label for="marryTime" class="label">婚礼时间:</label>
+                                <input class="input" id="marryTime" type="text"/>
                             </div>
                             <div class="form-item form-item-error position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
@@ -103,10 +103,11 @@
                         <div class="phone-layer" id="phoneLayer">
                             <img src="" id="coverImg" class="fn-hide info cover-img">
                             <div class="bg"><img src=""></div>
+                            <div class="info" id="bride_info"></div>
+                            <div class="info" id="groom_info"></div>
+                            <div class="info" id="time_info"></div>
+                            <div class="info" id="place_info"></div>
                         </div>
-                        <div class="info" id="bride_info"></div>
-                        <div class="info" id="groom_info"></div>
-                        <div class="info" id="place_info"></div>
                     </div>
                     <div class="invitation-template">
                         <header>
@@ -270,6 +271,9 @@
     var formWidget={
         init:function(){
             this.chooseSex();
+            seajs.use('arale/calendar/0.8.4/calendar', function(Calendar) {
+                new Calendar({trigger: '#marryTime'});
+            });
         },
         chooseSex:function(){
             $("input[name='sex']").on("click",function(){
@@ -315,14 +319,17 @@
                         })
                     }
                 })*/
-                var templates= window.temData,data;
+
+                var templates,temParam;
+                 templates= self.cloneObject(window.temData);
+                console.log(window.temData);
                 for(var i in templates){
                    if(id==templates[i].id){
-                      data=templates[i];
+                       temParam=templates[i];
                       break;
                    }
                 }
-                self.updateTemplate(data);
+                self.updateTemplate(temParam);
 
             });
         },
@@ -332,9 +339,9 @@
             $("#groom_info").text($("input[name='card[groom_name]']").val()).css(self.transStyle(data.groom_info));
             $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
             $("#place_info").text($("#place").val()).css(self.transStyle(data.location_info));
+            $("#time_info").text($("#marryTime").val()).css(self.transStyle(data.time_info));
             var imgList=self.transImg(data.image_info);
             for(var i in imgList){
-                console.log(i);
                 $(".cover-img").eq(i).css(imgList[i]);
             }
             $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
@@ -343,25 +350,41 @@
         validate:function(){
             return true;
         },
+        parameter:{
+           xAdjust:257/320,
+           yAdjust:462/568
+        },
         transStyle:function(data){
            console.log(data);
 
            var result=data;
-            result.color="RGB("+data.color+")";
-            result.left=data.x;
-            result.top=data.y;
+            result.color="RGB("+data.color+")"
+            result.left=(data.x)*this.parameter.xAdjust;
+            result.top=(data.y)*this.parameter.yAdjust;
             result.fontSize=data.font;
             return result;
         },
         transImg:function(data){
            var result=data;
            for(var i= 0,len=data.length;i<len;i++){
-               result[i].left=result[i].x;
-               result[i].top=result[i].y;
+               console.log("width is"+result[i].width);
+               console.log("left is"+result[i].left);
+               result[i].left=(result[i].x)*this.parameter.xAdjust;
+               result[i].top=(result[i].y)*this.parameter.yAdjust;
+               result[i].width=(result[i].width)*this.parameter.xAdjust;
             }
-           console.log("the image x is "+data.length);
-           console.log("the image is "+result[0].left);
+           console.log("the image is "+result[0].width);
            return result
+        },
+        cloneObject:function(obj){
+            var o = obj.constructor === Array ? [] : {};
+            for(var i in obj){
+                if(obj.hasOwnProperty(i)){
+                    o[i] = typeof obj[i] === "object" ? this.cloneObject(obj[i]) : obj[i];
+                }
+            }
+            return o;
+
         }
     }
     templateWidget.init();
