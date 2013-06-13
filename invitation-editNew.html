@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>婚礼纪</title>
+    <title>婚礼纪--创建请帖</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/base.css">
@@ -45,11 +45,14 @@
     </script>
 
     <div id="container" class="container">
-        <form class="ui-form" action="#" method="post">
+        <form class="ui-form" action="http://www.marrymemo.com/cards.json" method="post" target="hidden_frame">
         <input type="hidden" name="token" value="" id="token"/>
         <input type="hidden" name="secret" value="" id="secret"/>
         <input type="hidden" name="card[user_id]" id="userId">
         <input type="hidden" name="card[theme_id]" id="templateId">
+        <input type="hidden" name="card[audio_pos]" id="audio">
+        <input type="hidden" name="card[latitude]" id="latitude">
+        <input type="hidden" name="card[longitude]" id="longitude">
         <input type="text" class="fn-hide"  id="fileIndex" value="2">
         <section id="firstStep" >
             <div class="add-panel ui-shadow">
@@ -86,10 +89,10 @@
                                 <label for="marryTime" class="label">婚礼时间:</label>
                                 <input class="input" id="marryTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"/>
                             </div>
-                            <div class="form-item form-item-error position-panel">
+                            <div class="form-item position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
                                 <textarea id="place" name="card[place]" class="textarea"></textarea>
-                                <span class="position-btn">定位</span>
+                                <span class="position-btn" id="pin">定位</span>
                             </div>
                             <div class="form-item text-center">
                                 <input type="file" name="file1" id="cover">
@@ -250,6 +253,7 @@
         </section>
         </form>
 </div>
+<div id="map" class="fn-hide"></div>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
         seajs.use(['marry/application'], function(App) {
@@ -260,7 +264,13 @@
 </div>
 <script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/dist/chinese-lunar.js"></script>
+
 <script type="text/javascript">
+function loadScript() {
+    var script = document.createElement("script");
+    script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapFun";//此为v1.5版本的引用方式
+    document.body.appendChild(script);
+}
     var params = {
         fileInput: $("#file2").get(0),
         addPanel:'#2ndPanel'
@@ -411,7 +421,6 @@
             $("#firstStep").hide();
             $("#secondStep").show();
             $("#2to1").on("click",self.backFirst);
-//            self.formBlur();
             $("#2to3").on("click",function(){
                 self.goThird();
             });
@@ -439,23 +448,10 @@
             $("#secondStep").show();
         },
         validate:function(){
-            console.log("validate!!!");
-            var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
-            if(name===""||description===""){
-                alert("请输入相关信息");
-                return false;
-            }
             return true;
         },
-        formChange:function(){
-            $("#secondStep input,#secondStep textarea").blur(function(){
-                var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
-                if(name!==""&&description!==""){
-                    $("#2to3").removeClass("gray").addClass("ui-btn-green");
-                }
-            });
-        },
         submit:function(){
+            $("#createSubmit").val("创建中...");
             $("#hidden_frame").on("load complete",function(){
                 var data=$(window.frames["hidden_frame"].document).find("pre").html();
                 if(data.indexOf("ok")!==-1)
@@ -469,6 +465,30 @@
     $("#uploadCover").on("click",function(){
         document.getElementById("cover").addEventListener("change",function(e){templateWidget.changeCover(e)}, false);
         $("#cover").click();
+    })
+    function mapFun(){
+        var map = new BMap.Map("map");
+        var localSearch = new BMap.LocalSearch(map);
+        function searchByStationName() {
+            $("#pin").text("定位中...");
+            var keyword = document.getElementById("place").value;
+            localSearch.setSearchCompleteCallback(function(searchResult) {
+                var poi = searchResult.getPoi(0);
+                $("#latitude").val(poi.point.lat);
+                $("#longitude").val(poi.point.lng);
+                $("#pin").text("定位完成");
+            });
+            localSearch.search(keyword);
+        }
+        $("#place").on("change",searchByStationName);
+    }
+    function loadScript() {
+        var script = document.createElement("script");
+        script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapFun";//此为v1.5版本的引用方式
+        document.body.appendChild(script);
+    }
+    $("document").ready(function(){
+        loadScript();
     })
 </script>
 </body>

@@ -783,3 +783,17 @@
 .phone-layer .info {
     position: absolute;
 }
+
+.position-panel {
+    position: relative;
+}
+
+.position-panel .position-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 18px;
+    display: block;
+    background: #B1E441;
+    color: #fff;
+    padding: 0 2px;
+}
