@@ -117,6 +117,7 @@
                             <div class="info" id="groom_info"></div>
                             <div class="info" id="time_info"></div>
                             <div class="info" id="place_info"></div>
+                            <div class="info" id="lunar_info"></div>
                         </div>
                     </div>
                     <div class="invitation-template">
@@ -344,8 +345,13 @@ function loadScript() {
             var strDate= $("#marryTime").val();
             var inputDate=new Date(strDate.substr(0,10));
             var tranDate=chineseLunar.solarToLunar(inputDate);
-            var newDate=tranDate.gongli+" "+strDate.substr(10)+"<br/>"+tranDate.nongli;
+            var newDate=tranDate.gongli+" "+strDate.substr(10);
             $("#time_info").html(newDate).css(self.transStyle(data.time_info));
+            if(data.lunar_info.width!==undefined&&typeof (data.lunar_info.width)=="number"){
+                $("#lunar_info").text(tranDate.nongli).css(self.transStyle(data.lunar_info)).show();
+            }else{
+                $("#lunar_info").hide();
+            }
             var imgList=self.transImg(data.image_info);
             for(var i in imgList){
                 $(".cover-img").eq(i).css(imgList[i]);
@@ -366,7 +372,7 @@ function loadScript() {
             return flag;
         },
         parameter:{
-           xAdjust:257/320,
+           xAdjust:260/320,
            yAdjust:455/568
         },
         transStyle:function(data){
@@ -415,11 +421,14 @@ function loadScript() {
         backFirst:function(){
             $("#firstStep").show();
             $("#secondStep").hide();
+            adjustFootPos();
         },
         goSecond:function(){
             var self=this;
+
             $("#firstStep").hide();
             $("#secondStep").show();
+            adjustFootPos();
             $("#2to1").on("click",self.backFirst);
             $("#2to3").on("click",function(){
                 self.goThird();
@@ -430,14 +439,17 @@ function loadScript() {
         },
         goThird:function(){
             var self=this;
-            if($("#2ndPanel article").size()<2) return alert("请上传图片");
+            if($("#2ndPanel article").size()<2) {
+                return alert("请上传照片 ^_^");
+            }
 
-            $("#secondStep").hide();
             var photoList=$("#2ndPanel article");
             for(var i=0;i<(photoList.size()-1);i++){
                 photoList.eq(i).find("input[type='file']").attr("name","image_file"+(i+2));
             }
+            $("#secondStep").hide();
             $("#thirdStep").show();
+            adjustFootPos();
             $("#3to2").click(function(){
                 self.backSecond();
             });
@@ -446,6 +458,7 @@ function loadScript() {
         backSecond:function(){
             $("#thirdStep").hide();
             $("#secondStep").show();
+            adjustFootPos();
         },
         validate:function(){
             return true;
