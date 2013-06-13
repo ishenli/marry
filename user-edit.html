@@ -40,32 +40,31 @@
     <div class="user-edit-inner">
         <h1>资料修改</h1>
     </div>
+    <form class="ui-form" name="" method="post" action="users.json" id="infoEdit">
     <div class="form-panel" id="container">
-        <form class="ui-form" name="" method="post" action="users.json" id="infoEdit">
             <input type="hidden" name="token" value="" id="token"/>
             <input type="hidden" name="secret" value="" id="secret"/>
             <input type="hidden" name="montage[user_id]" id="userId">
             <fieldset>
                 <legend>表单标题</legend>
-                <div class="ui-form-item ui-form-item-error">
+                <div class="ui-form-item">
                     <label for="username" class="ui-lable">昵称:</label>
-                    <input class="ui-input" id="username" name="username" type="text">
-                    <div class="ui-form-explain">昵称不能为空</div>
-                </div>
-                <div class="ui-form-item ui-form-item-error">
-                    <label for="" class="ui-lable">性别:</label>
-                    <input class="ui-radio" type="radio" name="sex"/>
-                    <span class="ui-radio-txt"> 男</span>
-                    <input class="ui-radio" type="radio" name="sex"/>
-                    <span class="ui-radio-txt"> 女</span>
-                </div>
-                <div class="ui-form-item ui-form-item-error">
-                    <label for=""class="ui-lable">出生年月:</label>
-                    <input class="ui-input" name="birthday" id="birthday" type="text"/> <span class="ui-form-other"><a href="#">格式为xxxx-xx-xx</a></span>
+                    <input class="ui-input" id="username" name="user[nick]" type="text">
                 </div>
                 <div class="ui-form-item">
-                    <label for="" class="ui-lable">自我介绍:</label>
-                    <textarea name="info" onclick="this.value=''" class="ui-textarea">这家伙很懒，什么都没留下</textarea>
+                    <label class="ui-lable">性别:</label>
+                    <input class="ui-radio" type="radio" name="user[gender]" checked/>
+                    <span class="ui-radio-txt"> 男</span>
+                    <input class="ui-radio" type="radio" name="user[gender]"/>
+                    <span class="ui-radio-txt"> 女</span>
+                </div>
+                <div class="ui-form-item">
+                    <label for="birthday"class="ui-lable">出生年月:</label>
+                    <input class="ui-input" name="user[birthday]" id="birthday" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/> <span class="ui-form-other"><a href="#">格式为xxxx-xx-xx</a></span>
+                </div>
+                <div class="ui-form-item">
+                    <label for="description" class="ui-lable">自我介绍:</label>
+                    <textarea name="user[description]" id="description" onclick="this.value=''" class="ui-textarea">这家伙很懒，什么都没留下</textarea>
                 </div>
                 <div class="ui-form-item">
                     <div class="ui-btn middle ui-btn-green">
@@ -73,12 +72,14 @@
                     </div>
                 </div>
             </fieldset>
-        </form>
+
     </div>
     <div class="img-panel">
-        <img src="assets/test/beauty.jpg" alt=""/>
-        <p>更新一张很酷的照片</p>
+        <img src="assets/test/beauty.jpg" alt="" id="avatarImg"/>
+        <input type="file" name="image_file1" id="avatarFile" style="display: none">
+        <a href="javascript:void(0)" id="changeAvatar">更新一张很酷的照片</a>
     </div>
+</form>
 </section>
 <footer class="ui-footer ui-shadow-top" id="foot"></footer>
 <script type="text/javascript">
@@ -88,10 +89,12 @@
     });
 </script>
 </div>
+<script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
     $("#token").val(localStorage["token"]);
     $("#secret").val(localStorage["secret"]);
-    $("#userId").val(JSON.parse(localStorage["user"]).id);
+//    $("#userId").val(JSON.parse(localStorage["user"]).id);
+    $("#userId").val(126);
     seajs.use(['arale/validator/0.9.2/validator', '$'], function(Validator, $) {
         $(function() {
             var validator = new Validator({
@@ -99,19 +102,31 @@
             });
 
             validator.addItem({
-                element: '[name=username]',
+                element: '#username',
                 required: true,
                 rule: 'minlength{min:1} maxlength{max:20}'
             }).addItem({
-                        element: '[name=birthday]',
-                        required: true,
-                        rule: 'minlength{min:5}'
-                    })
+                element: '#birthday',
+                required: true
+            }).addItem({
+                element: '#description',
+                required: true
+            })
         });
     });
-    seajs.use('arale/calendar/0.8.4/calendar', function(Calendar) {
-        new Calendar({trigger: '#birthday'});
-    });
+    $("#changeAvatar").on("click",function(){
+        document.getElementById("avatarFile").addEventListener("change",function(e){
+            var files = e.target.files || e.dataTransfer.files;
+            if (files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#avatarImg").attr("src",e.target.result);
+                }
+                reader.readAsDataURL(files[0]);
+            }
+        }, false);
+        $("#avatarFile").click();
+    })
 </script>
 </body>
 </html>
