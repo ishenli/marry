@@ -470,22 +470,6 @@
         document.getElementById("cover").addEventListener("change",function(e){templateWidget.changeCover(e)}, false);
         $("#cover").click();
     })
-
-    seajs.use(['arale/validator/0.9.2/validator', 'gallery/jquery.js'], function(Validator, $) {
-        $(function() {
-            var validator = new Validator({
-                element: 'form'
-            });
-            validator.addItem({
-                element: '#place',
-                required: true
-            }).addItem({
-                element: '#yourName',
-                required: true,
-                display:"名字"
-            })
-        });
-    });
 </script>
 </body>
 </html>
