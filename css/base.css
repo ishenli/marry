@@ -33,9 +33,9 @@ body{
 
 }
 /* 要注意表单元素并不继承父级 font 的问题 */
-
 button, input, select, textarea {
-    font: 14px/1.5 'Arial', sans-serif;
+    font-size: 14px;
+    font-family: "Microsoft Yahei", "微软雅黑";
 }
 
 input, select, textarea {
