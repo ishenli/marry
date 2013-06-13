@@ -13,18 +13,10 @@
     <link rel="stylesheet" type="text/css" href="css/status.css">
     <script src="js/sea-modules/seajs/1.3.1/sea.js" type="text/javascript"></script>
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-
     <script type="text/javascript" src="js/application.js"></script>
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-        seajs.config({
-            alias: {
-                "$": "gallery/jquery.js"
-            }
-        });
-    </script>
 </head>
 <body>
 <div id="wrapper">
@@ -68,16 +60,16 @@
                                 <span class="ui-radio-txt"> 新娘</span>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">你的名字:</label>
-                                <input class="input" type="text" id="yourName" name="groom_name"/>
+                                <label for="yourName" class="label">你的名字:</label>
+                                <input class="input" type="text" id="yourName" name="card[groom_name]"/>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">Ta的名字:</label>
-                                <input class="input" type="text" id="halfName" name="bride_name"/>
+                                <label for="halfName" class="label">Ta的名字:</label>
+                                <input class="input" type="text" id="halfName" name="card[bride_name]"/>
                             </div>
                             <div class="form-item">
-                                <label for="" class="label">婚礼时间:</label>
-                                <input class="input" type="text"/>
+                                <label for="marryTime" class="label">婚礼时间:</label>
+                                <input class="input" id="marryTime" type="text"/>
                             </div>
                             <div class="form-item form-item-error position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
@@ -101,10 +93,12 @@
                             </div>
                         </div>-->
                         <div class="phone-layer" id="phoneLayer">
-                            <img src="" id="coverImg" class="fn-hide">
+                            <img src="" id="coverImg" class="fn-hide info cover-img">
                             <div class="bg"><img src=""></div>
                             <div class="info" id="bride_info"></div>
                             <div class="info" id="groom_info"></div>
+                            <div class="info" id="time_info"></div>
+                            <div class="info" id="place_info"></div>
                         </div>
                     </div>
                     <div class="invitation-template">
@@ -122,13 +116,7 @@
                             seajs.use(['marry/application'], function(App) {
                                 var invitation=new App.Invitation();
                                 invitation.getTemplate({
-                                    element:"#templatePanel",
-                                    callback:function(){
-                                        $("#templatePanel li").click(function(){
-                                            alert($(this).attr("data-id"));
-                                            $("#templateId").val($(this).attr("data-id"));
-                                        })
-                                    }
+                                    element:"#templatePanel"
                                 });
                             });
                         </script>
@@ -258,7 +246,13 @@
     </script>
 </div>
 <script type="text/javascript">
-    var data={"background":"/ThemeBack/20130205152458.jpg","bride_info":{"x":186,"y":322,"width":132,"height":26,"angle":0,"color":"237,146,166","font":18,"alignment":0},"charge":0,"content_info":[],"created_at":"2013-02-05T07:24:58Z","groom_info":{"x":0,"y":322,"width":136,"height":26,"angle":0,"color":"139,188,184","font":18,"alignment":2},"id":2,"image_info":[{"x":41,"y":41,"width":240,"height":240,"angle":0}],"location_info":{"x":89,"y":400,"width":174,"height":42,"angle":0,"color":"164,150,149","font":16},"lunar_info":{},"name":"\u5fc3\u5fc3\u76f8\u5370","thumb_path":"/ThemeBack/1.jpg","time_info":{"x":89,"y":359,"width":194,"height":32,"angle":0,"color":"164,150,149","font":16},"updated_at":"2013-05-28T12:18:52Z"};
+seajs.config({
+    alias: {
+        "$": "gallery/jquery.js"
+    },
+    locale: 'zh-cn',
+    preload: 'seajs/plugin-i18n'
+});
     var params = {
         fileInput: $("#file1").get(0),
         addPanel:'#2ndPanel'
@@ -275,6 +269,11 @@
     var formWidget={
         init:function(){
             this.chooseSex();
+            seajs.use(['arale/calendar/0.8.4/calendar'],function(Calendar) {
+                var cal=new Calendar({
+                    trigger: '#marryTime'
+                });
+            });
         },
         chooseSex:function(){
             $("input[name='sex']").on("click",function(){
@@ -311,7 +310,6 @@
             var self=this;
             $(document).on("click", "#templatePanel>li",function(){
                var id=$(this).attr("data-id");
-                console.log("the id is "+id);
 /*                Window.util.FlyJSONP.get({
                     url:"http://www.marrymemo.com/themes/"+id+".json",
                     success:function(data){
@@ -321,21 +319,79 @@
                         })
                     }
                 })*/
-                if($("input[name='groom_name']").val());
-                $("#groom_info").text($("input[name='groom_name']").val()).css(self.transStyle(data.groom_info));
-                $("#bride_info").text($("input[name='bride_name']").val()).css(self.transStyle(data.bride_info));
-                $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
+
+                var templates,temParam;
+                 templates= self.cloneObject(window.temData);
+                console.log(window.temData);
+                for(var i in templates){
+                   if(id==templates[i].id){
+                       temParam=templates[i];
+                      break;
+                   }
+                }
+                self.updateTemplate(temParam);
 
             });
         },
+        updateTemplate:function(data){
+            var self=this;
+            if(!self.validate()) return alert("请输入完整的信息,^_^");
+            $("#groom_info").text($("input[name='card[groom_name]']").val()).css(self.transStyle(data.groom_info));
+            $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
+            $("#place_info").text($("#place").val()).css(self.transStyle(data.location_info));
+
+            seajs.use(['marry/util','$'],function(Util,$) {
+               var newdate=Util.lunar( $("#marryTime").val());
+                $("#time_info").text(newdate)
+            });
+
+            $("#time_info").css(self.transStyle(data.time_info));
+            var imgList=self.transImg(data.image_info);
+            for(var i in imgList){
+                $(".cover-img").eq(i).css(imgList[i]);
+            }
+            $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
+
+        },
+        validate:function(){
+            return true;
+        },
+        parameter:{
+           xAdjust:257/320,
+           yAdjust:455/568
+        },
         transStyle:function(data){
+           console.log(data);
+
            var result=data;
-            result.color="RGB("+data.color+")";
-            result.left=data.x;
-            result.top=data.y;
+            result.color="RGB("+data.color+")"
+            result.left=(data.x)*this.parameter.xAdjust;
+            result.top=(data.y)*this.parameter.yAdjust;
             result.fontSize=data.font;
-            console.log(result);
+            result.textAlign=(data.alignment===2?"center":"left");
             return result;
+        },
+        transImg:function(data){
+           var result=data;
+           for(var i= 0,len=data.length;i<len;i++){
+               console.log("width is"+result[i].width);
+               console.log("left is"+result[i].left);
+               result[i].left=(result[i].x)*this.parameter.xAdjust;
+               result[i].top=(result[i].y)*this.parameter.yAdjust;
+               result[i].width=(result[i].width)*this.parameter.xAdjust;
+            }
+           console.log("the image is "+result[0].width);
+           return result
+        },
+        cloneObject:function(obj){
+            var o = obj.constructor === Array ? [] : {};
+            for(var i in obj){
+                if(obj.hasOwnProperty(i)){
+                    o[i] = typeof obj[i] === "object" ? this.cloneObject(obj[i]) : obj[i];
+                }
+            }
+            return o;
+
         }
     }
     templateWidget.init();
@@ -393,7 +449,7 @@
             }
             return true;
         },
-        formBlur:function(){
+        formChange:function(){
             $("#secondStep input,#secondStep textarea").blur(function(){
                 var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
                 if(name!==""&&description!==""){

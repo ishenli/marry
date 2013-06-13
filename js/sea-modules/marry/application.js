@@ -367,7 +367,7 @@ define(function(require, exports, module) {
             util.FlyJSONP.get({
                 url:HOST + 'themes.json',
                 success:function(data){
-                    localStorage["templates"]=data;
+                    window.temData=data;
                     var html="",template='<li data-id={id}><a href="javascript:void(0)"> <img src="{pic}" alt="{name}"/> </a></li>';
 //                    var len=(data.length<4?data.length:4)
                     var len=data.length;
@@ -378,7 +378,6 @@ define(function(require, exports, module) {
                     $(option.element).html(html);
                 }
             })
-            option.callback();
         }
     })
 module.exports = App;
