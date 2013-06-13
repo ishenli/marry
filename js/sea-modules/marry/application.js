@@ -18,11 +18,18 @@ define(function(require, exports, module) {
     (function(window){
         var $li,img;
         function adjustFootPos(){
-            if($("#container").offset().top+$("#container").height()+70<WindowSize.height){
+            var oHeight= $("#container").offset().top+$("#container").height();
+            if(oHeight+70<WindowSize.height){
                 $("#foot").addClass("atFoot");
             }else{
                 $("#foot").removeClass("atFoot");
-            }}
+            }
+            if(oHeight+330<WindowSize.height){
+                $("#userFoot").addClass("atFootTop");
+            }else{
+                $("#userFoot").removeClass("atFootTop");
+            }
+        }
         function adjustViewer(){
             var height=WindowSize.height-140;
             $li=$("#slideBody li");
@@ -146,7 +153,9 @@ define(function(require, exports, module) {
                             $(option.element).append(output);
                             page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                            option.callback();
+                            setTimeout(function(){
+                                option.callback();
+                            },3000)
                         });
                     }
                 });
@@ -290,10 +299,10 @@ define(function(require, exports, module) {
                     url:url,
                     success:function(result){
                         var data=result.montages,output="";
-                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-index.html#{uid}"> <img src="{avatar}"> </a> <a href="user-index.html#{userid}">{name}</a> </div> </footer> </article>';
+                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;">{name}</a> </div> </footer> </article>';
                         for(var i=0;i<data.length;i++)
                         {
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
                                 .replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
 
                         }
