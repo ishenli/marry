@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-item">
                                 <label for="marryTime" class="label">婚礼时间:</label>
-                                <input class="input" id="marryTime" type="text"/>
+                                <input class="input" id="marryTime" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                             </div>
                             <div class="form-item form-item-error position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
@@ -245,6 +245,7 @@
         });
     </script>
 </div>
+<script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 seajs.config({
     alias: {
@@ -269,11 +270,6 @@ seajs.config({
     var formWidget={
         init:function(){
             this.chooseSex();
-            seajs.use(['arale/calendar/0.8.4/calendar'],function(Calendar) {
-                var cal=new Calendar({
-                    trigger: '#marryTime'
-                });
-            });
         },
         chooseSex:function(){
             $("input[name='sex']").on("click",function(){
@@ -342,7 +338,7 @@ seajs.config({
 
             seajs.use(['marry/util','$'],function(Util,$) {
                var newdate=Util.lunar( $("#marryTime").val());
-                $("#time_info").text(newdate)
+                $("#time_info").html(newdate)
             });
 
             $("#time_info").css(self.transStyle(data.time_info));

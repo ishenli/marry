@@ -80,20 +80,15 @@ define(function(require, exports, module) {
     Util.lunar=function(date){
         //获取当前系统时间
         curTime = new Date(date);
-//星期名
         var weekName = "星期日,星期一,星期二,星期三,星期四,星期五,星期六".split(/,/g);
-//农历日期名
         var dayName = "*,初一,初二,初三,初四,初五,初六,初七,初八,初九,初十,十一,十二,十三,十四,十五,十六,十七,十八,十九,二十,廿一,廿二,廿三,廿四,廿五,廿六,廿七,廿八,廿九,三十".split(/,/g);
-//农历月份名
         var monName = "*,正,二,三,四,五,六,七,八,九,十,十一,腊".split(/,/g);
-//公历每月前面的天数
         var monthAdd = new Array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
-//农历数据
         var nongliData = new Array(2635, 333387, 1701, 1748, 267701, 694, 2391, 133423, 1175, 396438, 3402, 3749, 331177, 1453, 694, 201326, 2350, 465197, 3221, 3402, 400202, 2901, 1386, 267611, 605, 2349, 137515, 2709, 464533, 1738, 2901, 330421, 1242, 2651, 199255, 1323, 529706, 3733, 1706, 398762, 2741, 1206, 267438, 2647, 1318, 204070, 3477, 461653, 1386, 2413, 330077, 1197, 2637, 268877, 3365, 531109, 2900, 2922, 398042, 2395, 1179, 267415, 2635, 661067, 1701, 1748, 398772, 2742, 2391, 330031, 1175, 1611, 200010, 3749, 527717, 1452, 2742, 332397, 2350, 3222, 268949, 3402, 3493, 133973, 1386, 464219, 605, 2349, 334123, 2709, 2890, 267946, 2773, 592565, 1210, 2651, 395863, 1323, 2707, 265877);
-//生成当前公历年、月、日 ==> GongliStr
         var curYear = curTime.getFullYear();
         var curMonth = curTime.getMonth() + 1;
         var curDay = curTime.getDate();
+        var hours=curTime.getHours(),minutes=curTime.getMinutes(),seconds=curTime.getSeconds();
         var curWeekday = curTime.getDay();
         var weekdayStr = weekName[curWeekday];
 //计算到初始时间1921年2月8日的天数：1921-2-8(正月初一)
@@ -147,7 +142,7 @@ define(function(require, exports, module) {
         o.nMonth += "月";
         o.nDate = dayName[curDay];
 //        console.log("the lunar is "+ o.nMonth+ o.nDate+ o.dayName);
-        return date+ o.nMonth+" "+ o.nDate+" "+ o.dayName;
+        return curYear+"年"+curMonth+"月"+curDay+"日&nbsp;&nbsp;"+hours+":"+minutes+"<br/>农历："+ o.nMonth+""+ o.nDate+" "+ o.dayName;
     }
     module.exports = Util;
 });
