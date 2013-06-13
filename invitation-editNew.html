@@ -417,6 +417,15 @@ function loadScript() {
                     alert("请选择模板 ^_^");
                 }
             });
+
+            $("#2to1").on("click",self.backFirst);
+            $("#2to3").on("click",function(){
+                self.goThird();
+            });
+            $("#3to2").click(function(){
+                self.backSecond();
+            });
+            $("#createSubmit").on("click",self.submit);
         },
         backFirst:function(){
             $("#firstStep").show();
@@ -424,21 +433,12 @@ function loadScript() {
             adjustFootPos();
         },
         goSecond:function(){
-            var self=this;
-
             $("#firstStep").hide();
             $("#secondStep").show();
             adjustFootPos();
-            $("#2to1").on("click",self.backFirst);
-            $("#2to3").on("click",function(){
-                self.goThird();
-            });
             $("#iphone5Second").html($("#iphone5First").children().clone());
-
-
         },
         goThird:function(){
-            var self=this;
             if($("#2ndPanel article").size()<2) {
                 return alert("请上传照片 ^_^");
             }
@@ -450,10 +450,7 @@ function loadScript() {
             $("#secondStep").hide();
             $("#thirdStep").show();
             adjustFootPos();
-            $("#3to2").click(function(){
-                self.backSecond();
-            });
-            $("#createSubmit").on("click",self.submit);
+
         },
         backSecond:function(){
             $("#thirdStep").hide();

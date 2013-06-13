@@ -187,28 +187,29 @@
                 if($(this).attr("data-next")==="true"){
                     self.goSecond();
                 }else{
-                    alert("请上传图片");
+                    alert("请上传照片 ^_^");
                 }
             });
-            /*$("#1stPanel").change(function(){
-                if($("#1stPanel article").size()<2){
-                    $("#index1").removeClass("ui-btn-green").addClass("gray").attr("data-next","false");
-                }
-            });*/
+            $("#2to1").on("click",function(){
+                $("#firstStep").show();
+                $("#secondStep").hide();
+            });
+            $("#2to3").on("click",function(){
+                self.goThird();
+            });
+            $("#3to2").click(function(){
+                self.backSecond();
+            });
+            $("#createSubmit").on("click",self.submit);
         },
         goSecond:function(){
             var self=this;
             if($("#1stPanel article").size()<2) return alert("请上传图片");
             $("#firstStep").hide();
             $("#secondStep").show();
-            $("#2to1").on("click",function(){
-                $("#firstStep").show();
-                $("#secondStep").hide();
-            });
+
             self.formChange();
-            $("#2to3").on("click",function(){
-                self.goThird();
-            });
+
             for(var i=0;i<($("#1stPanel article").size()-1);i++){
                 $("#1stPanel article").eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
             }
@@ -222,10 +223,6 @@
             if(self.validate()!==true) return;
             $("#secondStep").hide();
             $("#thirdStep").show();
-            $("#3to2").click(function(){
-                self.backSecond();
-            });
-            $("#createSubmit").on("click",self.submit);
             for(var i=0;i<($("#3rdPanel article").size()-1);i++){
                 $("#3rdPanel article").eq(i).find("input.description").attr("name","file_name"+(i+1));
             }
@@ -235,7 +232,6 @@
             $("#secondStep").show();
         },
         validate:function(){
-           console.log("validate!!!");
            var name= $("#montageTitle").val(),description=$("#montageIntroduction").val();
             if(name===""||description===""){
                 alert("请输入相关信息");
