@@ -17,6 +17,21 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        seajs.config({
+            alias: {
+                "$": "gallery/jquery.js"
+            }
+        });
+    </script>
+    <style type="text/css">
+        #thirdStep,#secondStep{
+            display: none;
+        }
+        input[type='file']{
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div id="wrapper">
@@ -30,12 +45,12 @@
     </script>
 
     <div id="container" class="container">
-        <form class="ui-form" action="#" post="#">
+        <form class="ui-form" action="#" method="post">
         <input type="hidden" name="token" value="" id="token"/>
         <input type="hidden" name="secret" value="" id="secret"/>
         <input type="hidden" name="card[user_id]" id="userId">
         <input type="hidden" name="card[theme_id]" id="templateId">
-        <input type="text" class="fn-hide"  id="fileIndex" value="1">
+        <input type="text" class="fn-hide"  id="fileIndex" value="2">
         <section id="firstStep" >
             <div class="add-panel ui-shadow">
                 <header>
@@ -49,7 +64,7 @@
                     <div class="step"> 1</div>
                 </header>
                 <section class="invitation-panel clearfix">
-                    <div class="invitation-form">
+                    <div class="invitation-form" id="invitationForm">
                         <fieldset>
                             <legend>创建请帖</legend>
                             <div class="form-item">
@@ -84,7 +99,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="iphone5">
+                    <div class="iphone5" id="iphone5First">
                         <!--<div class="iphone5-inner">
                             <h3>请登录后进行操作</h3>
                             <div class="login ui-login-btn green">
@@ -125,7 +140,7 @@
 
             </div>
             <div class="invitation-btn clearfix">
-                <div class="ui-btn ui-btn-green large" id="1to2">
+                <div class="ui-btn ui-btn-green large" id="1to2" data-next="false">
                     <span class="ui-btn-text"> 下一步 </span>
                 </div>
             </div>
@@ -153,11 +168,11 @@
                     </div>
                 </header>
                 <section class="add-list clearfix" id="2ndPanel">
-                    <article id="uploadList_1" class="note add-list-item fn-hide">
-                        <div class="close" title="删除" data-index="0">X</div>
+                    <article id="uploadList_2" class="note add-list-item fn-hide">
+                        <div class="close" title="删除">X</div>
                         <div class="cover">
-                            <img id="uploadImage_1" src=""/>
-                            <input type="file" name="image_file1" id="file1"/>
+                            <img id="uploadImage_2" src=""/>
+                            <input type="file" name="image_file2" id="file2"/>
                         </div>
                     </article>
                 </section>
@@ -171,7 +186,7 @@
                 </footer>
             </div>
             <div class="clearfix text-center">
-                <div class="ui-btn ui-btn-green large">
+                <div class="ui-btn ui-btn-green large" id="2to1">
                     <span class="ui-btn-text"> 上一步 </span>
                 </div>
 
@@ -193,9 +208,7 @@
                     <div class="step"> 3</div>
                 </header>
                 <section class="invitation-panel third-step clearfix">
-                    <div class="iphone5">
-                        <div class="screen-inner">
-                        </div>
+                    <div class="iphone5" id="iphone5Second">
                     </div>
                     <div class="weixin-panel">
                         <h2>邀请二维码:<span>（未安装应用也可查看请帖)</span></h2>
@@ -219,8 +232,8 @@
                         <div class="app">
                             <h2>应用下载</h2>
                             <div class="ui-download-btn">
-                                <a href="/" class="iphone" target="_blank">iphone</a>
-                                <a href="/" class="android" target="_blank">android</a>
+                                <a href="https://itunes.apple.com/cn/app/hun-li-ji/id594402673?ls=1&mt=8" class="iphone" target="_blank">iphone</a>
+                                <a href="http://marrymemo.com/MarryMemo.apk" class="android" target="_blank">android</a>
                             </div>
                         </div>
                     </div>
@@ -248,15 +261,8 @@
 <script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/dist/chinese-lunar.js"></script>
 <script type="text/javascript">
-seajs.config({
-    alias: {
-        "$": "gallery/jquery.js"
-    },
-    locale: 'zh-cn',
-    preload: 'seajs/plugin-i18n'
-});
     var params = {
-        fileInput: $("#file1").get(0),
+        fileInput: $("#file2").get(0),
         addPanel:'#2ndPanel'
     };
 
@@ -306,18 +312,9 @@ seajs.config({
         chooseTemplate:function(){
             var self=this;
             $(document).on("click", "#templatePanel>li",function(){
+               if(!self.validate()) return alert("请完善表单信息");
                var id=$(this).attr("data-id");
-/*                Window.util.FlyJSONP.get({
-                    url:"http://www.marrymemo.com/themes/"+id+".json",
-                    success:function(data){
-//                        console.log(data);
-                        $("#phoneLayer").css({
-                            "background":"http://www.marrymemo.com/ThemeBack/20130205152458.jpg"
-                        })
-                    }
-                })*/
-
-                var templates,temParam;
+               var templates,temParam;
                  templates= self.cloneObject(window.temData);
                 for(var i in templates){
                    if(id==templates[i].id){
@@ -326,20 +323,14 @@ seajs.config({
                    }
                 }
                 self.updateTemplate(temParam);
-
+                $("#1to2").attr("data-next","true");
             });
         },
         updateTemplate:function(data){
             var self=this;
-            if(!self.validate()) return alert("请输入完整的信息,^_^");
             $("#groom_info").text($("input[name='card[groom_name]']").val()).css(self.transStyle(data.groom_info));
             $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
             $("#place_info").text($("#place").val()).css(self.transStyle(data.location_info));
-
-            /*seajs.use(['marry/util','$'],function(Util,$) {
-               var newdate=Util.lunar( $("#marryTime").val());
-                $("#time_info").html(newdate)
-            });*/
             var strDate= $("#marryTime").val();
             var inputDate=new Date(strDate.substr(0,10));
             var tranDate=chineseLunar.solarToLunar(inputDate);
@@ -353,7 +344,16 @@ seajs.config({
 
         },
         validate:function(){
-            return true;
+            var flag=true;
+            $("#invitationForm input").each(function(){
+                console.log("the form item is "+$(this).val());
+                if($(this).val()==""||$(this).val()==undefined){
+                    console.log("form is not ");
+                    flag=false;
+                    return false;
+                }
+            })
+            return flag;
         },
         parameter:{
            xAdjust:257/320,
@@ -390,14 +390,15 @@ seajs.config({
         }
     }
     templateWidget.init();
+
     var stepNav={
         init:function(){
             var self=this;
-            $("#2to1").on("click",function(){
+            $("#1to2").on("click",function(){
                 if($(this).attr("data-next")==="true"){
                     self.goSecond();
                 }else{
-                    alert("请上传图片");
+                    alert("请选择模板 ^_^");
                 }
             });
         },
@@ -414,6 +415,8 @@ seajs.config({
             $("#2to3").on("click",function(){
                 self.goThird();
             });
+            $("#iphone5Second").html($("#iphone5First").children().clone());
+
 
         },
         goThird:function(){
@@ -421,9 +424,9 @@ seajs.config({
             if($("#2ndPanel article").size()<2) return alert("请上传图片");
 
             $("#secondStep").hide();
-            var photoList=$("#2ndPanelPanel article");
+            var photoList=$("#2ndPanel article");
             for(var i=0;i<(photoList.size()-1);i++){
-                photoList.eq(i).find("input[type='file']").attr("name","image_file"+(i+1));
+                photoList.eq(i).find("input[type='file']").attr("name","image_file"+(i+2));
             }
             $("#thirdStep").show();
             $("#3to2").click(function(){
@@ -461,7 +464,8 @@ seajs.config({
             });
         }
     }
-//    stepNav.init();
+    stepNav.init();
+
     $("#uploadCover").on("click",function(){
         document.getElementById("cover").addEventListener("change",function(e){templateWidget.changeCover(e)}, false);
         $("#cover").click();
@@ -475,6 +479,10 @@ seajs.config({
             validator.addItem({
                 element: '#place',
                 required: true
+            }).addItem({
+                element: '#yourName',
+                required: true,
+                display:"名字"
             })
         });
     });

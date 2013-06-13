@@ -777,6 +777,7 @@
 .phone-layer img {
     height: 455px;
     width: 256px;
+    top: 3px;
 }
 .phone-layer .info {
     position: absolute;

@@ -233,7 +233,12 @@ var SALT = "*#0621ix51y6679&";
         $("#imgNum").html($("#1stPanel article").size()-1);
     }
     function updateNextState(){
+        if($("#1stPanel article").size()>1){
             $("#index1").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
+        }else{
+            $("#index1").removeClass("ui-btn-green").addClass("gray").attr("data-next","false");
+
+        }
     }
     seajs.use(['marry/application'], function(App) {
         window.notes=new App.Note();
@@ -293,6 +298,7 @@ var SALT = "*#0621ix51y6679&";
                         $("#1stPanel .close").click(function() {
                             $(this).parent().remove();
                             updateNumber();
+                            updateNextState();
                             return false;
                         });
 
@@ -343,14 +349,15 @@ var SALT = "*#0621ix51y6679&";
 
 (function($,w){
     function updateNextState(){
-        $("#2to3").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
+        if($("#2ndPanel article").size()>1){
+            $("#2to3").removeClass("gray").addClass("ui-btn-green").attr("data-next","true");
+        }else{
+            $("#2to3").removeClass("ui-btn-green").addClass("gray").attr("data-next","false");
+        }
     }
     function updateNumber(){
         $("#photoNum").html($("#2ndPanel article").size()-1);
     }
-    seajs.use(['marry/application'], function(App) {
-        window.notes=new App.Note();
-    });
     var photoUpload = {
         fileInput: null,				//html file控件
         dragDrop: null,					//拖拽敏感区域
@@ -382,9 +389,8 @@ var SALT = "*#0621ix51y6679&";
                         j=i+1;
                         $("#uploadList_"+i).removeClass("fn-hide").find("img").attr("src",e.target.result);
                         html = html + '<article id="uploadList_'+ j +'" class="note add-list-item fn-hide">'+
-                            '<div class="close" title="删除" data-index="'+j+'">X</div>'+
+                            '<div class="close" title="删除">X</div>'+
                             '<div class="cover"><img id="uploadImage_' +j+'" src=""/>'+
-//                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
                             '<input type="file" name="image_file'+j+'" id="file'+j+'"/></div>'+
                             '</article>';
 
@@ -403,6 +409,8 @@ var SALT = "*#0621ix51y6679&";
                         //删除方法
                         $("#2ndPanel .close").click(function() {
                             $(this).parent().remove();
+                            updateNumber();
+                            updateNextState();
                             return false;
                         });
 
