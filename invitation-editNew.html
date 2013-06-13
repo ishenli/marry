@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-item">
                                 <label for="marryTime" class="label">婚礼时间:</label>
-                                <input class="input" id="marryTime" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                                <input class="input" id="marryTime" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"/>
                             </div>
                             <div class="form-item form-item-error position-panel">
                                 <label for="place" class="label">婚礼地址:</label>
@@ -246,6 +246,7 @@
     </script>
 </div>
 <script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/dist/chinese-lunar.js"></script>
 <script type="text/javascript">
 seajs.config({
     alias: {
@@ -318,7 +319,6 @@ seajs.config({
 
                 var templates,temParam;
                  templates= self.cloneObject(window.temData);
-                console.log(window.temData);
                 for(var i in templates){
                    if(id==templates[i].id){
                        temParam=templates[i];
@@ -336,12 +336,15 @@ seajs.config({
             $("#bride_info").text($("input[name='card[bride_name]']").val()).css(self.transStyle(data.bride_info));
             $("#place_info").text($("#place").val()).css(self.transStyle(data.location_info));
 
-            seajs.use(['marry/util','$'],function(Util,$) {
+            /*seajs.use(['marry/util','$'],function(Util,$) {
                var newdate=Util.lunar( $("#marryTime").val());
                 $("#time_info").html(newdate)
-            });
-
-            $("#time_info").css(self.transStyle(data.time_info));
+            });*/
+            var strDate= $("#marryTime").val();
+            var inputDate=new Date(strDate.substr(0,10));
+            var tranDate=chineseLunar.solarToLunar(inputDate);
+            var newDate=tranDate.gongli+" "+strDate.substr(10)+"<br/>"+tranDate.nongli;
+            $("#time_info").html(newDate).css(self.transStyle(data.time_info));
             var imgList=self.transImg(data.image_info);
             for(var i in imgList){
                 $(".cover-img").eq(i).css(imgList[i]);
@@ -357,8 +360,6 @@ seajs.config({
            yAdjust:455/568
         },
         transStyle:function(data){
-           console.log(data);
-
            var result=data;
             result.color="RGB("+data.color+")"
             result.left=(data.x)*this.parameter.xAdjust;
@@ -370,8 +371,6 @@ seajs.config({
         transImg:function(data){
            var result=data;
            for(var i= 0,len=data.length;i<len;i++){
-               console.log("width is"+result[i].width);
-               console.log("left is"+result[i].left);
                result[i].left=(result[i].x)*this.parameter.xAdjust;
                result[i].top=(result[i].y)*this.parameter.yAdjust;
                result[i].width=(result[i].width)*this.parameter.xAdjust;
@@ -456,7 +455,6 @@ seajs.config({
         submit:function(){
             $("#hidden_frame").on("load complete",function(){
                 var data=$(window.frames["hidden_frame"].document).find("pre").html();
-                console.log(data);
                 if(data.indexOf("ok")!==-1)
 //                    var id=data.indexOf(":",data.length-10);
                     window.location.href=HOST+"/marry/montage-index.html";
