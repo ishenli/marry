@@ -620,7 +620,7 @@
 }
 .form-item .textarea {
     height: 55px;
-    padding-left: 10px;
+    padding: 5px 10px;
     width: 240px;
 }
 .invitation-panel .invitation-template {
@@ -763,7 +763,7 @@
     margin-top: 23px;
 }
 .phone-layer {
-    margin: 94px 0 0 24px;
+    margin: 94px 0 0 28px;
     position: relative;
 }
 .phone-layer .bg {
@@ -771,12 +771,12 @@
     height: 460px;
     left: 0;
     position: absolute;
-    top: 0;
+    top:3px;
     width: 260px;
 }
 .phone-layer img {
-    height: 462px;
-    width: 264px;
+    height: 455px;
+    width: 256px;
 }
 .phone-layer .info {
     position: absolute;
