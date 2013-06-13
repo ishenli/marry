@@ -13,22 +13,23 @@ var SALT = "*#0621ix51y6679&";
  * @param $
  */
 
-(function(w, $) {
-	$("#weibo_content_btn").on("click", function() {
-		// if (!WB2.checkLogin()) {
-		WB2.login(function() {
-			WB2.anyWhere(function(W) {
-				weibologin(W);
-			});
-		});
-		// } else {
-		// weibologin(W);
-		// }
-		//
-	});
-	var weibologin = function(W) {
+(function (w, $) {
+    $("#weibo_content_btn").on("click",
+        function() {
+            // if (!WB2.checkLogin()) {
+            WB2.login(function() {
+                WB2.anyWhere(function(W) {
+                    weibologin(W);
+                });
+            });
+            // } else {
+            // weibologin(W);
+            // }
+            //
+        });
+    function weibologin(W) {
 		W.parseCMD("/account/get_uid.json", function(sResult, bStatus) {
-			if (typeof (sResult.error) == "undefined") {
+            if (typeof (sResult.error) ==="undefined") {
 				var uid = sResult.uid;
 				W.parseCMD("/users/show.json", function(sResult, bStatus) {
 					var user_id = "1-" + sResult.id;
@@ -155,7 +156,7 @@ var SALT = "*#0621ix51y6679&";
 		}
 	};
 
-	if (localStorage["user"]) {
+	if(localStorage["user"]) {
 		showUser();
 	}
 
