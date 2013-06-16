@@ -25,11 +25,28 @@
         });
     </script>
     <style type="text/css">
-        #thirdStep,#secondStep{
+        #thirdStep,#secondStep,#submitPanel{
             display: none;
         }
         input[type='file']{
             display: none;
+        }
+        #map{
+            height:100%;
+            width:100%;
+        }
+        #pop{
+            font-size: 25px;
+        }
+        #submitPanel{
+            height: 400px;
+            width: 600px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -300px;
+            font-size: 26px;
         }
     </style>
 </head>
@@ -45,12 +62,13 @@
     </script>
 
     <div id="container" class="container">
-        <form class="ui-form" action="http://www.marrymemo.com/cards.json" method="post" target="hidden_frame">
+        <form class="ui-form" id="cardForm" action="http://www.marrymemo.com:3000/cards.json" method="post" target="hidden_frame">
         <input type="hidden" name="token" value="" id="token"/>
         <input type="hidden" name="secret" value="" id="secret"/>
-        <input type="hidden" name="card[user_id]" id="userId">
+        <input type="hidden" name="japan" value="nihong" />
+        <input type="hidden" name="card[user_id]" id="userId" value="124">
         <input type="hidden" name="card[theme_id]" id="templateId">
-        <input type="hidden" name="card[audio_pos]" id="audio">
+        <input type="hidden" name="card[audio_pos]" id="audio" value="-1">
         <input type="hidden" name="card[latitude]" id="latitude">
         <input type="hidden" name="card[longitude]" id="longitude">
         <input type="text" class="fn-hide"  id="fileIndex" value="2">
@@ -72,9 +90,9 @@
                             <legend>创建请帖</legend>
                             <div class="form-item">
                                 <label class="label">你的身份:</label>
-                                <input class="ui-radio" type="radio" name="sex" checked value="groom"/>
+                                <input class="ui-radio" type="radio"  checked value="groom"/>
                                 <span class="ui-radio-txt"> 新郎</span>
-                                <input class="ui-radio" type="radio" name="sex" value="bride"/>
+                                <input class="ui-radio" type="radio" value="bride"/>
                                 <span class="ui-radio-txt"> 新娘</span>
                             </div>
                             <div class="form-item">
@@ -95,7 +113,7 @@
                                 <span class="position-btn" id="pin">定位</span>
                             </div>
                             <div class="form-item text-center">
-                                <input type="file" name="file1" id="cover">
+                                <input type="file" name="image_file1" id="cover">
                                 <div class="ui-btn middle ui-btn-green" id="uploadCover">
                                     <span  class="ui-btn-text">上传照片</span>
                                 </div>
@@ -199,6 +217,15 @@
                 </div>
             </div>
         </section>
+        <section id="submitPanel" class="add-panel ui-shadow">
+            <div class="sl-hvalign">
+                <div class="sl-hvalign-cnt">
+                    <div class="sl-hvalign-cnt-inner">
+                       请帖正在创建中……
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="thirdStep">
             <div class="add-panel ui-shadow">
                 <header>
@@ -253,8 +280,18 @@
             </div>
         </section>
         </form>
+        <iframe name="hidden_frame" id="hidden_frame"></iframe>
 </div>
-<div id="map" class="fn-hide"></div>
+<div id="map"></div>
+<div class="fn-hide">
+    <div class="sl-hvalign" id="pop">
+        <div class="sl-hvalign-cnt">
+            <div class="sl-hvalign-cnt-inner">
+                请输入地址 ^_^
+            </div>
+        </div>
+    </div>
+</div>
     <footer class="ui-footer ui-shadow-top" id="foot"></footer>
     <script type="text/javascript">
         seajs.use(['marry/application'], function(App) {
@@ -265,8 +302,10 @@
 </div>
 <script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/dist/chinese-lunar.js"></script>
-
 <script type="text/javascript">
+$("#token").val(localStorage["token"]);
+$("#secret").val(localStorage["secret"]);
+$("#userId").val(126);
 function loadScript() {
     var script = document.createElement("script");
     script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapFun";//此为v1.5版本的引用方式
@@ -324,9 +363,9 @@ function loadScript() {
             var self=this;
             $(document).on("click", "#templatePanel>li",function(){
                if(!self.validate()) return alert("请完善表单信息");
-               var id=$(this).attr("data-id");
-               var templates,temParam;
-                 templates= self.cloneObject(window.temData);
+               var id=$(this).attr("data-id"), templates,temParam;
+                $("#templateId").val(id);
+               templates= self.cloneObject(window.temData);
                 for(var i in templates){
                    if(id==templates[i].id){
                        temParam=templates[i];
@@ -447,10 +486,9 @@ function loadScript() {
             for(var i=0;i<(photoList.size()-1);i++){
                 photoList.eq(i).find("input[type='file']").attr("name","image_file"+(i+2));
             }
+            this.submit();
             $("#secondStep").hide();
-            $("#thirdStep").show();
-            adjustFootPos();
-
+            $("#submitPanel").show();
         },
         backSecond:function(){
             $("#thirdStep").hide();
@@ -461,12 +499,15 @@ function loadScript() {
             return true;
         },
         submit:function(){
-            $("#createSubmit").val("创建中...");
+            $("#cardForm").submit();
             $("#hidden_frame").on("load complete",function(){
                 var data=$(window.frames["hidden_frame"].document).find("pre").html();
                 if(data.indexOf("ok")!==-1)
 //                    var id=data.indexOf(":",data.length-10);
                     window.location.href=HOST+"/marry/montage-index.html";
+                $("#submitPanel").hide();
+                $("#thirdStep").show();
+                adjustFootPos();
             });
         }
     }
@@ -478,24 +519,65 @@ function loadScript() {
     })
     function mapFun(){
         var map = new BMap.Map("map");
+        map.enableScrollWheelZoom(true)
         var localSearch = new BMap.LocalSearch(map);
-        function searchByStationName() {
-            $("#pin").text("定位中...");
             var keyword = document.getElementById("place").value;
             localSearch.setSearchCompleteCallback(function(searchResult) {
-                var poi = searchResult.getPoi(0);
-                $("#latitude").val(poi.point.lat);
-                $("#longitude").val(poi.point.lng);
-                $("#pin").text("定位完成");
+                console.log(searchResult);
+                if(searchResult !==undefined){
+                    try{
+                        var poi = searchResult.getPoi(0);
+                        $("#latitude").val(poi.point.lat);
+                        $("#longitude").val(poi.point.lng);
+
+                        var point = new BMap.Point(poi.point.lng,poi.point.lat);
+                        map.centerAndZoom(point, 12);
+                        var marker = new BMap.Marker(point);  // 创建标注
+                        map.addOverlay(marker);              // 将标注添加到地图中
+                        marker.enableDragging();    //可拖拽
+                        map.addEventListener("click",function(e){
+                            point=new BMap.Point(e.point.lng,e.point.lat);
+                            marker.setPosition(point);
+                            $("#latitude").val(e.point.lat);
+                            $("#longitude").val(e.point.lng);
+                        });
+                        $("#pin").text("定位完成");
+                    }catch(e){
+                        $("#map").html($("#pop"));
+                    }
+                }else{
+                    $("#map").html($("#pop"));
+                    return;
+                }
+
+
             });
             localSearch.search(keyword);
-        }
-        $("#place").on("change",searchByStationName);
     }
+
     function loadScript() {
         var script = document.createElement("script");
-        script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapFun";//此为v1.5版本的引用方式
+        script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapInit";//此为v1.5版本的引用方式
         document.body.appendChild(script);
+    }
+    function mapInit(){
+        seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
+            var mapDialog=new Dialog({
+                trigger: '#pin',
+                height: '480px',
+                width:'480px',
+                effect: 'fade',
+                content: '#map'
+            })
+            mapDialog.before('show',function(){
+                if($("#place").val()==""){
+                    $("#map").html($("#pop"));
+                }else{
+                    mapFun();
+                }
+
+            });
+        });
     }
     $("document").ready(function(){
         loadScript();

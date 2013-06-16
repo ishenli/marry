@@ -38,7 +38,7 @@ var SALT = "*#0621ix51y6679&";
 					var bind_type = "1";
 					var info = JSON.stringify(sResult);
 					var code = hex_md5(user_id + SALT).toUpperCase();
-
+                    console.log("the weibo is "+sResult);
 					$.post(HOST + "users.json", {
 						"user[user_id]" : user_id,
 						"user[avatar]" : avatar,
