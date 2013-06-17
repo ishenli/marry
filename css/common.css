@@ -639,8 +639,8 @@
 }
 .invitation-template .invitation-list {
     height: 410px;
-    overflow: auto;
-    width: 260px;
+    overflow: hidden;
+    width: 250px;
 }
 .invitation-template .invitation-list li {
     float: left;
