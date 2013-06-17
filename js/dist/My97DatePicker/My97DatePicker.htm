@@ -2,8 +2,16 @@
 <head>
 <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
 <title>My97DatePicker</title>
-<script type="text/javascript" src="config.js"></script>
 <script>
+var langList =
+        [
+            {name:'zh-cn',	charset:'UTF-8'}
+        ];
+
+var skinList =
+        [
+            {name:'default',charset:'UTF-8'}
+        ];
 if(parent==window)
 	location.href = 'http://www.my97.net';
 var $d, $dp, $pdp = parent.$dp, $dt, $tdt, $sdt, $IE=$pdp.ie, $FF = $pdp.ff,$OPERA=$pdp.opera, $ny, $cMark = false;
@@ -33,7 +41,7 @@ $dp.getLang = function(name){
 	}
 	return langList[index];
 }
- 
+
 $dp.realLang = $dp.getLang($dp.lang);
 document.write("<script src='lang/" + $dp.realLang.name + ".js' charset='" + $dp.realLang.charset + "'><\/script>");
 
