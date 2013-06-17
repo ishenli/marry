@@ -16,7 +16,6 @@
         <!--[if lt IE 9]>
         <script type="text/javascript" src="js/dist/html5shiv.js"></script>
         <![endif]-->
-        <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript">
             seajs.config({
                 alias: {
@@ -24,6 +23,7 @@
                 }
             });
         </script>
+
     </head>
     <body>
     <div id="wrapper">
@@ -97,6 +97,7 @@
     </script>
 
 </div>
+
     <script type="text/javascript">
         seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
             carousel = new Carousel({

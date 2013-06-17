@@ -17,6 +17,7 @@ var SALT = "*#0621ix51y6679&";
     $("#weibo_content_btn").on("click",
         function() {
             // if (!WB2.checkLogin()) {
+            alert("weibo login");
             WB2.login(function() {
                 WB2.anyWhere(function(W) {
                     weibologin(W);
