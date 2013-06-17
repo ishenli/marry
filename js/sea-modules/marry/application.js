@@ -3,15 +3,12 @@
  * User: shenli
  * Date: 13-4-17
  * Time: 下午12:49
- * To change this template use File | Settings | File Templates.
  */
 
 define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
-        Base = require('arale/base/1.0.1/base'),
-        Widget = require('arale/widget/1.0.2/widget');
-//        Backbone = require('gallery/backbone/1.0.0/backbone');
+        Base = require('arale/base/1.0.1/base');
 
     var HOST = "http://www.marrymemo.com/";
 
@@ -39,9 +36,6 @@ define(function(require, exports, module) {
             $(".img-wrap").each(function(){
                 $(this).height(height-20);
             })
-            /*$(".img-wrap a").each(function(){
-             $(this).width((height-20)*$(this).attr("data-width")/$(this).attr("data-height"));
-             });*/
             $(".cover-content").height(height-200);
             for(var i=0;i<$li.length;i++){
                 img= $(".fancybox").eq(i).find("img");
@@ -76,24 +70,6 @@ define(function(require, exports, module) {
 
     });
 
-    /*    App.B=Backbone.Model.extend({
-     model:'',
-     initialize: function(){
-     var self=this;
-     util.FlyJSONP.get({
-     url:HOST + 'montages/'+self.id+'/discussions.json',
-     success:function(result){
-     self.model=result;
-     console.log(self.model);
-     }
-     })
-
-     },
-     outModel:function(){
-     alert(this.model);
-     }
-
-     })*/
     App.Comment=Base.extend({
             get:function(id,element){
                 util.FlyJSONP.get({
@@ -369,13 +345,13 @@ define(function(require, exports, module) {
                 success:function(data){
                     window.temData=data;
                     var html="",template='<li data-id={id}><a href="javascript:void(0)"> <img src="{pic}" alt="{name}"/> </a></li>';
-//                    var len=(data.length<4?data.length:4)
                     var len=data.length;
                     for(var i=0;i<len;i++){
                         html+=template.replace("{pic}",HOST+data[i].thumb_path).replace("{name}",data[i].name)
                             .replace("{id}",data[i].id);
                     }
                     $(option.element).html(html);
+                    $('#scrollbar1').tinyscrollbar();
                 }
             })
         }
