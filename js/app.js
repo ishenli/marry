@@ -43,7 +43,6 @@ var SALT = "*#0621ix51y6679&";
 						"user[nick]" : nick,
 						"user[info]" : info,
 						"user[bind_type]" : bind_type,
-						"japan" : "nihong",
 						"code" : code
 					}, function(data) {
                         console.log("user data "+data)
@@ -155,11 +154,15 @@ var SALT = "*#0621ix51y6679&";
 			$(".ui-login-btn").show();
 		}
 	};
-
-	if(localStorage["user"]) {
+    /* the code in the test server*/
+    $.get("http://www.marrymemo.com:3000/users/0.json?japan=nihong", function(user) {
+        localStorage["user"] = JSON.stringify(user);
+        showUser();
+    });
+    /* the code in the test server*/
+    if(localStorage["user"]){
 		showUser();
 	}
-
 	$(".logout>a").click(function(){
 		localStorage.clear();
 		showUser();
