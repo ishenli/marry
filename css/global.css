@@ -38,7 +38,6 @@ body{
     margin: 4px 0;
 }
 
-
 .ui-top-nav .user-panel{
     position: relative;
     height: 40px;
@@ -81,6 +80,7 @@ body{
     position: relative;
     float: right;
 }
+
 .ui-top-nav .user-panel .user-active:hover{
     cursor: pointer;
     background: #6addd3;
@@ -149,6 +149,16 @@ body{
 }
 .ui-top-nav .top-login a {
     padding: 0 5px;
+}
+.ui-top-nav .top-menu .active a,.ui-top-nav .user-panel .option-item:hover a{
+    background:#6addd3;
+    color: #fff;
+
+}
+.ui-top-nav .top-menu .active{
+    border: 1px solid #47d3c6;
+    border-top: none;
+    border-bottom: none;
 }
 .container{
     width: 980px;

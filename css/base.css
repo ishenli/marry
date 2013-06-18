@@ -257,7 +257,7 @@ body .mgr-20{margin-right:20px;}
 .ui-grid-23{width:910px}
 .ui-grid-24{width:950px}
 .ui-grid-25{width:990px}
-.ui-grid-right{margin-right:0px; }
+.ui-grid-right{margin-right:0; }
 
 /*list design*/
 .ui-list{
@@ -273,9 +273,7 @@ body .mgr-20{margin-right:20px;}
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa',endColorstr='#eaeaea')";
 }
 /*base layout*/
-.w1000{
-    width: 1000px;
-}
+.w1000{ width: 1000px; }
 .w980{
     width: 980px;
 }
