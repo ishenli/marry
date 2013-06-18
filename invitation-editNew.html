@@ -61,11 +61,9 @@
     </script>
 
     <div id="container" class="container">
-        <form class="ui-form" id="cardForm" action="http://www.marrymemo.com:3000/cards.json" method="post" target="hidden_frame">
-        <input type="hidden" name="token" value="" id="token"/>
-        <input type="hidden" name="secret" value="" id="secret"/>
+        <form class="ui-form" id="cardForm" action="http://www.marrymemo.com:3000/cards.json" method="post" target="hidden_frame" enctype="multipart/form-data">
         <input type="hidden" name="japan" value="nihong" />
-        <input type="hidden" name="card[user_id]" id="userId" value="124">
+        <input type="hidden" name="card[user_id]" id="userId" value="24">
         <input type="hidden" name="card[theme_id]" id="templateId">
         <input type="hidden" name="card[audio_pos]" id="audio" value="-1">
         <input type="hidden" name="card[latitude]" id="latitude">
@@ -258,7 +256,7 @@
                                 </div>
                             </div> <!-- .sl-hvalign -->
                         </div>
-                        <h2>邀请字符码:<span class="code">X3SP3O</span></h2>
+                        <h2>邀请字符码:<span class="code" id="invitationCode">0000</span></h2>
                         <div class="info">将邀请发送给你的亲朋好友，邀请他们来参加婚礼吧！</div>
                         <div class="app">
                             <h2>应用下载</h2>
@@ -304,9 +302,7 @@
 <script type="text/javascript" src="js/dist/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="js/dist/chinese-lunar.js"></script>
 <script type="text/javascript">
-$("#token").val(localStorage["token"]);
-$("#secret").val(localStorage["secret"]);
-$("#userId").val(126);
+$("#userId").val(24);
 function loadScript() {
     var script = document.createElement("script");
     script.src = "http://api.map.baidu.com/api?v=1.5&ak=15639c7259dce3f9248c47626ee8a49e&callback=mapFun";//此为v1.5版本的引用方式
@@ -396,7 +392,7 @@ function loadScript() {
             for(var i in imgList){
                 $(".cover-img").eq(i).css(imgList[i]);
             }
-            $("#phoneLayer .bg > img").attr("src","http://www.marrymemo.com"+data.background).parent().show();
+            $("#phoneLayer .bg > img").attr("src","http://" + window.location.host+data.background).parent().show();
 
         },
         validate:function(){
@@ -500,10 +496,12 @@ function loadScript() {
         submit:function(){
             $("#cardForm").submit();
             $("#hidden_frame").on("load complete",function(){
-                var data=$(window.frames["hidden_frame"].document).find("pre").html();
-                if(data.indexOf("ok")!==-1)
-//                    var id=data.indexOf(":",data.length-10);
-                    window.location.href=HOST+"/marry/montage-index.html";
+//                var thisDocument=window.frames["hidden_frame"].contentDocument||window.frames["hidden_frame"].document;
+//                var data=thisDocument.body.innerHTML;
+                var data=$(window.frames["hidden_frame"].document).find("pre").text();
+                var invitationCode=JSON.parse(data).card.invitation_code;
+                console.log("the result code is "+JSON.parse(data).card.invitation_code);
+                $("#invitationCode").text(invitationCode);
                 $("#submitPanel").hide();
                 $("#thirdStep").show();
                 adjustFootPos();

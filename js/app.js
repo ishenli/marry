@@ -8,7 +8,6 @@ var HOST = "http://" + window.location.host + "/";
 var SALT = "*#0621ix51y6679&";
 /**
  * 微博登陆
- *
  * @param window
  * @param $
  */
@@ -17,7 +16,6 @@ var SALT = "*#0621ix51y6679&";
     $("#weibo_content_btn").on("click",
         function() {
             // if (!WB2.checkLogin()) {
-            alert("weibo login");
             WB2.login(function() {
                 WB2.anyWhere(function(W) {
                     weibologin(W);
@@ -39,15 +37,16 @@ var SALT = "*#0621ix51y6679&";
 					var bind_type = "1";
 					var info = JSON.stringify(sResult);
 					var code = hex_md5(user_id + SALT).toUpperCase();
-                    console.log("the weibo is "+sResult);
-					$.post(HOST + "users.json", {
+					$.post(HOST + "auth/weibo", {
 						"user[user_id]" : user_id,
 						"user[avatar]" : avatar,
 						"user[nick]" : nick,
 						"user[info]" : info,
 						"user[bind_type]" : bind_type,
+						"japan" : "nihong",
 						"code" : code
 					}, function(data) {
+                        console.log("user data "+data)
 						// 这里处理登录成功后的事情，保存到localstorage，显示用户名等等的
 						data.id;
 						localStorage["token"] = data.token;
@@ -280,7 +279,7 @@ var SALT = "*#0621ix51y6679&";
                             '<div class="close" title="删除" data-index="'+j+'">X</div>'+
                             '<div class="cover"><img id="uploadImage_' +j+'" src=""/>'+
 //                            '<span id="uploadProgress_' + i + '" class="upload_progress"></span>' +
-                            '<input type="file" name="image_file'+j+'" id="file'+j+'"/></div>'+
+                            '<input type="file" id="file'+j+'"/></div>'+
                             '<input type="text" class="description"/>'+
                             '</article>';
 

@@ -10,7 +10,7 @@ define(function(require, exports, module) {
         util=require("marry/util"),
         Base = require('arale/base/1.0.1/base');
 
-    var HOST = "http://www.marrymemo.com/";
+    var HOST = "http://" + window.location.host + "/";
 
     (function(window){
         var $li,img;
@@ -120,7 +120,13 @@ define(function(require, exports, module) {
                         $(option.element).append(output);
                         page=len;
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                        if(option.callback!=="") option.callback();
+                        option.callback();
+                        if(option.callback!==""){
+                            setTimeout(function(){
+                                option.callback();
+                            },2000)
+                        }
+
                         $("#loadmore").on("click",function(){
                             var output='',len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                             for(var i=page;i<len;i++){
@@ -129,9 +135,6 @@ define(function(require, exports, module) {
                             $(option.element).append(output);
                             page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
-                            setTimeout(function(){
-                                option.callback();
-                            },3000)
                         });
                     }
                 });

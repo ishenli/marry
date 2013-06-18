@@ -39,7 +39,7 @@
              <span class="big-avatar fn-left">
                  <img src="" id="avatar" alt="个人头像">
              </span>
-            <a href="#" class="username" id="username"></a>
+            <a href="javascript:;" class="username" id="username"></a>
             <p class="description" id="description"></p>
         </div>
         <script type="text/javascript">
@@ -110,9 +110,9 @@
                 element:"#montageList",
                 type:"index",
                 param:{
-                    user_id: JSON.parse(localStorage["user"]).id,
-                    token : localStorage["token"],
-                    secret : localStorage["secret"],
+//                    user_id: JSON.parse(localStorage["user"]).id,
+                    user_id: 24,
+                    japan : 'nihong',
                     create:1
                 },
                 pageItems:6,
