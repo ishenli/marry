@@ -37,7 +37,7 @@
             display: none;
         }
         #hidden_frame{
-            /*display: none;*/
+            display: none;
         }
     </style>
 </head>
@@ -138,8 +138,9 @@
                     <span>3</span>
                 </div>
             </header>
-            <section class="add-list third-step clearfix">
-                <div class="slidee ui-scrollbar" id="3rdPanel"></div>
+            <div class="scrollbar"><div class="track"><div class="thumb"></div></div></div>
+            <section class="add-list third-step clearfix viewport">
+                <div class="ui-scrollbar overview" id="3rdPanel"></div>
             </section>
             <div class="spacer" id="dragdrop-spacer"></div>
             <div class="spacer-hor" id="dragdrop-spacer-hor"></div>
@@ -251,10 +252,12 @@
             $("#createSubmit").val("创建中...");
             $("#hidden_frame").on("load complete",function(){
                 var data=$(window.frames["hidden_frame"].document).find("pre").html();
-                console.log(data);
-//                if(data.indexOf("ok")!==-1)
-////                    var id=data.indexOf(":",data.length-10);
-//                    window.location.href=HOST+"marry/montage-index.html";
+                var jsonData=JSON.parse(data);
+                if(jsonData.result=="ok"){
+                    window.location.href=HOST+"marry/montage-show.html#"+jsonData.id;
+                }else{
+                    alert("创建失败,请重新创建 ^_^");
+                }
             });
         }
     }
