@@ -15,13 +15,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-        seajs.config({
-            alias: {
-                "$": "gallery/jquery.js"
-            }
-        });
-    </script>
+    <script type="text/javascript" src="js/config.js"></script>
     <style type="text/css">
         #thirdStep,#secondStep,#submitPanel{
             display: none;
@@ -558,7 +552,7 @@ function loadScript() {
         document.body.appendChild(script);
     }
     function mapInit(){
-        seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
+        seajs.use(['dialog',"$"], function(Dialog,$) {
             var mapDialog=new Dialog({
                 trigger: '#pin',
                 height: '480px',

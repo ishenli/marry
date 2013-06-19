@@ -15,14 +15,7 @@
         <!--[if lt IE 9]>
         <script type="text/javascript" src="js/dist/html5shiv.js"></script>
         <![endif]-->
-        <script type="text/javascript">
-            seajs.config({
-                alias: {
-                    "$": "gallery/jquery.js"
-                }
-            });
-        </script>
-
+        <script type="text/javascript" src="js/config.js"></script>
     </head>
     <body>
     <div id="wrapper">
@@ -98,7 +91,7 @@
 </div>
 
     <script type="text/javascript">
-        seajs.use(['arale/switchable/0.9.11/carousel', '$'], function(Carousel, $) {
+        seajs.use(['carousel', '$'], function(Carousel, $) {
             carousel = new Carousel({
                 element: '#indexBanner',
                 triggers: '#indexBanner .ui-switchable-nav li',
