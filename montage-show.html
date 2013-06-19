@@ -139,7 +139,7 @@
                         <span id="favBtn" class="fav">0</span>
                     </div>
                 </div>
-                <div class="ui-poptip fn-hide" id="poptip">
+                <div class="ui-poptip fn-hide ui-poptip-white" id="poptip">
                     <div class="ui-poptip-shadow">
                         <div class="ui-poptip-container">
                             <div class="ui-poptip-arrow ui-poptip-arrow-7">
@@ -261,11 +261,11 @@
         var t = new Tip({
             element:'#poptip',
             trigger: '#favBtn',
-            content: '<div style="padding:10px">我是内容</div>',
-            theme: 'blue',
+            arrowShift:"50%",
+            pointPos:"40",
+            content: '<div style="padding:10px">点击收藏</div>',
             arrowPosition: 7
         });
-        t.set('content', '更改后的内容');
     });
 
 </script>

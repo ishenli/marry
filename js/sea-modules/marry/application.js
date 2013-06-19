@@ -8,7 +8,7 @@
 define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
-        Base = require('arale/base/1.0.1/base');
+        Base = require('arale/base/1.1.0/base');
 
     var HOST = "http://" + window.location.host + "/";
 
@@ -101,7 +101,7 @@ define(function(require, exports, module) {
         }
     });
     App.montage=Base.extend({
-    get:function(options){
+        get:function(options){
         var option=$.extend({},options);
         switch (option.type){
             case "index": //index
@@ -324,9 +324,27 @@ define(function(require, exports, module) {
             default:
                 return null;
         }
-    }
+    },
+        collect:function(option){
+            $.ajax({
+                url:HOST+"collect.json",
+                type:"post",
+                data:option.data,
+                success:function(data){
+                    console.log("collect result is "+data);
+                    if(data.result=="ok"){
+                        alert("collect ok");
+                    }else{
+                        alert("collect error");
+                    }
+                },
+                error:function(){
 
-});
+                }
+            })
+        }
+
+    });
 
     App.template=Base.extend({
         loadHeader:function(id){ // the id is the element which should be added a active class
