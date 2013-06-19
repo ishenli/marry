@@ -215,6 +215,14 @@
         nextPage: $('.nextPage')
     });
     seajs.use(['marry/application','dialog','tip','$'], function(App,Dialog,Tip,$) {
+        //提示框
+        var tip= new Tip({
+            element:'#poptip',
+            trigger: '#favBtn',
+            arrowShift:"50%",
+            pointPos:"25",
+            content: '<div style="padding:10px">点击收藏</div>'
+        });
         var montages=new App.montage(),id=location.hash.substring(1);
         montages.get({
             id:id,
@@ -222,7 +230,8 @@
             type:"show",
             param:{
                 user_id:24
-            }
+            },
+            tip:tip
         });
         $frame.init();
         var feedBack=new Dialog({
@@ -243,31 +252,19 @@
         comment.get(id,'#comments-list ul');
 
         $("#commentBtn").click(function(){
-            comment.post(id,"","#commentInput",function(){
-                comment.get(id,'#comments-list ul');
-                $("#commentBack").text(parseInt($("#commentBack").text())+1);
-            })
-        });
-
-        //收藏功能
-        $("#favBtn").click(function(){
-            montages.collect({
-                data:{
-                    montage_id:id,
-                    user_id:24,
-                    japan:"nihong"
+            comment.post({
+                id:id,
+                data:{discussion:{
+                    "content": $("#commentInput").val(),
+                    "user_id": 24,
+                    "japan":"nihong"
+//                        user_id:  JSON.parse(localStorage.user).id
+                }},
+                callback:function(){
+                    comment.get(id,'#comments-list ul');
+                    $("#commentBack").text(parseInt($("#commentBack").text())+1);
                 }
-            });
-        });
-
-        //提示框
-        var t = new Tip({
-            element:'#poptip',
-            trigger: '#favBtn',
-            arrowShift:"50%",
-            pointPos:"40",
-            content: '<div style="padding:10px">点击收藏</div>',
-            arrowPosition: 7
+            })
         });
     });
 

@@ -86,22 +86,16 @@ define(function(require, exports, module) {
                     }
                 });
             },
-            post:function(id,userid,input,callback){
-                $.post(HOST + 'montages/'+id+'/discussions.json', {
-                    discussion:{
-                        content: $(input).val(),
-                        user_id:  JSON.parse(localStorage.user).id
-                    },
-                    token : localStorage["token"],
-                    secret : localStorage["secret"]
-                }, function(data) {
+            post:function(option){
+                $.post(HOST + 'montages/'+option.id+'/discussions.json',option.data, function(data) {
                     console.log(data);
-                    callback();
+                    option.callback();
                 });
         }
     });
     App.montage=Base.extend({
         get:function(options){
+        var self=this;
         var option=$.extend({},options);
         switch (option.type){
             case "index": //index
@@ -179,6 +173,21 @@ define(function(require, exports, module) {
                         $("#montageEnding").text(data.ending);
                         if(!!data.collected){
                             $("#favBtn").addClass("faved");
+                            option.tip.set("content","已收藏");
+                        }else{
+                            $("#favBtn").click(function(){
+                                self.collect({
+                                    data:{
+                                        montage_id:option.id,
+                                        user_id:24,
+                                        japan:"nihong"
+                                    },
+                                    success:function(){
+                                        $("#favBtn").addClass("faved").text(++data.collect_count);
+                                        option.tip.set("content","已收藏");
+                                    }
+                                });
+                            });
                         }
 
                     }
@@ -335,11 +344,10 @@ define(function(require, exports, module) {
                 type:"post",
                 data:option.data,
                 success:function(data){
-                    console.log("collect result is "+data);
                     if(data.result=="ok"){
-                        alert("collect ok");
+                       option.success();
                     }else{
-                        alert("collect error");
+                        alert("收藏失败");
                     }
                 },
                 error:function(){
