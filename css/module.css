@@ -428,6 +428,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
     padding-left: 26px;
     background-position: 0 -29px;
 }
+.ui-counter .fav.faved{
+    background-position: -39px 0px;
+}
 /*用户页面顶部导航*/
 .ui-green-header {
     /*background:#95e5de;*/

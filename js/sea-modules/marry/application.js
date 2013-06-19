@@ -142,6 +142,7 @@ define(function(require, exports, module) {
             case "show"://get
                 util.FlyJSONP.get({
                     url:HOST + 'montages/'+option.id+'.json',
+                    parameters:option.param,
                     success:function(result){
                         var data=result,output="",height=WindowSize.height-160;
                         $("#introduction").text(data.introduction);
@@ -176,6 +177,9 @@ define(function(require, exports, module) {
                         $("#sAvatar").attr("src",data.user.avatar.indexOf("http") == 0 ? data.user.avatar : HOST + data.user.avatar);
                         $("#username").text(data.user.nick);
                         $("#montageEnding").text(data.ending);
+                        if(!!data.collected){
+                            $("#favBtn").addClass("faved");
+                        }
 
                     }
                 });
