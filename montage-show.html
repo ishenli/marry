@@ -18,13 +18,7 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-        seajs.config({
-            alias: {
-                "$": "gallery/jquery.js"
-            }
-        });
-    </script>
+    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body class="photo-show">
 <header class="top-tool">
@@ -141,8 +135,22 @@
 
                 <div class="ui-share-btn-list ui-slip">
                     <div class="ui-counter counter">
-                        <span id="commentBack" class="comments">11</span>
-                        <span id="favBtn" class="fav">11</span>
+                        <span id="commentBack" class="comments">0</span>
+                        <span id="favBtn" class="fav">0</span>
+                    </div>
+                </div>
+                <div class="ui-poptip fn-hide" id="poptip">
+                    <div class="ui-poptip-shadow">
+                        <div class="ui-poptip-container">
+                            <div class="ui-poptip-arrow ui-poptip-arrow-7">
+                                <em>◆</em>
+                                <span>◆</span>
+                            </div>
+                            <div class="ui-poptip-content" data-role="content">
+                                <div>我是上方的tip</div>
+                                <div>我是上方的tip</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -206,13 +214,7 @@
         prevPage: $('.prev-page'),
         nextPage: $('.nextPage')
     });
-
-    seajs.config({
-        alias: {
-            "$": "gallery/jquery.js"
-        }
-    });
-    seajs.use(['marry/application','arale/dialog/1.0.1/dialog','$'], function(App,Dialog,$) {
+    seajs.use(['marry/application','dialog','tip','$'], function(App,Dialog,Tip,$) {
         var montages=new App.montage(),id=location.hash.substring(1);
         montages.get({
             id:id,
@@ -220,17 +222,16 @@
             type:"show"
         });
         $frame.init();
-        $(".facybox img").scrollLoading({
-            callback:function(){
-
-            }
-        });
         var feedBack=new Dialog({
             trigger: '#commentBack',
             height: '520px',
             width:'480px',
             effect: 'fade',
             content: '#commentPanel'
+
+        });
+        feedBack.after('show',function(){
+            $("#commentPanel").show();
 
         });
         var comment=new App.Comment({
@@ -244,19 +245,27 @@
                 $("#commentBack").text(parseInt($("#commentBack").text())+1);
             })
         });
-        feedBack.after('show',function(){
-            $("#commentPanel").show();
 
-        });
-
+        //收藏功能
         $("#favBtn").click(function(){
-            $.post(HOST+'collect?montage_id='+id+'&user_id='+JSON.parse(localStorage.user).id,{
-                token : localStorage["token"],
-                secret : localStorage["secret"]
-            }, function(data) {
-                console.log(data);
+            montages.collect({
+                data:{
+                    montage_id:id,
+                    user_id:24,
+                    japan:"nihong"
+                }
             });
         });
+
+        //提示框
+        var t = new Atip({
+            element:'#poptip',
+            trigger: '#favBtn',
+            content: '<div style="padding:10px">我是内容</div>',
+            theme: 'blue',
+            arrowPosition: 7
+        });
+        t.set('content', '更改后的内容');
     });
 
 </script>
