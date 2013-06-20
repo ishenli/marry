@@ -42,6 +42,7 @@
                 <div class="ui-form-item">
                     <label for="username" class="ui-lable">昵称:</label>
                     <input class="ui-input" id="username" name="user[nick]" type="text">
+                    <div class="ui-form-explain">昵称不能为空哦 ^_^</div>
                 </div>
                 <div class="ui-form-item">
                     <label class="ui-lable">性别:</label>
@@ -52,11 +53,13 @@
                 </div>
                 <div class="ui-form-item">
                     <label for="birthday"class="ui-lable">出生年月:</label>
-                    <input class="ui-input" name="user[birthday]" id="birthday" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/> <span class="ui-form-other"><a href="#">格式为xxxx-xx-xx</a></span>
+                    <input class="ui-input" name="user[birthday]" id="birthday" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+                    <div class="ui-form-explain">格式为 xxxx-xx-xx</div>
                 </div>
                 <div class="ui-form-item">
                     <label for="description" class="ui-lable">自我介绍:</label>
                     <textarea name="user[description]" id="description" onclick="this.value=''" class="ui-textarea">这家伙很懒，什么都没留下</textarea>
+                    <div class="ui-form-explain">&nbsp;</div>
                 </div>
                 <div class="ui-form-item">
                     <div class="ui-btn middle ui-btn-green">
@@ -102,7 +105,8 @@
                 required: true
             }).addItem({
                 element: '#description',
-                required: true
+                required: true,
+                rule: 'minlength{min:1}'
             })
         });
     });
