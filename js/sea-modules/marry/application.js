@@ -105,11 +105,12 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
-                            +'<div class="btns"><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
+                            +'<div class="btns"><div class="trash"><a href="javascript:;" data-id="{mid}">delete</a></div><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
                         var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                         for(var i=page;i<len;i++){
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count)
+                                .replace("{mid}",data[i].id);
                         }
                         $(option.element).append(output);
                         page=len;
@@ -133,7 +134,7 @@ define(function(require, exports, module) {
                     }
                 });
                 break;
-            case "show"://get
+            case "show":
                 util.FlyJSONP.get({
                     url:HOST + 'montages/'+option.id+'.json',
                     parameters:option.param,
@@ -322,11 +323,11 @@ define(function(require, exports, module) {
                     url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages;
-                        var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"> <span class="comments"> <i class="ico"></i> <span>{comments}</span> </span> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="user-fav.html#{uid}" target="_blank"> <img src="{avatar}"> </a> <a href="user-fav.html#{userid}" target="_blank">{name}</a> </div> </footer> </article>';
+                        var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;" target="_blank">{name}</a> </div> </footer> </article>';
                         for(var i=0;i<option.pageItems;i++)
                         {
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{comments}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{fav}","0").replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
+                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
+                                .replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
 
                         }
                         $(option.element).html(output);
@@ -353,6 +354,10 @@ define(function(require, exports, module) {
                 error:function(){
 
                 }
+            })
+        },
+        delete:function(option){
+            $.ajax({
             })
         }
 
