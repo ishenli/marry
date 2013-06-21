@@ -45,6 +45,7 @@
     height: 46px;
     line-height: 46px;
     text-indent: 17px;
+    font-size: 18px;
 }
 .template-panel {
     margin: 20px auto 0;
@@ -143,6 +144,7 @@
     height: 46px;
     line-height: 46px;
     margin-bottom: 6px;
+    font-size: 18px;
 }
 .marry-list .footer {
     color: #ACA195;
