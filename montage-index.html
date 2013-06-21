@@ -65,8 +65,31 @@
     </section>
     <section class="container" id="container">
         <div id="montageList" class="marry-list marry-list-medium clearfix"></div>
-
-
+        <script id="montage-template" type="text/x-handlebars-template">
+            {{#montages}}
+            <article class="marry-list-item ui-shadow">
+                <div class="cover">
+                    <div class="line"></div>
+                    <a class="read" href="montage-show.html#{{id}}">
+                        <header>
+                            <h1>{{title}}</h1>
+                        </header>
+                        <img src=""></a>
+                </div>
+                <footer class="footer">
+                    <div class="counter">
+                        <span class="fav"> <i class="ico"></i> <span>{{collection_count}}</span> </span>
+                        <span class="share"> <i class="ico"></i> <span>{{share_count}}</span> </span>
+                    </div>
+                    <div class="user avatar">
+                        <a href="javascript:void(0)">
+                            <img src="{{formatAvatarPath user.avatar}}"></a>
+                        <a href="javascript:void(0)">{{user.name}}</a>
+                    </div>
+                </footer>
+            </article>
+            {{/montages}}
+        </script>
         <footer class="mt30">
             <div class="ui-paging" id="pagination">
                 <div class="ui-paging" id="pages">
@@ -84,16 +107,19 @@
                 montage.get({
                     element:"#montageList",
                     type:"recommend",
-                    itemNumber:9,
-                    page:$("#montagePage").val()
+                    data:{
+                        page:$("#montagePage").val()
+                    },
+                    itemNumber:9
                 });
                 $("#next").click(function(){
                     montage.get({
-                        id:'',
                         element:"#montageList",
                         type:"recommend",
+                        data:{
+                            page:$("#montagePage").val()
+                        },
                         itemNumber:9,
-                        page:$("#montagePage").val(),
                         callback:function(){
                         }
                     });
@@ -101,11 +127,12 @@
                 $(document).on("click",'.ui-paging-item',function(){
                     var self=this;
                     montage.get({
-                        id:'',
                         element:"#montageList",
                         type:"recommendPage",
                         itemNumber:9,
-                        page:$(this).attr("data-page"),
+                        data:{
+                            page:$(this).attr("data-page")
+                        },
                         callback:function(){
                             $(self).addClass("ui-paging-current");
                         }

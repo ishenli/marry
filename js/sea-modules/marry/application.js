@@ -8,7 +8,8 @@
 define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
-        Base = require('arale/base/1.1.0/base');
+        Base = require('arale/base/1.1.0/base'),
+        Handlebars=require("handlebars");
 
     var HOST = "http://" + window.location.host + "/";
 
@@ -49,6 +50,13 @@ define(function(require, exports, module) {
         adjustViewer();
     }(window));
 
+    Handlebars.registerHelper("formatImgPath", function(imgPath) {
+        imgPath = imgPath.toString();
+        return HOST+imgPath;
+    });
+    Handlebars.registerHelper("formatAvatarPath", function(avatarPath) {
+        return (avatarPath.indexOf("http") == 0 ? avatarPath : HOST +avatarPath);
+    });
     var App={};
     App.Note=Base.extend({
         drag:function(){
@@ -104,16 +112,15 @@ define(function(require, exports, module) {
                     type:"get",
                     data:option.param,
                     success:function(result){
-                        var data=result.montages;
-                        var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
-                            +'<div class="btns"><div class="trash"><a href="javascript:;" title="删除" data-id="{mid}">delete</a></div><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
-                            '</div> </article>';
-                        var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
-                        for(var i=page;i<len;i++){
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count)
-                                .replace("{mid}",data[i].id);
+                        var data=result.montages,temData={montages:[]};
+                        var page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
+
+                        for(var i=0;i<len;i++){
+                            temData.montages.push(data[i]);
                         }
-                        $(option.element).append(output);
+                        var template = Handlebars.compile($("#montages-template").html());
+                        $(option.element).html(template(temData));
+
                         page=len;
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         option.callback();
@@ -122,13 +129,13 @@ define(function(require, exports, module) {
                                 option.callback();
                             },2000)
                         }
-
                         $("#loadmore").on("click",function(){
-                            var output='',len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
+                            var len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                             for(var i=page;i<len;i++){
-                                output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{content}",data[i].content).replace("{comments}", data[i].collection_count).replace("{favs}", data[i].share_count);
+                                temData.montages.push(data[i]);
                             }
-                            $(option.element).append(output);
+                            var template = Handlebars.compile($("#montages-template").html());
+                            $(option.element).html(template(temData));
                             page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         });
@@ -201,6 +208,7 @@ define(function(require, exports, module) {
                 $.ajax({
                     url:HOST + 'montages.json?nice=1',
                     type:"get",
+                    data:option.data,
                     success:function(result){
                         var data=result.montages,output="";
                         var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}">查看画卷</a> </li>';
@@ -209,6 +217,7 @@ define(function(require, exports, module) {
                                 .replace("{id}",data[i].id);
                         }
                         $(option.element).append(output);
+
                         var height,oWidth,oHeight;
                         for(var j=0;j<option.pageNumber;j++){
                             var img=new Image();
@@ -229,45 +238,45 @@ define(function(require, exports, module) {
                 });
                 break;
             case "recommend":
-                if(option.nice===1){
-                    url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
-                }else{
-                    url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
-                }
                 $.ajax({
-                    url:url,
+                    url:HOST+"montages.json?per_page="+option.itemNumber,
                     type:"get",
+                    data:option.data,
                     success:function(result){
-                        var data=result.montages;
-                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:void(0)"> <img src="{avatar}"> </a> <a href="javascript:void(0)">{name}</a> </div> </footer> </article>';
+                        var data=result.montages,templateData={montages:[]};
                         if(data.length===0){
                             adjustFootPos();
                             $("#ellipsis").remove();
                             return $("#next").remove();
                         }
-                        var len=(data.length<option.itemNumber?data.length:option.itemNumber),output="";
+                        var len=(data.length<option.itemNumber?data.length:option.itemNumber);
                         for(var i=0;i<len;i++)
                         {
-                            output+=htmlTep.replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{fav}", data[i].collection_count)
-                                .replace("{share}",data[i].share_count).replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick);
-
+                            templateData.montages.push(data[i]);
                         }
-                        $(option.element).html(output);
+                        var template = Handlebars.compile($("#montage-template").html());
+                        $(option.element).html(template(templateData));
+
+                        var height,oWidth,oHeight;
                         for(var j=0;j<len;j++){
                             var img=new Image();
                             img.src=HOST+data[j].image_path;
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".marry-list-item header").eq(this.index);
+                                oWidth=this.width;
+                                oHeight=this.height;
+                                height=oHeight/ oWidth*300<200?200:oHeight/ oWidth*300;
                                 item.after($(this));
-                                $(this).css({"marginTop":-$(this).height()/2,"top":99})
+                                $(this).css({"height":height});
+                                $(this).css({"marginTop":-height/2,"top":92});
                             };
                         }
                         if(len===option.itemNumber){
-                            $("#montagePage").val(parseInt(option.page)+1);
+                            $("#montagePage").val(parseInt(option.data.page)+1);
                         }
                         $("#pages a").removeClass("ui-paging-current");
-                        $('<a href="javascript:;" data-page="'+option.page+'" class="ui-paging-item ui-paging-current">'+option.page+'</a>').insertBefore("#ellipsis");
+                        $('<a href="javascript:;" data-page="'+option.data.page+'" class="ui-paging-item ui-paging-current">'+option.data.page+'</a>').insertBefore("#ellipsis");
                         if(len<option.itemNumber){
                             $("#ellipsis").remove();
                             $("#next").remove();
@@ -286,36 +295,43 @@ define(function(require, exports, module) {
 
                 break;
             case "recommendPage":
-                var url;
-                if(option.nice===1){
-                    url=HOST + 'montages.json?nice=1&page='+option.page+'&per_page='+option.itemNumber+'';
-                }else{
-                    url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
-                }
                 $.ajax({
-                    url:url,
+                    url:HOST+"montages.json?per_page="+option.itemNumber,
                     type:"get",
+                    data:option.data,
                     success:function(result){
-                        var data=result.montages,output="";
-                        var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;">{name}</a> </div> </footer> </article>';
-                        for(var i=0;i<data.length;i++)
+                        var data=result.montages,templateData={montages:[]};
+                        var len=(data.length<option.itemNumber?data.length:option.itemNumber);
+                        for(var i=0;i<len;i++)
                         {
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{avatar}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar  ).replace("{name}",data[i].user.nick);
-
+                            templateData.montages.push(data[i]);
                         }
+                        var template = Handlebars.compile($("#montage-template").html());
+                        $(option.element).html(template(templateData));
+
                         $("#pages a").removeClass("ui-paging-current");
-                        $(option.element).html(output);
+
+                        var height,oWidth,oHeight;
                         for(var j=0;j<data.length;j++){
                             var img=new Image();
                             img.src=HOST+data[j].image_path,
-                                img.index=j;
+                            img.index=j;
                             img.onload=function(){
                                 var item= $(".marry-list-item header").eq(this.index);
                                 item.after($(this));
-                                $(this).css({"marginTop":-$(this).height()/2,"top":99})
+                                oWidth=this.width;
+                                oHeight=this.height;
+                                height=oHeight/ oWidth*300<200?200:oHeight/ oWidth*300;
+                                item.after($(this));
+                                $(this).css({"height":height});
+                                $(this).css({"marginTop":-height/2,"top":92});
                             };
                         }
+
+                        if(len===option.itemNumber){
+                            $("#montagePage").val(parseInt(option.page)+1);
+                        }
+
                         if($.isFunction(option.callback)){
                             option.callback();
                         }
@@ -328,15 +344,12 @@ define(function(require, exports, module) {
                     url:HOST + 'montages.json',
                     type:"get",
                     success:function(result){
-                        var data=result.montages;
-                        var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;" target="_blank">{name}</a> </div> </footer> </article>';
-                        for(var i=0;i<option.pageItems;i++)
-                        {
-                            output+=htmlTep.replace("{pic}",HOST+data[i].image_path).replace("{id}",data[i].id).replace("{title}",data[i].title).replace("{uid}",data[i].user.id).replace("{userid}",data[i].user.id).replace("{fav}", data[i].collection_count).replace("{share}", data[i].share_count)
-                                .replace("{avatar}",data[i].user.avatar).replace("{name}",data[i].user.nick);
-
+                        var data=result.montages,templateData={montages:[]};
+                        for(var i=0;i<option.pageItems;i++){
+                            templateData.montages.push(data[i]);
                         }
-                        $(option.element).html(output);
+                        var template = Handlebars.compile($("#mRecommend").html());
+                        $(option.element).html(template(templateData));
                         return false;
                     }
                 });

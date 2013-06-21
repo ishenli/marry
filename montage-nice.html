@@ -83,9 +83,11 @@
                 montage.get({
                     element:"#montageList",
                     type:"recommend",
-                    nice:1,
-                    itemNumber:9,
-                    page:$("#montagePage").val(),
+                    data:{
+                        nice:1,
+                        itemNumber:9,
+                        page:$("#montagePage").val()
+                    },
                     callback:function(){
                     }
                 });
