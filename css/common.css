@@ -427,6 +427,9 @@
     top: 60px;
     width: 200px;
 }
+.user-grid .user-grid-item .btns span{
+    cursor:auto;
+}
 .btns .trash {
     float: left;
 }
