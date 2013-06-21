@@ -56,16 +56,27 @@
                     <a class="ui-btn middle ui-btn-green ui-header-more" href="montage-nice.html"> <span class="ui-btn-text"> 更多 </span> </a>
                 </header>
                 <section>
-                    <ul class="ui-pic-list clearfix" id="montageInclude" >
-
-                    </ul>
+                    <ul class="ui-pic-list clearfix" id="montageInclude"></ul>
+                    <script id="montage-template" type="text/x-handlebars-template">
+                        {{#montages}}
+                            <li class="ui-pic-item">
+                                <header>
+                                    <h1>{{title}}</h1>
+                                </header>
+                                <a class="read" href="montage-show.html#{{id}}">查看画卷</a>
+                            </li>
+                        {{/montages}}
+                    </script>
                     <script type="text/javascript">
                         seajs.use(['marry/application', '$'], function(App, $) {
                             var montage=new App.montage();
                             montage.get({
                                 element:"#montageInclude",
                                 type:"include",
-                                pageNumber:9
+                                data:{
+//                                    nice:1,
+                                    pageNumber:9
+                                }
                             });
 
                             var template=new App.template();

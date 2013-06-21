@@ -112,14 +112,14 @@ define(function(require, exports, module) {
                     type:"get",
                     data:option.param,
                     success:function(result){
-                        var data=result.montages,temData={montages:[]};
+                        var data=result.montages,templateData={montages:[]};
                         var page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
 
                         for(var i=0;i<len;i++){
-                            temData.montages.push(data[i]);
+                            templateData.montages.push(data[i]);
                         }
                         var template = Handlebars.compile($("#montages-template").html());
-                        $(option.element).html(template(temData));
+                        $(option.element).html(template(templateData));
 
                         page=len;
                         len<data.length?$("#loadmore").removeClass("gray").addClass("ui-btn-green"):$("#loadmore").removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
@@ -132,10 +132,10 @@ define(function(require, exports, module) {
                         $("#loadmore").on("click",function(){
                             var len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                             for(var i=page;i<len;i++){
-                                temData.montages.push(data[i]);
+                                templateData.montages.push(data[i]);
                             }
                             var template = Handlebars.compile($("#montages-template").html());
-                            $(option.element).html(template(temData));
+                            $(option.element).html(template(templateData));
                             page=len;
                             len<data.length?$(this).removeClass("gray").addClass("ui-btn-green"):$(this).removeClass("ui-btn-green").addClass("gray").find("span").text("没有更多");
                         });
@@ -206,23 +206,21 @@ define(function(require, exports, module) {
                 break;
             case "include":
                 $.ajax({
-                    url:HOST + 'montages.json?nice=1',
+                    url:HOST + 'montages.json',
                     type:"get",
                     data:option.data,
                     success:function(result){
-                        var data=result.montages,output="";
-                        var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}">查看画卷</a> </li>';
-                        for(var i=0;i<option.pageNumber;i++){
-                            output+=htmlTem.replace('{pic}',HOST+data[i].image_path).replace("{title}",data[i].title)
-                                .replace("{id}",data[i].id);
+                        var data=result.montages,templateData={montages:[]};
+                        for(var i=0;i<option.data.pageNumber;i++){
+                            templateData.montages.push(data[i]);
                         }
-                        $(option.element).append(output);
-
+                        var template = Handlebars.compile($("#montage-template").html());
+                        $(option.element).html(template(templateData));
                         var height,oWidth,oHeight;
-                        for(var j=0;j<option.pageNumber;j++){
+                        for(var j=0;j<option.data.pageNumber;j++){
                             var img=new Image();
                             img.src=HOST+data[j].image_path,
-                                img.index=j;
+                            img.index=j;
                             img.onload=function(){
                                 var item= $(".ui-pic-item header").eq(this.index);
                                 oWidth=this.width;
@@ -266,10 +264,10 @@ define(function(require, exports, module) {
                                 var item= $(".marry-list-item header").eq(this.index);
                                 oWidth=this.width;
                                 oHeight=this.height;
-                                height=oHeight/ oWidth*300<200?200:oHeight/ oWidth*300;
+                                height=oHeight/ oWidth*314<190?190:oHeight/ oWidth*314;
                                 item.after($(this));
                                 $(this).css({"height":height});
-                                $(this).css({"marginTop":-height/2,"top":92});
+                                $(this).css({"marginTop":-height/2,"top":90});
                             };
                         }
                         if(len===option.itemNumber){
@@ -406,8 +404,9 @@ define(function(require, exports, module) {
     });
     App.Invitation=Base.extend({
         getTemplate:function(option){
-            util.FlyJSONP.get({
+            $.ajax({
                 url:HOST + 'themes.json',
+                type:"get",
                 success:function(data){
                     window.temData=data;
                     var html="",template='<li data-id={id}><a href="javascript:void(0)"> <img src="{pic}" alt="{name}"/> </a></li>';
