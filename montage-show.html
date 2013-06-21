@@ -64,55 +64,57 @@
         </div>
     </div>
 </header>
-<article class="viewer" id="viewer">
-    <div class="viewport-wrapper" id="viewer-wrapper">
-        <div id="viewPrev" class="viewArrow viewArrow-left">
-            <div class="prev">&lt; </div>
-        </div>
-        <div id="horizontal">
-            <div class="sly" id="slide">
-                <ul class="node-list" id="slideBody">
-                    <!--<li>
-                        <div class="img-wrap" style="width:162px;">
-                            <a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}">
-                                <img src="assets/test/show.jpg"/>
-                            </a>
-                            <div class="hover-panel">
-                                <div class="share-btn"></div>
-                                <div class="description"></div>
-                                <div class="btns">
-                                    <a class="sina" href="#"><span>sina</span></a>
-                                    <a class="qq" href="#"><span>qq</span></a>
-                                    <a class="tt" href="#"><span>tt</span></a>
+<div id="container">
+    <article class="viewer" id="viewer">
+        <div class="viewport-wrapper" id="viewer-wrapper">
+            <div id="viewPrev" class="viewArrow viewArrow-left">
+                <div class="prev">&lt; </div>
+            </div>
+            <div id="horizontal">
+                <div class="sly" id="slide">
+                    <ul class="node-list" id="slideBody">
+                        <!--<li>
+                            <div class="img-wrap" style="width:162px;">
+                                <a class="fancybox" rel="gallery1" href="http://marrymemo.com:3000/{pic}">
+                                    <img src="assets/test/show.jpg"/>
+                                </a>
+                                <div class="hover-panel">
+                                    <div class="share-btn"></div>
+                                    <div class="description"></div>
+                                    <div class="btns">
+                                        <a class="sina" href="#"><span>sina</span></a>
+                                        <a class="qq" href="#"><span>qq</span></a>
+                                        <a class="tt" href="#"><span>tt</span></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>-->
-                    <li class="cover  prev" id="firstcover"> <div class="cover-dot-top"></div>
-                        <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt">
-                            <div class="sl-hvalign-cnt-inner"> <p id="introduction">封面描述</p></div>
-                        </div> </div> </div> <div class="cover-dot-bottom">”</div>
-                    </li>
+                        </li>-->
+                        <li class="cover  prev" id="firstcover"> <div class="cover-dot-top"></div>
+                            <div class="cover-content" id="cover"> <div class="sl-hvalign"> <div class="sl-hvalign-cnt">
+                                <div class="sl-hvalign-cnt-inner"> <p id="introduction">封面描述</p></div>
+                            </div> </div> </div> <div class="cover-dot-bottom">”</div>
+                        </li>
 
-                    <li class="cover next">
-                        <div class="cover-dot-top"></div>
-                        <div class="cover-content">
-                            <div class="sl-hvalign">
-                                <div class="sl-hvalign-cnt">
-                                    <div class="sl-hvalign-cnt-inner">最后一页啦 </div>
+                        <li class="cover next">
+                            <div class="cover-dot-top"></div>
+                            <div class="cover-content">
+                                <div class="sl-hvalign">
+                                    <div class="sl-hvalign-cnt">
+                                        <div class="sl-hvalign-cnt-inner">最后一页啦 </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="cover-dot-bottom">”</div>
-                    </li>
-                </ul>
+                            <div class="cover-dot-bottom">”</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="viewArrow viewArrow-right">
+                <div class="next">&gt;</div>
             </div>
         </div>
-        <div class="viewArrow viewArrow-right">
-            <div class="next">&gt;</div>
-        </div>
-    </div>
-</article>
+    </article>
+</div>
 <footer id="footFool" class="foot-tol">
     <div class="sl-hvalign">
         <div class="sl-hvalign-cnt">
@@ -246,10 +248,11 @@
             $("#commentPanel").show();
 
         });
-        var comment=new App.Comment({
-            element:'#comments-list'
+        var comment=new App.Comment();
+        comment.get({
+            id:id,
+            element:'#comments-list ul'
         });
-        comment.get(id,'#comments-list ul');
 
         $("#commentBtn").click(function(){
             comment.post({
@@ -261,8 +264,11 @@
 //                        user_id:  JSON.parse(localStorage.user).id
                 }},
                 callback:function(){
-                    comment.get(id,'#comments-list ul');
-                    $("#commentBack").text(parseInt($("#commentBack").text())+1);
+                    comment.get({
+                        id:id,
+                        element:'#comments-list ul'
+                    });
+                    $("#commentBack").text(parseInt($(this).text())+1);
                 }
             })
         });

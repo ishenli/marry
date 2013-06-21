@@ -71,9 +71,9 @@ define(function(require, exports, module) {
     });
 
     App.Comment=Base.extend({
-            get:function(id,element){
+            get:function(option){
                 util.FlyJSONP.get({
-                    url:HOST + 'montages/'+id+'/discussions.json',
+                    url:HOST + 'montages/'+option.id+'/discussions.json',
                     success:function(result){
                         var data=result.discussions;
                         var htmlTep='<li class="big-avatar"> <img src="{pic}" class="fn-left"> <div class="comments-text"> <h3>{name}</h3> <p>{content}</p> <span class="date">{date}</span> </div> </li>';
@@ -82,7 +82,7 @@ define(function(require, exports, module) {
                             output+=htmlTep.replace("{pic}",data[i].user.avatar.indexOf("http") == 0 ? data[i].user.avatar : HOST + data[i].user.avatar).replace("{name}",data[i].user.nick).replace("{content}",data[i].content)
                                 .replace("{date}",data[i].created_at.substring(0,10));
                         }
-                        $(element).html(output);
+                        $(option.element).html(output);
                     }
                 });
             },
@@ -99,9 +99,10 @@ define(function(require, exports, module) {
         var option=$.extend({},options);
         switch (option.type){
             case "index": //index
-                util.FlyJSONP.get({
+                $.ajax({
                     url:HOST + 'montages.json',
-                    parameters:option.param,
+                    type:"get",
+                    data:option.param,
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
@@ -135,9 +136,10 @@ define(function(require, exports, module) {
                 });
                 break;
             case "show":
-                util.FlyJSONP.get({
+                $.ajax({
                     url:HOST + 'montages/'+option.id+'.json',
-                    parameters:option.param,
+                    type:"get",
+                    data:option.param,
                     success:function(result){
                         var data=result,output="",height=WindowSize.height-160;
                         $("#introduction").text(data.introduction);
@@ -196,8 +198,9 @@ define(function(require, exports, module) {
                 });
                 break;
             case "include":
-                $.get({
+                $.ajax({
                     url:HOST + 'montages.json?nice=1',
+                    type:"get",
                     success:function(result){
                         var data=result.montages,output="";
                         var htmlTem='<li class="ui-pic-item"> <header> <h1>{title}</h1></header><a class="read" href="montage-show.html#{id}">查看画卷</a> </li>';
@@ -231,8 +234,9 @@ define(function(require, exports, module) {
                 }else{
                     url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
-                $.get({
+                $.ajax({
                     url:url,
+                    type:"get",
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div><a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header></a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:void(0)"> <img src="{avatar}"> </a> <a href="javascript:void(0)">{name}</a> </div> </footer> </article>';
@@ -288,8 +292,9 @@ define(function(require, exports, module) {
                 }else{
                     url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
-                $.get({
+                $.ajax({
                     url:url,
+                    type:"get",
                     success:function(result){
                         var data=result.montages,output="";
                         var htmlTep='<article class="marry-list-item ui-shadow"> <div class="cover"><div class="line"></div> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header>  </a> </div> <footer class="footer"> <div class="counter"> <span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;">{name}</a> </div> </footer> </article>';
@@ -319,8 +324,9 @@ define(function(require, exports, module) {
                 });
                 break;
             case "favRecommend":
-                $.get({
+                $.ajax({
                     url:HOST + 'montages.json',
+                    type:"get",
                     success:function(result){
                         var data=result.montages;
                         var output="",htmlTep='<article class="marry-list-item marry-list-small  ui-shadow"> <div class="cover"> <a class="read" href="montage-show.html#{id}"> <header> <h1>{title}</h1></header> <img src="{pic}"/> </a> </div> <footer class="footer"> <div class="counter"><span class="fav"> <i class="ico"></i> <span>{fav}</span> </span> <span class="share"> <i class="ico"></i> <span>{share}</span> </span> </div> <div class="user avatar"> <a href="javascript:;"> <img src="{avatar}"> </a> <a href="javascript:;" target="_blank">{name}</a> </div> </footer> </article>';
