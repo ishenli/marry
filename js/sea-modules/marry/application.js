@@ -105,7 +105,7 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result.montages;
                         var htmlTep='<article class="outer"> <div class="user-grid-item"> <img src="{pic}"/> <h1>{title}</h1>'
-                            +'<div class="btns"><div class="trash"><a href="javascript:;" data-id="{mid}">delete</a></div><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
+                            +'<div class="btns"><div class="trash"><a href="javascript:;" title="删除" data-id="{mid}">delete</a></div><div class="fc"> <div class="ui-counter counter"> <span id="commentBack" class="comments">{comments}</span> <span id="favBtn" class="fav">{favs}</span> </div> </div> </div> <div class="view-btn"> <a href="montage-show.html#{id}">查看画卷</a> </div>'+
                             '</div> </article>';
                         var output='',page=0,len=(page+option.pageItems)<=data.length?page+option.pageItems:data.length;
                         for(var i=page;i<len;i++){
@@ -218,7 +218,6 @@ define(function(require, exports, module) {
                                 item.after($(this));
                                 $(this).css({"height":height});
                                 $(this).css({"marginTop":-height/2,"top":92});
-
                             };
                         }
                         adjustFootPos();
@@ -358,6 +357,15 @@ define(function(require, exports, module) {
         },
         delete:function(option){
             $.ajax({
+                url:HOST+"montages.json",
+                type:"delete",
+                data:option.data,
+                success:function(){
+                    option.success();
+                },
+                error:function(){
+
+                }
             })
         }
 
