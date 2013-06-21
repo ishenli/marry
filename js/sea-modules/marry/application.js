@@ -176,7 +176,7 @@ define(function(require, exports, module) {
                             $("#favBtn").addClass("faved");
                             option.tip.set("content","已收藏");
                         }else{
-                            $("#favBtn").click(function(){
+                            $("#favBtn").on("click",function(){
                                 self.collect({
                                     data:{
                                         montage_id:option.id,
@@ -186,6 +186,7 @@ define(function(require, exports, module) {
                                     success:function(){
                                         $("#favBtn").addClass("faved").text(++data.collect_count);
                                         option.tip.set("content","已收藏");
+                                        $("#favBtn").off("click");
                                     }
                                 });
                             });
@@ -195,7 +196,7 @@ define(function(require, exports, module) {
                 });
                 break;
             case "include":
-                util.FlyJSONP.get({
+                $.get({
                     url:HOST + 'montages.json?nice=1',
                     success:function(result){
                         var data=result.montages,output="";
@@ -230,7 +231,7 @@ define(function(require, exports, module) {
                 }else{
                     url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
-                util.FlyJSONP.get({
+                $.get({
                     url:url,
                     success:function(result){
                         var data=result.montages;
@@ -287,7 +288,7 @@ define(function(require, exports, module) {
                 }else{
                     url=HOST + 'montages.json?page='+option.page+'&per_page='+option.itemNumber+'';
                 }
-                util.FlyJSONP.get({
+                $.get({
                     url:url,
                     success:function(result){
                         var data=result.montages,output="";
@@ -318,7 +319,7 @@ define(function(require, exports, module) {
                 });
                 break;
             case "favRecommend":
-                util.FlyJSONP.get({
+                $.get({
                     url:HOST + 'montages.json',
                     success:function(result){
                         var data=result.montages;
