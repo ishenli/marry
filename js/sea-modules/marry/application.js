@@ -8,7 +8,7 @@
 define(function(require, exports, module) {
     var $=require("marry/extendJq"),
         util=require("marry/util"),
-        Base = require('arale/base/1.1.0/base'),
+        Base = require('base'),
         Handlebars=require("handlebars");
 
     var HOST = "http://" + window.location.host + "/";
