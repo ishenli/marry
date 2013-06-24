@@ -109,12 +109,6 @@ caption, th {
     text-align: left;
 }
 
-/* 标题应该更贴紧内容，并与其他块区分，margin 值要相应做优化 */
-h1, h2, h3, h4, h5, h6 {
-    font:500 100%/1;
-    /*font-weight:700\9; *//* todo: make some font-family detection */
-}
-
 q:before, q:after {
     content: '';
 }

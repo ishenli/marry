@@ -10,12 +10,12 @@
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" type="text/css" href="css/module.css">
-    <script src="js/sea-modules/seajs/1.3.1/sea.js" type="text/javascript"></script>
+    <script src="js/sea-modules/seajs/2.0.0/sea.js" data-config="marry/config" type="text/javascript"></script>
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="js/config.js"></script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -75,17 +75,40 @@
                 <div class="arrow">&gt;</div>
             </li>
         </ul>
-        <!--<div class="sl-vertical create">
+        <div class="sl-vertical create">
             <a href="marry-editNew.html" class="ui-btn ui-btn-green large">
                 <span class="ui-btn-text"> 创建画卷 </span>
             </a>
-        </div>-->
+        </div>
     </div>
 </header>
 <section id="container" class="container">
     <div class="user-grid ui-shadow" id="montageList">
     </div>
-
+    <script id="montages-template" type="text/x-handlebars-template">
+        {{#montages}}
+        <article class="outer">
+            <div class="user-grid-item">
+                <img src="{{formatImgPath image_path}}">
+                <h1>{{title}}</h1>
+                <div class="btns">
+                    <div class="trash">
+                        <a href="javascript:;" title="删除" data-id="{{id}}">delete</a>
+                    </div>
+                    <div class="fc">
+                        <div class="ui-counter counter">
+                            <span id="commentBack" class="comments">{{share_count}}</span>
+                            <span id="favBtn" class="fav">{{collection_count}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-btn">
+                    <a href="montage-show.html#{{id}}">查看画卷</a>
+                </div>
+            </div>
+        </article>
+        {{/montages}}
+        </script>
     <div class="load-more">
         <a id="loadmore" href="javascript:;" class="ui-btn ui-btn-green large">
             <span class="ui-btn-text"> 载入更多 </span>
@@ -94,7 +117,37 @@
 </section>
 <section class="user-grid-foot ui-shadow-top" id="userFoot">
     <div class="outer">
-        <div class="marry-list marry-list-small clearfix" id="marryList"></div>
+        <div class="marry-list marry-list-small clearfix" id="marryList">
+
+        </div>
+        <script id="mRecommend" type="text/x-handlebars-template">
+            {{#montages}}
+                <article class="marry-list-item marry-list-small  ui-shadow">
+                    <div class="cover">
+                        <a class="read" href="montage-show.html#{{id}}">
+                            <header>
+                                <h1>{{title}}</h1>
+                            </header>
+                            <img src="{{formatImgPath image_path}}"></a>
+                    </div>
+                    <footer class="footer">
+                        <div class="counter">
+                          <span class="fav"> <i class="ico"></i>
+                            <span>{{collection_count}}</span>
+                          </span>
+                          <span class="share"> <i class="ico"></i>
+                            <span>{{share_count}}</span>
+                          </span>
+                        </div>
+                        <div class="user avatar">
+                            <a href="javascript:;">
+                                <img src="http://tp2.sinaimg.cn/3215211301/180/40023159244/1"></a>
+                            <a href="javascript:;" target="_blank">婚礼纪</a>
+                        </div>
+                    </footer>
+                </article>
+            {{/montages}}
+        </script>
     </div>
 </section>
     <script type="text/javascript">
