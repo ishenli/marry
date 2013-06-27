@@ -189,7 +189,7 @@ body{
     font-size: 14px;
 }
 .ui-body-content section{
-
+    margin-top: -10px;
 }
 .ui-footer {
     margin-top: 30px;

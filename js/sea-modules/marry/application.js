@@ -80,7 +80,7 @@ define(function(require, exports, module) {
 
     App.Comment=Base.extend({
             get:function(option){
-                util.FlyJSONP.get({
+                $.get({
                     url:HOST + 'montages/'+option.id+'/discussions.json',
                     success:function(result){
                         var data=result.discussions;
@@ -159,17 +159,25 @@ define(function(require, exports, module) {
                         }
                         $(option.element).after(output);
                         $frame.reload();
-
+                        var isLoad=false;
                         for(var j=0;j<data.photos.length;j++){
                             var img=new Image();
                             img.src=HOST+data.photos[j].path;
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".fancybox").eq(this.index);
+
                                 item.append($(this));
                                 item.parent().width($(this).width());
-                                $frame.reload();
                                 item.removeAttr("style").css({"background":"#fff","display":"inline"});
+                                $frame.reload();
+                                console.log("the image is loaded");
+                                if(!isLoad){
+                                   $("#wrap").show("fast");
+                                   $("body").addClass("photo-show");
+
+                               }
+                                isLoad=true;
                             };
                         }
                         $(".img-wrap").each(function(){

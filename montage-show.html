@@ -18,9 +18,24 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/dist/html5shiv.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .load{
+            width: 400px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 40px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin: -25px 0 0 -200px;
+            text-align: center;
 
+        }
+    </style>
 </head>
-<body class="photo-show">
+<body >
+<div class="load">画卷载入中……</div>
+<div class="wrapper fn-hide" id="wrap">
 <header class="top-tool">
     <div class="sl-hvalign">
         <div class="sl-hvalign-cnt">
@@ -159,6 +174,7 @@
         </div>
     </div>
 </footer>
+</div>
 <div id="commentPanel" class="ui-dialog-container ">
     <div id="comments-list" class="ui-comment-list">
             <ul></ul>
