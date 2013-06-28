@@ -282,13 +282,22 @@ define(function(require, exports, module) {
                             $("#montagePage").val(parseInt(option.data.page)+1);
                         }
                         $("#pages a").removeClass("ui-paging-current");
-                        $('<a href="javascript:;" data-page="'+option.data.page+'" class="ui-paging-item ui-paging-current">'+option.data.page+'</a>').insertBefore("#ellipsis");
-                        if(len<option.itemNumber){
+//                        $('<a href="javascript:;" data-page="'+option.data.page+'" class="ui-paging-item ui-paging-current">'+option.data.page+'</a>').insertBefore("#ellipsis");
+                        /*if(len<option.itemNumber){
                             $("#ellipsis").remove();
                             $("#next").remove();
                         }else{
                             $("#next").text(">").removeClass("ui-paging-current");
-                        }
+                        }*/
+                        console.log("the total count is "+parseInt(result.total_pages)*option.itemNumber);
+                        $("#pagination").pagination(parseInt(result.total_pages)*option.itemNumber, {
+                            items_per_page:9,
+                            prev_text:"<",
+                            next_text:">",
+                            callback:function(){
+
+                            }
+                        });
 
                         if($.isFunction(option.callback)){
                             option.callback();

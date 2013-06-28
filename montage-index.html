@@ -124,12 +124,13 @@
                 });
                 $(document).on("click",'.ui-paging-item',function(){
                     var self=this;
+                    console.log("the current page is "+$(this).text());
                     montage.get({
                         element:"#montageList",
                         type:"recommendPage",
                         itemNumber:9,
                         data:{
-                            page:$(this).attr("data-page")
+                            page:$(this).text()
                         },
                         callback:function(){
                             $(self).addClass("ui-paging-current");
