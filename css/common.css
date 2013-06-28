@@ -29,14 +29,13 @@
     z-index: 20;
 }
 .ui-pic-item header {
-    background: none repeat scroll 0 0 #000000;
+    background:rgba(0,0,0,0.7);
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
     bottom: 12px;
     color: #FFFFFF;
     height: 46px;
     left: 0;
-    opacity: 0.7;
     position: absolute;
     width: 140px;
     z-index: 10;
