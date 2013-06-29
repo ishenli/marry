@@ -256,11 +256,6 @@ define(function(require, exports, module) {
                     data:option.data,
                     success:function(result){
                         var data=result.montages,templateData={montages:[]};
-                        if(data.length===0){
-                            adjustFootPos();
-                            $("#ellipsis").remove();
-                            return $("#next").remove();
-                        }
                         var len=(data.length<option.itemNumber?data.length:option.itemNumber);
                         for(var i=0;i<len;i++)
                         {
@@ -269,25 +264,6 @@ define(function(require, exports, module) {
                         var template = Handlebars.compile($("#montage-template").html());
                         $(option.element).html(template(templateData));
 
-                        var height,oWidth,oHeight;
-                        for(var j=0;j<len;j++){
-                            var img=new Image();
-                            img.src=HOST+data[j].image_path;
-                            img.index=j;
-                            img.onload=function(){
-                                var item= $(".marry-list-item header").eq(this.index);
-                                oWidth=this.width;
-                                oHeight=this.height;
-                                height=oHeight/ oWidth*314<190?190:oHeight/ oWidth*314;
-                                item.after($(this));
-                                $(this).css({"height":height});
-                                $(this).css({"marginTop":-height/2,"top":90});
-                            };
-                        }
-                        if(len===option.itemNumber){
-                            $("#montagePage").val(parseInt(option.data.page)+1);
-                        }
-                        $("#pages a").removeClass("ui-paging-current");
 //                        $('<a href="javascript:;" data-page="'+option.data.page+'" class="ui-paging-item ui-paging-current">'+option.data.page+'</a>').insertBefore("#ellipsis");
                         /*if(len<option.itemNumber){
                             $("#ellipsis").remove();
@@ -300,8 +276,22 @@ define(function(require, exports, module) {
                             items_per_page:9,
                             prev_text:"<",
                             next_text:">",
-                            callback:function(){
-
+                            current_page:0,
+                            num_edge_entries:0,
+                            num_display_entries:10,
+                            link_to:'javascript:;',
+                            callback:function(page_index){
+                                console.log("the page_index is"+page_index);
+                                var items_per_page = this.items_per_page,output="";
+                                var max_elem = Math.min((page_index+1) * items_per_page, data.length);
+                                self.get({
+                                    element:"#montageList",
+                                    type:"recommendPage",
+                                    itemNumber:9,
+                                    data:{
+                                        page:parseInt(page_index)+1
+                                    }
+                                });
                             }
                         });
 
@@ -321,6 +311,7 @@ define(function(require, exports, module) {
                     type:"get",
                     data:option.data,
                     success:function(result){
+                        console.log("the recommendPage is doing");
                         var data=result.montages,templateData={montages:[]};
                         var len=(data.length<option.itemNumber?data.length:option.itemNumber);
                         for(var i=0;i<len;i++)
@@ -330,7 +321,7 @@ define(function(require, exports, module) {
                         var template = Handlebars.compile($("#montage-template").html());
                         $(option.element).html(template(templateData));
 
-                        $("#pages a").removeClass("ui-paging-current");
+//                        $("#pages a").removeClass("ui-paging-current");
 
                         var height,oWidth,oHeight;
                         for(var j=0;j<data.length;j++){
@@ -349,9 +340,9 @@ define(function(require, exports, module) {
                             };
                         }
 
-                        if(len===option.itemNumber){
+                        /*if(len===option.itemNumber){
                             $("#montagePage").val(parseInt(option.page)+1);
-                        }
+                        }*/
 
                         if($.isFunction(option.callback)){
                             option.callback();

@@ -89,14 +89,8 @@
             {{/montages}}
         </script>
         <footer class="mt30">
-            <div class="ui-paging" id="pagination">
-                <div class="ui-paging" id="pages">
-                    <span class="ui-paging-ellipsis" id="ellipsis">...</span>
-                    <a href="javascript:;" id="next" class="ui-paging-next ui-shadow"> &gt; </a>
-                </div>
-            </div>
+            <div class="ui-paging" id="pagination"></div>
         </footer>
-        <input type="hidden" id="montagePage" value="1"/>
     </section>
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
@@ -109,33 +103,6 @@
                         page:$("#montagePage").val()
                     },
                     itemNumber:9
-                });
-                $("#next").click(function(){
-                    montage.get({
-                        element:"#montageList",
-                        type:"recommend",
-                        data:{
-                            page:$("#montagePage").val()
-                        },
-                        itemNumber:9,
-                        callback:function(){
-                        }
-                    });
-                });
-                $(document).on("click",'.ui-paging-item',function(){
-                    var self=this;
-                    console.log("the current page is "+$(this).text());
-                    montage.get({
-                        element:"#montageList",
-                        type:"recommendPage",
-                        itemNumber:9,
-                        data:{
-                            page:$(this).text()
-                        },
-                        callback:function(){
-                            $(self).addClass("ui-paging-current");
-                        }
-                    });
                 });
 
             });
