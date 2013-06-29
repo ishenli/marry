@@ -412,6 +412,7 @@ define(function(require, exports, module) {
         },
         loadFoot:function(){
             $("#foot").load("foot.html",function(){
+                $(this).addClass("ui-footer");
                 adjustFootPos();
             });
         }

@@ -95,7 +95,6 @@
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
                 var montage=new App.montage();
-                $("#montagePage").val(1);
                 montage.get({
                     element:"#montageList",
                     type:"recommend",
@@ -107,7 +106,7 @@
 
             });
         </script>
-        <footer class="ui-footer ui-shadow-top" id="foot"></footer>
+        <footer class="ui-shadow-top" id="foot"></footer>
         <script type="text/javascript">
             seajs.use(['marry/application', '$'], function(App, $) {
                 var template=new App.template();
