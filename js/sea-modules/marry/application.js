@@ -150,7 +150,7 @@ define(function(require, exports, module) {
                     success:function(result){
                         var data=result,output="",height=WindowSize.height-160;
                         $("#introduction").text(data.introduction);
-                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="'+HOST+'{pic}" data-width="{width}" data-height="{height}" style="height:{adjustHeight}px;width:{adjustWidth}px;"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns"> <a class="sina" href="javascript:;"><span>sina</span></a> <a class="qq" href="javascript:;"><span>qq</span></a> <a class="tt" href="javascript:;"><span>tt</span></a> </div> </div></div></li>';
+                        var htmlTem='<li><div class="img-wrap"><a class="fancybox" rel="gallery1" href="'+HOST+'{pic}" data-width="{width}" data-height="{height}" style="height:{adjustHeight}px;width:{adjustWidth}px;"></a><div class="hover-panel"> <div class="share-btn"></div> <div class="description">{des}</div> <div class="btns a-fadeinL"> <a class="sina" href="javascript:;"><span>sina</span></a> <a class="qq" href="javascript:;"><span>qq</span></a> <a class="tt" href="javascript:;"><span>tt</span></a> </div> </div></div></li>';
                         for(var i=0;i<data.photos.length;i++){
                             output+=htmlTem.replace('{pic}',data.photos[i].path).replace("{des}",data.photos[i].title)
                                 .replace("{width}",data.photos[i].width).replace("{height}",data.photos[i].height)
@@ -158,6 +158,11 @@ define(function(require, exports, module) {
                                 .replace("{adjustHeight}",height);
                         }
                         $(option.element).after(output);
+                        $(".description").each(function(){
+                            if($(this).text()===""||$(this).text()==undefined){
+                                $(this).addClass("fn-hide");
+                            }
+                        })
                         $frame.reload();
                         var isLoad=false;
                         for(var j=0;j<data.photos.length;j++){
@@ -166,18 +171,19 @@ define(function(require, exports, module) {
                             img.index=j;
                             img.onload=function(){
                                 var item= $(".fancybox").eq(this.index);
-
+                                if(!isLoad){
+                                    $("#wrap").show("fast");
+                                    $("body").addClass("photo-show");
+                                    $("#loadPanel").hide();
+                                }
                                 item.append($(this));
                                 item.parent().width($(this).width());
                                 item.removeAttr("style").css({"background":"#fff","display":"inline"});
-                                $frame.reload();
-                                console.log("the image is loaded");
-                                if(!isLoad){
-                                   $("#wrap").show("fast");
-                                   $("body").addClass("photo-show");
 
-                               }
+                                console.log("the image is loaded");
+
                                 isLoad=true;
+                                $frame.reload();
                             };
                         }
                         $(".img-wrap").each(function(){

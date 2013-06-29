@@ -21,25 +21,44 @@
     <style type="text/css">
         .load{
             width: 400px;
-            height: 50px;
+            height: 100px;
             line-height: 50px;
             font-size: 40px;
             position: fixed;
             left: 50%;
             top: 50%;
-            margin: -25px 0 0 -200px;
+            margin: -50px 0 0 -200px;
             text-align: center;
 
         }
+        .hover-panel .share-btn{
+            cursor: pointer;
+        }
+        .hover-panel .btns{
+            display: none;
+        }
+        body .hover-panel .btns-show{
+            display: block;
+        }
+
     </style>
 </head>
 <body >
-<div class="load">画卷载入中……</div>
-<div class="wrapper fn-hide" id="wrap">
-<header class="top-tool">
+<div class="load" id="loadPanel">
     <div class="sl-hvalign">
         <div class="sl-hvalign-cnt">
             <div class="sl-hvalign-cnt-inner">
+                <img src="assets/images/ajax-loader-64.gif"/>
+            </div>
+        </div>
+    </div>
+    画卷载入中……
+</div>
+<div class="wrapper fn-hide" id="wrap">
+<header class="top-tool">
+    <div class="sl-hvalign">
+                <div class="sl-hvalign-cnt">
+                    <div class="sl-hvalign-cnt-inner">
                 <div class="ui-slip">
                         <i class="small-arrow"></i>
                         <a class="back" href="javascript:;" id="backHistory">返回</a>
@@ -164,8 +183,7 @@
                                 <span>◆</span>
                             </div>
                             <div class="ui-poptip-content" data-role="content">
-                                <div>我是上方的tip</div>
-                                <div>我是上方的tip</div>
+                                <div>内容</div>
                             </div>
                         </div>
                     </div>
@@ -216,15 +234,11 @@
         horizontal: 1,
         itemNav: 'basic',
         smart: 1,
-        activateOn: 'click',
         startAt: 1,
         scrollBy: 1,
-        activatePageOn: 'click',
         speed: 300,
         elasticBounds: 1,
         dragHandle: 1,
-        clickBar: 1,
-
         // Buttons
         scrollBar: $('.scrollbar'),
         prev: $('.prev'),
@@ -289,7 +303,10 @@
             })
         });
     });
-
+    // share options
+    $(document).on("click",".share-btn",function(e){
+        $(this).parent().find(".btns").toggleClass("btns-show");
+    })
 </script>
 </body>
 </html>
