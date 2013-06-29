@@ -789,6 +789,9 @@ input.ui-btn-text,button.ui-btn-text{vertical-align: top; }
 .node-list .cover-content{
     margin: 100px 97px;
 }
+.node-list .cover-content .cover-text{
+    font-size: 24px;
+}
 .pages {
     list-style: none;
     margin: 20px 0;

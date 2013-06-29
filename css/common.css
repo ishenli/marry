@@ -130,20 +130,18 @@
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
-    bottom: 16px;
-    color: #FFFFFF;
-    height: 46px;
-    left: 4px;
-    padding: 6px 18px;
     position: absolute;
+    left: 4px;
+    bottom: 16px;
     width: 140px;
     z-index: 10;
+    line-height: 46px;
+    height: 46px;
+    color: #FFFFFF;
 }
 .marry-list .marry-list-item header h1 {
-    height: 46px;
-    line-height: 46px;
-    margin-bottom: 6px;
     font-size: 18px;
+    margin-left: 20px;
 }
 .marry-list .footer {
     color: #ACA195;
@@ -335,7 +333,7 @@
     display: block;
     height: 30px;
     text-indent: -9999px;
-    width: 25px;
+    width: 26px;
 }
 #footFool .prevPage, #footFool .nextPage {
     cursor: pointer;
