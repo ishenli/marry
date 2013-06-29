@@ -255,22 +255,6 @@ define(function(require, exports, module) {
                     type:"get",
                     data:option.data,
                     success:function(result){
-                        var data=result.montages,templateData={montages:[]};
-                        var len=(data.length<option.itemNumber?data.length:option.itemNumber);
-                        for(var i=0;i<len;i++)
-                        {
-                            templateData.montages.push(data[i]);
-                        }
-                        var template = Handlebars.compile($("#montage-template").html());
-                        $(option.element).html(template(templateData));
-
-//                        $('<a href="javascript:;" data-page="'+option.data.page+'" class="ui-paging-item ui-paging-current">'+option.data.page+'</a>').insertBefore("#ellipsis");
-                        /*if(len<option.itemNumber){
-                            $("#ellipsis").remove();
-                            $("#next").remove();
-                        }else{
-                            $("#next").text(">").removeClass("ui-paging-current");
-                        }*/
                         console.log("the total count is "+parseInt(result.total_pages)*option.itemNumber);
                         $("#pagination").pagination(parseInt(result.total_pages)*option.itemNumber, {
                             items_per_page:9,
@@ -282,14 +266,14 @@ define(function(require, exports, module) {
                             link_to:'javascript:;',
                             callback:function(page_index){
                                 console.log("the page_index is"+page_index);
-                                var items_per_page = this.items_per_page,output="";
-                                var max_elem = Math.min((page_index+1) * items_per_page, data.length);
+                                var items_per_page = this.items_per_page;
                                 self.get({
                                     element:"#montageList",
                                     type:"recommendPage",
                                     itemNumber:9,
                                     data:{
-                                        page:parseInt(page_index)+1
+                                        page:parseInt(page_index)+1,
+                                        nice:option.data.nice
                                     }
                                 });
                             }
@@ -320,9 +304,6 @@ define(function(require, exports, module) {
                         }
                         var template = Handlebars.compile($("#montage-template").html());
                         $(option.element).html(template(templateData));
-
-//                        $("#pages a").removeClass("ui-paging-current");
-
                         var height,oWidth,oHeight;
                         for(var j=0;j<data.length;j++){
                             var img=new Image();
@@ -339,11 +320,6 @@ define(function(require, exports, module) {
                                 $(this).css({"marginTop":-height/2,"top":92});
                             };
                         }
-
-                        /*if(len===option.itemNumber){
-                            $("#montagePage").val(parseInt(option.page)+1);
-                        }*/
-
                         if($.isFunction(option.callback)){
                             option.callback();
                         }
