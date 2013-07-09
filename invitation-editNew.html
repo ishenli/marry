@@ -554,7 +554,7 @@ function loadScript() {
         document.body.appendChild(script);
     }
     function mapInit(){
-        seajs.use(['arale/dialog/1.0.1/dialog',"$"], function(Dialog,$) {
+        seajs.use(['dialog',"$"], function(Dialog,$) {
             var mapDialog=new Dialog({
                 trigger: '#pin',
                 height: '480px',

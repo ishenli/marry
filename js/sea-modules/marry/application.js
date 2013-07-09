@@ -230,6 +230,8 @@ define(function(require, exports, module) {
                         }
                         var template = Handlebars.compile($("#montage-template").html());
                         $(option.element).html(template(templateData));
+                        $("#loadPanel").hide();
+                        $("#montageBody").removeClass("fn-hide");
                         var height,oWidth,oHeight;
                         for(var j=0;j<option.data.pageNumber;j++){
                             var img=new Image();
