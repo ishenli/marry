@@ -525,6 +525,7 @@
     right: 0;
     top: 0;
     z-index: 10;
+    width: 300px;
 }
 #photo-user-panel .user-panel .arrow {
     background: none repeat scroll 0 0 #6ADDD3;
